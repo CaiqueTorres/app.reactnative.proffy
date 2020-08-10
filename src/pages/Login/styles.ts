@@ -1,38 +1,57 @@
-import { StyleSheet } from 'react-native'
-import { Archivo_400Regular } from '@expo-google-fonts/archivo'
-import { Poppins_400Regular } from '@expo-google-fonts/poppins'
+import styled from 'styled-components/native'
 
-export const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
+export const Container = styled.View`
+    flex: 1;
+`
 
-    backgroundImage: {
-        backgroundColor: "#8257E5",
-        flex: 1,
-        resizeMode: "cover",
-        justifyContent: "space-between",
-        alignItems: "center"
-    },
+export const LogoBox = styled.View`
+    flex: 1;
+    justify-content: center;
+    align-items: flex-start;
+`
 
-    logoBox: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "flex-start",
-    },
+export const BackgroundImage = styled.ImageBackground`
+    background-color: #8257E5;
+    flex: 1;
+    justify-content: space-between;
+    align-items: center;
+`
 
-    logoText: {
-        color: "#D4C2FF",
-        fontFamily: "Poppins_400Regular",
-        fontSize: 15,
-        maxWidth: 150
-    },
+export const LogoText = styled.Text`
+    color: #D4C2FF;
+    font-family: "Poppins_400Regular";
+    font-size: 15px;
+    width: 150px;
+`
 
-    loginBox: {
-        flex: 1,
-        width: "100%",
-        backgroundColor: "#F0F0F7",
-        justifyContent: "center",
-        alignItems: "center"
-    },
-})
+export const LoginBox = styled.View`
+    flex: 1;
+    width: 100%;
+    background-color: #F0F0F7;
+    align-items: center;
+    justify-content: center;
+`
+
+export const Header = styled.View`
+    flex: 1;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+`
+
+export const InputEmail = styled.TextInput`
+    flex: 1;
+`
+
+export const InputPassword = styled.TextInput`
+    flex: 1;
+`
+
+export const Footer = styled.View`
+    flex: 1;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+`
