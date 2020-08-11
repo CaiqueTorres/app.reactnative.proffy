@@ -1,20 +1,24 @@
 import { StyleSheet } from 'react-native'
+import { colors } from '../../styles'
 import { Poppins_400Regular } from '@expo-google-fonts/poppins'
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
 
-
     backgroundImage: {
-        backgroundColor: "#8257E5",
         flex: 1,
-        justifyContent: "space-between",
-        alignItems: "center"
+        backgroundColor: "#8257E5",
     },
 
     logoBox: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+    },
+
+    logoTexts: {
         flex: 1,
         alignItems: "flex-start",
         justifyContent: "center",
@@ -29,60 +33,74 @@ export const styles = StyleSheet.create({
 
     loginBox: {
         flex: 1,
-        width: "100%",
-        padding: 20,
         backgroundColor: "#F0F0F7",
-        alignItems: "center",
-        justifyContent: "center",
-    },
-
-    doLogin: {
-
-    },
-
-    createAccount: {
-
+        padding: 25,
+        justifyContent: "center"
     },
 
     header: {
-        flex: 1,
-        width: "100%",
         flexDirection: "row",
+        justifyContent: "space-between",
         alignItems: "center",
-        justifyContent: "space-around",
     },
 
-    inputEmail: {
-        flex: 1,
+    doLogin: {
+        color: "#32264D",
+        fontFamily: "Poppins_400Regular",
+        fontWeight: "bold",
+        fontSize: 28,
+    },
+
+    createAccount: {
+        fontFamily: "Poppins_400Regular",
+        color: "#9871F5"
+    },
+
+    inputBox: {
+        justifyContent: "center",
+        marginVertical: 40,
+    },
+
+    emailInput: {
+        height: 65,
+        borderWidth: 1,
+        borderRadius: 10,
+        borderColor: colors.lighter,
+        backgroundColor: colors.white
     },
 
     passwordInput: {
-        flex: 1,
+        height: 65,
+        borderWidth: 1,
+        borderRadius: 10,
+        borderColor: colors.lighter,
+        backgroundColor: colors.white
     },
 
     footer: {
-        flex: 1,
-        width: "100%",
-        alignItems: "center",
-        justifyContent: "space-around",
+
     },
 
     footerHeader: {
-        width: "100%",
-        paddingHorizontal: 30,
+        flex: 1,
         flexDirection: "row",
+        justifyContent: "space-between",
+        paddingHorizontal: 25,
         alignItems: "center",
-        justifyContent: "space-between"
     },
 
     footerButton: {
-        backgroundColor: "#ccc",
-        flex: 1,
-        width: "90%",
-        margin: 20
+        marginTop: 40,
+        backgroundColor: colors.light,
+        height: 70,
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: 10,
     },
 
     buttonText: {
 
     }
 })
+
+export default styles

@@ -6,7 +6,7 @@ import styles from './styles'
 const Button: React.FC<RectButtonProperties> = ({ children, ...rest }) => {
     return (
         <RectButton
-            style={styles.button}
+            style={styles.container}
             {...rest}
         >
             {children}
