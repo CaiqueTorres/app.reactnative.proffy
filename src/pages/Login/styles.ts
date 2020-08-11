@@ -6,17 +6,18 @@ export const styles = StyleSheet.create({
         flex: 1,
     },
 
-    logoBox: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-    },
 
     backgroundImage: {
         backgroundColor: "#8257E5",
         flex: 1,
         justifyContent: "space-between",
         alignItems: "center"
+    },
+
+    logoBox: {
+        flex: 1,
+        alignItems: "flex-start",
+        justifyContent: "center",
     },
 
     logoText: {
@@ -67,7 +68,7 @@ export const styles = StyleSheet.create({
     },
 
     footerHeader: {
-        width:"100%",
+        width: "100%",
         paddingHorizontal: 30,
         flexDirection: "row",
         alignItems: "center",
