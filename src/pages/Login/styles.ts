@@ -1,57 +1,87 @@
-import styled from 'styled-components/native'
+import { StyleSheet } from 'react-native'
+import { Poppins_400Regular } from '@expo-google-fonts/poppins'
 
-export const Container = styled.View`
-    flex: 1;
-`
+export const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
 
-export const LogoBox = styled.View`
-    flex: 1;
-    justify-content: center;
-    align-items: flex-start;
-`
+    logoBox: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+    },
 
-export const BackgroundImage = styled.ImageBackground`
-    background-color: #8257E5;
-    flex: 1;
-    justify-content: space-between;
-    align-items: center;
-`
+    backgroundImage: {
+        backgroundColor: "#8257E5",
+        flex: 1,
+        justifyContent: "space-between",
+        alignItems: "center"
+    },
 
-export const LogoText = styled.Text`
-    color: #D4C2FF;
-    font-family: "Poppins_400Regular";
-    font-size: 15px;
-    width: 150px;
-`
+    logoText: {
+        color: "#D4C2FF",
+        fontFamily: "Poppins_400Regular",
+        fontSize: 15,
+        width: 150
+    },
 
-export const LoginBox = styled.View`
-    flex: 1;
-    width: 100%;
-    background-color: #F0F0F7;
-    align-items: center;
-    justify-content: center;
-`
+    loginBox: {
+        flex: 1,
+        width: "100%",
+        padding: 20,
+        backgroundColor: "#F0F0F7",
+        alignItems: "center",
+        justifyContent: "center",
+    },
 
-export const Header = styled.View`
-    flex: 1;
-    width: 100%;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-`
+    doLogin: {
 
-export const InputEmail = styled.TextInput`
-    flex: 1;
-`
+    },
 
-export const InputPassword = styled.TextInput`
-    flex: 1;
-`
+    createAccount: {
 
-export const Footer = styled.View`
-    flex: 1;
-    width: 100%;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-`
+    },
+
+    header: {
+        flex: 1,
+        width: "100%",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-around",
+    },
+
+    inputEmail: {
+        flex: 1,
+    },
+
+    passwordInput: {
+        flex: 1,
+    },
+
+    footer: {
+        flex: 1,
+        width: "100%",
+        alignItems: "center",
+        justifyContent: "space-around",
+    },
+
+    footerHeader: {
+        width:"100%",
+        paddingHorizontal: 30,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between"
+    },
+
+    footerButton: {
+        backgroundColor: "#ccc",
+        flex: 1,
+        width: "90%",
+        margin: 20
+    },
+
+    buttonText: {
+
+    }
+})
