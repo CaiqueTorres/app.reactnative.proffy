@@ -43,7 +43,7 @@ export default function Login() {
 
                     <View style={styles.footer}>
                         <View style={styles.footerHeader}>
-                            <Checkbox onClick={onPressCheckBox} />
+                            <Checkbox onPress={onPressCheckBox} />
                             <Text style={styles.remindMe}>Lembrar-me</Text>
                             <Text style={styles.forget}>Esqueci minha senha</Text>
                         </View>

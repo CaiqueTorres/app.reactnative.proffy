@@ -10,24 +10,21 @@ import checkIcon from '../../assets/images/icons/check.png'
 
 import styles from './styles'
 
-interface CheckBoxProps extends TouchableWithoutFeedbackProperties {
-    onClick(): any
+interface CheckBoxProps {
+    onPress(): any
 }
 
-const CheckBox: React.FC<CheckBoxProps> = ({ onClick, ...rest }) => {
+const CheckBox: React.FC<CheckBoxProps> = ({ onPress }) => {
 
     const [isChecked, setIsChecked] = useState(false)
 
-    function onClickHandler() {
+    function onPressHandler() {
         setIsChecked(!isChecked)
-        onClick()
+        onPress()
     }
 
     return (
-        <TouchableWithoutFeedback
-            onPress={onClickHandler}
-            {...rest}
-        >
+        <TouchableWithoutFeedback onPress={onPressHandler}>
             <View style={[
                 {
                     backgroundColor: isChecked ? "#04D361" : "#fff"
@@ -41,8 +38,8 @@ const CheckBox: React.FC<CheckBoxProps> = ({ onClick, ...rest }) => {
                         },
                         styles.checkImage
                     ]}
-                    source={checkIcon} /
-                >
+                    source={checkIcon}
+                />
             </View>
         </TouchableWithoutFeedback>
     )
