@@ -3,13 +3,18 @@ import SvgUri from 'react-native-svg-uri'
 import { View, Text, ImageBackground, TextInput, StatusBar } from 'react-native'
 
 import Button from '../../components/Button'
+import Checkbox from '../../components/CheckBox'
 
 import backgroundImage from '../../assets/images/give-classes-background.png'
 
 import styles from './styles'
-import { Switch } from 'react-native-gesture-handler'
 
 export default function Login() {
+
+    function onPressCheckBox() {
+        console.log('clicked')
+    }
+
     return (
         //#region JSX
 
@@ -38,10 +43,11 @@ export default function Login() {
 
                     <View style={styles.footer}>
                         <View style={styles.footerHeader}>
+                            <Checkbox onClick={onPressCheckBox} />
                             <Text style={styles.remindMe}>Lembrar-me</Text>
                             <Text style={styles.forget}>Esqueci minha senha</Text>
                         </View>
-                        <Button style={styles.footerButton}>
+                        <Button onPress={onPressCheckBox} style={styles.footerButton}>
                             <Text style={styles.buttonText}>Entrar</Text>
                         </Button>
                     </View>
