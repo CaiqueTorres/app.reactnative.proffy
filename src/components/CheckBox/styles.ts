@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
 
-    checkImage: {
+    checkmarkImage: {
         color: "#fff",
         width: "60%",
         height: "60%",

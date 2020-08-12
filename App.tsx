@@ -25,6 +25,6 @@ function loadFonts() {
         Archivo_400Regular,
         Archivo_700Bold,
         Poppins_400Regular,
-        Poppins_600SemiBold
+        Poppins_600SemiBold,
     })
 }

@@ -10,11 +10,6 @@ import backgroundImage from '../../assets/images/give-classes-background.png'
 import styles from './styles'
 
 export default function Login() {
-
-    function onPressCheckBox(isActive: boolean) {
-        console.log(isActive)
-    }
-
     return (
         //#region JSX
 
@@ -45,7 +40,6 @@ export default function Login() {
                         <View style={styles.footerHeader}>
                             <View style={styles.remindBox}>
                                 <Checkbox
-                                    onPress={onPressCheckBox}
                                     uncheckedBackgroundColor="#fff"
                                     checkedBackgroundColor="#04D361"
                                 />
@@ -53,7 +47,7 @@ export default function Login() {
                             </View>
                             <Text style={styles.forgetText}>Esqueci minha senha</Text>
                         </View>
-                        <Button onPress={onPressCheckBox} style={styles.footerButton}>
+                        <Button style={styles.footerButton}>
                             <Text style={styles.buttonText}>Entrar</Text>
                         </Button>
                     </View>
