@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
     },
 
     checkImage: {
+        color: "#fff",
         width: "60%",
         height: "60%",
     },

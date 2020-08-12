@@ -44,7 +44,11 @@ export default function Login() {
                     <View style={styles.footer}>
                         <View style={styles.footerHeader}>
                             <View style={styles.remindBox}>
-                                <Checkbox onPress={onPressCheckBox} />
+                                <Checkbox
+                                    onPress={onPressCheckBox}
+                                    uncheckedBackgroundColor="#fff"
+                                    checkedBackgroundColor="#04D361"
+                                />
                                 <Text style={styles.remindMe}>Lembrar-me</Text>
                             </View>
                             <Text style={styles.forgetText}>Esqueci minha senha</Text>

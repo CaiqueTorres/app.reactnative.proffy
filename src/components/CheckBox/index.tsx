@@ -3,8 +3,8 @@ import {
     View,
     Image,
     TouchableWithoutFeedback,
-    TouchableWithoutFeedbackProperties,
 } from 'react-native'
+// import Ionicons from '@expo/vector-icons'
 
 import checkIcon from '../../assets/images/icons/check.png'
 
@@ -12,9 +12,15 @@ import styles from './styles'
 
 interface CheckBoxProps {
     onPress(isActive: boolean): any
+    checkedBackgroundColor: string
+    uncheckedBackgroundColor: string
 }
 
-const CheckBox: React.FC<CheckBoxProps> = ({ onPress }) => {
+const CheckBox: React.FC<CheckBoxProps> = ({
+    onPress,
+    checkedBackgroundColor,
+    uncheckedBackgroundColor
+}) => {
 
     const [isChecked, setIsChecked] = useState(false)
 
@@ -26,22 +32,18 @@ const CheckBox: React.FC<CheckBoxProps> = ({ onPress }) => {
     }
 
     return (
-        <TouchableWithoutFeedback onPress={onPressHandler}>
+        <TouchableWithoutFeedback
+            onPress={onPressHandler}
+        >
             <View style={[
                 {
-                    backgroundColor: isChecked ? "#04D361" : "#fff"
+                    backgroundColor: isChecked
+                        ? checkedBackgroundColor
+                        : uncheckedBackgroundColor
                 },
                 styles.container
             ]}>
-                <Image
-                    style={[
-                        {
-                            display: isChecked ? "flex" : "none"
-                        },
-                        styles.checkImage
-                    ]}
-                    source={checkIcon}
-                />
+                {/* <Ionicons  /> */}
             </View>
         </TouchableWithoutFeedback>
     )
