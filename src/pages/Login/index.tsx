@@ -1,13 +1,13 @@
 import React from 'react'
 import SvgUri from 'react-native-svg-uri'
 import { View, Text, ImageBackground, TextInput, StatusBar } from 'react-native'
-import { RectButton } from "react-native-gesture-handler";
 
 import Button from '../../components/Button'
 
 import backgroundImage from '../../assets/images/give-classes-background.png'
 
 import styles from './styles'
+import { Switch } from 'react-native-gesture-handler'
 
 export default function Login() {
     return (
@@ -38,8 +38,8 @@ export default function Login() {
 
                     <View style={styles.footer}>
                         <View style={styles.footerHeader}>
-                            <Text>Lembrar-me</Text>
-                            <Text>Esqueci minha senha</Text>
+                            <Text style={styles.remindMe}>Lembrar-me</Text>
+                            <Text style={styles.forget}>Esqueci minha senha</Text>
                         </View>
                         <Button style={styles.footerButton}>
                             <Text style={styles.buttonText}>Entrar</Text>

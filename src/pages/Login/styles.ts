@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
     },
 
     createAccount: {
+        marginTop: 8,
         fontFamily: "Poppins_400Regular",
         color: "#9871F5"
     },
@@ -62,18 +63,23 @@ const styles = StyleSheet.create({
     },
 
     emailInput: {
+        paddingLeft: 20,
         height: 65,
         borderWidth: 1,
-        borderRadius: 10,
-        borderColor: colors.lighter,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+        borderBottomWidth: 0,
+        borderColor: "#E6E6F0",
         backgroundColor: colors.white
     },
 
     passwordInput: {
+        paddingLeft: 20,
         height: 65,
         borderWidth: 1,
-        borderRadius: 10,
-        borderColor: colors.lighter,
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
+        borderColor: "#E6E6F0",
         backgroundColor: colors.white
     },
 
@@ -89,9 +95,19 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
 
+    remindMe: {
+        fontSize: 13,
+        fontFamily: "Poppins_400Regular",
+    },
+
+    forget: {
+        fontSize: 13,
+        fontFamily: "Poppins_400Regular",
+    },
+
     footerButton: {
         marginTop: 40,
-        backgroundColor: colors.light,
+        backgroundColor: "#DCDCE5",
         height: 70,
         justifyContent: "center",
         alignItems: "center",
