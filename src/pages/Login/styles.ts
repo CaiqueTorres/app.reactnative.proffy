@@ -91,16 +91,21 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: "row",
         justifyContent: "space-between",
-        paddingHorizontal: 25,
         alignItems: "center",
     },
 
+    remindBox: {
+        flex: 1,
+        flexDirection: "row",
+    },
+
     remindMe: {
+        marginLeft: 15,
         fontSize: 13,
         fontFamily: "Poppins_400Regular",
     },
 
-    forget: {
+    forgetText: {
         fontSize: 13,
         fontFamily: "Poppins_400Regular",
     },

@@ -11,7 +11,7 @@ import checkIcon from '../../assets/images/icons/check.png'
 import styles from './styles'
 
 interface CheckBoxProps {
-    onPress(): any
+    onPress(isActive: boolean): any
 }
 
 const CheckBox: React.FC<CheckBoxProps> = ({ onPress }) => {
@@ -19,8 +19,10 @@ const CheckBox: React.FC<CheckBoxProps> = ({ onPress }) => {
     const [isChecked, setIsChecked] = useState(false)
 
     function onPressHandler() {
-        setIsChecked(!isChecked)
-        onPress()
+        const newValue = !isChecked
+
+        onPress(newValue)
+        setIsChecked(newValue)
     }
 
     return (

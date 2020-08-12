@@ -11,8 +11,8 @@ import styles from './styles'
 
 export default function Login() {
 
-    function onPressCheckBox() {
-        console.log('clicked')
+    function onPressCheckBox(isActive: boolean) {
+        console.log(isActive)
     }
 
     return (
@@ -43,9 +43,11 @@ export default function Login() {
 
                     <View style={styles.footer}>
                         <View style={styles.footerHeader}>
-                            <Checkbox onPress={onPressCheckBox} />
-                            <Text style={styles.remindMe}>Lembrar-me</Text>
-                            <Text style={styles.forget}>Esqueci minha senha</Text>
+                            <View style={styles.remindBox}>
+                                <Checkbox onPress={onPressCheckBox} />
+                                <Text style={styles.remindMe}>Lembrar-me</Text>
+                            </View>
+                            <Text style={styles.forgetText}>Esqueci minha senha</Text>
                         </View>
                         <Button onPress={onPressCheckBox} style={styles.footerButton}>
                             <Text style={styles.buttonText}>Entrar</Text>
