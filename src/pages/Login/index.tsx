@@ -4,6 +4,7 @@ import { View, Text, ImageBackground, TextInput, StatusBar } from 'react-native'
 
 import Button from '../../components/Button'
 import Checkbox from '../../components/CheckBox'
+import LoginTextInput from '../../components/LoginTextInput'
 
 import backgroundImage from '../../assets/images/give-classes-background.png'
 
@@ -32,8 +33,8 @@ export default function Login() {
                     </View>
 
                     <View style={styles.inputBox}>
-                        <TextInput style={styles.emailInput} placeholder="E-mail" />
-                        <TextInput style={styles.passwordInput} placeholder="Senha" />
+                        <LoginTextInput placeholder="E-mail" />
+                        <LoginTextInput placeholder="Senha" />
                     </View>
 
                     <View style={styles.footer}>
