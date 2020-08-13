@@ -33,8 +33,22 @@ export default function Login() {
                     </View>
 
                     <View style={styles.inputBox}>
-                        <LoginTextInput placeholder="E-mail" />
-                        <LoginTextInput placeholder="Senha" />
+                        <LoginTextInput
+                            style={{
+                                borderTopLeftRadius: 10,
+                                borderTopRightRadius: 10
+                            }}
+                            transition={175}
+                            placeholder="E-mail"
+                        />
+                        <LoginTextInput
+                            style={{
+                                borderBottomLeftRadius: 10,
+                                borderBottomRightRadius: 10
+                            }}
+                            transition={175}
+                            placeholder="Senha"
+                        />
                     </View>
 
                     <View style={styles.footer}>

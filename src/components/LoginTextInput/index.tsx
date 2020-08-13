@@ -1,24 +1,118 @@
-import React from 'react';
-import { View, TextInputProperties } from 'react-native'
-import { TextInput } from 'react-native-gesture-handler';
+import React, { useState } from 'react';
+import { Animated, View, TextInputProperties, StyleProp, ViewStyle } from 'react-native'
 
-import Svg, { Line } from 'react-native-svg'
+import AnimatedTextInput from './AnimatedTextInput'
 
 import styles from './styles'
 
 interface LoginTextInputsProps extends TextInputProperties {
-
+    style?: StyleProp<ViewStyle>
+    transition: number,
+    placeholder?: string
 }
 
-const LoginTextInput: React.FC<LoginTextInputsProps> = ({ ...rest }) => {
+const LoginTextInput: React.FC<LoginTextInputsProps> = ({ style, transition, placeholder, ...rest }) => {
+
+    const [isFocused, setIsFocused] = useState(false)
+
+    const translateYAnimation = useState(new Animated.Value(0))[0]
+    const fontSizeAnimation = useState(new Animated.Value(14))[0]
+    const translateYTextInputAnimation = useState(new Animated.Value(0))[0]
+
+    //#region Handlers
+
+    function handlerOnFocused() {
+        setIsFocused(true)
+
+        Animated.parallel([
+            Animated.timing(
+                fontSizeAnimation,
+                {
+                    toValue: 11,
+                    duration: transition,
+                    useNativeDriver: false
+                }),
+
+            Animated.timing(
+                translateYAnimation,
+                {
+                    toValue: -11,
+                    duration: transition,
+                    useNativeDriver: false
+                }),
+
+            Animated.timing(
+                translateYTextInputAnimation,
+                {
+                    toValue: 11,
+                    duration: transition,
+                    useNativeDriver: false
+                }),
+        ]).start()
+    }
+
+    function handlerOnBlurred() {
+        setIsFocused(false)
+
+        Animated.parallel([
+            Animated.timing(
+                translateYAnimation,
+                {
+                    toValue: 0,
+                    duration: transition,
+                    useNativeDriver: false
+                }),
+
+            Animated.timing(
+                fontSizeAnimation,
+                {
+                    toValue: 14,
+                    duration: transition,
+                    useNativeDriver: false
+                }),
+
+            Animated.timing(
+                translateYTextInputAnimation,
+                {
+                    toValue: 0,
+                    duration: transition,
+                    useNativeDriver: false
+                }),
+        ]).start()
+    }
+
+    //#endregion
+
     return (
-        <View style={styles.container}>
-            <TextInput
-                style={styles.textInput}
-                {...rest}
+        //#region JSX
+
+        <View style={[styles.container, style]}>
+            <AnimatedTextInput
+                style={[
+                    styles.textInput,
+                    {
+                        transform: [{ translateY: translateYTextInputAnimation }]
+                    }
+                ]}
+                onFocus={handlerOnFocused}
+                onBlur={handlerOnBlurred}
             />
-            <View style={styles.purpleLine} />
+            {isFocused && <View style={styles.purpleLine} />}
+            <View
+                pointerEvents="none"
+                style={styles.placeHolderBox}
+            >
+                <Animated.Text style={[
+                    styles.placeHolderText,
+                    {
+                        fontSize: fontSizeAnimation,
+                        transform: [{ translateY: translateYAnimation }]
+                    }
+                ]}>{placeholder}</Animated.Text>
+            </View>
         </View>
+
+        //#endregion
     )
 }
 
