@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import SvgUri from 'react-native-svg-uri'
-import { View, Text, ImageBackground, TextInput, StatusBar } from 'react-native'
+import { Keyboard, View, Text, ImageBackground, StatusBar } from 'react-native'
 
 import Button from '../../components/Button'
 import Checkbox from '../../components/CheckBox'
@@ -11,6 +11,25 @@ import backgroundImage from '../../assets/images/give-classes-background.png'
 import styles from './styles'
 
 export default function Login() {
+
+    useEffect(() => {
+        Keyboard.addListener("keyboardDidShow", keyboardDidShow);
+        Keyboard.addListener("keyboardDidHide", keyboardDidHide);
+
+        return () => {
+            Keyboard.removeListener("keyboardDidShow", keyboardDidShow);
+            Keyboard.removeListener("keyboardDidHide", keyboardDidHide);
+        };
+    }, []);
+
+    function keyboardDidShow() {
+
+    }
+
+    function keyboardDidHide() {
+
+    }
+
     return (
         //#region JSX
 
