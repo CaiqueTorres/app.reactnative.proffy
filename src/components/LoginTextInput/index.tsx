@@ -11,8 +11,14 @@ interface LoginTextInputsProps extends TextInputProperties {
     placeholder?: string
 }
 
-const LoginTextInput: React.FC<LoginTextInputsProps> = ({ style, transition, placeholder, ...rest }) => {
+const LoginTextInput: React.FC<LoginTextInputsProps> = ({
+    style,
+    transition,
+    placeholder,
+    secureTextEntry
+}) => {
 
+    const [inputText, setInputText] = useState('')
     const [isFocused, setIsFocused] = useState(false)
 
     const translateYAnimation = useState(new Animated.Value(0))[0]
@@ -54,6 +60,9 @@ const LoginTextInput: React.FC<LoginTextInputsProps> = ({ style, transition, pla
     function handlerOnBlurred() {
         setIsFocused(false)
 
+        if (!validateText(inputText))
+            return
+
         Animated.parallel([
             Animated.timing(
                 translateYAnimation,
@@ -81,6 +90,10 @@ const LoginTextInput: React.FC<LoginTextInputsProps> = ({ style, transition, pla
         ]).start()
     }
 
+    function validateText(text: string) {
+        return inputText == '' || inputText == null
+    }
+
     //#endregion
 
     return (
@@ -96,6 +109,8 @@ const LoginTextInput: React.FC<LoginTextInputsProps> = ({ style, transition, pla
                 ]}
                 onFocus={handlerOnFocused}
                 onBlur={handlerOnBlurred}
+                onChangeText={setInputText}
+                secureTextEntry={secureTextEntry}
             />
             {isFocused && <View style={styles.purpleLine} />}
             <View

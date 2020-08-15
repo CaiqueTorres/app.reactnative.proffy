@@ -1,17 +1,21 @@
 import { StyleSheet } from 'react-native'
 import { colors } from '../../styles'
 
+const inputHeight = 65
+const paddingLeft = 25
+
 const styles = StyleSheet.create({
     container: {
         justifyContent: "center",
-        height: 65,
+        height: inputHeight,
         borderWidth: 1,
         borderColor: "#E6E6F0",
         backgroundColor: colors.white,
     },
     
     textInput: {
-        paddingLeft: 25,
+        paddingLeft: paddingLeft,
+        height: inputHeight,
     },
 
     purpleLine: {
@@ -28,7 +32,7 @@ const styles = StyleSheet.create({
     },
 
     placeHolderText: {
-        paddingLeft: 25,
+        paddingLeft: paddingLeft,
         color: "#C1BCCC",
         fontSize: 14
     },

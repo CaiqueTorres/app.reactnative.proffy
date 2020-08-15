@@ -48,6 +48,7 @@ export default function Login() {
                             }}
                             transition={175}
                             placeholder="Senha"
+                            secureTextEntry={true}
                         />
                     </View>
 
