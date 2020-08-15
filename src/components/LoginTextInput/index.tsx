@@ -7,128 +7,143 @@ import styles from './styles'
 
 interface LoginTextInputsProps extends TextInputProperties {
     style?: StyleProp<ViewStyle>
-    transition: number,
+    transition: number
     placeholder?: string
 }
 
-const LoginTextInput: React.FC<LoginTextInputsProps> = ({
-    style,
-    transition,
-    placeholder,
-    secureTextEntry
-}) => {
+interface LoginTextInputState {
+    isFocused: boolean
+    inputText: string
+    translateYAnimation: Animated.Value
+    fontSizeAnimation: Animated.Value
+    translateYTextInputAnimation: Animated.Value
+}
 
-    const [inputText, setInputText] = useState('')
-    const [isFocused, setIsFocused] = useState(false)
+export default class LoginTextInput extends React.Component<LoginTextInputsProps, LoginTextInputState> {
 
-    const translateYAnimation = useState(new Animated.Value(0))[0]
-    const fontSizeAnimation = useState(new Animated.Value(14))[0]
-    const translateYTextInputAnimation = useState(new Animated.Value(0))[0]
+    constructor(props: LoginTextInputsProps) {
+        super(props)
 
-    //#region Handlers
+        this.state = {
+            isFocused: false,
+            inputText: '',
+            translateYAnimation: new Animated.Value(0),
+            fontSizeAnimation: new Animated.Value(14),
+            translateYTextInputAnimation: new Animated.Value(0)
+        };
 
-    function handlerOnFocused() {
-        setIsFocused(true)
+        this.handlerOnFocused = this.handlerOnFocused.bind(this)
+        this.handlerOnBlurred = this.handlerOnBlurred.bind(this)
+        this.validateText = this.validateText.bind(this)
+    }
+
+    handlerOnFocused() {
+        this.setState({ isFocused: true })
 
         Animated.parallel([
             Animated.timing(
-                fontSizeAnimation,
+                this.state.fontSizeAnimation,
                 {
                     toValue: 11,
-                    duration: transition,
+                    duration: this.props.transition,
                     useNativeDriver: false
                 }),
 
             Animated.timing(
-                translateYAnimation,
+                this.state.translateYAnimation,
                 {
                     toValue: -11,
-                    duration: transition,
+                    duration: this.props.transition,
                     useNativeDriver: false
                 }),
 
             Animated.timing(
-                translateYTextInputAnimation,
+                this.state.translateYTextInputAnimation,
                 {
                     toValue: 11,
-                    duration: transition,
+                    duration: this.props.transition,
                     useNativeDriver: false
                 }),
         ]).start()
     }
 
-    function handlerOnBlurred() {
-        setIsFocused(false)
+    handlerOnBlurred() {
+        this.setState({ isFocused: false })
 
-        if (!validateText(inputText))
+        if (!this.validateText(this.state.inputText))
             return
 
         Animated.parallel([
             Animated.timing(
-                translateYAnimation,
+                this.state.translateYAnimation,
                 {
                     toValue: 0,
-                    duration: transition,
+                    duration: this.props.transition,
                     useNativeDriver: false
                 }),
 
             Animated.timing(
-                fontSizeAnimation,
+                this.state.fontSizeAnimation,
                 {
                     toValue: 14,
-                    duration: transition,
+                    duration: this.props.transition,
                     useNativeDriver: false
                 }),
 
             Animated.timing(
-                translateYTextInputAnimation,
+                this.state.translateYTextInputAnimation,
                 {
                     toValue: 0,
-                    duration: transition,
+                    duration: this.props.transition,
                     useNativeDriver: false
                 }),
         ]).start()
     }
 
-    function validateText(text: string) {
-        return inputText == '' || inputText == null
+    validateText(text: string) {
+        return this.state.inputText == '' || this.state.inputText == null
     }
 
-    //#endregion
+    render() {
+        const {
+            style,
+            placeholder,
+            transition,
+            secureTextEntry
+        } = this.props;
 
-    return (
-        //#region JSX
+        return (
+            //#region JSX
 
-        <View style={[styles.container, style]}>
-            <AnimatedTextInput
-                style={[
-                    styles.textInput,
-                    {
-                        transform: [{ translateY: translateYTextInputAnimation }]
-                    }
-                ]}
-                onFocus={handlerOnFocused}
-                onBlur={handlerOnBlurred}
-                onChangeText={setInputText}
-                secureTextEntry={secureTextEntry}
-            />
-            {isFocused && <View style={styles.purpleLine} />}
-            <View
-                pointerEvents="none"
-                style={styles.placeHolderBox}
-            >
-                <Animated.Text style={[
-                    styles.placeHolderText,
-                    {
-                        fontSize: fontSizeAnimation,
-                        transform: [{ translateY: translateYAnimation }]
-                    }
-                ]}>{placeholder}</Animated.Text>
+            <View style={[styles.container, style]}>
+                <AnimatedTextInput
+                    style={[
+                        styles.textInput,
+                        {
+                            transform: [{ translateY: this.state.translateYTextInputAnimation }]
+                        }
+                    ]}
+                    onFocus={this.handlerOnFocused}
+                    onBlur={this.handlerOnBlurred}
+                    onChangeText={(text: string) => this.setState({ inputText: text })}
+                    secureTextEntry={secureTextEntry}
+                />
+                {this.state.isFocused && <View style={styles.purpleLine} pointerEvents="none" />}
+                <View
+                    pointerEvents="none"
+                    style={styles.placeHolderBox}
+                >
+                    <Animated.Text style={[
+                        styles.placeHolderText,
+                        {
+                            fontSize: this.state.fontSizeAnimation,
+                            transform: [{ translateY: this.state.translateYAnimation }]
+                        }
+                    ]}>{placeholder}</Animated.Text>
+                </View>
             </View>
-        </View>
 
-        //#endregion
-    )
+            //#endregion
+        )
+    }
 }
-
-export default LoginTextInput;
