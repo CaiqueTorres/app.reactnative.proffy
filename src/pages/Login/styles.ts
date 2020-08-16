@@ -1,38 +1,108 @@
-import { StyleSheet } from 'react-native'
-import { Archivo_400Regular } from '@expo-google-fonts/archivo'
-import { Poppins_400Regular } from '@expo-google-fonts/poppins'
+import styled from 'styled-components/native'
+import { Dimensions } from 'react-native';
+import { RectButton } from 'react-native-gesture-handler'
 
-export const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
+import LoginTextInput from '../../components/LoginTextInput'
 
-    backgroundImage: {
-        backgroundColor: "#8257E5",
-        flex: 1,
-        resizeMode: "cover",
-        justifyContent: "space-between",
-        alignItems: "center"
-    },
+const windowHeight = Dimensions.get('window').height;
 
-    logoBox: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "flex-start",
-    },
+export const ContainerKeyboardAvoidingView = styled.KeyboardAvoidingView`
+    flex: 1;
+`
 
-    logoText: {
-        color: "#D4C2FF",
-        fontFamily: "Poppins_400Regular",
-        fontSize: 15,
-        maxWidth: 150
-    },
+export const ImageBackground = styled.ImageBackground`
+    flex: 1;
+`
 
-    loginBox: {
-        flex: 1,
-        width: "100%",
-        backgroundColor: "#F0F0F7",
-        justifyContent: "center",
-        alignItems: "center"
-    },
-})
+export const LogoView = styled.View`
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+`
+
+export const LogoText = styled.Text`
+    color: #fff;
+    font-size: 14px;
+`
+
+export const LoginView = styled.View`
+    height: ${windowHeight / 2};
+    min-width: 300px;
+    background: #F0F0F7;
+    justify-content: space-between;
+    padding: 0 25px;
+`
+
+export const LoginHeaderView = styled.View`
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+`
+
+export const LoginText = styled.Text`
+    color: #32264D;
+    font-family: Poppins_400Regular;
+    font-weight: bold;
+    font-size: 28px;
+`
+
+export const CreateAccountText = styled.Text`
+    color: #9871F5;
+    font-family: Poppins_400Regular;
+`
+
+export const InputsView = styled.View`
+    margin-top: 20px;
+`
+
+export const EmailInput = styled(LoginTextInput)`
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-width: 0;
+`
+
+export const PasswordInput = styled(LoginTextInput)`
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+`
+
+export const PasswordManagerView = styled.View`
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top:  20px;
+`
+
+export const RemindMeView = styled.View`
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+`
+
+export const RemindMeText = styled.Text`
+    margin-left: 15px;
+    font-size: 13px;
+    color: #9C98A6;
+    font-family: Poppins_400Regular;
+`
+
+export const ForgetText = styled.Text`
+    font-size: 13px;
+    color: #9C98A6;
+    font-family: Poppins_400Regular;
+`
+
+export const FooterRectButton = styled(RectButton)`
+    background: #DCDCE5;
+    height: 70px;
+    margin: 20px 0;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+`
+
+export const FooterRectButtonText = styled.Text`
+    font-family: Archivo_400Regular;
+    font-size: 14px;
+`
