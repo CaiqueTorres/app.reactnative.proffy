@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import SvgUri from 'react-native-svg-uri'
 import {
     View,
@@ -7,6 +7,7 @@ import {
     ImageBackground,
     Platform,
 } from 'react-native'
+import { Keyboard } from 'react-native'
 
 import Checkbox from '../../components/CheckBox'
 
@@ -36,6 +37,27 @@ export default function Login() {
     StatusBar.setBarStyle("light-content")
     StatusBar.setTranslucent(true)
 
+    const [isKeyboardOpen, setIsKeyboardOpen] = useState(false)
+
+    useEffect(() => {
+        Keyboard.addListener("keyboardDidShow", keyboardDidShow);
+        Keyboard.addListener("keyboardDidHide", keyboardDidHide);
+
+        // cleanup function
+        return () => {
+            Keyboard.removeListener("keyboardDidShow", keyboardDidShow);
+            Keyboard.removeListener("keyboardDidHide", keyboardDidHide);
+        };
+    }, []);
+
+    function keyboardDidShow() {
+        setIsKeyboardOpen(true)
+    }
+
+    function keyboardDidHide() {
+        setIsKeyboardOpen(false)
+    }
+
     return (
         //#region JSX
 
@@ -48,7 +70,7 @@ export default function Login() {
                     source={backgroundImage}
                 >
                     <LogoView>
-                        <View>
+                        <View style={{display: isKeyboardOpen ? "none" : "flex"}}>
                             <SvgUri
                                 fill="#fff"
                                 height="85"

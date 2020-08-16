@@ -28,7 +28,7 @@ const LoginTextInput: React.FC<LoginTextInputsProps> = ({
     isPassword,
 }) => {
 
-    const [secureTextEntry, setSecureTextEntry] = useState(false)
+    const [secureTextEntry, setSecureTextEntry] = useState(true)
     const [inputText, setInputText] = useState('')
     const [isFocused, setIsFocused] = useState(false)
 
@@ -118,7 +118,7 @@ const LoginTextInput: React.FC<LoginTextInputsProps> = ({
                     onFocus={handlerOnFocused}
                     onBlur={handlerOnBlurred}
                     onChangeText={setInputText}
-                    secureTextEntry={secureTextEntry}
+                    secureTextEntry={isPassword && secureTextEntry}
                 />
                 {isFocused && <View pointerEvents="none" style={styles.purpleLine} />}
                 <View
