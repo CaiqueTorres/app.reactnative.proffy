@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
-import { Animated, View, TextInputProperties, StyleProp, ViewStyle } from 'react-native'
+import {
+    Animated,
+    View,
+    TextInputProperties,
+    StyleProp,
+    ViewStyle,
+    TouchableWithoutFeedback
+} from 'react-native'
+import { Ionicons } from '@expo/vector-icons';
 
 import AnimatedTextInput from './AnimatedTextInput'
 
@@ -7,17 +15,19 @@ import styles from './styles'
 
 interface LoginTextInputsProps extends TextInputProperties {
     style?: StyleProp<ViewStyle>
-    transition: number,
+    transition: number
     placeholder?: string
+    isPassword?: boolean
 }
 
 const LoginTextInput: React.FC<LoginTextInputsProps> = ({
     style,
     transition,
     placeholder,
-    secureTextEntry
+    isPassword,
 }) => {
 
+    const [secureTextEntry, setSecureTextEntry] = useState(false)
     const [inputText, setInputText] = useState('')
     const [isFocused, setIsFocused] = useState(false)
 
@@ -125,6 +135,15 @@ const LoginTextInput: React.FC<LoginTextInputsProps> = ({
                     }
                 ]}>{placeholder}</Animated.Text>
             </View>
+
+            {isPassword && (
+                <Ionicons
+                    onPress={() => { setSecureTextEntry(!secureTextEntry) }}
+                    name={secureTextEntry ? "md-eye-off" : "md-eye"}
+                    size={26}
+                    color="black"
+                />
+            )}
         </View>
 
         //#endregion

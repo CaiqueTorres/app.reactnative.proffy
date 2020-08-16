@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native'
+
 import { colors } from '../../styles'
 
 const inputHeight = 65
@@ -12,7 +13,7 @@ const styles = StyleSheet.create({
         borderColor: "#E6E6F0",
         backgroundColor: colors.white,
     },
-    
+
     textInput: {
         paddingLeft: paddingLeft,
         height: inputHeight,
