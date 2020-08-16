@@ -90,11 +90,11 @@ export default function Login() {
                         <InputsView>
                             <EmailInput
                                 placeholder="E-mail"
-                                transition={0.15}
+                                transition={150}
                             />
                             <PasswordInput
                                 placeholder="Senha"
-                                transition={0.15}
+                                transition={150}
                                 isPassword
                             />
                         </InputsView>
