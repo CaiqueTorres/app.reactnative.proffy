@@ -1,48 +1,44 @@
-import { StyleSheet } from 'react-native'
+import styled from 'styled-components/native'
+import { Animated } from 'react-native'
 
-import { colors } from '../../styles'
+import AnimatedTextInput from './AnimatedTextInput'
 
 const inputHeight = 65
 
-const styles = StyleSheet.create({
-    container: {
-        paddingHorizontal: 25,
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-        height: inputHeight,
-        borderWidth: 1,
-        borderColor: "#E6E6F0",
-        backgroundColor: colors.white,
-    },
+export const ContainerView = styled.View`
+    padding: 0 25px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: ${inputHeight};
+    border: 1px solid #E6E6F0;
+    background: #fff;
+`
 
-    passwordBox: {
-        flex: 1,
-        justifyContent: "center",
-    },
+export const TextInputContentView = styled.View`
+    flex: 1;
+    justify-content: center;
+`
 
-    textInput: {
-        height: inputHeight,
-    },
+export const InputTextAnimated = styled(AnimatedTextInput)`
+    height: ${inputHeight};
+`
 
-    purpleLine: {
-        height: "65%",
-        width: "100%",
-        position: "absolute",
-        transform: [{ translateX: -25 }],
-        borderLeftColor: "#8257E5",
-        borderLeftWidth: 3
-    },
+export const PurpleLineView = styled.View`
+    height: 65%;
+    width: 100%;
+    position: absolute;
+    transform: translateX(-25px);
+    border-left-width: 3px;
+    border-left-color: #8257E5;
+`
 
-    placeHolderBox: {
-        flex: 1,
-        position: "absolute",
-    },
+export const PlaceHolderView = styled.View`
+    flex: 1;
+    position: absolute;
+`
 
-    placeHolderText: {
-        color: "#C1BCCC",
-        fontSize: 14
-    },
-})
-
-export default styles
+export const PlaceHolderText = styled(Animated.Text)`
+    color: #C1BCCC;
+    font-size: 14px;
+`

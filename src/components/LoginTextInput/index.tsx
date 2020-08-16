@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {
     Animated,
-    View,
     TextInputProperties,
     StyleProp,
     ViewStyle
@@ -10,9 +9,14 @@ import { Ionicons } from '@expo/vector-icons';
 
 import validateText from '../../utils/validateText';
 
-import AnimatedTextInput from './AnimatedTextInput'
-
-import styles from './styles'
+import {
+    ContainerView,
+    TextInputContentView,
+    InputTextAnimated,
+    PurpleLineView,
+    PlaceHolderView,
+    PlaceHolderText
+} from './styles'
 
 interface LoginTextInputsProps extends TextInputProperties {
     style?: StyleProp<ViewStyle>
@@ -106,34 +110,27 @@ const LoginTextInput: React.FC<LoginTextInputsProps> = ({
     return (
         //#region JSX
 
-        <View style={[styles.container, style]}>
-            <View style={styles.passwordBox}>
-                <AnimatedTextInput
-                    style={[
-                        styles.textInput,
-                        {
-                            transform: [{ translateY: translateYTextInputAnimation }]
-                        }
-                    ]}
+        <ContainerView style={style}>
+            <TextInputContentView>
+                <InputTextAnimated
+                    style={{ transform: [{ translateY: translateYTextInputAnimation }] }}
                     onFocus={handlerOnFocused}
                     onBlur={handlerOnBlurred}
                     onChangeText={setInputText}
                     secureTextEntry={isPassword && secureTextEntry}
                 />
-                {isFocused && <View pointerEvents="none" style={styles.purpleLine} />}
-                <View
+                {isFocused && <PurpleLineView pointerEvents="none" />}
+                <PlaceHolderView
                     pointerEvents="none"
-                    style={styles.placeHolderBox}
                 >
-                    <Animated.Text style={[
-                        styles.placeHolderText,
+                    <PlaceHolderText style={
                         {
                             fontSize: fontSizeAnimation,
                             transform: [{ translateY: translateYAnimation }]
                         }
-                    ]}>{placeholder}</Animated.Text>
-                </View>
-            </View>
+                    }>{placeholder}</PlaceHolderText>
+                </PlaceHolderView>
+            </TextInputContentView>
 
             {isPassword && (
                 <Ionicons
@@ -143,7 +140,7 @@ const LoginTextInput: React.FC<LoginTextInputsProps> = ({
                     color="#8257E5"
                 />
             )}
-        </View>
+        </ContainerView>
 
         //#endregion
     )
