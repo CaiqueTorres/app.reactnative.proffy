@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import SvgUri from 'react-native-svg-uri'
+import { useNavigation } from '@react-navigation/native'
 import {
     View,
-    StatusBar,
     SafeAreaView,
     ImageBackground,
     Platform,
@@ -34,9 +34,7 @@ import {
 
 export default function Login() {
 
-    StatusBar.setBarStyle("light-content")
-    StatusBar.setTranslucent(true)
-
+    const { navigate } = useNavigation()
     const [isKeyboardOpen, setIsKeyboardOpen] = useState(false)
 
     useEffect(() => {
@@ -56,6 +54,10 @@ export default function Login() {
 
     function keyboardDidHide() {
         setIsKeyboardOpen(false)
+    }
+
+    function handleNavigateToSignUp() {
+        navigate('SignUp')
     }
 
     return (
@@ -84,7 +86,9 @@ export default function Login() {
                     <LoginView>
                         <LoginHeaderView>
                             <LoginText>Fazer login</LoginText>
-                            <CreateAccountText>Criar uma conta</CreateAccountText>
+                            <CreateAccountText
+                                onPress={handleNavigateToSignUp}
+                            >Criar uma conta</CreateAccountText>
                         </LoginHeaderView>
 
                         <InputsView>
