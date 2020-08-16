@@ -4,10 +4,11 @@ import {
     View,
     TextInputProperties,
     StyleProp,
-    ViewStyle,
-    TouchableWithoutFeedback
+    ViewStyle
 } from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
+
+import validateText from '../../utils/validateText';
 
 import AnimatedTextInput from './AnimatedTextInput'
 
@@ -100,48 +101,46 @@ const LoginTextInput: React.FC<LoginTextInputsProps> = ({
         ]).start()
     }
 
-    function validateText(text: string) {
-        return inputText == '' || inputText == null
-    }
-
     //#endregion
 
     return (
         //#region JSX
 
         <View style={[styles.container, style]}>
-            <AnimatedTextInput
-                style={[
-                    styles.textInput,
-                    {
-                        transform: [{ translateY: translateYTextInputAnimation }]
-                    }
-                ]}
-                onFocus={handlerOnFocused}
-                onBlur={handlerOnBlurred}
-                onChangeText={setInputText}
-                secureTextEntry={secureTextEntry}
-            />
-            {isFocused && <View pointerEvents="none" style={styles.purpleLine} />}
-            <View
-                pointerEvents="none"
-                style={styles.placeHolderBox}
-            >
-                <Animated.Text style={[
-                    styles.placeHolderText,
-                    {
-                        fontSize: fontSizeAnimation,
-                        transform: [{ translateY: translateYAnimation }]
-                    }
-                ]}>{placeholder}</Animated.Text>
+            <View style={styles.passwordBox}>
+                <AnimatedTextInput
+                    style={[
+                        styles.textInput,
+                        {
+                            transform: [{ translateY: translateYTextInputAnimation }]
+                        }
+                    ]}
+                    onFocus={handlerOnFocused}
+                    onBlur={handlerOnBlurred}
+                    onChangeText={setInputText}
+                    secureTextEntry={secureTextEntry}
+                />
+                {isFocused && <View pointerEvents="none" style={styles.purpleLine} />}
+                <View
+                    pointerEvents="none"
+                    style={styles.placeHolderBox}
+                >
+                    <Animated.Text style={[
+                        styles.placeHolderText,
+                        {
+                            fontSize: fontSizeAnimation,
+                            transform: [{ translateY: translateYAnimation }]
+                        }
+                    ]}>{placeholder}</Animated.Text>
+                </View>
             </View>
 
             {isPassword && (
                 <Ionicons
                     onPress={() => { setSecureTextEntry(!secureTextEntry) }}
                     name={secureTextEntry ? "md-eye-off" : "md-eye"}
-                    size={26}
-                    color="black"
+                    size={24}
+                    color="#9C98A6"
                 />
             )}
         </View>
