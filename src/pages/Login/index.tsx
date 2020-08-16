@@ -1,95 +1,101 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import SvgUri from 'react-native-svg-uri'
-import { Keyboard, View, Text, ImageBackground, StatusBar } from 'react-native'
+import {
+    View,
+    StatusBar,
+    SafeAreaView,
+    ImageBackground,
+    Platform,
+} from 'react-native'
 
-import Button from '../../components/Button'
 import Checkbox from '../../components/CheckBox'
-import LoginTextInput from '../../components/LoginTextInput'
 
 import backgroundImage from '../../assets/images/give-classes-background.png'
 
-import styles from './styles'
+import {
+    ContainerKeyboardAvoidingView,
+    LogoView,
+    LoginView,
+    LogoText,
+    LoginHeaderView,
+    LoginText,
+    CreateAccountText,
+    InputsView,
+    EmailInput,
+    PasswordInput,
+    PasswordManagerView,
+    RemindMeView,
+    RemindMeText,
+    ForgetText,
+    FooterRectButton,
+    FooterRectButtonText
+} from './styles'
 
 export default function Login() {
 
-    useEffect(() => {
-        Keyboard.addListener("keyboardDidShow", keyboardDidShow);
-        Keyboard.addListener("keyboardDidHide", keyboardDidHide);
-
-        return () => {
-            Keyboard.removeListener("keyboardDidShow", keyboardDidShow);
-            Keyboard.removeListener("keyboardDidHide", keyboardDidHide);
-        };
-    }, []);
-
-    function keyboardDidShow() {
-
-    }
-
-    function keyboardDidHide() {
-
-    }
+    StatusBar.setBarStyle("light-content")
+    StatusBar.setTranslucent(true)
 
     return (
         //#region JSX
 
-        <View style={styles.container}>
-            <StatusBar barStyle="light-content" />
-            <ImageBackground
-                style={styles.backgroundImage}
-                source={backgroundImage}
-            >
-                <View style={styles.logoBox}>
-                    <View style={styles.logoTexts}>
-                        <SvgUri height="85" width="220" source={require('../../assets/images/logo.svg')} />
-                        <Text style={styles.logoText}>Sua plataforma de estudo online</Text>
-                    </View>
-                </View>
-                <View style={styles.loginBox}>
-                    <View style={styles.header}>
-                        <Text style={styles.doLogin}>Fazer login</Text>
-                        <Text style={styles.createAccount}>Criar uma conta</Text>
-                    </View>
-
-                    <View style={styles.inputBox}>
-                        <LoginTextInput
-                            style={{
-                                borderTopLeftRadius: 10,
-                                borderTopRightRadius: 10
-                            }}
-                            transition={175}
-                            placeholder="E-mail"
-                        />
-                        <LoginTextInput
-                            style={{
-                                borderBottomLeftRadius: 10,
-                                borderBottomRightRadius: 10
-                            }}
-                            transition={175}
-                            placeholder="Senha"
-                            isPassword={true}
-                            secureTextEntry={true}
-                        />
-                    </View>
-
-                    <View style={styles.footer}>
-                        <View style={styles.footerHeader}>
-                            <View style={styles.remindBox}>
-                                <Checkbox
-                                    uncheckedBackgroundColor="#fff"
-                                    checkedBackgroundColor="#04D361"
-                                />
-                                <Text style={styles.remindMe}>Lembrar-me</Text>
-                            </View>
-                            <Text style={styles.forgetText}>Esqueci minha senha</Text>
+        <ContainerKeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+        >
+            <SafeAreaView style={{ flex: 1, backgroundColor: "#8257E5" }}>
+                <ImageBackground
+                    style={{ flex: 1 }}
+                    source={backgroundImage}
+                >
+                    <LogoView>
+                        <View>
+                            <SvgUri
+                                fill="#fff"
+                                height="85"
+                                width="220"
+                                source={require('../../assets/images/logo.svg')}
+                            />
+                            <LogoText>Sua plataforma de estudo online</LogoText>
                         </View>
-                        <Button style={styles.footerButton}>
-                            <Text style={styles.buttonText}>Entrar</Text>
-                        </Button>
-                    </View>
-                </View>
-            </ImageBackground>
-        </View>
+                    </LogoView>
+
+                    <LoginView>
+                        <LoginHeaderView>
+                            <LoginText>Fazer login</LoginText>
+                            <CreateAccountText>Criar uma conta</CreateAccountText>
+                        </LoginHeaderView>
+
+                        <InputsView>
+                            <EmailInput
+                                placeholder="E-mail"
+                                transition={0.15}
+                            />
+                            <PasswordInput
+                                placeholder="Senha"
+                                transition={0.15}
+                                isPassword
+                            />
+                        </InputsView>
+
+                        <PasswordManagerView>
+                            <RemindMeView>
+                                <Checkbox
+                                    checkedBackgroundColor="#04D361"
+                                    uncheckedBackgroundColor="#fff"
+                                />
+                                <RemindMeText>Lembrar-me</RemindMeText>
+                            </RemindMeView>
+
+                            <ForgetText>Esqueci minha senha</ForgetText>
+                        </PasswordManagerView>
+
+                        <FooterRectButton>
+                            <FooterRectButtonText>Entrar</FooterRectButtonText>
+                        </FooterRectButton>
+                    </LoginView>
+                </ImageBackground>
+            </SafeAreaView>
+        </ContainerKeyboardAvoidingView>
 
         //#endregion
     )

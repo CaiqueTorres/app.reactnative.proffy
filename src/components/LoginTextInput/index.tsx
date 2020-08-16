@@ -140,7 +140,7 @@ const LoginTextInput: React.FC<LoginTextInputsProps> = ({
                     onPress={() => { setSecureTextEntry(!secureTextEntry) }}
                     name={secureTextEntry ? "md-eye-off" : "md-eye"}
                     size={24}
-                    color="#9C98A6"
+                    color="#8257E5"
                 />
             )}
         </View>

@@ -7,6 +7,8 @@ const styles = StyleSheet.create({
         borderRadius: 7,
         justifyContent: "center",
         alignItems: "center",
+        borderWidth: 1,
+        borderColor: "#E6E6F0",
     },
 
     checkmarkImage: {
