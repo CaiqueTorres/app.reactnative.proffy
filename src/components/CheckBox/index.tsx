@@ -5,7 +5,7 @@ import {
 } from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
 
-import styles from './styles'
+import { ContainerView } from './styles'
 
 interface CheckBoxProps {
     onPress?(isActive: boolean): any
@@ -26,7 +26,7 @@ const CheckBox: React.FC<CheckBoxProps> = ({
 
         if (onPress)
             onPress(newValue)
-            
+
         setIsChecked(newValue)
     }
 
@@ -34,20 +34,19 @@ const CheckBox: React.FC<CheckBoxProps> = ({
         <TouchableWithoutFeedback
             onPress={onPressHandler}
         >
-            <View style={[
+            <ContainerView style={[
                 {
                     backgroundColor: isChecked
                         ? checkedBackgroundColor
                         : uncheckedBackgroundColor
-                },
-                styles.container
+                }
             ]}>
                 <Ionicons
                     name="md-checkmark"
                     size={22}
                     color="#fff"
                 />
-            </View>
+            </ContainerView>
         </TouchableWithoutFeedback>
     )
 }

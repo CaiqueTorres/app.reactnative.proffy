@@ -1,21 +1,10 @@
-import { StyleSheet } from 'react-native'
+import styled from 'styled-components/native'
 
-const styles = StyleSheet.create({
-    container: {
-        width: 25,
-        height: 25,
-        borderRadius: 7,
-        justifyContent: "center",
-        alignItems: "center",
-        borderWidth: 1,
-        borderColor: "#E6E6F0",
-    },
-
-    checkmarkImage: {
-        color: "#fff",
-        width: "60%",
-        height: "60%",
-    },
-})
-
-export default styles
+export const ContainerView = styled.View`
+    width: 25px;
+    height: 25px;
+    border-radius: 7px;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #E6E6F0;
+`
