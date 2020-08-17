@@ -30,14 +30,13 @@ export const LoginView = styled.View`
     min-width: 300px;
     background: #F0F0F7;
     justify-content: space-between;
-    padding: 0 25px;
+    padding: 20px 25px;
 `
 
 export const LoginHeaderView = styled.View`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-top: 20px;
 `
 
 export const LoginText = styled.Text`
@@ -91,18 +90,4 @@ export const ForgetText = styled.Text`
     font-size: 13px;
     color: #9C98A6;
     font-family: Poppins_400Regular;
-`
-
-export const FooterRectButton = styled(RectButton)`
-    background: #DCDCE5;
-    height: 70px;
-    margin: 20px 0;
-    border-radius: 10px;
-    justify-content: center;
-    align-items: center;
-`
-
-export const FooterRectButtonText = styled.Text`
-    font-family: Archivo_400Regular;
-    font-size: 14px;
 `

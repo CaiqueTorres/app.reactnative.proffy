@@ -58,16 +58,3 @@ export const InputTitleText = styled.Text`
     font-size: 30px;
     margin-bottom: 20px;
 `
-
-export const FooterRectButton = styled(RectButton)`
-    background: #DCDCE5;
-    height: 70px;
-    border-radius: 10px;
-    justify-content: center;
-    align-items: center;
-`
-
-export const FooterRectButtonText = styled.Text`
-    font-family: Archivo_400Regular;
-    font-size: 14px;
-`

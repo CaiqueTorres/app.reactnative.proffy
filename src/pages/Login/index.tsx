@@ -10,6 +10,7 @@ import {
 } from 'react-native'
 
 import Checkbox from '../../components/CheckBox'
+import Button from '../../components/Button'
 
 import backgroundImage from '../../assets/images/give-classes-background.png'
 
@@ -27,9 +28,7 @@ import {
     PasswordManagerView,
     RemindMeView,
     RemindMeText,
-    ForgetText,
-    FooterRectButton,
-    FooterRectButtonText
+    ForgetText
 } from './styles'
 
 export default function Login() {
@@ -72,7 +71,7 @@ export default function Login() {
                     source={backgroundImage}
                 >
                     <LogoView>
-                        <View style={{display: isKeyboardOpen ? "none" : "flex"}}>
+                        <View style={{ display: isKeyboardOpen ? "none" : "flex" }}>
                             <SvgUri
                                 fill="#fff"
                                 height="85"
@@ -88,7 +87,9 @@ export default function Login() {
                             <LoginText>Fazer login</LoginText>
                             <CreateAccountText
                                 onPress={handleNavigateToSignUp}
-                            >Criar uma conta</CreateAccountText>
+                            >
+                                Criar uma conta
+                            </CreateAccountText>
                         </LoginHeaderView>
 
                         <InputsView>
@@ -115,9 +116,15 @@ export default function Login() {
                             <ForgetText>Esqueci minha senha</ForgetText>
                         </PasswordManagerView>
 
-                        <FooterRectButton>
-                            <FooterRectButtonText>Entrar</FooterRectButtonText>
-                        </FooterRectButton>
+                        <Button
+                            enabled={false}
+                            textEnabled="Entrar"
+                            textDisabled="Entrar"
+                            backgroundColorEnabled="#04D361"
+                            backgroundColorDisabled="#DCDCE5"
+                            textColorEnable="#FFF"
+                            textColorDisabled="#9C98A6"
+                        />
                     </LoginView>
                 </ImageBackground>
             </SafeAreaView>

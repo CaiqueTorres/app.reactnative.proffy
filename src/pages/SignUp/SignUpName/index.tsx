@@ -19,6 +19,8 @@ import {
 
 import PageNumber from '../../../components/PageNumber'
 
+import Button from '../../../components/Button';
+
 export default function SignUpName() {
     const { navigate } = useNavigation()
 
@@ -56,9 +58,15 @@ export default function SignUpName() {
                     />
                 </InputsView>
 
-                <FooterRectButton>
-                    <FooterRectButtonText>Próximo</FooterRectButtonText>
-                </FooterRectButton>
+                <Button
+                    enabled={false}
+                    textEnabled="Próximo"
+                    textDisabled="Próximo"
+                    backgroundColorEnabled="#8257E5"
+                    backgroundColorDisabled="#DCDCE5"
+                    textColorEnable="#FFF"
+                    textColorDisabled="#9C98A6"
+                />
             </SafeAreaView>
         </ContainerKeyboardAvoidingView>
     )
