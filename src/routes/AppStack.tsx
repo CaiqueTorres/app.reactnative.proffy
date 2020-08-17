@@ -4,7 +4,8 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
 import Login from '../pages/Login'
-import SignUp from '../pages/SignUp'
+import SignUpName from '../pages/SignUp/SignUpName'
+import SignUpEmail from '../pages/SignUp/SignUpEmail'
 
 const { Navigator, Screen } = createStackNavigator()
 
@@ -13,7 +14,7 @@ export default function AppStack() {
         <NavigationContainer>
             <Navigator screenOptions={{ headerShown: false }} >
                 <Screen name="Login" component={Login} />
-                <Screen name="SignUp" component={SignUp} />
+                <Screen name="SignUp" component={SignUpName} />
             </Navigator>
         </NavigationContainer>
     )

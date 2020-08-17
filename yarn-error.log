@@ -1,5 +1,5 @@
 Arguments: 
-  D:\Program Files\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add @react-navigation
+  D:\Program Files\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add @react-native-community
 
 PATH: 
   C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Common Files\Autodesk Shared\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;D:\Program Files\Git\cmd;D:\Program Files\;C:\ProgramData\chocolatey\bin;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files (x86)\Yarn\bin\;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\caiqu\AppData\Local\Programs\Python\Python37\Scripts\;C:\Users\caiqu\AppData\Local\Programs\Python\Python37\;C:\Users\caiqu\AppData\Local\Programs\Python\Python38\Scripts\;C:\Users\caiqu\AppData\Local\Programs\Python\Python38\;C:\Users\caiqu\AppData\Local\Programs\Python\Python38-32\Scripts\;C:\Users\caiqu\AppData\Local\Programs\Python\Python38-32\;C:\Users\caiqu\AppData\Local\Microsoft\WindowsApps;C:\Users\caiqu\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\JetBrains\PyCharm Community Edition 2019.2.5\bin;C:\Users\caiqu\AppData\Roaming\npm;C:\Program Files\JetBrains\JetBrains Rider 2019.3.1\bin;C:\Program Files\JetBrains\PyCharm Community Edition 2019.3.3\bin;C:\Users\caiqu\.dotnet\tools;C:\Program Files (x86)\Dev-Cpp\MinGW64\bin;C:\Users\caiqu\AppData\Local\Yarn\bin;C:\Program Files\JetBrains\WebStorm 2020.2\bin;;C:\Users\caiqu\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Java\jdk-14.0.1\bin;
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@react-navigation: Request "https://registry.yarnpkg.com/@react-navigation" returned a 405
+  Error: https://registry.yarnpkg.com/@react-native-community: Request "https://registry.yarnpkg.com/@react-native-community" returned a 405
       at Request.params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:66105:18)
       at Request.self.callback (C:\Program Files (x86)\Yarn\lib\cli.js:140748:22)
       at Request.emit (events.js:210:5)

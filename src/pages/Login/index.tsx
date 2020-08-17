@@ -6,8 +6,8 @@ import {
     SafeAreaView,
     ImageBackground,
     Platform,
+    Keyboard
 } from 'react-native'
-import { Keyboard } from 'react-native'
 
 import Checkbox from '../../components/CheckBox'
 
