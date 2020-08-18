@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import SvgUri from 'react-native-svg-uri'
+import { useNavigation } from '@react-navigation/native'
 import {
     View,
-    StatusBar,
     SafeAreaView,
     ImageBackground,
     Platform,
+    Keyboard
 } from 'react-native'
-import { Keyboard } from 'react-native'
 
 import Checkbox from '../../components/CheckBox'
+import Button from '../../components/Button'
 
 import backgroundImage from '../../assets/images/give-classes-background.png'
 
@@ -27,16 +28,12 @@ import {
     PasswordManagerView,
     RemindMeView,
     RemindMeText,
-    ForgetText,
-    FooterRectButton,
-    FooterRectButtonText
+    ForgetText
 } from './styles'
 
 export default function Login() {
 
-    StatusBar.setBarStyle("light-content")
-    StatusBar.setTranslucent(true)
-
+    const { navigate } = useNavigation()
     const [isKeyboardOpen, setIsKeyboardOpen] = useState(false)
 
     useEffect(() => {
@@ -58,6 +55,10 @@ export default function Login() {
         setIsKeyboardOpen(false)
     }
 
+    function handleNavigateToSignUp() {
+        navigate('SignUp')
+    }
+
     return (
         //#region JSX
 
@@ -70,7 +71,7 @@ export default function Login() {
                     source={backgroundImage}
                 >
                     <LogoView>
-                        <View style={{display: isKeyboardOpen ? "none" : "flex"}}>
+                        <View style={{ display: isKeyboardOpen ? "none" : "flex" }}>
                             <SvgUri
                                 fill="#fff"
                                 height="85"
@@ -84,7 +85,11 @@ export default function Login() {
                     <LoginView>
                         <LoginHeaderView>
                             <LoginText>Fazer login</LoginText>
-                            <CreateAccountText>Criar uma conta</CreateAccountText>
+                            <CreateAccountText
+                                onPress={handleNavigateToSignUp}
+                            >
+                                Criar uma conta
+                            </CreateAccountText>
                         </LoginHeaderView>
 
                         <InputsView>
@@ -111,9 +116,15 @@ export default function Login() {
                             <ForgetText>Esqueci minha senha</ForgetText>
                         </PasswordManagerView>
 
-                        <FooterRectButton>
-                            <FooterRectButtonText>Entrar</FooterRectButtonText>
-                        </FooterRectButton>
+                        <Button
+                            enabled
+                            textEnabled="Entrar"
+                            textDisabled="Entrar"
+                            backgroundColorEnabled="#04D361"
+                            backgroundColorDisabled="#DCDCE5"
+                            textColorEnable="#FFF"
+                            textColorDisabled="#9C98A6"
+                        />
                     </LoginView>
                 </ImageBackground>
             </SafeAreaView>
