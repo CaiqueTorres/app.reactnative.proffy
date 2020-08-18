@@ -15,15 +15,18 @@ import {
     InputTitleText,
 } from './styles'
 
-import PageNumber from '../../../components/PageNumber'
-
 import Button from '../../../components/Button';
+import PageNumber from '../../../components/PageNumber'
 
 export default function SignUpName() {
     const { navigate } = useNavigation()
 
     function handleNavigateToLoginPage() {
         navigate('Login')
+    }
+
+    function handleNavigateToSignUpEmail() {
+        navigate('SignUpEmail')
     }
 
     return (
@@ -67,6 +70,7 @@ export default function SignUpName() {
                     backgroundColorDisabled="#DCDCE5"
                     textColorEnable="#FFF"
                     textColorDisabled="#9C98A6"
+                    onPress={handleNavigateToSignUpEmail}
                 />
             </SafeAreaView>
         </ContainerKeyboardAvoidingView>

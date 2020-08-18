@@ -14,7 +14,8 @@ export default function AppStack() {
         <NavigationContainer>
             <Navigator screenOptions={{ headerShown: false }} >
                 <Screen name="Login" component={Login} />
-                <Screen name="SignUp" component={SignUpName} />
+                <Screen name="SignUpName" component={SignUpName} />
+                <Screen name="SignUpEmail" component={SignUpEmail} />
             </Navigator>
         </NavigationContainer>
     )

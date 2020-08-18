@@ -56,7 +56,7 @@ export default function Login() {
     }
 
     function handleNavigateToSignUp() {
-        navigate('SignUp')
+        navigate('SignUpName')
     }
 
     return (
