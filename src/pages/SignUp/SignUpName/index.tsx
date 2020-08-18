@@ -13,8 +13,6 @@ import {
     NameInputText,
     LastNameInputText,
     InputTitleText,
-    FooterRectButton,
-    FooterRectButtonText
 } from './styles'
 
 import PageNumber from '../../../components/PageNumber'
@@ -38,7 +36,10 @@ export default function SignUpName() {
                         color="#9C98A6"
                         onPress={handleNavigateToLoginPage}
                     />
-                    <PageNumber />
+                    <PageNumber
+                        pagesAmount={2}
+                        pageNumberSelected={0}
+                    />
                 </HeaderView>
 
                 <InfoView>
@@ -59,7 +60,7 @@ export default function SignUpName() {
                 </InputsView>
 
                 <Button
-                    enabled={false}
+                    enabled
                     textEnabled="Próximo"
                     textDisabled="Próximo"
                     backgroundColorEnabled="#8257E5"

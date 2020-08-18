@@ -117,7 +117,7 @@ export default function Login() {
                         </PasswordManagerView>
 
                         <Button
-                            enabled={false}
+                            enabled
                             textEnabled="Entrar"
                             textDisabled="Entrar"
                             backgroundColorEnabled="#04D361"

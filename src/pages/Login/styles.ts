@@ -1,6 +1,5 @@
 import styled from 'styled-components/native'
 import { Dimensions } from 'react-native';
-import { RectButton } from 'react-native-gesture-handler'
 
 import LoginTextInput from '../../components/LoginTextInput'
 
