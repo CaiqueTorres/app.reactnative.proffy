@@ -26,6 +26,10 @@ export default function SignUpEmail() {
         navigate('SignUpName')
     }
 
+    function handleNavigateToSignUpCompletePage() {
+        navigate('SignUpComplete')
+    }
+
     return (
         <ContainerKeyboardAvoidingView>
             <SafeAreaView>
@@ -68,6 +72,7 @@ export default function SignUpEmail() {
                     backgroundColorDisabled="#DCDCE5"
                     textColorEnable="#FFF"
                     textColorDisabled="#9C98A6"
+                    onPress={handleNavigateToSignUpCompletePage}
                 />
             </SafeAreaView>
         </ContainerKeyboardAvoidingView>
