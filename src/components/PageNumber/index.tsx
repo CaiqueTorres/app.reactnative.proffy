@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { FontAwesome } from '@expo/vector-icons';
 
-import { ContainerView } from './styles'
+import {
+    ContainerView,
+    CircleView
+} from './styles'
 
 interface PageNumberProps {
     pagesAmount: number
@@ -9,46 +12,27 @@ interface PageNumberProps {
 }
 
 const PageNumber: React.FC<PageNumberProps> = ({ pagesAmount, pageNumberSelected }) => {
+    const [currentPage, setCurrentPage] = useState<boolean[]>([])
 
-    const [pages, setPages] = useState<Element[]>([])
-    const [currentPage, setCurrentPage] = useState(pageNumberSelected)
+    useEffect(() => {
+        const array = []
+        for (let i = 0; i < pagesAmount; i++)
+            array.push(pageNumberSelected == i)
 
-    // useEffect(() => {
-    //     const newArray = []
-    //     for (let i = 0; i < pagesAmount; i++) {
-    //         newArray.push(
-    //             <FontAwesome
-    //                 name="circle"
-    //                 size={24}
-    //                 color="black"
-    //             />
-    //         )
-    //     }
-    //     setPages(newArray)
-    // }, [pageNumberSelected])
-
-    // function* showCirclesVector() {
-    //     for (let i = 0; i < pagesAmount; i++) {
-    //         if (i == pageNumberSelected) {
-    //             yield
-    //             (<FontAwesome
-    //                 name="circle"
-    //                 size={24}
-    //                 color="black"
-    //             />)
-    //         }
-    //         yield
-    //         (<FontAwesome
-    //             name="circle"
-    //             size={24}
-    //             color="green"
-    //         />)
-    //     }
-    // }
+        setCurrentPage([...currentPage, ...array])
+    }, [])
 
     return (
         <ContainerView>
-
+            {currentPage.map(pageNumber =>
+                <CircleView>
+                    <FontAwesome
+                        name="circle"
+                        size={5}
+                        color={pageNumber ? "#8257E5" : "#C1BCCC"}
+                    />
+                </CircleView>
+            )}
         </ContainerView>
     )
 }

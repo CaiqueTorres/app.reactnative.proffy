@@ -42,7 +42,7 @@ export default function SignUpEmail() {
                     />
                     <PageNumber
                         pagesAmount={2}
-                        pageNumberSelected={0}
+                        pageNumberSelected={1}
                     />
                 </HeaderView>
 
