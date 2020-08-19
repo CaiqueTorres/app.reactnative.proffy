@@ -1,5 +1,5 @@
 import styled from 'styled-components/native'
-import { Dimensions, Button } from 'react-native';
+import { Dimensions } from 'react-native';
 
 import LoginTextInput from '../../components/LoginTextInput'
 

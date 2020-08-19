@@ -1,8 +1,5 @@
 import React, { useState } from 'react'
-import {
-    View,
-    TouchableWithoutFeedback,
-} from 'react-native'
+import { TouchableWithoutFeedback, } from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
 
 import { ContainerView } from './styles'

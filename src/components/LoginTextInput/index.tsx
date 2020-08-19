@@ -86,7 +86,6 @@ export default class LoginTextInput extends
     handlerOnBlurred() {
         this.setState({ isFocused: false })
 
-        console.log(this.state.inputText)
         if (!validateText(this.state.inputText))
             return
 
