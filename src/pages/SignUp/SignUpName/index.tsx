@@ -19,7 +19,7 @@ import {
     InputTitleText,
 } from './styles'
 
-export type DefaultSignUpNameProps = StackScreenProps<
+type DefaultSignUpNameProps = StackScreenProps<
     RootStackParamList,
     'SignUpName'
 >
@@ -66,7 +66,7 @@ export default function SignUpName({ navigation }: DefaultSignUpNameProps) {
                     backgroundColorDisabled="#DCDCE5"
                     textColorEnable="#FFF"
                     textColorDisabled="#9C98A6"
-                    onPress={() => { navigation.navigate("SignUpEmail") }}
+                    onPress={() => { navigation.push("SignUpEmail") }}
                 />
             </SafeAreaView>
         </ContainerKeyboardAvoidingView>

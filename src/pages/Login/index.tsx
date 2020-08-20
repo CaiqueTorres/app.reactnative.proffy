@@ -33,7 +33,7 @@ import {
 } from './styles'
 
 
-export type DefaultLoginScreenProps = StackScreenProps<
+type DefaultLoginScreenProps = StackScreenProps<
     RootStackParamList,
     'Login'
 >
@@ -57,10 +57,6 @@ export default function Login({ navigation }: DefaultLoginScreenProps) {
 
     function keyboardDidHide() {
         setIsKeyboardOpen(false)
-    }
-
-    function handleNavigateToSignUp() {
-        navigation.navigate('SignUpName')
     }
 
     return (
@@ -90,7 +86,7 @@ export default function Login({ navigation }: DefaultLoginScreenProps) {
                         <LoginHeaderView>
                             <LoginText>Fazer login</LoginText>
                             <CreateAccountText
-                                onPress={handleNavigateToSignUp}
+                                onPress={() => { navigation.push('SignUpName') }}
                             >
                                 Criar uma conta
                             </CreateAccountText>

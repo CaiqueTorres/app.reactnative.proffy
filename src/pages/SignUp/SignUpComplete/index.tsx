@@ -16,7 +16,7 @@ import {
     SubtitleText
 } from './styles'
 
-export type DefaultSignUpCompleteProps = StackScreenProps<
+type DefaultSignUpCompleteProps = StackScreenProps<
     RootStackParamList,
     "SignUpComplete"
 >

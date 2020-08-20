@@ -19,7 +19,7 @@ import {
     InputTitleText,
 } from './styles'
 
-export type DefaultSignUpEmailProps = StackScreenProps<
+type DefaultSignUpEmailProps = StackScreenProps<
     RootStackParamList,
     'SignUpEmail'
 >
@@ -67,7 +67,7 @@ export default function SignUpEmail({ navigation }: DefaultSignUpEmailProps) {
                     backgroundColorDisabled="#DCDCE5"
                     textColorEnable="#FFF"
                     textColorDisabled="#9C98A6"
-                    onPress={() => { navigation.navigate("SignUpComplete") }}
+                    onPress={() => { navigation.push("SignUpComplete") }}
                 />
             </SafeAreaView>
         </ContainerKeyboardAvoidingView>
