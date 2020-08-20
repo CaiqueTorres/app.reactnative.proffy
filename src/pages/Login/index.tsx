@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import SvgUri from 'react-native-svg-uri'
-import { useNavigation } from '@react-navigation/native'
 import {
     View,
     SafeAreaView,
@@ -8,7 +7,9 @@ import {
     Platform,
     Keyboard
 } from 'react-native'
+import { StackScreenProps } from '@react-navigation/stack'
 
+import { RootStackParamList } from '../../routes/AppStack'
 import Checkbox from '../../components/CheckBox'
 import Button from '../../components/Button'
 
@@ -31,18 +32,22 @@ import {
     ForgetText
 } from './styles'
 
-export default function Login() {
 
-    const { navigate } = useNavigation()
+export type DefaultLoginScreenProps = StackScreenProps<
+    RootStackParamList,
+    'Login'
+>
+
+export default function Login({ navigation }: DefaultLoginScreenProps) {
     const [isKeyboardOpen, setIsKeyboardOpen] = useState(false)
 
     useEffect(() => {
-        Keyboard.addListener("keyboardDidShow", keyboardDidShow);
-        Keyboard.addListener("keyboardDidHide", keyboardDidHide);
+        Keyboard.addListener('keyboardDidShow', keyboardDidShow);
+        Keyboard.addListener('keyboardDidHide', keyboardDidHide);
 
         return () => {
-            Keyboard.removeListener("keyboardDidShow", keyboardDidShow);
-            Keyboard.removeListener("keyboardDidHide", keyboardDidHide);
+            Keyboard.removeListener('keyboardDidShow', keyboardDidShow);
+            Keyboard.removeListener('keyboardDidHide', keyboardDidHide);
         };
     }, []);
 
@@ -55,7 +60,7 @@ export default function Login() {
     }
 
     function handleNavigateToSignUp() {
-        navigate('SignUpName')
+        navigation.navigate('SignUpName')
     }
 
     return (
@@ -75,7 +80,7 @@ export default function Login() {
                                 fill="#fff"
                                 height="85"
                                 width="220"
-                                source={require('../../assets/images/logo.svg')}
+                                source={require("../../assets/images/logo.svg")}
                             />
                             <LogoText>Sua plataforma de estudo online</LogoText>
                         </View>
