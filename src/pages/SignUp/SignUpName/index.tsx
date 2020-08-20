@@ -1,4 +1,5 @@
 import React from 'react'
+import { StackScreenProps } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native'
 import { AntDesign } from '@expo/vector-icons';
 
@@ -17,8 +18,14 @@ import {
 
 import Button from '../../../components/Button';
 import PageNumber from '../../../components/PageNumber'
+import { RootStackParamList } from '../../../routes/AppStack';
 
-export default function SignUpName() {
+export type DefaultSignUpNameProps = StackScreenProps<
+    RootStackParamList,
+    'SignUpName'
+>
+
+export default function SignUpName({ navigation }: DefaultSignUpNameProps) {
     const { navigate } = useNavigation()
 
     function handleNavigateToLoginPage() {
