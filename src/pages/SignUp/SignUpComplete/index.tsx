@@ -1,7 +1,8 @@
 import React from 'react'
-import { useNavigation } from '@react-navigation/native'
+import { StackScreenProps } from '@react-navigation/stack';
 import { Feather } from '@expo/vector-icons';
 
+import { RootStackParamList } from '../../../routes/AppStack';
 import Button from '../../../components/Button'
 
 import backgroundImage from '../../../assets/images/give-classes-background.png'
@@ -15,13 +16,12 @@ import {
     SubtitleText
 } from './styles'
 
-export default function SignUpComplete() {
-    const { navigate } = useNavigation()
+type DefaultSignUpCompleteProps = StackScreenProps<
+    RootStackParamList,
+    "SignUpComplete"
+>
 
-    function handleNavigateToLoginPage() {
-        navigate("Login")
-    }
-
+export default function SignUpComplete({ navigation }: DefaultSignUpCompleteProps) {
     return (
         <Container>
             <BackgroundImage source={backgroundImage}>
@@ -40,7 +40,7 @@ export default function SignUpComplete() {
                         textEnabled="Fazer login"
                         backgroundColorEnabled="#04D361"
                         textColorEnable="#FFF"
-                        onPress={handleNavigateToLoginPage}
+                        onPress={() => { navigation.popToTop() }}
                     />
                 </SafeArea>
             </BackgroundImage>

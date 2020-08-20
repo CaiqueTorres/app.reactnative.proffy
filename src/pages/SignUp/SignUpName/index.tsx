@@ -1,6 +1,10 @@
 import React from 'react'
-import { useNavigation } from '@react-navigation/native'
+import { StackScreenProps } from '@react-navigation/stack';
 import { AntDesign } from '@expo/vector-icons';
+
+import { RootStackParamList } from '../../../routes/AppStack';
+import Button from '../../../components/Button';
+import PageNumber from '../../../components/PageNumber'
 
 import {
     ContainerKeyboardAvoidingView,
@@ -15,20 +19,12 @@ import {
     InputTitleText,
 } from './styles'
 
-import Button from '../../../components/Button';
-import PageNumber from '../../../components/PageNumber'
+type DefaultSignUpNameProps = StackScreenProps<
+    RootStackParamList,
+    'SignUpName'
+>
 
-export default function SignUpName() {
-    const { navigate } = useNavigation()
-
-    function handleNavigateToLoginPage() {
-        navigate('Login')
-    }
-
-    function handleNavigateToSignUpEmail() {
-        navigate('SignUpEmail')
-    }
-
+export default function SignUpName({ navigation }: DefaultSignUpNameProps) {
     return (
         <ContainerKeyboardAvoidingView>
             <SafeAreaView>
@@ -37,7 +33,7 @@ export default function SignUpName() {
                         name="arrowleft"
                         size={24}
                         color="#9C98A6"
-                        onPress={handleNavigateToLoginPage}
+                        onPress={() => { navigation.popToTop() }}
                     />
                     <PageNumber
                         pagesAmount={2}
@@ -70,7 +66,7 @@ export default function SignUpName() {
                     backgroundColorDisabled="#DCDCE5"
                     textColorEnable="#FFF"
                     textColorDisabled="#9C98A6"
-                    onPress={handleNavigateToSignUpEmail}
+                    onPress={() => { navigation.push("SignUpEmail") }}
                 />
             </SafeAreaView>
         </ContainerKeyboardAvoidingView>

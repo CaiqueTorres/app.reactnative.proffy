@@ -24,10 +24,12 @@ const { Navigator, Screen } = createStackNavigator<RootStackParamList>()
 
 export default function AppStack() {
     return (
+        //#region JSX
+
         <NavigationContainer>
             <Navigator
                 screenOptions={{ headerShown: false }}
-                initialRouteName="PresentationFirstPage"
+                initialRouteName="Login"
             >
                 <Screen name="PresentationFirstPage" component={PresentationFirstPage} />
                 <Screen name="PresentationSecondPage" component={PresentationSecondPage} />
@@ -37,5 +39,7 @@ export default function AppStack() {
                 <Screen name="SignUpComplete" component={SignUpComplete} />
             </Navigator>
         </NavigationContainer>
+
+        //#endregion
     )
 }
