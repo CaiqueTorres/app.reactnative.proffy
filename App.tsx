@@ -7,6 +7,8 @@ import { Poppins_400Regular, Poppins_600SemiBold } from '@expo-google-fonts/popp
 import AppStack from './src/routes/AppStack'
 import { StatusBar } from 'react-native';
 
+import 'react-native-gesture-handler';
+
 let fontsLoaded: boolean
 
 export default function App() {

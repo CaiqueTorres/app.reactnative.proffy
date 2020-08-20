@@ -40,7 +40,6 @@ export default function Login() {
         Keyboard.addListener("keyboardDidShow", keyboardDidShow);
         Keyboard.addListener("keyboardDidHide", keyboardDidHide);
 
-        // cleanup function
         return () => {
             Keyboard.removeListener("keyboardDidShow", keyboardDidShow);
             Keyboard.removeListener("keyboardDidHide", keyboardDidHide);
