@@ -1,10 +1,7 @@
 import React, { useState } from 'react'
 import { RectButtonProperties } from 'react-native-gesture-handler'
 
-import {
-    RectButtonBackground,
-    RectButtonText
-} from './styles'
+import { RectButtonBackground, RectButtonText } from './styles'
 
 interface ButtonProps extends RectButtonProperties {
     enabled: boolean
@@ -26,7 +23,6 @@ const Button: React.FC<ButtonProps> = ({
     textColorDisabled,
     ...rest
 }) => {
-
     const [isEnabled, setIsEnabled] = useState(enabled)
 
     return (
@@ -38,18 +34,17 @@ const Button: React.FC<ButtonProps> = ({
             }}
             {...rest}
         >
-            {(textEnabled || textDisabled) &&
+            {(textEnabled || textDisabled) && (
                 <RectButtonText
                     style={{
-                        color: isEnabled
-                            ? textColorEnable
-                            : textColorDisabled
+                        color: isEnabled ? textColorEnable : textColorDisabled
                     }}
                 >
                     {isEnabled ? textEnabled : textDisabled}
-                </RectButtonText>}
+                </RectButtonText>
+            )}
         </RectButtonBackground>
     )
 }
 
-export default Button;
+export default Button
