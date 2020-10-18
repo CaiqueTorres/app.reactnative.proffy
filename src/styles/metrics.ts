@@ -6,5 +6,5 @@ export default {
         ios: { headerHeight: 64, haderPadding: 20 },
         android: { headerHeight: 44, haderPadding: 0 }
     }),
-    tabBarHeight: 50,
+    tabBarHeight: 50
 }
