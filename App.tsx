@@ -1,11 +1,18 @@
 import React from 'react'
-import { View } from 'react-native'
+import AppStack from './src/routes/AppStack'
+
+import { AppLoading } from 'expo'
+import { useFonts } from 'expo-font'
 
 export default function App(): JSX.Element {
+    const [fontsLoaded] = useFonts({})
+
+    if (!fontsLoaded) return <AppLoading />
+
     return (
         //#region JSX
 
-        <View />
+        <AppStack />
 
         //#endregion
     )
