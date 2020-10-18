@@ -1,6 +1,17 @@
 import React from 'react'
+import { View } from 'react-native'
 
-export default function App() {}
+export default function App(): JSX.Element {
+    return (
+        //#region JSX
+
+        <View />
+
+        //#endregion
+    )
+}
+
+//#region Old code
 
 // import {
 //     Archivo_400Regular,
@@ -24,3 +35,5 @@ export default function App() {}
 //         Poppins_600SemiBold
 //     })
 // }
+
+//#endregion
