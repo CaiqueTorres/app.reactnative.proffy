@@ -36,7 +36,7 @@ export default function AppStack(): JSX.Element {
         <NavigationContainer>
             <Navigator
                 screenOptions={{ headerShown: false }}
-                initialRouteName="OnboardingPage"
+                initialRouteName="LoginPage"
             >
                 <Screen
                     name="OnboardingPage"

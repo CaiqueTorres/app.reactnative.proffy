@@ -1,19 +1,27 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import Button from '../../components/atoms/Button'
+
+import { ContainerView } from './styles'
 
 export default function LoginPage(): JSX.Element {
     return (
         //#region JSX
 
-        <View
+        <ContainerView
             style={{
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center'
+                paddingHorizontal: 40
             }}
         >
-            <Text>Login page</Text>
-        </View>
+            <Button
+                enabled
+                text="Próximo"
+                enabledColor="#8257E5"
+                style={{
+                    width: '100%',
+                    height: 70
+                }}
+            />
+        </ContainerView>
 
         //#endregino
     )
