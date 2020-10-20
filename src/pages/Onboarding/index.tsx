@@ -1,6 +1,5 @@
 import React from 'react'
 import { Image, StatusBar } from 'react-native'
-
 import Onboarding from 'react-native-onboarding-swiper'
 
 import {
@@ -9,10 +8,10 @@ import {
     IconContainerImageBackground
 } from './styles'
 
-import studyIcon from '../../assets/images/study.png'
 import giveClassesIcon from '../../assets/images/give-classes.png'
 import onboardingPageBackground01 from '../../assets/images/onboarding-page-background-01.png'
 import onboardingPageBackground02 from '../../assets/images/onboarding-page-background-02.png'
+import studyIcon from '../../assets/images/study.png'
 
 /**
  * The onboarding page

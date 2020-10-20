@@ -4,8 +4,8 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { TransitionSpec } from '@react-navigation/stack/lib/typescript/src/types'
 
-import OnboardingPage from '../pages/Onboarding'
 import LoginPage from '../pages/Login'
+import OnboardingPage from '../pages/Onboarding'
 
 export type AppStackParamsList = {
     OnboardingPage: undefined

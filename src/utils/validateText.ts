@@ -1,3 +1,3 @@
-export default function validateText(text: string) {
+export default function validateText(text: string): boolean {
     return text == '' || text == null
 }

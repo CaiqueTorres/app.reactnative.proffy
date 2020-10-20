@@ -1,9 +1,12 @@
 import React from 'react'
-import Button from '../../components/atoms/Button'
 
 import { ContainerView } from './styles'
 
-export default function LoginPage(): JSX.Element {
+import Button from '../../components/atoms/Button'
+
+export interface LoginPageProps {}
+
+const LoginPage: React.FC<LoginPageProps> = () => {
     return (
         //#region JSX
 
@@ -26,3 +29,7 @@ export default function LoginPage(): JSX.Element {
         //#endregino
     )
 }
+
+LoginPage.displayName = 'LoginPage'
+
+export default LoginPage
