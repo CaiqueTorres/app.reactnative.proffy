@@ -42,20 +42,20 @@ export default function OnboardingPage(): JSX.Element {
                 }}
                 titleStyles={{
                     color: '#6A618016',
-                    fontFamily: 'Archivo_400Regular',
-                    marginBottom: 25,
+                    marginTop: 85,
                     marginHorizontal: 20,
                     fontSize: 50,
                     textAlign: 'left',
-                    marginTop: 50
+                    fontFamily: 'Archivo_400Regular'
                 }}
                 subTitleStyles={{
                     color: '#6A6180',
-                    fontFamily: 'Archivo_400Regular',
-                    marginBottom: 150,
+                    marginBottom: 175,
                     marginHorizontal: 20,
-                    fontSize: 32,
-                    textAlign: 'left'
+                    fontSize: 30,
+                    textAlign: 'left',
+                    lineHeight: 40,
+                    fontFamily: 'Poppins_400Regular'
                 }}
                 pages={[
                     {
