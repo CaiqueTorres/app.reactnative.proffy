@@ -1,5 +1,6 @@
 import React from 'react'
 import { RectButtonProperties } from 'react-native-gesture-handler'
+
 import { ContainerRectButton, ContainerText } from './styles'
 
 /**
@@ -22,7 +23,7 @@ export interface ButtonProps extends RectButtonProperties {
  * This component has the same properties as the RectButton, it must be used in
  * project when a button is needed
  */
-export default function Button({
+const Button: React.FC<ButtonProps> = ({
     enabled,
     text,
     enabledColor = '#04d361',
@@ -30,7 +31,7 @@ export default function Button({
     textEnabledColor = '#fff',
     textDisabledColor = '#9C98A6',
     ...rest
-}: ButtonProps) {
+}: ButtonProps): JSX.Element => {
     return (
         //#region JSX
 
@@ -48,3 +49,7 @@ export default function Button({
         //#endregion
     )
 }
+
+Button.displayName = 'Button'
+
+export default Button
