@@ -1,5 +1,5 @@
-import React from 'react'
-import { Image, StatusBar } from 'react-native'
+import React, { useRef } from 'react'
+import { Image, StatusBar, Text } from 'react-native'
 import Onboarding from 'react-native-onboarding-swiper'
 
 import {
@@ -12,18 +12,31 @@ import giveClassesIcon from '../../assets/images/give-classes.png'
 import onboardingPageBackground01 from '../../assets/images/onboarding-page-background-01.png'
 import onboardingPageBackground02 from '../../assets/images/onboarding-page-background-02.png'
 import studyIcon from '../../assets/images/study.png'
+import ArrowRectButton from './ArrowButton'
+import Dot from './Dot'
 
 /**
  * The onboarding page
  *
  * This component has the objective presents the app
  */
-export default function OnboardingPage(): JSX.Element {
+const OnboardingPage: React.FC = (): JSX.Element => {
     return (
         //#region JSX
 
         <ContainerView>
             <Onboarding
+                skipToPage={1}
+                showSkip={false}
+                bottomBarColor="#F0F0F7"
+                DotComponent={({ selected }) => (
+                    <Dot
+                        selected={selected}
+                        selectedColor="#8257E5"
+                        deselectedColor="#C1BCCC"
+                    />
+                )}
+                NextButtonComponent={() => <ArrowRectButton />}
                 pageIndexCallback={(pageIndex: number) => {
                     StatusBar.setBarStyle('light-content')
                     StatusBar.setBackgroundColor(
@@ -105,3 +118,7 @@ export default function OnboardingPage(): JSX.Element {
         //#endregion
     )
 }
+
+OnboardingPage.displayName = 'OnboardingPage'
+
+export default OnboardingPage
