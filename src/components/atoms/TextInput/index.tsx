@@ -23,8 +23,8 @@ import { isTextEmpty } from '../../../utils/validationFunctions'
  * The main app's ext input props
  */
 export interface TextInputProps extends TextInputPropsRN {
-    duration?: number
-    colorTheme?: string
+    readonly duration?: number
+    readonly colorTheme?: string
 }
 
 /**
@@ -146,13 +146,14 @@ const TextInput: React.FC<TextInputProps> = ({
         //#region JSX
 
         <ContainerView>
-            <ContainerTextInput // it works but typescript say it is wrong
+            <ContainerTextInput
                 onFocus={handleOnFocus}
                 onBlur={handleOnBlur}
                 onChangeText={handleOnChangeText}
                 secureTextEntry={secureTextEntry && !passwordVisible}
                 extraPadding={secureTextEntry ? 65 : 25}
-                {...rest}
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                {...(rest as any)}
             />
             <NonInteractableView pointerEvents="none">
                 <PlaceholderText

@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { KeyboardAvoidingView, View } from 'react-native'
+import {
+    KeyboardAvoidingView,
+    StatusBar,
+    TouchableWithoutFeedback,
+    View
+} from 'react-native'
 
 import { FontAwesome } from '@expo/vector-icons'
+import { useNavigation } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
+
+import { AppStackParamsList } from '../../routes/AppStack'
 
 import {
     ContainerSafeAreaView,
@@ -34,13 +43,26 @@ import {
  * This component stores all the login page style and logic
  */
 const LoginPage: React.FC = () => {
+    const navigation = useNavigation<
+        StackNavigationProp<AppStackParamsList, 'LoginPage'>
+    >()
+
     const [inputValid, setInputValid] = useState(false)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
+    //#region Effects
+
+    useEffect(() => {
+        StatusBar.setTranslucent(true)
+        StatusBar.setBarStyle('light-content')
+    }, [])
+
     useEffect(() => {
         setInputValid(validateEmail(email) && validatePassword(password))
     }, [email, password])
+
+    //#endregion
 
     return (
         //#region JSX
@@ -58,9 +80,15 @@ const LoginPage: React.FC = () => {
                 <LoginView>
                     <LoginHeaderView>
                         <LoginHeaderTitleText>Fazer login</LoginHeaderTitleText>
-                        <LoginHeaderCreateAccountText>
-                            Criar uma conta
-                        </LoginHeaderCreateAccountText>
+                        <TouchableWithoutFeedback
+                            onPress={() => {
+                                navigation.push('FirstSignUpPage')
+                            }}
+                        >
+                            <LoginHeaderCreateAccountText>
+                                Criar uma conta
+                            </LoginHeaderCreateAccountText>
+                        </TouchableWithoutFeedback>
                     </LoginHeaderView>
                     <View>
                         <TextInput

@@ -27,7 +27,7 @@ module.exports = {
                     '/@/',
                     '/(expo)|(modules)/',
                     '/store/',
-                    '/navigations/',
+                    '/routes/',
                     '/.styles/',
                     '/components/',
                     [('parent', 'sibling', 'index')]

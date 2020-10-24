@@ -15,6 +15,10 @@ export function validateEmail(email: string): boolean {
     return regex.test(email)
 }
 
+/**
+ * Function that can validate the password that the user is passing
+ * @param password stores the password string
+ */
 export function validatePassword(password: string): boolean {
     return password.length >= 6
 }
