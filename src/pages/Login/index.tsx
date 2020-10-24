@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { KeyboardAvoidingView, View } from 'react-native'
 
 import { FontAwesome } from '@expo/vector-icons'
@@ -23,6 +23,10 @@ import TextInput from '../../components/atoms/TextInput'
 
 import loginPageBackgroundImage from '../../assets/images/login/login-page-background.png'
 import logoImage from '../../assets/images/logo.png'
+import {
+    validateEmail,
+    validatePassword
+} from '../../utils/validationFunctions'
 
 /**
  * The app login page
@@ -30,6 +34,14 @@ import logoImage from '../../assets/images/logo.png'
  * This component stores all the login page style and logic
  */
 const LoginPage: React.FC = () => {
+    const [inputValid, setInputValid] = useState(false)
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    useEffect(() => {
+        setInputValid(validateEmail(email) && validatePassword(password))
+    }, [email, password])
+
     return (
         //#region JSX
         <KeyboardAvoidingView behavior="position" style={{ flex: 1 }}>
@@ -60,6 +72,7 @@ const LoginPage: React.FC = () => {
                                 borderTopLeftRadius: 10,
                                 borderTopRightRadius: 10
                             }}
+                            onChangeText={setEmail}
                         />
                         <TextInput
                             secureTextEntry
@@ -69,6 +82,7 @@ const LoginPage: React.FC = () => {
                                 borderBottomLeftRadius: 10,
                                 borderBottomRightRadius: 10
                             }}
+                            onChangeText={setPassword}
                         />
                     </View>
                     <PasswordStoreView>
@@ -91,7 +105,7 @@ const LoginPage: React.FC = () => {
                         </PasswordStoreText>
                     </PasswordStoreView>
                     <Button
-                        enabled={false}
+                        enabled={inputValid}
                         text="Entrar"
                         style={{ height: 65 }}
                         enabledColor="#04D361"

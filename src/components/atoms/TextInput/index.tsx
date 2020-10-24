@@ -17,6 +17,8 @@ import {
     PlaceholderText
 } from './styles'
 
+import { isTextEmpty } from '../../../utils/validationFunctions'
+
 /**
  * The main app's ext input props
  */
@@ -97,7 +99,7 @@ const TextInput: React.FC<TextInputProps> = ({
      * block the user changing the value
      */
     function animate(value: boolean): void {
-        if (text.length !== 0) return
+        if (!isTextEmpty(text)) return
 
         if (value) {
             Animated.parallel([
@@ -148,7 +150,7 @@ const TextInput: React.FC<TextInputProps> = ({
                 onFocus={handleOnFocus}
                 onBlur={handleOnBlur}
                 onChangeText={handleOnChangeText}
-                secureTextEntry={passwordVisible}
+                secureTextEntry={secureTextEntry && !passwordVisible}
                 extraPadding={secureTextEntry ? 65 : 25}
                 {...rest}
             />
