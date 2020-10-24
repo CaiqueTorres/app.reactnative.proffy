@@ -7,6 +7,8 @@ import { AntDesign } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
+import { AppStackParamsList } from '../../routes/AppStack'
+
 import {
     ContainerView,
     SwiperPageContainerView,
@@ -22,7 +24,6 @@ import giveClassesIcon from '../../assets/images/give-classes.png'
 import onboardingPageBackground01 from '../../assets/images/onboarding-page-background-01.png'
 import onboardingPageBackground02 from '../../assets/images/onboarding-page-background-02.png'
 import studyIcon from '../../assets/images/study.png'
-import { AppStackParamsList } from '../../routes/AppStack'
 
 /**
  * The app onboarding page
