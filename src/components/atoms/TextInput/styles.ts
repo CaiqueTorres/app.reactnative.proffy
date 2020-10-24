@@ -10,8 +10,7 @@ export const ContainerView = styled.View`
 
 export const ContainerTextInput = styled(AnimatedTextInput)`
     background: #fff;
-    border-color: #e6e6f0;
-    border-width: 2px;
+    border: 2px solid #e6e6f0;
     height: 65px;
     padding-left: 25px;
     color: #6a6180;
