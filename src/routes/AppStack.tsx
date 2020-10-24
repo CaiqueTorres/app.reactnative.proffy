@@ -4,10 +4,12 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { TransitionSpec } from '@react-navigation/stack/lib/typescript/src/types'
 
-import Onboarding from '../pages/Onboarding'
+import LoginPage from '../pages/Login'
+import OnboardingPage from '../pages/Onboarding'
 
 export type AppStackParamsList = {
-    Onboarding: undefined
+    OnboardingPage: undefined
+    LoginPage: undefined
 }
 
 const { Navigator, Screen } = createStackNavigator<AppStackParamsList>()
@@ -32,10 +34,13 @@ export default function AppStack(): JSX.Element {
         //#region JSX
 
         <NavigationContainer>
-            <Navigator>
+            <Navigator
+                screenOptions={{ headerShown: false }}
+                initialRouteName="OnboardingPage"
+            >
                 <Screen
-                    name="Onboarding"
-                    component={Onboarding}
+                    name="OnboardingPage"
+                    component={OnboardingPage}
                     options={{
                         transitionSpec: {
                             open: config,
@@ -43,6 +48,7 @@ export default function AppStack(): JSX.Element {
                         }
                     }}
                 />
+                <Screen name="LoginPage" component={LoginPage} />
             </Navigator>
         </NavigationContainer>
 
