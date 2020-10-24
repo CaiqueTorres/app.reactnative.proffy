@@ -10,12 +10,12 @@ import useToggle from '../../../hooks/useToggle'
  */
 export interface CheckboxProps {
     onPress?(value: boolean): void
-    boxSize?: number
-    boxActiveColor?: string
-    boxDeactiveColor?: string
-    activeIcon?: JSX.Element
-    deactiveIcon?: JSX.Element
-    children?: JSX.Element
+    readonly boxSize?: number
+    readonly boxActiveColor?: string
+    readonly boxDeactiveColor?: string
+    readonly activeIcon?: JSX.Element
+    readonly deactiveIcon?: JSX.Element
+    readonly children?: JSX.Element
 }
 
 /**
