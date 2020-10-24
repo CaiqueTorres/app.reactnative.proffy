@@ -1,124 +1,124 @@
-import React, { useRef } from 'react'
-import { Image, StatusBar, Text } from 'react-native'
-import Onboarding from 'react-native-onboarding-swiper'
+import React, { useEffect, useRef, useState } from 'react'
+import { TouchableWithoutFeedback } from 'react-native'
+import { StatusBar } from 'react-native'
+import Swiper from 'react-native-swiper'
+
+import { AntDesign } from '@expo/vector-icons'
 
 import {
     ContainerView,
-    IconContainerView,
-    IconContainerImageBackground
+    SwiperPageContainerView,
+    IconView,
+    IconImageBackground,
+    IconImage,
+    ContentView,
+    TitleText,
+    SubtitleText
 } from './styles'
 
 import giveClassesIcon from '../../assets/images/give-classes.png'
 import onboardingPageBackground01 from '../../assets/images/onboarding-page-background-01.png'
 import onboardingPageBackground02 from '../../assets/images/onboarding-page-background-02.png'
 import studyIcon from '../../assets/images/study.png'
-import ArrowRectButton from './ArrowButton'
-import Dot from './Dot'
 
-/**
- * The onboarding page
- *
- * This component has the objective presents the app
- */
-const OnboardingPage: React.FC = (): JSX.Element => {
+const OnboadingPage: React.FC = (): JSX.Element => {
+    const swiper = useRef<Swiper>(null)
+    const [index, setIndex] = useState(0)
+
+    useEffect(() => {
+        StatusBar.setTranslucent(true)
+        StatusBar.setBarStyle('light-content')
+    }, [])
+
+    //#region Functions
+
+    /**
+     * A function that can change the current page in onboarding and even
+     * navigate to the login page
+     */
+    function handleChangePageIndex(): void {
+        setIndex(index + 1)
+        swiper.current?.scrollBy(index)
+    }
+
+    //#endregion
+
     return (
         //#region JSX
 
         <ContainerView>
-            <Onboarding
-                skipToPage={1}
-                showSkip={false}
-                bottomBarColor="#F0F0F7"
-                DotComponent={({ selected }) => (
-                    <Dot
-                        selected={selected}
-                        selectedColor="#8257E5"
-                        deselectedColor="#C1BCCC"
-                    />
-                )}
-                NextButtonComponent={() => <ArrowRectButton />}
-                pageIndexCallback={(pageIndex: number) => {
-                    StatusBar.setBarStyle('light-content')
-                    StatusBar.setBackgroundColor(
-                        pageIndex === 0 ? '#8257E5' : '#04D361'
-                    )
+            <Swiper
+                ref={swiper}
+                key={2}
+                loop={false}
+                onIndexChanged={setIndex}
+                dotStyle={{
+                    width: 8,
+                    height: 8,
+                    borderRadius: 3,
+                    backgroundColor: '#C1BCCC'
                 }}
-                transitionAnimationDuration={200}
-                containerStyles={{
-                    alignItems: 'flex-start',
-                    justifyContent: 'flex-end'
+                activeDotStyle={{
+                    width: 8,
+                    height: 8,
+                    borderRadius: 3,
+                    backgroundColor: '#8257E5'
                 }}
-                imageContainerStyles={{
+                paginationStyle={{
                     flex: 1,
-                    paddingBottom: 0
+                    paddingLeft: 40,
+                    marginBottom: 30,
+                    justifyContent: 'flex-start',
+                    width: '100%'
                 }}
-                titleStyles={{
-                    color: '#6A618016',
-                    marginTop: 85,
-                    marginHorizontal: 20,
-                    fontSize: 50,
-                    textAlign: 'left',
-                    fontFamily: 'Archivo_400Regular'
-                }}
-                subTitleStyles={{
-                    color: '#6A6180',
-                    marginBottom: 175,
-                    marginHorizontal: 20,
-                    fontSize: 30,
-                    textAlign: 'left',
-                    lineHeight: 40,
-                    fontFamily: 'Poppins_400Regular'
-                }}
-                pages={[
-                    {
-                        backgroundColor: '#F0F0F7',
-                        image: (
-                            <IconContainerView backgroundImage="#8257e5">
-                                <IconContainerImageBackground
-                                    source={onboardingPageBackground01}
-                                >
-                                    <Image
-                                        source={studyIcon}
-                                        style={{
-                                            width: 175,
-                                            height: 175
-                                        }}
-                                    />
-                                </IconContainerImageBackground>
-                            </IconContainerView>
-                        ),
-                        title: '01.',
-                        subtitle:
-                            'Encontre vários professores para ensinar você'
-                    },
-                    {
-                        backgroundColor: '#F0F0F7',
-                        image: (
-                            <IconContainerView backgroundImage="#04D361">
-                                <IconContainerImageBackground
-                                    source={onboardingPageBackground02}
-                                >
-                                    <Image
-                                        source={giveClassesIcon}
-                                        style={{
-                                            width: 175,
-                                            height: 175
-                                        }}
-                                    />
-                                </IconContainerImageBackground>
-                            </IconContainerView>
-                        ),
-                        title: '02.',
-                        subtitle: 'Ou dê aulas sobre o que você mais conhece'
-                    }
-                ]}
-            />
+            >
+                <SwiperPageContainerView backgroundColor="#8257E5">
+                    <IconView>
+                        <IconImageBackground
+                            source={onboardingPageBackground01}
+                        />
+                        <IconImage source={studyIcon} />
+                    </IconView>
+                    <ContentView>
+                        <TitleText>01.</TitleText>
+                        <SubtitleText>
+                            Encontre vários professores para ensinar você
+                        </SubtitleText>
+                    </ContentView>
+                </SwiperPageContainerView>
+                <SwiperPageContainerView backgroundColor="#04D361">
+                    <IconView>
+                        <IconImageBackground
+                            source={onboardingPageBackground02}
+                        />
+                        <IconImage source={giveClassesIcon} />
+                    </IconView>
+                    <ContentView>
+                        <TitleText>02.</TitleText>
+                        <SubtitleText>
+                            Ou dê aulas sobre o que você mais conhece
+                        </SubtitleText>
+                    </ContentView>
+                </SwiperPageContainerView>
+            </Swiper>
+            <TouchableWithoutFeedback onPress={handleChangePageIndex}>
+                <AntDesign
+                    style={{
+                        position: 'absolute',
+                        right: 40,
+                        bottom: 50
+                    }}
+                    name="arrowright"
+                    size={24}
+                    color="#9C98A6"
+                />
+            </TouchableWithoutFeedback>
         </ContainerView>
 
         //#endregion
     )
 }
 
-OnboardingPage.displayName = 'OnboardingPage'
+OnboadingPage.displayName = 'OnboadingPage'
 
-export default OnboardingPage
+export default OnboadingPage
