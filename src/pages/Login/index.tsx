@@ -1,30 +1,45 @@
 import React from 'react'
 
-import { ContainerView } from './styles'
+import {
+    ContainerSafeAreaView,
+    IconView,
+    LoginView,
+    LoginHeaderView,
+    LoginHeaderTitleText,
+    LoginHeaderCreateAccountText
+} from './styles'
 
 import Button from '../../components/atoms/Button'
 
-export interface LoginPageProps {}
-
-const LoginPage: React.FC<LoginPageProps> = () => {
+/**
+ * The app login page
+ *
+ * This component stores all the login page style and logic
+ */
+const LoginPage: React.FC = () => {
     return (
         //#region JSX
 
-        <ContainerView
-            style={{
-                paddingHorizontal: 40
-            }}
-        >
-            <Button
-                enabled
-                text="Próximo"
-                enabledColor="#8257E5"
-                style={{
-                    width: '100%',
-                    height: 70
-                }}
-            />
-        </ContainerView>
+        <ContainerSafeAreaView>
+            <IconView>
+                <LoginHeaderTitleText>Logo</LoginHeaderTitleText>
+            </IconView>
+            <LoginView>
+                <LoginHeaderView>
+                    <LoginHeaderTitleText>Fazer login</LoginHeaderTitleText>
+                    <LoginHeaderCreateAccountText>
+                        Criar uma conta
+                    </LoginHeaderCreateAccountText>
+                </LoginHeaderView>
+                <Button
+                    enabled={false}
+                    text="Entrar"
+                    style={{ height: 65 }}
+                    enabledColor="#04D361"
+                    textEnabledColor="#fff"
+                />
+            </LoginView>
+        </ContainerSafeAreaView>
 
         //#endregino
     )
