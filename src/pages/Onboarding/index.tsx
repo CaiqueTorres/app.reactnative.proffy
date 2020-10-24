@@ -4,6 +4,8 @@ import { StatusBar } from 'react-native'
 import Swiper from 'react-native-swiper'
 
 import { AntDesign } from '@expo/vector-icons'
+import { useNavigation } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
 
 import {
     ContainerView,
@@ -20,9 +22,18 @@ import giveClassesIcon from '../../assets/images/give-classes.png'
 import onboardingPageBackground01 from '../../assets/images/onboarding-page-background-01.png'
 import onboardingPageBackground02 from '../../assets/images/onboarding-page-background-02.png'
 import studyIcon from '../../assets/images/study.png'
+import { AppStackParamsList } from '../../routes/AppStack'
 
+/**
+ * The app onboarding page
+ */
 const OnboadingPage: React.FC = (): JSX.Element => {
+    const navigation = useNavigation<
+        StackNavigationProp<AppStackParamsList, 'OnboardingPage'>
+    >()
+
     const swiper = useRef<Swiper>(null)
+
     const [index, setIndex] = useState(0)
 
     useEffect(() => {
@@ -37,8 +48,9 @@ const OnboadingPage: React.FC = (): JSX.Element => {
      * navigate to the login page
      */
     function handleChangePageIndex(): void {
+        if (index + 1 >= 2 || index + 1 < 0) navigation.navigate('LoginPage')
         setIndex(index + 1)
-        swiper.current?.scrollBy(index)
+        swiper.current?.scrollBy(index + 1)
     }
 
     //#endregion
