@@ -1,16 +1,21 @@
 import React from 'react'
 import { View } from 'react-native'
 
+import { FontAwesome } from '@expo/vector-icons'
+
 import {
     ContainerSafeAreaView,
     IconView,
     LoginView,
     LoginHeaderView,
     LoginHeaderTitleText,
-    LoginHeaderCreateAccountText
+    LoginHeaderCreateAccountText,
+    PasswordStoreView,
+    PasswordStoreText
 } from './styles'
 
 import Button from '../../components/atoms/Button'
+import Checkbox from '../../components/atoms/Checkbox'
 import TextInput from '../../components/atoms/TextInput'
 
 /**
@@ -54,6 +59,21 @@ const LoginPage: React.FC = () => {
                         }}
                     />
                 </View>
+                <PasswordStoreView>
+                    <Checkbox
+                        boxActiveColor="#04D361"
+                        boxSize={25}
+                        activeIcon={
+                            <FontAwesome name="check" size={16} color="#fff" />
+                        }
+                        onPress={(value: boolean) => {
+                            console.log(value)
+                        }}
+                    >
+                        <PasswordStoreText>Lembrar-me</PasswordStoreText>
+                    </Checkbox>
+                    <PasswordStoreText>Esqueci minha senha</PasswordStoreText>
+                </PasswordStoreView>
                 <Button
                     enabled={false}
                     text="Entrar"
