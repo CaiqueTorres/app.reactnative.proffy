@@ -1,4 +1,5 @@
 import React from 'react'
+import { View } from 'react-native'
 
 import {
     ContainerSafeAreaView,
@@ -10,6 +11,7 @@ import {
 } from './styles'
 
 import Button from '../../components/atoms/Button'
+import TextInput from '../../components/atoms/TextInput'
 
 /**
  * The app login page
@@ -31,6 +33,27 @@ const LoginPage: React.FC = () => {
                         Criar uma conta
                     </LoginHeaderCreateAccountText>
                 </LoginHeaderView>
+                <View>
+                    <TextInput
+                        keyboardType="email-address"
+                        placeholder="E-mail"
+                        colorTheme="#8257e5"
+                        style={{
+                            borderBottomWidth: 0,
+                            borderTopLeftRadius: 10,
+                            borderTopRightRadius: 10
+                        }}
+                    />
+                    <TextInput
+                        secureTextEntry
+                        placeholder="Senha"
+                        colorTheme="#8257e5"
+                        style={{
+                            borderBottomLeftRadius: 10,
+                            borderBottomRightRadius: 10
+                        }}
+                    />
+                </View>
                 <Button
                     enabled={false}
                     text="Entrar"
