@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { KeyboardAvoidingView, StatusBar } from 'react-native'
 
+import { useNavigation } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
+
+import { AppStackParamsList } from '../../../routes/AppStack'
+
 import {
     ContainerSafeAreaView,
     TitleView,
@@ -19,7 +24,16 @@ import {
     validatePassword
 } from '../../../utils/validationFunctions'
 
+/**
+ * The second sign up page
+ *
+ * This page is responsible to get the user e-mail and password
+ */
 const SecondSignUpPage: React.FC = (): JSX.Element => {
+    const navigation = useNavigation<
+        StackNavigationProp<AppStackParamsList, 'SecondSignUpPage'>
+    >()
+
     const [valid, setValid] = useState(false)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -78,6 +92,15 @@ const SecondSignUpPage: React.FC = (): JSX.Element => {
                         text="Concluir cadastro"
                         enabled={valid}
                         style={{ height: 65 }}
+                        onPress={() => {
+                            navigation.push('SuccessPage', {
+                                title: 'Cadastro concluído!',
+                                subtitle:
+                                    'Agora você faz parte da plataforma da Proffy',
+                                buttonTitle: 'Fazer login',
+                                onButtonPress: navigation.popToTop
+                            })
+                        }}
                     />
                 </FooterView>
             </ContainerSafeAreaView>

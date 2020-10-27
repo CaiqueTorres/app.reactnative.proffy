@@ -21,6 +21,11 @@ import TextInput from '../../../components/atoms/TextInput'
 
 import { isTextEmpty } from '../../../utils/validationFunctions'
 
+/**
+ * The first sign up page
+ *
+ * This page is responsible to get the user name and last name
+ */
 const FirstSignUpPage: React.FC = (): JSX.Element => {
     const navigation = useNavigation<
         StackNavigationProp<AppStackParamsList, 'FirstSignUpPage'>
@@ -28,7 +33,7 @@ const FirstSignUpPage: React.FC = (): JSX.Element => {
 
     const [valid, setValid] = useState(false)
     const [name, setName] = useState('')
-    const [middleName, setMiddleName] = useState('')
+    const [lastName, setMiddleName] = useState('')
 
     //#region Effects
 
@@ -38,8 +43,8 @@ const FirstSignUpPage: React.FC = (): JSX.Element => {
     }, [])
 
     useEffect(() => {
-        setValid(!isTextEmpty(name) && !isTextEmpty(middleName))
-    }, [name, middleName])
+        setValid(!isTextEmpty(name) && !isTextEmpty(lastName))
+    }, [name, lastName])
 
     //#endregion
 
