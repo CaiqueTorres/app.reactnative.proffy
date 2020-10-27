@@ -39,8 +39,8 @@ const Checkbox: React.FC<CheckboxProps> = ({
     return (
         //#region JSX
 
-        <ContainerView>
-            <TouchableWithoutFeedback onPress={() => toggleValue()}>
+        <TouchableWithoutFeedback onPress={() => toggleValue()}>
+            <ContainerView>
                 <ToggleView
                     boxColor={boxActiveColor}
                     size={boxSize}
@@ -55,9 +55,9 @@ const Checkbox: React.FC<CheckboxProps> = ({
                 >
                     {active ? activeIcon : deactiveIcon}
                 </ToggleView>
-            </TouchableWithoutFeedback>
-            {children}
-        </ContainerView>
+                {children}
+            </ContainerView>
+        </TouchableWithoutFeedback>
 
         //#endregion
     )
