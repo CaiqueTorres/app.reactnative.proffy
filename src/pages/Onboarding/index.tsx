@@ -49,7 +49,7 @@ const OnboadingPage: React.FC = (): JSX.Element => {
      * navigate to the login page
      */
     function handleChangePageIndex(): void {
-        if (index + 1 >= 2 || index + 1 < 0) navigation.navigate('LoginPage')
+        if (index + 1 >= 2 || index + 1 < 0) navigation.replace('LoginPage')
         setIndex(index + 1)
         swiper.current?.scrollBy(index + 1)
     }
