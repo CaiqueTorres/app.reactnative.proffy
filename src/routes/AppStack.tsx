@@ -8,12 +8,14 @@ import LoginPage from '../pages/Login'
 import OnboardingPage from '../pages/Onboarding'
 import FirstSignUpPage from '../pages/SignUp/First'
 import SecondSignUpPage from '../pages/SignUp/Second'
+import SuccessPage, { SuccessPageProps } from '../pages/Success'
 
 export type AppStackParamsList = {
     readonly OnboardingPage: undefined
     readonly LoginPage: undefined
     readonly FirstSignUpPage: undefined
     readonly SecondSignUpPage: undefined
+    readonly SuccessPage: SuccessPageProps
 }
 
 const { Navigator, Screen } = createStackNavigator<AppStackParamsList>()
@@ -55,6 +57,7 @@ export default function AppStack(): JSX.Element {
                 <Screen name="LoginPage" component={LoginPage} />
                 <Screen name="FirstSignUpPage" component={FirstSignUpPage} />
                 <Screen name="SecondSignUpPage" component={SecondSignUpPage} />
+                <Screen name="SuccessPage" component={SuccessPage} />
             </Navigator>
         </NavigationContainer>
 
