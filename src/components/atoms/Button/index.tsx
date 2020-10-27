@@ -30,13 +30,26 @@ const Button: React.FC<ButtonProps> = ({
     disabledColor = '#DCDCE5',
     textEnabledColor = '#fff',
     textDisabledColor = '#9C98A6',
+    onPress,
     ...rest
 }: ButtonProps): JSX.Element => {
+    //#region Functions
+
+    /**
+     * Function that run the onPress event just when the button is activated
+     */
+    function handleOnPress(pointerInside: boolean): void {
+        if (enabled && onPress) onPress(pointerInside)
+    }
+
+    //#endregion
+
     return (
         //#region JSX
 
         <ContainerRectButton
             backgroundColor={enabled ? enabledColor : disabledColor}
+            onPress={handleOnPress}
             {...rest}
         >
             <ContainerText
