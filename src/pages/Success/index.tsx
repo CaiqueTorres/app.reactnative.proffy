@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import { StatusBar } from 'react-native'
 
-import { RouteProp, useRoute } from '@react-navigation/native'
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
 
 import { AppStackParamsList } from '../../routes/AppStack'
 
@@ -26,7 +27,6 @@ export interface SuccessPageProps {
     readonly title: string
     readonly subtitle: string
     readonly buttonTitle: string
-    onButtonPress(): void
 }
 
 /**
@@ -34,6 +34,9 @@ export interface SuccessPageProps {
  */
 const SuccessPage: React.FC = (): JSX.Element => {
     const route = useRoute<RouteProp<AppStackParamsList, 'SuccessPage'>>()
+    const navigation = useNavigation<
+        StackNavigationProp<AppStackParamsList, 'SuccessPage'>
+    >()
 
     //#region Effects
 
@@ -58,7 +61,7 @@ const SuccessPage: React.FC = (): JSX.Element => {
                 enabled
                 text={route.params.buttonTitle}
                 style={{ height: 65 }}
-                onPress={route.params.onButtonPress}
+                onPress={navigation.popToTop}
             />
         </ContainerView>
 

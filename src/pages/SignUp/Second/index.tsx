@@ -42,7 +42,7 @@ const SecondSignUpPage: React.FC = (): JSX.Element => {
 
     useEffect(() => {
         StatusBar.setTranslucent(true)
-        StatusBar.setBarStyle('dark-content')
+        StatusBar.setBarStyle('light-content')
     }, [])
 
     useEffect(() => {
@@ -97,8 +97,7 @@ const SecondSignUpPage: React.FC = (): JSX.Element => {
                                 title: 'Cadastro concluído!',
                                 subtitle:
                                     'Agora você faz parte da plataforma da Proffy',
-                                buttonTitle: 'Fazer login',
-                                onButtonPress: navigation.popToTop
+                                buttonTitle: 'Fazer login'
                             })
                         }}
                     />
