@@ -35,7 +35,7 @@ export const LogoSubtitleText = styled.Text`
     font-family: Archivo_400Regular;
 `
 
-export const LoginView = styled.View`
+export const ForgotPasswordView = styled.View`
     height: 460px;
     width: 100%;
     background: #f0f0f7;
@@ -43,31 +43,16 @@ export const LoginView = styled.View`
     padding: 50px 30px;
 `
 
-export const LoginHeaderView = styled.View`
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-`
-
-export const LoginHeaderTitleText = styled.Text`
+export const ForgotPasswordTitle = styled.Text`
     color: #32264c;
     font-family: Poppins_600SemiBold;
     font-size: 24px;
 `
 
-export const LoginHeaderCreateAccountText = styled.Text`
-    color: #8257e5;
-    font-family: Poppins_400Regular;
-    font-size: 12px;
-`
-
-export const PasswordStoreView = styled.View`
-    flex-direction: row;
-    justify-content: space-between;
-`
-
-export const PasswordStoreText = styled.Text`
+export const ForgotPasswordSubtitle = styled.Text`
     font-size: 14px;
     font-family: Poppins_400Regular;
     color: #9c98a6;
+    width: 250px;
+    margin-top: 20px;
 `

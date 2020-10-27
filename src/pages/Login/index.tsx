@@ -126,9 +126,15 @@ const LoginPage: React.FC = () => {
                         >
                             <PasswordStoreText>Lembrar-me</PasswordStoreText>
                         </Checkbox>
-                        <PasswordStoreText>
-                            Esqueci minha senha
-                        </PasswordStoreText>
+                        <TouchableWithoutFeedback
+                            onPress={() => {
+                                navigation.push('ForgotPasswordPage')
+                            }}
+                        >
+                            <PasswordStoreText>
+                                Esqueci minha senha
+                            </PasswordStoreText>
+                        </TouchableWithoutFeedback>
                     </PasswordStoreView>
                     <Button
                         enabled={inputValid}

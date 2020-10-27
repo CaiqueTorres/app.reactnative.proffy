@@ -1,6 +1,3 @@
-import { Archivo_700Bold_Italic } from '@expo-google-fonts/archivo'
-import { Poppins_400Regular } from '@expo-google-fonts/poppins'
-
 import styled from 'styled-components/native'
 
 export const ContainerView = styled.View`
@@ -29,12 +26,14 @@ export const TitleText = styled.Text`
     font-size: 32px;
     font-family: Archivo_400Regular;
     text-align: center;
+    margin-top: 15px;
 `
 
 export const SubtitleText = styled.Text`
-    width: 200px;
+    width: 240px;
     color: #d4c2ff;
     font-size: 14px;
     font-family: Poppins_400Regular;
     text-align: center;
+    margin-top: 15px;
 `
