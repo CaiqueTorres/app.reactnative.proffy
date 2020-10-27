@@ -38,12 +38,10 @@ const SecondSignUpPage: React.FC = (): JSX.Element => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    //#region Effects
+    StatusBar.setTranslucent(true)
+    StatusBar.setBarStyle('light-content')
 
-    useEffect(() => {
-        StatusBar.setTranslucent(true)
-        StatusBar.setBarStyle('light-content')
-    }, [])
+    //#region Effects
 
     useEffect(() => {
         setValid(validateEmail(email) && validatePassword(password))

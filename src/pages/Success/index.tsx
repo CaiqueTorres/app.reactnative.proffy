@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { StatusBar } from 'react-native'
 
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
@@ -38,14 +38,8 @@ const SuccessPage: React.FC = (): JSX.Element => {
         StackNavigationProp<AppStackParamsList, 'SuccessPage'>
     >()
 
-    //#region Effects
-
-    useEffect(() => {
-        StatusBar.setTranslucent(true)
-        StatusBar.setBarStyle('light-content')
-    }, [])
-
-    //#endregion
+    StatusBar.setTranslucent(true)
+    StatusBar.setBarStyle('light-content')
 
     return (
         //#region JSX

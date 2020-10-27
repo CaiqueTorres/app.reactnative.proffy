@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { TouchableWithoutFeedback } from 'react-native'
 import { StatusBar } from 'react-native'
 import Swiper from 'react-native-swiper'
@@ -37,10 +37,8 @@ const OnboadingPage: React.FC = (): JSX.Element => {
 
     const [index, setIndex] = useState(0)
 
-    useEffect(() => {
-        StatusBar.setTranslucent(true)
-        StatusBar.setBarStyle('light-content')
-    }, [])
+    StatusBar.setTranslucent(true)
+    StatusBar.setBarStyle('light-content')
 
     //#region Functions
 

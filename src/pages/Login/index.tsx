@@ -51,12 +51,10 @@ const LoginPage: React.FC = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    //#region Effects
+    StatusBar.setTranslucent(true)
+    StatusBar.setBarStyle('light-content')
 
-    useEffect(() => {
-        StatusBar.setTranslucent(true)
-        StatusBar.setBarStyle('light-content')
-    }, [])
+    //#region Effects
 
     useEffect(() => {
         setInputValid(validateEmail(email) && validatePassword(password))

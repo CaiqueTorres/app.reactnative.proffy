@@ -35,12 +35,10 @@ const FirstSignUpPage: React.FC = (): JSX.Element => {
     const [name, setName] = useState('')
     const [lastName, setMiddleName] = useState('')
 
-    //#region Effects
+    StatusBar.setTranslucent(true)
+    StatusBar.setBarStyle('dark-content')
 
-    useEffect(() => {
-        StatusBar.setTranslucent(true)
-        StatusBar.setBarStyle('dark-content')
-    }, [])
+    //#region Effects
 
     useEffect(() => {
         setValid(!isTextEmpty(name) && !isTextEmpty(lastName))
