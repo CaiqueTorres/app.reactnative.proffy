@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { TransitionSpec } from '@react-navigation/stack/lib/typescript/src/types'
 
+import ForgotPasswordPage from '../pages/ForgotPassword'
 import LoginPage from '../pages/Login'
 import OnboardingPage from '../pages/Onboarding'
 import FirstSignUpPage from '../pages/SignUp/First'
@@ -16,6 +17,7 @@ export type AppStackParamsList = {
     readonly FirstSignUpPage: undefined
     readonly SecondSignUpPage: undefined
     readonly SuccessPage: SuccessPageProps
+    readonly ForgotPasswordPage: undefined
 }
 
 const { Navigator, Screen } = createStackNavigator<AppStackParamsList>()
@@ -58,6 +60,10 @@ export default function AppStack(): JSX.Element {
                 <Screen name="FirstSignUpPage" component={FirstSignUpPage} />
                 <Screen name="SecondSignUpPage" component={SecondSignUpPage} />
                 <Screen name="SuccessPage" component={SuccessPage} />
+                <Screen
+                    name="ForgotPasswordPage"
+                    component={ForgotPasswordPage}
+                />
             </Navigator>
         </NavigationContainer>
 
