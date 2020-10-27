@@ -67,7 +67,7 @@ export const PasswordStoreView = styled.View`
 `
 
 export const PasswordStoreText = styled.Text`
-    font-size: 12px;
+    font-size: 14px;
     font-family: Poppins_400Regular;
     color: #9c98a6;
 `
