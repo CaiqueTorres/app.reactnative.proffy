@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { KeyboardAvoidingView, StatusBar } from 'react-native'
+import { KeyboardAvoidingView } from 'react-native'
 
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
+
+import { StatusBar } from 'expo-status-bar'
 
 import { AppStackParamsList } from '../../../routes/AppStack'
 
@@ -38,9 +40,6 @@ const SecondSignUpPage: React.FC = (): JSX.Element => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    StatusBar.setTranslucent(true)
-    StatusBar.setBarStyle('light-content')
-
     //#region Effects
 
     useEffect(() => {
@@ -53,6 +52,7 @@ const SecondSignUpPage: React.FC = (): JSX.Element => {
         //#region JSX
 
         <KeyboardAvoidingView behavior="position" style={{ flex: 1 }}>
+            <StatusBar translucent style="dark" />
             <ContainerSafeAreaView>
                 <TitleView>
                     <TitleText>Crie sua conta gratuíta</TitleText>

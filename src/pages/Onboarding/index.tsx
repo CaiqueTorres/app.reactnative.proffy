@@ -1,11 +1,12 @@
 import React, { useRef, useState } from 'react'
 import { TouchableWithoutFeedback } from 'react-native'
-import { StatusBar } from 'react-native'
 import Swiper from 'react-native-swiper'
 
 import { AntDesign } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
+
+import { StatusBar } from 'expo-status-bar'
 
 import { AppStackParamsList } from '../../routes/AppStack'
 
@@ -37,9 +38,6 @@ const OnboadingPage: React.FC = (): JSX.Element => {
 
     const [index, setIndex] = useState(0)
 
-    StatusBar.setTranslucent(true)
-    StatusBar.setBarStyle('light-content')
-
     //#region Functions
 
     /**
@@ -58,6 +56,7 @@ const OnboadingPage: React.FC = (): JSX.Element => {
         //#region JSX
 
         <ContainerView>
+            <StatusBar translucent style="light" />
             <Swiper
                 ref={swiper}
                 key={2}

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {
     KeyboardAvoidingView,
-    StatusBar,
     TouchableWithoutFeedback,
     View
 } from 'react-native'
@@ -9,6 +8,8 @@ import {
 import { AntDesign } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
+
+import { StatusBar } from 'expo-status-bar'
 
 import { AppStackParamsList } from '../../routes/AppStack'
 
@@ -41,9 +42,6 @@ const ForgotPasswordPage: React.FC = (): JSX.Element => {
     const [valid, setValid] = useState(false)
     const [email, setEmail] = useState('')
 
-    StatusBar.setTranslucent(true)
-    StatusBar.setBarStyle('light-content')
-
     //#region Effects
 
     useEffect(() => {
@@ -56,6 +54,7 @@ const ForgotPasswordPage: React.FC = (): JSX.Element => {
         //#region JSX
 
         <KeyboardAvoidingView behavior="position" style={{ flex: 1 }}>
+            <StatusBar translucent style="light" />
             <ContainerSafeAreaView>
                 <IconView>
                     <IconBackgroundImage source={loginPageBackgroundImage} />

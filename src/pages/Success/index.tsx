@@ -1,8 +1,9 @@
 import React from 'react'
-import { StatusBar } from 'react-native'
 
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
+
+import { StatusBar } from 'expo-status-bar'
 
 import { AppStackParamsList } from '../../routes/AppStack'
 
@@ -38,13 +39,11 @@ const SuccessPage: React.FC = (): JSX.Element => {
         StackNavigationProp<AppStackParamsList, 'SuccessPage'>
     >()
 
-    StatusBar.setTranslucent(true)
-    StatusBar.setBarStyle('light-content')
-
     return (
         //#region JSX
 
         <ContainerView>
+            <StatusBar translucent style="dark" />
             <TitleView>
                 <BackgroundImage source={backgroundImage} />
                 <SuccessImage source={successIcon} />

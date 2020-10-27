@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {
     KeyboardAvoidingView,
-    StatusBar,
     TouchableWithoutFeedback,
     View
 } from 'react-native'
@@ -9,6 +8,8 @@ import {
 import { FontAwesome } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
+
+import { StatusBar } from 'expo-status-bar'
 
 import { AppStackParamsList } from '../../routes/AppStack'
 
@@ -51,9 +52,6 @@ const LoginPage: React.FC = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    StatusBar.setTranslucent(true)
-    StatusBar.setBarStyle('light-content')
-
     //#region Effects
 
     useEffect(() => {
@@ -65,6 +63,7 @@ const LoginPage: React.FC = () => {
     return (
         //#region JSX
         <KeyboardAvoidingView behavior="position" style={{ flex: 1 }}>
+            <StatusBar translucent style="light" />
             <ContainerSafeAreaView>
                 <IconView>
                     <IconBackgroundImage source={loginPageBackgroundImage} />
