@@ -43,7 +43,7 @@ const SuccessPage: React.FC = (): JSX.Element => {
         //#region JSX
 
         <ContainerView>
-            <StatusBar translucent style="dark" />
+            <StatusBar translucent style="light" />
             <TitleView>
                 <BackgroundImage source={backgroundImage} />
                 <SuccessImage source={successIcon} />
