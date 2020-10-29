@@ -25,6 +25,7 @@ import {
     validateEmail,
     validatePassword
 } from '../../../utils/validationFunctions'
+import SignUpHeader from '../Header'
 
 /**
  * The second sign up page
@@ -54,6 +55,11 @@ const SecondSignUpPage: React.FC = (): JSX.Element => {
         <KeyboardAvoidingView behavior="position" style={{ flex: 1 }}>
             <StatusBar translucent style="dark" />
             <ContainerSafeAreaView>
+                <SignUpHeader
+                    dotsAmount={2}
+                    selectedDot={1}
+                    onPress={() => navigation.pop()}
+                />
                 <TitleView>
                     <TitleText>Crie sua conta gratuíta</TitleText>
                     <SubtitleText>
