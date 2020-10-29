@@ -57,8 +57,8 @@ const SignUpHeader: React.FC<SignUpHeaderProps> = ({
                         style={{
                             width: 8,
                             height: 8,
-                            borderRadius: 4,
-                            marginHorizontal: 5
+                            borderRadius: 3,
+                            marginHorizontal: 3
                         }}
                     />
                 ))}
