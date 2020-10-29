@@ -22,6 +22,7 @@ import Button from '../../../components/atoms/Button'
 import TextInput from '../../../components/atoms/TextInput'
 
 import { isTextEmpty } from '../../../utils/validationFunctions'
+import SignUpHeader from '../Header'
 
 /**
  * The first sign up page
@@ -51,6 +52,11 @@ const FirstSignUpPage: React.FC = (): JSX.Element => {
         <KeyboardAvoidingView behavior="position" style={{ flex: 1 }}>
             <StatusBar translucent style="dark" />
             <ContainerSafeAreaView>
+                <SignUpHeader
+                    dotsAmount={2}
+                    selectedDot={0}
+                    onPress={() => navigation.pop()}
+                />
                 <TitleView>
                     <TitleText>Crie sua conta gratuíta</TitleText>
                     <SubtitleText>
