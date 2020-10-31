@@ -141,6 +141,9 @@ const LoginPage: React.FC = () => {
                         style={{ height: 65 }}
                         enabledColor="#04D361"
                         textEnabledColor="#fff"
+                        onPress={() => {
+                            navigation.replace('LandingPage')
+                        }}
                     />
                 </LoginView>
             </ContainerSafeAreaView>

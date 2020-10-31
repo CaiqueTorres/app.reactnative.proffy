@@ -7,7 +7,8 @@ import {
 } from '@expo-google-fonts/archivo'
 import {
     Poppins_400Regular,
-    Poppins_600SemiBold
+    Poppins_600SemiBold,
+    Poppins_700Bold
 } from '@expo-google-fonts/poppins'
 
 import { AppLoading } from 'expo'
@@ -21,7 +22,8 @@ export default function App(): JSX.Element {
         Archivo_600SemiBold,
         Archivo_700Bold,
         Poppins_400Regular,
-        Poppins_600SemiBold
+        Poppins_600SemiBold,
+        Poppins_700Bold
     })
 
     if (!fontsLoaded) return <AppLoading />
