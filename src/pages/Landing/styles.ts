@@ -61,12 +61,14 @@ export const ContentView = styled.View`
 export const TitleText = styled.Text`
     font-size: 20px;
     font-family: Poppins_400Regular;
+    line-height: 25px;
 `
 
 export const SubtitleText = styled.Text`
     font-size: 22px;
     font-family: Poppins_700Bold;
     font-weight: bold;
+    line-height: 25px;
 `
 
 export const ButtonsView = styled.View`
@@ -74,8 +76,14 @@ export const ButtonsView = styled.View`
     flex-direction: row;
 `
 
+export const LandingButtonIconImage = styled.Image`
+    width: 60px;
+    height: 60px;
+`
+
 export const FooterView = styled.View`
     flex-direction: row;
+    width: 170px;
 `
 
 export const FooterText = styled.Text`
@@ -83,4 +91,5 @@ export const FooterText = styled.Text`
     font-family: Poppins_400Regular;
     font-size: 12px;
     margin-right: 10px;
+    line-height: 21px;
 `

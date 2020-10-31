@@ -1,10 +1,14 @@
 import React from 'react'
-import { Image, View } from 'react-native'
+import { View } from 'react-native'
 
 import { AntDesign } from '@expo/vector-icons'
 import { Feather } from '@expo/vector-icons'
+import { useNavigation } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
 
 import { StatusBar } from 'expo-status-bar'
+
+import { AppStackParamsList } from '../../routes/AppStack'
 
 import {
     ContainerSafeAreaView,
@@ -19,6 +23,7 @@ import {
     TitleText,
     SubtitleText,
     ButtonsView,
+    LandingButtonIconImage,
     FooterView,
     FooterText
 } from './styles'
@@ -29,7 +34,14 @@ import studyIcon from '../../assets/images/onboarding/study.png'
 import profileImage from '../../assets/images/profile.jpg'
 import LandingButton from './LandingButton'
 
+/**
+ * Tha app's landing page
+ */
 const LandingPage: React.FC = (): JSX.Element => {
+    const navigation = useNavigation<
+        StackNavigationProp<AppStackParamsList, 'LandingPage'>
+    >()
+
     return (
         //#region JSX
 
@@ -41,8 +53,12 @@ const LandingPage: React.FC = (): JSX.Element => {
                         <ProfilePhotoImage source={profileImage} />
                         <ProfileUsernameText>Caique Torres</ProfileUsernameText>
                     </ProfileView>
-                    <LogoutRectButton>
-                        <Feather name="power" size={24} color="#d4c2ff" />
+                    <LogoutRectButton
+                        onPress={() => {
+                            navigation.replace('LoginPage')
+                        }}
+                    >
+                        <Feather name="power" size={22} color="#d4c2ff" />
                     </LogoutRectButton>
                 </HeaderView>
                 <LandingImage source={landingImage} />
@@ -62,13 +78,7 @@ const LandingPage: React.FC = (): JSX.Element => {
                             borderRadius: 10
                         }}
                     >
-                        <Image
-                            source={studyIcon}
-                            style={{
-                                width: 60,
-                                height: 60
-                            }}
-                        />
+                        <LandingButtonIconImage source={studyIcon} />
                     </LandingButton>
                     <LandingButton
                         title="Dar aulas"
@@ -79,18 +89,21 @@ const LandingPage: React.FC = (): JSX.Element => {
                             borderRadius: 10
                         }}
                     >
-                        <Image
-                            source={giveClassesIcon}
-                            style={{
-                                width: 60,
-                                height: 60
-                            }}
-                        />
+                        <LandingButtonIconImage source={giveClassesIcon} />
                     </LandingButton>
                 </ButtonsView>
                 <FooterView>
                     <FooterText>Total de 285 conexões já realizadas</FooterText>
-                    <AntDesign name="heart" size={17} color="#B9A4EE" />
+                    <AntDesign
+                        name="heart"
+                        size={17}
+                        color="#B9A4EE"
+                        style={{
+                            position: 'absolute',
+                            bottom: 4,
+                            left: 95
+                        }}
+                    />
                 </FooterView>
             </ContentView>
         </ContainerSafeAreaView>
