@@ -1,0 +1,21 @@
+{
+    "expo": {
+        "name": "Proffy",
+        "slug": "proffy",
+        "version": "0.0.1",
+        "orientation": "portrait",
+        "updates": {
+            "fallbackToCacheTimeout": 0
+        },
+        "assetBundlePatterns": ["**/*"],
+        "ios": {
+            "supportsTablet": false,
+            "bundleIdentifier": "com.home.proffy",
+            "buildNumber": "0.0.1"
+        },
+        "android": {
+            "package": "com.home.proffy",
+            "versionCode": 1
+        }
+    }
+}

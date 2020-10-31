@@ -1,0 +1,26 @@
+{
+    "Themed Component": {
+        "scope": "typescriptreact",
+        "prefix": "rnc",
+        "body": [
+            "import React from 'react'",
+            " ",
+            "// import { ContainerView } from './styles'",
+            " ",
+            "const ${1:ComponentName}: React.FC = (): JSX.Element => {",
+            "    return (",
+            "        //#region JSX",
+            "        ",
+            "        <></>",
+            "        ",
+            "        //#endregion",
+            "    )",
+            "}",
+            " ",
+            "${1:ComponentName}.displayName = '${1:ComponentName}'",
+            " ",
+            "export default ${1:ComponentName}",
+            ""
+        ]
+    }
+}
