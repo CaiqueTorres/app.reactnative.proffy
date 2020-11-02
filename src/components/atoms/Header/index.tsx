@@ -1,5 +1,5 @@
 import React from 'react'
-import { TouchableWithoutFeedback } from 'react-native'
+import { StyleProp, TouchableWithoutFeedback, ViewStyle } from 'react-native'
 
 import { AntDesign } from '@expo/vector-icons'
 
@@ -15,6 +15,7 @@ import logoImage from '../../../assets/images/logo.png'
 export interface HeaderProps {
     onPress?(): void
     readonly title?: string
+    readonly style?: StyleProp<ViewStyle>
 }
 
 /**
@@ -22,12 +23,13 @@ export interface HeaderProps {
  */
 const Header: React.FC<HeaderProps> = ({
     onPress,
-    title
+    title,
+    style
 }: HeaderProps): JSX.Element => {
     return (
         //#region JSX
 
-        <ContainerView>
+        <ContainerView style={style}>
             <StatusBar translucent style="light" backgroundColor="#774dd6" />
             <TouchableWithoutFeedback onPress={onPress}>
                 <BackButtonView>

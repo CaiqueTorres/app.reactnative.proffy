@@ -1,5 +1,3 @@
-import { Archivo_400Regular } from '@expo-google-fonts/archivo'
-
 import styled from 'styled-components/native'
 
 export const ContainerView = styled.View`
@@ -7,7 +5,7 @@ export const ContainerView = styled.View`
     justify-content: space-between;
     align-items: center;
     background: #774dd6;
-    padding: 30px 20px;
+    padding: 30px 30px;
     border-bottom-width: 2px;
     border-bottom-color: #6842c2;
 `
@@ -24,6 +22,6 @@ export const TitleText = styled.Text`
 `
 
 export const LogoImage = styled.Image`
-    width: 50px;
+    width: 52px;
     height: 15px;
 `
