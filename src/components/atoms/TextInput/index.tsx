@@ -3,7 +3,8 @@ import {
     TextInputFocusEventData,
     NativeSyntheticEvent,
     Animated,
-    TouchableWithoutFeedback
+    TouchableWithoutFeedback,
+    ViewStyle
 } from 'react-native'
 import { TextInputProps as TextInputPropsRN } from 'react-native'
 
@@ -25,6 +26,7 @@ import { isTextEmpty } from '../../../utils/validationFunctions'
 export interface TextInputProps extends TextInputPropsRN {
     readonly duration?: number
     readonly colorTheme?: string
+    readonly style?: StyleProp<ViewStyle>
 }
 
 /**
@@ -38,6 +40,7 @@ const TextInput: React.FC<TextInputProps> = ({
     onChangeText,
     colorTheme,
     placeholder,
+    style,
     ...rest
 }: TextInputProps): JSX.Element => {
     const [text, setText] = useState('')
@@ -145,7 +148,7 @@ const TextInput: React.FC<TextInputProps> = ({
     return (
         //#region JSX
 
-        <ContainerView>
+        <ContainerView style={style}>
             <ContainerTextInput
                 onFocus={handleOnFocus}
                 onBlur={handleOnBlur}

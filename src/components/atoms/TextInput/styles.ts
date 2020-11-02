@@ -6,11 +6,11 @@ import AnimatedTextInput from '../AnimatedTextInput'
 
 export const ContainerView = styled.View`
     justify-content: center;
+    background: #fff;
+    border: 2px solid #e6e6f0;
 `
 
 export const ContainerTextInput = styled(AnimatedTextInput)`
-    background: #fff;
-    border: 2px solid #e6e6f0;
     height: 65px;
     padding-left: 25px;
     color: #6a6180;
