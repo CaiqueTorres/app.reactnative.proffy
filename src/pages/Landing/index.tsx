@@ -1,8 +1,8 @@
 import React from 'react'
-import { View } from 'react-native'
+import { TouchableWithoutFeedback, View } from 'react-native'
 
-import { AntDesign } from '@expo/vector-icons'
 import { Feather } from '@expo/vector-icons'
+import { AntDesign } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
@@ -49,10 +49,18 @@ const LandingPage: React.FC = (): JSX.Element => {
             <StatusBar translucent style="light" />
             <LogoView>
                 <HeaderView>
-                    <ProfileView>
-                        <ProfilePhotoImage source={profileImage} />
-                        <ProfileUsernameText>Caique Torres</ProfileUsernameText>
-                    </ProfileView>
+                    <TouchableWithoutFeedback
+                        onPress={() => {
+                            navigation.push('AccountPage')
+                        }}
+                    >
+                        <ProfileView>
+                            <ProfilePhotoImage source={profileImage} />
+                            <ProfileUsernameText>
+                                Caique Torres
+                            </ProfileUsernameText>
+                        </ProfileView>
+                    </TouchableWithoutFeedback>
                     <LogoutRectButton
                         onPress={() => {
                             navigation.replace('LoginPage')
