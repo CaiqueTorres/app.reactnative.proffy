@@ -4,7 +4,8 @@ import {
     NativeSyntheticEvent,
     Animated,
     TouchableWithoutFeedback,
-    ViewStyle
+    ViewStyle,
+    StyleProp
 } from 'react-native'
 import { TextInputProps as TextInputPropsRN } from 'react-native'
 
@@ -21,7 +22,7 @@ import {
 import { isTextEmpty } from '../../../utils/validationFunctions'
 
 /**
- * The main app's ext input props
+ * The authentication text input props
  */
 export interface TextInputProps extends TextInputPropsRN {
     readonly duration?: number
@@ -30,9 +31,11 @@ export interface TextInputProps extends TextInputPropsRN {
 }
 
 /**
- * The main app's text input
+ * The authentication text input
+ *
+ * It component will be used in login, signup and forgot password screens
  */
-const TextInput: React.FC<TextInputProps> = ({
+const AuthenticationTextInput: React.FC<TextInputProps> = ({
     secureTextEntry,
     duration = 200,
     onFocus,
@@ -197,6 +200,6 @@ const TextInput: React.FC<TextInputProps> = ({
     )
 }
 
-TextInput.displayName = 'TextInput'
+AuthenticationTextInput.displayName = 'TextInput'
 
-export default TextInput
+export default AuthenticationTextInput

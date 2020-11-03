@@ -27,9 +27,9 @@ import {
     PasswordStoreText
 } from './styles'
 
+import AuthenticationTextInput from '../../components/atoms/AuthenticationTextInput'
 import Button from '../../components/atoms/Button'
 import Checkbox from '../../components/atoms/Checkbox'
-import TextInput from '../../components/atoms/TextInput'
 
 import loginPageBackgroundImage from '../../assets/images/login/login-page-background.png'
 import logoImage from '../../assets/images/logo.png'
@@ -88,7 +88,7 @@ const LoginPage: React.FC = () => {
                         </TouchableWithoutFeedback>
                     </LoginHeaderView>
                     <View>
-                        <TextInput
+                        <AuthenticationTextInput
                             keyboardType="email-address"
                             placeholder="E-mail"
                             colorTheme="#8257e5"
@@ -99,7 +99,7 @@ const LoginPage: React.FC = () => {
                             }}
                             onChangeText={setEmail}
                         />
-                        <TextInput
+                        <AuthenticationTextInput
                             secureTextEntry
                             placeholder="Senha"
                             colorTheme="#8257e5"
