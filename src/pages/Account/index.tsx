@@ -59,17 +59,22 @@ const AccountPage: React.FC = (): JSX.Element => {
                 <UserDataView>
                     <UserDataTitle>Seus dados</UserDataTitle>
                     <UserDataTextInput
-                        placeholder="Nome"
-                        colorTheme="#8257e5"
+                        viewStyle={{
+                            marginVertical: 20
+                        }}
+                        title="Nome"
                     />
                     <UserDataTextInput
-                        placeholder="Sobrenome"
-                        colorTheme="#8257e5"
+                        viewStyle={{
+                            marginVertical: 20
+                        }}
+                        title="Sobrenome"
                     />
                     <UserDataTextInput
-                        placeholder="E-mail"
-                        colorTheme="#8257e5"
-                        keyboardType="email-address"
+                        viewStyle={{
+                            marginVertical: 20
+                        }}
+                        title="E-mail"
                     />
                 </UserDataView>
             </ContainerScrollView>

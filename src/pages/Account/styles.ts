@@ -1,6 +1,7 @@
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 import AuthenticationTextInput from '../../components/atoms/AuthenticationTextInput'
+import TextInput from '../../components/atoms/TextInput'
 import styled from 'styled-components/native'
 
 export const ContainerSafeAreaView = styled(SafeAreaView)`
@@ -62,8 +63,7 @@ export const UserDataTitle = styled.Text`
     margin-bottom: 20px;
 `
 
-export const UserDataTextInput = styled(AuthenticationTextInput)`
+export const UserDataTextInput = styled(TextInput)`
     border-radius: 8px;
-    margin: 20px 0;
     background: #fafafc;
 `
