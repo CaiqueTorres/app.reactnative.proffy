@@ -7,7 +7,7 @@ import {
     ViewStyle,
     StyleProp
 } from 'react-native'
-import { TextInputProps as TextInputPropsRN } from 'react-native'
+import { TextInputProps } from 'react-native'
 
 import { Ionicons } from '@expo/vector-icons'
 
@@ -24,7 +24,7 @@ import { isTextEmpty } from '../../../utils/validationFunctions'
 /**
  * The authentication text input props
  */
-export interface TextInputProps extends TextInputPropsRN {
+export interface AuthenticationTextInputProps extends TextInputProps {
     readonly duration?: number
     readonly colorTheme?: string
     readonly style?: StyleProp<ViewStyle>
@@ -35,7 +35,7 @@ export interface TextInputProps extends TextInputPropsRN {
  *
  * It component will be used in login, signup and forgot password screens
  */
-const AuthenticationTextInput: React.FC<TextInputProps> = ({
+const AuthenticationTextInput: React.FC<AuthenticationTextInputProps> = ({
     secureTextEntry,
     duration = 200,
     onFocus,
@@ -45,7 +45,7 @@ const AuthenticationTextInput: React.FC<TextInputProps> = ({
     placeholder,
     style,
     ...rest
-}: TextInputProps): JSX.Element => {
+}: AuthenticationTextInputProps): JSX.Element => {
     const [text, setText] = useState('')
     const [selected, setSelected] = useState(false)
     const [passwordVisible, setPasswordVisible] = useState(false)
@@ -200,6 +200,6 @@ const AuthenticationTextInput: React.FC<TextInputProps> = ({
     )
 }
 
-AuthenticationTextInput.displayName = 'TextInput'
+AuthenticationTextInput.displayName = 'AuthenticationTextInput'
 
 export default AuthenticationTextInput
