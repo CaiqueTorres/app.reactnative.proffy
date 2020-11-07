@@ -52,7 +52,7 @@ export const UserDataView = styled.View`
     margin-bottom: 40px;
 `
 
-export const UserDataTitle = styled.Text`
+export const UserDataTitleText = styled.Text`
     color: #32264d;
     font-family: Archivo_400Regular;
     font-size: 20px;

@@ -14,12 +14,13 @@ import {
     DetailsTitleText,
     DetailsSubtitleText,
     UserDataView,
-    UserDataTitle,
+    UserDataTitleText,
     UserDataTextInput
 } from './styles'
 
 import Button from '../../components/atoms/Button'
 import Header from '../../components/atoms/Header'
+import AvailableTimesList from '../../components/organisms/AvailableTimesList'
 
 import backgroundImage from '../../assets/images/login/login-page-background.png'
 import photoImage from '../../assets/images/profile.jpg'
@@ -56,7 +57,7 @@ const AccountPage: React.FC = (): JSX.Element => {
                     </DetailsImageBackground>
                 </DetailsView>
                 <UserDataView>
-                    <UserDataTitle>Seus dados</UserDataTitle>
+                    <UserDataTitleText>Seus dados</UserDataTitleText>
                     <UserDataTextInput
                         title="Nome"
                         viewStyle={{ marginVertical: 20 }}
@@ -80,7 +81,7 @@ const AccountPage: React.FC = (): JSX.Element => {
                         title="Whatsapp"
                         viewStyle={{ marginVertical: 20 }}
                     />
-                    <UserDataTitle>Sobre a aula</UserDataTitle>
+                    <UserDataTitleText>Sobre a aula</UserDataTitleText>
                     <UserDataTextInput
                         title="Matéria"
                         viewStyle={{ marginVertical: 20 }}
@@ -90,11 +91,15 @@ const AccountPage: React.FC = (): JSX.Element => {
                         keyboardType="decimal-pad"
                         viewStyle={{ marginVertical: 20 }}
                     />
+                    <AvailableTimesList />
                     <Button
                         enabled
                         enabledColor="#04D361"
                         text="Salvar alterações"
-                        style={{ marginTop: 10, height: 65 }}
+                        style={{
+                            height: 65,
+                            marginVertical: 10
+                        }}
                     />
                 </UserDataView>
             </ContainerScrollView>
