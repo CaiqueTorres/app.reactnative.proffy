@@ -11,9 +11,8 @@ export const TitleText = styled.Text`
 export const ContainerTextInput = styled.TextInput`
     background: #fafafc;
     border: 1px solid #e6e6f0;
-    height: 65px;
     color: #6a6180;
     font-family: Poppins_400Regular;
     font-size: 14px;
-    padding: 0 20px;
+    padding: 10px 20px;
 `
