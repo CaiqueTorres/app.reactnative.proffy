@@ -24,8 +24,8 @@ import {
     ForgotPasswordSubtitle
 } from './styles'
 
+import AuthenticationTextInput from '../../components/atoms/AuthenticationTextInput'
 import Button from '../../components/atoms/Button'
-import TextInput from '../../components/atoms/TextInput'
 
 import loginPageBackgroundImage from '../../assets/images/login/login-page-background.png'
 import logoImage from '../../assets/images/logo.png'
@@ -82,7 +82,7 @@ const ForgotPasswordPage: React.FC = (): JSX.Element => {
                         </ForgotPasswordSubtitle>
                     </View>
                     <View>
-                        <TextInput
+                        <AuthenticationTextInput
                             keyboardType="email-address"
                             placeholder="E-mail"
                             colorTheme="#8257e5"
