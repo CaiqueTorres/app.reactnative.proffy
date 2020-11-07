@@ -18,6 +18,7 @@ import {
     UserDataTextInput
 } from './styles'
 
+import Button from '../../components/atoms/Button'
 import Header from '../../components/atoms/Header'
 
 import backgroundImage from '../../assets/images/login/login-page-background.png'
@@ -37,9 +38,7 @@ const AccountPage: React.FC = (): JSX.Element => {
                 onPress={() => {
                     navigation.pop()
                 }}
-                style={{
-                    width: '100%'
-                }}
+                style={{ width: '100%' }}
             />
             <ContainerScrollView>
                 <DetailsView>
@@ -59,22 +58,43 @@ const AccountPage: React.FC = (): JSX.Element => {
                 <UserDataView>
                     <UserDataTitle>Seus dados</UserDataTitle>
                     <UserDataTextInput
-                        viewStyle={{
-                            marginVertical: 20
-                        }}
                         title="Nome"
+                        viewStyle={{ marginVertical: 20 }}
                     />
                     <UserDataTextInput
-                        viewStyle={{
-                            marginVertical: 20
-                        }}
                         title="Sobrenome"
+                        viewStyle={{ marginVertical: 20 }}
                     />
                     <UserDataTextInput
-                        viewStyle={{
-                            marginVertical: 20
-                        }}
                         title="E-mail"
+                        keyboardType="email-address"
+                        viewStyle={{ marginVertical: 20 }}
+                    />
+                    <UserDataTextInput
+                        title="Whatsapp"
+                        keyboardType="phone-pad"
+                        viewStyle={{ marginVertical: 20 }}
+                    />
+                    <UserDataTextInput
+                        multiline
+                        title="Whatsapp"
+                        viewStyle={{ marginVertical: 20 }}
+                    />
+                    <UserDataTitle>Sobre a aula</UserDataTitle>
+                    <UserDataTextInput
+                        title="Matéria"
+                        viewStyle={{ marginVertical: 20 }}
+                    />
+                    <UserDataTextInput
+                        title="Custo da sua hora por aula"
+                        keyboardType="decimal-pad"
+                        viewStyle={{ marginVertical: 20 }}
+                    />
+                    <Button
+                        enabled
+                        enabledColor="#04D361"
+                        text="Salvar alterações"
+                        style={{ marginTop: 10, height: 65 }}
                     />
                 </UserDataView>
             </ContainerScrollView>
