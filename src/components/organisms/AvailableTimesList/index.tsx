@@ -9,7 +9,7 @@ import {
 } from './styles'
 
 export interface AvailableTimesListProps {
-    children?: JSX.Element
+    children?: JSX.Element[] | JSX.Element
 }
 
 const AvailableTimesList: React.FC<AvailableTimesListProps> = ({
