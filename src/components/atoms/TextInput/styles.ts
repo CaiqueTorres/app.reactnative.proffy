@@ -1,5 +1,3 @@
-import { Poppins_400Regular } from '@expo-google-fonts/poppins'
-
 import styled from 'styled-components/native'
 
 export const TitleText = styled.Text`
