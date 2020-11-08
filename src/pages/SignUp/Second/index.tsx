@@ -18,8 +18,8 @@ import {
     TextsInputView
 } from '../styles'
 
+import AuthenticationTextInput from '../../../components/atoms/AuthenticationTextInput'
 import Button from '../../../components/atoms/Button'
-import TextInput from '../../../components/atoms/TextInput'
 
 import {
     validateEmail,
@@ -69,7 +69,7 @@ const SecondSignUpPage: React.FC = (): JSX.Element => {
                 <FooterView>
                     <FooterTitle>02. Email e Senha</FooterTitle>
                     <TextsInputView>
-                        <TextInput
+                        <AuthenticationTextInput
                             keyboardType="email-address"
                             placeholder="E-mail"
                             colorTheme="#8257e5"
@@ -80,7 +80,7 @@ const SecondSignUpPage: React.FC = (): JSX.Element => {
                             }}
                             onChangeText={setEmail}
                         />
-                        <TextInput
+                        <AuthenticationTextInput
                             secureTextEntry
                             placeholder="Senha"
                             colorTheme="#8257e5"

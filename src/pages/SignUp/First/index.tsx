@@ -18,8 +18,8 @@ import {
     TextsInputView
 } from '../styles'
 
+import AuthenticationTextInput from '../../../components/atoms/AuthenticationTextInput'
 import Button from '../../../components/atoms/Button'
-import TextInput from '../../../components/atoms/TextInput'
 
 import { isTextEmpty } from '../../../utils/validationFunctions'
 import SignUpHeader from '../Header'
@@ -66,7 +66,7 @@ const FirstSignUpPage: React.FC = (): JSX.Element => {
                 <FooterView>
                     <FooterTitle>01. Quem é você?</FooterTitle>
                     <TextsInputView>
-                        <TextInput
+                        <AuthenticationTextInput
                             placeholder="Nome"
                             colorTheme="#8257e5"
                             style={{
@@ -76,7 +76,7 @@ const FirstSignUpPage: React.FC = (): JSX.Element => {
                             }}
                             onChangeText={setName}
                         />
-                        <TextInput
+                        <AuthenticationTextInput
                             placeholder="Sobrenome"
                             colorTheme="#8257e5"
                             style={{
