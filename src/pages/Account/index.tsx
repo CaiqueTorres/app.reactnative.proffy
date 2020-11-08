@@ -20,6 +20,7 @@ import {
 
 import Button from '../../components/atoms/Button'
 import Header from '../../components/atoms/Header'
+import AvailableTimeElement from '../../components/molecules/AvailableTimeElement'
 import AvailableTimesList from '../../components/organisms/AvailableTimesList'
 
 import backgroundImage from '../../assets/images/login/login-page-background.png'
@@ -91,7 +92,9 @@ const AccountPage: React.FC = (): JSX.Element => {
                         keyboardType="decimal-pad"
                         viewStyle={{ marginVertical: 20 }}
                     />
-                    <AvailableTimesList />
+                    <AvailableTimesList>
+                        <AvailableTimeElement />
+                    </AvailableTimesList>
                     <Button
                         enabled
                         enabledColor="#04D361"
