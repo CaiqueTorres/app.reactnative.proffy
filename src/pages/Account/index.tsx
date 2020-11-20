@@ -94,6 +94,7 @@ const AccountPage: React.FC = (): JSX.Element => {
                     />
                     <AvailableTimesList>
                         <AvailableTimeElement />
+                        <AvailableTimeElement />
                     </AvailableTimesList>
                     <Button
                         enabled
