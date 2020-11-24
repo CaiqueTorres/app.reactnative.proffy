@@ -27,6 +27,7 @@ module.exports = {
                     '/@/',
                     '/(expo)|(modules)/',
                     '/store/',
+                    '/hooks/',
                     '/routes/',
                     '/.styles/',
                     '/components/',
