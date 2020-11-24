@@ -16,6 +16,7 @@ import TimePicker from '../../atoms/DatePicker'
 import Dropdown from '../../atoms/Dropdown'
 
 export interface TimeProps {
+    readonly id?: string | number
     readonly weekDay?: WeekDay
     readonly from?: Date
     readonly to?: Date
