@@ -9,22 +9,24 @@ import useToggle from '../../../hooks/useToggle'
 import { formatDate } from '../../../utils/date'
 
 export interface TimePickerProps {
-    title: string
-    style?: StyleProp<ViewStyle>
-    containerStyle?: StyleProp<ViewStyle>
+    readonly title: string
+    readonly initialDate?: Date
+    readonly style?: StyleProp<ViewStyle>
+    readonly containerStyle?: StyleProp<ViewStyle>
 }
 
 const TimePicker: React.FC<TimePickerProps> = ({
     title,
+    initialDate = new Date(),
     style,
     containerStyle
 }: TimePickerProps): JSX.Element => {
     const [dateText, setDateText] = useState('')
-    const [date, setDate] = useState(new Date())
+    const [date, setDate] = useState(initialDate)
     const [active, toggleValue] = useToggle(false)
 
     function onChangeDateTime(
-        event: Event,
+        _event: Event,
         selectedDate: Date | undefined
     ): void {
         toggleValue()
