@@ -93,8 +93,18 @@ const AccountPage: React.FC = (): JSX.Element => {
                         viewStyle={{ marginVertical: 20 }}
                     />
                     <AvailableTimesList>
-                        <AvailableTimeElement />
-                        <AvailableTimeElement />
+                        <AvailableTimeElement
+                            style={{
+                                height: 240,
+                                marginVertical: 10
+                            }}
+                        />
+                        <AvailableTimeElement
+                            style={{
+                                height: 240,
+                                marginVertical: 10
+                            }}
+                        />
                     </AvailableTimesList>
                     <Button
                         enabled
