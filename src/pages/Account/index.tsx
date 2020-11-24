@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Image } from 'react-native'
 
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
+
+import usePrevious from '../../hooks/usePrevious'
 
 import { AppStackParamsList } from '../../routes/AppStack'
 
@@ -20,16 +22,46 @@ import {
 
 import Button from '../../components/atoms/Button'
 import Header from '../../components/atoms/Header'
-import AvailableTimeElement from '../../components/molecules/AvailableTimeElement'
+import AvailableTimeElement, {
+    TimeProps
+} from '../../components/molecules/AvailableTimeElement'
 import AvailableTimesList from '../../components/organisms/AvailableTimesList'
 
 import backgroundImage from '../../assets/images/login/login-page-background.png'
 import photoImage from '../../assets/images/profile.jpg'
+import uuid from 'uuid-random'
 
 const AccountPage: React.FC = (): JSX.Element => {
     const navigation = useNavigation<
         StackNavigationProp<AppStackParamsList, 'AccountPage'>
     >()
+
+    const [name, setName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [email, setEmail] = useState('')
+    const [whatsapp, setWhatsapp] = useState('')
+    const [about, setAbout] = useState('')
+    const [subject, setSubject] = useState('')
+    const [cost, setCost] = useState(0)
+
+    const hasChangedName = usePrevious(name)
+    const previousLastName = usePrevious(lastName)
+    const previousEmail = usePrevious(email)
+    const previousWhatsapp = usePrevious(whatsapp)
+    const previousAbout = usePrevious(about)
+    const previousSubject = usePrevious(subject)
+    const previousCost = usePrevious(cost)
+
+    const enableButton =
+        hasChangedName ||
+        previousLastName ||
+        previousEmail ||
+        previousWhatsapp ||
+        previousAbout ||
+        previousSubject ||
+        previousCost
+
+    const [timePropsList, setTimePropsList] = useState<TimeProps[]>([])
 
     return (
         //#region JSX
@@ -62,52 +94,74 @@ const AccountPage: React.FC = (): JSX.Element => {
                     <UserDataTextInput
                         title="Nome"
                         viewStyle={{ marginVertical: 20 }}
+                        onChangeText={setName}
                     />
                     <UserDataTextInput
                         title="Sobrenome"
                         viewStyle={{ marginVertical: 20 }}
+                        onChangeText={setLastName}
                     />
                     <UserDataTextInput
                         title="E-mail"
                         keyboardType="email-address"
                         viewStyle={{ marginVertical: 20 }}
+                        onChangeText={setEmail}
                     />
                     <UserDataTextInput
                         title="Whatsapp"
                         keyboardType="phone-pad"
                         viewStyle={{ marginVertical: 20 }}
+                        onChangeText={setWhatsapp}
                     />
                     <UserDataTextInput
                         multiline
-                        title="Whatsapp"
+                        title="Sobre"
                         viewStyle={{ marginVertical: 20 }}
+                        onChangeText={setAbout}
                     />
                     <UserDataTitleText>Sobre a aula</UserDataTitleText>
                     <UserDataTextInput
                         title="Matéria"
                         viewStyle={{ marginVertical: 20 }}
+                        onChangeText={setSubject}
                     />
                     <UserDataTextInput
                         title="Custo da sua hora por aula"
                         keyboardType="decimal-pad"
                         viewStyle={{ marginVertical: 20 }}
+                        onChangeText={(newText: string) =>
+                            setCost(Number(newText))
+                        }
                     />
-                    <AvailableTimesList>
-                        <AvailableTimeElement
-                            style={{
-                                height: 240,
-                                marginVertical: 10
-                            }}
-                        />
-                        <AvailableTimeElement
-                            style={{
-                                height: 240,
-                                marginVertical: 10
-                            }}
-                        />
+                    <AvailableTimesList
+                        onClickedNewButton={() => {
+                            setTimePropsList([...timePropsList, { id: uuid() }])
+                        }}
+                    >
+                        {timePropsList.map((element: TimeProps) => {
+                            const { id, ...rest } = element
+                            return (
+                                <AvailableTimeElement
+                                    key={id}
+                                    onClickDeleteButton={() => {
+                                        setTimePropsList(
+                                            timePropsList.filter(
+                                                (timeProps: TimeProps) =>
+                                                    timeProps.id != id
+                                            )
+                                        )
+                                    }}
+                                    style={{
+                                        height: 240,
+                                        marginVertical: 10
+                                    }}
+                                    {...rest}
+                                />
+                            )
+                        })}
                     </AvailableTimesList>
                     <Button
-                        enabled
+                        enabled={enableButton}
                         enabledColor="#04D361"
                         text="Salvar alterações"
                         style={{
