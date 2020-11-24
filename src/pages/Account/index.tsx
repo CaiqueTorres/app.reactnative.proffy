@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Image } from 'react-native'
 
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
-import usePrevious from '../../hooks/usePrevious'
+import useStateAndCheck from '../../hooks/useStateAndCheck'
 
 import { AppStackParamsList } from '../../routes/AppStack'
 
@@ -36,32 +36,28 @@ const AccountPage: React.FC = (): JSX.Element => {
         StackNavigationProp<AppStackParamsList, 'AccountPage'>
     >()
 
-    const [name, setName] = useState('')
-    const [lastName, setLastName] = useState('')
-    const [email, setEmail] = useState('')
-    const [whatsapp, setWhatsapp] = useState('')
-    const [about, setAbout] = useState('')
-    const [subject, setSubject] = useState('')
-    const [cost, setCost] = useState(0)
-
-    const hasChangedName = usePrevious(name)
-    const previousLastName = usePrevious(lastName)
-    const previousEmail = usePrevious(email)
-    const previousWhatsapp = usePrevious(whatsapp)
-    const previousAbout = usePrevious(about)
-    const previousSubject = usePrevious(subject)
-    const previousCost = usePrevious(cost)
+    const [, setName, hasChangedName] = useStateAndCheck('')
+    const [, setLastName, hasChangedLastName] = useStateAndCheck('')
+    const [, setEmail, hasChangedEmail] = useStateAndCheck('')
+    const [, setWhatsapp, hasChangedWhatsapp] = useStateAndCheck('')
+    const [, setAbout, hasChangedAbout] = useStateAndCheck('')
+    const [, setSubject, hasChangedSubject] = useStateAndCheck('')
+    const [, setCost, hasChangedCost] = useStateAndCheck(0)
+    const [
+        timePropsList,
+        setTimePropsList,
+        hasChangedTimePropsList
+    ] = useStateAndCheck<TimeProps[]>([])
 
     const enableButton =
         hasChangedName ||
-        previousLastName ||
-        previousEmail ||
-        previousWhatsapp ||
-        previousAbout ||
-        previousSubject ||
-        previousCost
-
-    const [timePropsList, setTimePropsList] = useState<TimeProps[]>([])
+        hasChangedLastName ||
+        hasChangedEmail ||
+        hasChangedWhatsapp ||
+        hasChangedAbout ||
+        hasChangedSubject ||
+        hasChangedCost ||
+        hasChangedTimePropsList
 
     return (
         //#region JSX
