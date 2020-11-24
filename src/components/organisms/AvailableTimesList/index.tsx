@@ -1,4 +1,5 @@
 import React from 'react'
+import { TouchableWithoutFeedback } from 'react-native'
 
 import {
     ContainerView,
@@ -9,10 +10,12 @@ import {
 } from './styles'
 
 export interface AvailableTimesListProps {
+    onClickedNewButton?(): void
     children?: JSX.Element[] | JSX.Element
 }
 
 const AvailableTimesList: React.FC<AvailableTimesListProps> = ({
+    onClickedNewButton,
     children
 }: AvailableTimesListProps): JSX.Element => {
     return (
@@ -21,7 +24,9 @@ const AvailableTimesList: React.FC<AvailableTimesListProps> = ({
         <ContainerView>
             <HeaderView>
                 <TitleText>Horários disponíveis</TitleText>
-                <NewText>+ Novo</NewText>
+                <TouchableWithoutFeedback onPress={onClickedNewButton}>
+                    <NewText>+ Novo</NewText>
+                </TouchableWithoutFeedback>
             </HeaderView>
             <ContentView>{children}</ContentView>
         </ContainerView>

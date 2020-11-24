@@ -4,16 +4,18 @@ import { PickerProps } from 'react-native'
 import { ContainerView, TitleText, PickerView, ContainerPicker } from './styles'
 
 export interface DropdownProps extends PickerProps {
+    defaultValue?: string
     title?: string
     children?: JSX.Element[]
 }
 
 const Dropdown: React.FC<DropdownProps> = ({
+    defaultValue,
     title,
     children,
     ...rest
 }: DropdownProps): JSX.Element => {
-    const [value, setValue] = useState('')
+    const [value, setValue] = useState(defaultValue)
 
     return (
         //#region JSX

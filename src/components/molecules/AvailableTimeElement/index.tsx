@@ -1,61 +1,76 @@
 import React from 'react'
+import { StyleProp, TouchableWithoutFeedback, ViewStyle } from 'react-native'
 
 import { Picker } from '@react-native-community/picker'
 
-import { ContainerView, TimeView } from './styles'
+import {
+    ContainerView,
+    TimeView,
+    DeleteView,
+    DeleteText,
+    DeleteLine
+} from './styles'
 
+import { WeekDay } from '../../../utils/date'
+import TimePicker from '../../atoms/DatePicker'
 import Dropdown from '../../atoms/Dropdown'
 
-const AvailableTimeElement: React.FC = (): JSX.Element => {
+export interface TimeProps {
+    readonly weekDay?: WeekDay
+    readonly from?: Date
+    readonly to?: Date
+}
+
+export interface AvailableTimeElementProps extends TimeProps {
+    readonly style?: StyleProp<ViewStyle>
+    readonly displayDeleteButton?: boolean
+    onClickDeleteButton?(): void
+}
+
+const AvailableTimeElement: React.FC<AvailableTimeElementProps> = ({
+    style,
+    weekDay = WeekDay.MONDAY,
+    displayDeleteButton = true,
+    onClickDeleteButton
+}: AvailableTimeElementProps): JSX.Element => {
     return (
         //#region JSX
 
-        <ContainerView>
-            <Dropdown title="Dia da semana">
-                <Picker.Item label="Segunda-feira" value="Segunda-feira" />
-                <Picker.Item label="Terça-feira" value="Terça-feira" />
-                <Picker.Item label="Quarta-feira" value="Quarta-feira" />
-                <Picker.Item label="Quinta-feira" value="Quinta-feira" />
-                <Picker.Item label="Sexta-feira" value="Sexta-feira" />
+        <ContainerView style={style}>
+            <Dropdown title="Dia da semana" defaultValue={weekDay}>
+                <Picker.Item label={WeekDay.MONDAY} value={WeekDay.MONDAY} />
+                <Picker.Item label={WeekDay.TUESDAY} value={WeekDay.TUESDAY} />
+                <Picker.Item
+                    label={WeekDay.WEDNESDAY}
+                    value={WeekDay.WEDNESDAY}
+                />
+                <Picker.Item
+                    label={WeekDay.THURSDAY}
+                    value={WeekDay.THURSDAY}
+                />
+                <Picker.Item label={WeekDay.FRIDAY} value={WeekDay.FRIDAY} />
             </Dropdown>
             <TimeView>
-                <Dropdown
-                    style={{ flex: 1, marginRight: 10 }}
-                    title="Dia da semana"
-                >
-                    <Picker.Item label="6 horas" value={6} />
-                    <Picker.Item label="7 horas" value={7} />
-                    <Picker.Item label="8 horas" value={8} />
-                    <Picker.Item label="9 horas" value={9} />
-                    <Picker.Item label="10 horas" value={10} />
-                    <Picker.Item label="10 horas" value={11} />
-                    <Picker.Item label="10 horas" value={12} />
-                    <Picker.Item label="10 horas" value={13} />
-                    <Picker.Item label="10 horas" value={14} />
-                    <Picker.Item label="10 horas" value={15} />
-                    <Picker.Item label="10 horas" value={16} />
-                    <Picker.Item label="10 horas" value={17} />
-                    <Picker.Item label="10 horas" value={18} />
-                </Dropdown>
-                <Dropdown
-                    style={{ flex: 1, marginLeft: 10 }}
-                    title="Dia da semana"
-                >
-                    <Picker.Item label="6 horas" value={6} />
-                    <Picker.Item label="7 horas" value={7} />
-                    <Picker.Item label="8 horas" value={8} />
-                    <Picker.Item label="9 horas" value={9} />
-                    <Picker.Item label="10 horas" value={10} />
-                    <Picker.Item label="10 horas" value={11} />
-                    <Picker.Item label="10 horas" value={12} />
-                    <Picker.Item label="10 horas" value={13} />
-                    <Picker.Item label="10 horas" value={14} />
-                    <Picker.Item label="10 horas" value={15} />
-                    <Picker.Item label="10 horas" value={16} />
-                    <Picker.Item label="10 horas" value={17} />
-                    <Picker.Item label="10 horas" value={18} />
-                </Dropdown>
+                <TimePicker
+                    title="Das"
+                    style={{ marginRight: 10, height: 85 }}
+                    containerStyle={{ borderRadius: 8 }}
+                />
+                <TimePicker
+                    title="Até"
+                    style={{ marginLeft: 10, height: 85 }}
+                    containerStyle={{ borderRadius: 8 }}
+                />
             </TimeView>
+            {displayDeleteButton && (
+                <TouchableWithoutFeedback onPress={onClickDeleteButton}>
+                    <DeleteView>
+                        <DeleteLine />
+                        <DeleteText>Excluir horário</DeleteText>
+                        <DeleteLine />
+                    </DeleteView>
+                </TouchableWithoutFeedback>
+            )}
         </ContainerView>
 
         //#endregion
