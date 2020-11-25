@@ -90,6 +90,9 @@ const LandingPage: React.FC = (): JSX.Element => {
                     </LandingButton>
                     <LandingButton
                         title="Dar aulas"
+                        onPress={() => {
+                            navigation.push('GiveClassesPage')
+                        }}
                         style={{
                             flex: 1,
                             backgroundColor: '#04D361',
