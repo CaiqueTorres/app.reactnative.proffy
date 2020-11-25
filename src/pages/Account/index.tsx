@@ -4,6 +4,8 @@ import { Image } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
+import useStateAndCheck from '../../hooks/useStateAndCheck'
+
 import { AppStackParamsList } from '../../routes/AppStack'
 
 import {
@@ -20,16 +22,45 @@ import {
 
 import Button from '../../components/atoms/Button'
 import Header from '../../components/atoms/Header'
-import AvailableTimeElement from '../../components/molecules/AvailableTimeElement'
+import AvailableTimeElement, {
+    TimeProps
+} from '../../components/molecules/AvailableTimeElement'
 import AvailableTimesList from '../../components/organisms/AvailableTimesList'
 
 import backgroundImage from '../../assets/images/login/login-page-background.png'
 import photoImage from '../../assets/images/profile.jpg'
+import uuid from 'uuid-random'
 
+/**
+ * The app's account page
+ */
 const AccountPage: React.FC = (): JSX.Element => {
     const navigation = useNavigation<
         StackNavigationProp<AppStackParamsList, 'AccountPage'>
     >()
+
+    const [, setName, hasChangedName] = useStateAndCheck('')
+    const [, setLastName, hasChangedLastName] = useStateAndCheck('')
+    const [, setEmail, hasChangedEmail] = useStateAndCheck('')
+    const [, setWhatsapp, hasChangedWhatsapp] = useStateAndCheck('')
+    const [, setAbout, hasChangedAbout] = useStateAndCheck('')
+    const [, setSubject, hasChangedSubject] = useStateAndCheck('')
+    const [, setCost, hasChangedCost] = useStateAndCheck(0)
+    const [
+        timePropsList,
+        setTimePropsList,
+        hasChangedTimePropsList
+    ] = useStateAndCheck<TimeProps[]>([])
+
+    const enableButton =
+        hasChangedName ||
+        hasChangedLastName ||
+        hasChangedEmail ||
+        hasChangedWhatsapp ||
+        hasChangedAbout ||
+        hasChangedSubject ||
+        hasChangedCost ||
+        hasChangedTimePropsList
 
     return (
         //#region JSX
@@ -62,41 +93,74 @@ const AccountPage: React.FC = (): JSX.Element => {
                     <UserDataTextInput
                         title="Nome"
                         viewStyle={{ marginVertical: 20 }}
+                        onChangeText={setName}
                     />
                     <UserDataTextInput
                         title="Sobrenome"
                         viewStyle={{ marginVertical: 20 }}
+                        onChangeText={setLastName}
                     />
                     <UserDataTextInput
                         title="E-mail"
                         keyboardType="email-address"
                         viewStyle={{ marginVertical: 20 }}
+                        onChangeText={setEmail}
                     />
                     <UserDataTextInput
                         title="Whatsapp"
                         keyboardType="phone-pad"
                         viewStyle={{ marginVertical: 20 }}
+                        onChangeText={setWhatsapp}
                     />
                     <UserDataTextInput
                         multiline
-                        title="Whatsapp"
+                        title="Sobre"
                         viewStyle={{ marginVertical: 20 }}
+                        onChangeText={setAbout}
                     />
                     <UserDataTitleText>Sobre a aula</UserDataTitleText>
                     <UserDataTextInput
                         title="Matéria"
                         viewStyle={{ marginVertical: 20 }}
+                        onChangeText={setSubject}
                     />
                     <UserDataTextInput
                         title="Custo da sua hora por aula"
                         keyboardType="decimal-pad"
                         viewStyle={{ marginVertical: 20 }}
+                        onChangeText={(newText: string) =>
+                            setCost(Number(newText))
+                        }
                     />
-                    <AvailableTimesList>
-                        <AvailableTimeElement />
+                    <AvailableTimesList
+                        onClickedNewButton={() => {
+                            setTimePropsList([...timePropsList, { id: uuid() }])
+                        }}
+                    >
+                        {timePropsList.map((element: TimeProps) => {
+                            const { id, ...rest } = element
+                            return (
+                                <AvailableTimeElement
+                                    key={id}
+                                    onClickDeleteButton={() => {
+                                        setTimePropsList(
+                                            timePropsList.filter(
+                                                (timeProps: TimeProps) =>
+                                                    timeProps.id != id
+                                            )
+                                        )
+                                    }}
+                                    style={{
+                                        height: 240,
+                                        marginVertical: 10
+                                    }}
+                                    {...rest}
+                                />
+                            )
+                        })}
                     </AvailableTimesList>
                     <Button
-                        enabled
+                        enabled={enableButton}
                         enabledColor="#04D361"
                         text="Salvar alterações"
                         style={{
