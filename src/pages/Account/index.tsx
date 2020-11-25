@@ -1,5 +1,4 @@
 import React from 'react'
-import { Image } from 'react-native'
 
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
@@ -22,13 +21,13 @@ import {
 
 import Button from '../../components/atoms/Button'
 import Header from '../../components/atoms/Header'
+import ProfileImage from '../../components/atoms/ProfileImage'
 import AvailableTimeElement, {
     TimeProps
 } from '../../components/molecules/AvailableTimeElement'
 import AvailableTimesList from '../../components/organisms/AvailableTimesList'
 
 import backgroundImage from '../../assets/images/login/login-page-background.png'
-import photoImage from '../../assets/images/profile.jpg'
 import uuid from 'uuid-random'
 
 /**
@@ -39,6 +38,7 @@ const AccountPage: React.FC = (): JSX.Element => {
         StackNavigationProp<AppStackParamsList, 'AccountPage'>
     >()
 
+    const [, setImage, hasChangedImage] = useStateAndCheck('')
     const [, setName, hasChangedName] = useStateAndCheck('')
     const [, setLastName, hasChangedLastName] = useStateAndCheck('')
     const [, setEmail, hasChangedEmail] = useStateAndCheck('')
@@ -53,6 +53,7 @@ const AccountPage: React.FC = (): JSX.Element => {
     ] = useStateAndCheck<TimeProps[]>([])
 
     const enableButton =
+        hasChangedImage ||
         hasChangedName ||
         hasChangedLastName ||
         hasChangedEmail ||
@@ -76,14 +77,7 @@ const AccountPage: React.FC = (): JSX.Element => {
             <ContainerScrollView>
                 <DetailsView>
                     <DetailsImageBackground source={backgroundImage}>
-                        <Image
-                            source={photoImage}
-                            style={{
-                                width: 175,
-                                height: 175,
-                                borderRadius: 100
-                            }}
-                        />
+                        <ProfileImage onChangedImage={setImage} />
                         <DetailsTitleText>Caique Torres</DetailsTitleText>
                         <DetailsSubtitleText>Física</DetailsSubtitleText>
                     </DetailsImageBackground>
