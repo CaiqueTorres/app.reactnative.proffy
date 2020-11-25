@@ -32,7 +32,7 @@ import logoImage from '../../assets/images/logo.png'
 import { validateEmail } from '../../utils/validationFunctions'
 
 /**
- * The app's forgot page
+ * The app's forgot password page
  */
 const ForgotPasswordPage: React.FC = (): JSX.Element => {
     const navigation = useNavigation<
