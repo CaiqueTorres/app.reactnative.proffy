@@ -22,12 +22,18 @@ export interface TimeProps {
     readonly to?: Date
 }
 
+/**
+ * Tha app's main available time element properties
+ */
 export interface AvailableTimeElementProps extends TimeProps {
     readonly style?: StyleProp<ViewStyle>
     readonly displayDeleteButton?: boolean
     onClickDeleteButton?(): void
 }
 
+/**
+ * The app's main available time element
+ */
 const AvailableTimeElement: React.FC<AvailableTimeElementProps> = ({
     style,
     weekDay = WeekDay.MONDAY,

@@ -31,6 +31,9 @@ import backgroundImage from '../../assets/images/login/login-page-background.png
 import photoImage from '../../assets/images/profile.jpg'
 import uuid from 'uuid-random'
 
+/**
+ * The app's account page
+ */
 const AccountPage: React.FC = (): JSX.Element => {
     const navigation = useNavigation<
         StackNavigationProp<AppStackParamsList, 'AccountPage'>

@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { TouchableWithoutFeedback } from 'react-native'
 
-import { ContainerView, ToggleView } from './styles'
-
 import useToggle from '../../../hooks/useToggle'
+
+import { ContainerView, ToggleView } from './styles'
 
 /**
  * The main app's checkbox component properties

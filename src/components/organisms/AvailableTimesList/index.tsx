@@ -9,11 +9,18 @@ import {
     ContentView
 } from './styles'
 
+/**
+ * The app's main available times list properties
+ */
 export interface AvailableTimesListProps {
     onClickedNewButton?(): void
     children?: JSX.Element[] | JSX.Element
 }
 
+/**
+ * The app's main available times list
+ * It is used in the Account page and in the GiveClass page
+ */
 const AvailableTimesList: React.FC<AvailableTimesListProps> = ({
     onClickedNewButton,
     children
