@@ -5,7 +5,7 @@ import { StackNavigationProp } from '@react-navigation/stack'
 
 import { StatusBar } from 'expo-status-bar'
 
-import { AppStackParamsList } from '../../routes/AppStack'
+import { AppStackParamsList } from '../../routes/appStack'
 
 import {
     ContainerView,

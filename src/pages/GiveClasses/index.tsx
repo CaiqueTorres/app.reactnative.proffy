@@ -4,7 +4,7 @@ import { ScrollView } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
-import { AppStackParamsList } from '../../routes/AppStack'
+import { AppStackParamsList } from '../../routes/appStack'
 
 import {
     ContainerSafeAreaView,

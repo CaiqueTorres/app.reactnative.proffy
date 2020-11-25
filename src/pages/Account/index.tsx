@@ -5,7 +5,7 @@ import { StackNavigationProp } from '@react-navigation/stack'
 
 import useStateAndCheck from '../../hooks/useStateAndCheck'
 
-import { AppStackParamsList } from '../../routes/AppStack'
+import { AppStackParamsList } from '../../routes/appStack'
 
 import {
     ContainerSafeAreaView,

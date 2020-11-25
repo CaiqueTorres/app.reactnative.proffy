@@ -14,7 +14,7 @@ import {
 import { AppLoading } from 'expo'
 import { useFonts } from 'expo-font'
 
-import AppStack from './src/routes/AppStack'
+import AppStack from './src/routes/appStack'
 
 export default function App(): JSX.Element {
     const [fontsLoaded] = useFonts({
