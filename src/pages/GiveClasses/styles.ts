@@ -3,9 +3,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import TextInput from '../../components/atoms/TextInput'
 import styled from 'styled-components/native'
 
-export const ContainerSafeAreaView = styled(SafeAreaView)`
-    flex: 1;
-`
+export const ContainerSafeAreaView = styled(SafeAreaView)``
 
 export const DetailsView = styled.View`
     height: 243px;

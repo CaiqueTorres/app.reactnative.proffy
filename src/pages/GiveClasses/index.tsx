@@ -42,7 +42,11 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
                     navigation.pop()
                 }}
             />
-            <ScrollView>
+            <ScrollView
+                style={{
+                    width: '100%'
+                }}
+            >
                 <DetailsView>
                     <DetailsTitleText>
                         Que incrível que você quer dar aulas.
