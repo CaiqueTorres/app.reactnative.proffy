@@ -52,3 +52,27 @@ export const UserDataTextInput = styled(TextInput)`
     max-height: 800px;
     min-height: 65px;
 `
+
+export const FooterView = styled.View`
+    margin-top: 10px;
+    flex-direction: row;
+    align-items: center;
+`
+
+export const FooterTextsView = styled.View`
+    margin-left: 20px;
+`
+
+export const FooterTitleText = styled.Text`
+    color: #8257e5;
+    font-size: 12px;
+    line-height: 20px;
+    font-family: Poppins_400Regular;
+`
+
+export const FooterDescriptionText = styled.Text`
+    color: #a0a0b2;
+    font-size: 12px;
+    line-height: 20px;
+    font-family: Poppins_400Regular;
+`
