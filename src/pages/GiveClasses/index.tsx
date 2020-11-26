@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { ScrollView } from 'react-native'
 
+import { AntDesign } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
@@ -13,7 +14,11 @@ import {
     DetailsDescriptionText,
     UserDataView,
     UserDataTitleText,
-    UserDataTextInput
+    UserDataTextInput,
+    FooterView,
+    FooterTextsView,
+    FooterTitleText,
+    FooterDescriptionText
 } from './styles'
 
 import Button from '../../components/atoms/Button'
@@ -113,7 +118,24 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
                             height: 65,
                             marginVertical: 10
                         }}
+                        onPress={() => {
+                            navigation.push('SuccessPage', {
+                                title: 'Cadastro Salvo!',
+                                subtitle:
+                                    'Tudo certo, seu cadastro está na nossa lista de professores. Agora é só ficar de olho no seu WhatsApp.',
+                                buttonTitle: 'Ir para o ínicio'
+                            })
+                        }}
                     />
+                    <FooterView>
+                        <AntDesign name="warning" size={33} color="#8257E5" />
+                        <FooterTextsView>
+                            <FooterTitleText>Importante!</FooterTitleText>
+                            <FooterDescriptionText>
+                                Preencha todos os dados
+                            </FooterDescriptionText>
+                        </FooterTextsView>
+                    </FooterView>
                 </UserDataView>
             </ScrollView>
         </ContainerSafeAreaView>
