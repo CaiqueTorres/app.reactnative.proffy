@@ -28,6 +28,10 @@ import AvailableTimeElement, {
 } from '../../components/molecules/AvailableTimeElement'
 import AvailableTimesList from '../../components/organisms/AvailableTimesList'
 
+import {
+    isStringEmpty,
+    validateTimePropsList
+} from '../../utils/validationFunctions'
 import uuid from 'uuid-random'
 
 const GiveClassesPage: React.FC = (): JSX.Element => {
@@ -35,7 +39,18 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
         StackNavigationProp<AppStackParamsList, 'GiveClassesPage'>
     >()
 
+    const [whatsapp, setWhatsapp] = useState('')
+    const [about, setAbout] = useState('')
+    const [subject, setSubject] = useState('')
+    const [cost, setCost] = useState<number | undefined>(undefined)
     const [timePropsList, setTimePropsList] = useState<TimeProps[]>([])
+
+    const enabled =
+        !isStringEmpty(whatsapp) &&
+        !isStringEmpty(about) &&
+        !isStringEmpty(subject) &&
+        cost != undefined &&
+        validateTimePropsList(timePropsList)
 
     return (
         //#region JSX
@@ -67,21 +82,27 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
                         title="Whatsapp"
                         keyboardType="phone-pad"
                         viewStyle={{ marginVertical: 20 }}
+                        onChangeText={setWhatsapp}
                     />
                     <UserDataTextInput
                         multiline
                         title="Sobre"
                         viewStyle={{ marginVertical: 20 }}
+                        onChangeText={setAbout}
                     />
                     <UserDataTitleText>Sobre a aula</UserDataTitleText>
                     <UserDataTextInput
                         title="Matéria"
                         viewStyle={{ marginVertical: 20 }}
+                        onChangeText={setSubject}
                     />
                     <UserDataTextInput
                         title="Custo da sua hora por aula"
                         keyboardType="decimal-pad"
                         viewStyle={{ marginVertical: 20 }}
+                        onChangeText={(text: string) => {
+                            setCost(Number(text))
+                        }}
                     />
                     <AvailableTimesList
                         onClickedNewButton={() => {
@@ -111,7 +132,7 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
                         })}
                     </AvailableTimesList>
                     <Button
-                        enabled
+                        enabled={enabled}
                         enabledColor="#04D361"
                         text="Salvar cadastro"
                         style={{
