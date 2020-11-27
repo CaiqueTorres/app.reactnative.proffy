@@ -34,6 +34,9 @@ import {
 } from '../../utils/validationFunctions'
 import uuid from 'uuid-random'
 
+/**
+ * Tha main app's give classes page
+ */
 const GiveClassesPage: React.FC = (): JSX.Element => {
     const navigation = useNavigation<
         StackNavigationProp<AppStackParamsList, 'GiveClassesPage'>
