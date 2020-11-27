@@ -1,8 +1,10 @@
+import { TimeProps } from '../components/molecules/AvailableTimeElement'
+
 /**
  * Function that can validate if a text is null or empty
  * @param text stores the text string
  */
-export function isTextEmpty(text: string): boolean {
+export function isStringEmpty(text: string): boolean {
     return text.length === 0
 }
 
@@ -21,4 +23,18 @@ export function validateEmail(email: string): boolean {
  */
 export function validatePassword(password: string): boolean {
     return password.length >= 6
+}
+
+/**
+ * Function that can validate the time props list
+ * It checks if the list is empty of some field is undefined or null
+ * @param timePropsList stores the TimeProps array
+ */
+export function validateTimePropsList(timePropsList: TimeProps[]): boolean {
+    return (
+        timePropsList.length != 0 &&
+        timePropsList.every((timeProps) => {
+            return !!timeProps.to && !!timeProps.from
+        })
+    )
 }

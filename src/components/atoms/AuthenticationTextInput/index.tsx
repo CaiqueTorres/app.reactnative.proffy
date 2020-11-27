@@ -19,7 +19,7 @@ import {
     PlaceholderText
 } from './styles'
 
-import { isTextEmpty } from '../../../utils/validationFunctions'
+import { isStringEmpty } from '../../../utils/validationFunctions'
 
 /**
  * The authentication text input props
@@ -105,7 +105,7 @@ const AuthenticationTextInput: React.FC<AuthenticationTextInputProps> = ({
      * block the user changing the value
      */
     function animate(value: boolean): void {
-        if (!isTextEmpty(text)) return
+        if (!isStringEmpty(text)) return
 
         if (value) {
             Animated.parallel([

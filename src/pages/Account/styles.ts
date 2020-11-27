@@ -44,7 +44,7 @@ export const DetailsSubtitleText = styled.Text`
 export const UserDataView = styled.View`
     background: #fff;
     padding: 20px 30px;
-    width: 95%;
+    width: 90%;
     align-self: center;
     border-radius: 10px;
     border: 2px solid #e6e6f0;

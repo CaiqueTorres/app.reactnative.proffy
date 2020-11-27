@@ -8,7 +8,7 @@ import { StackNavigationProp } from '@react-navigation/stack'
 
 import { StatusBar } from 'expo-status-bar'
 
-import { AppStackParamsList } from '../../routes/AppStack'
+import { AppStackParamsList } from '../../routes/appStack'
 
 import {
     ContainerSafeAreaView,
@@ -90,6 +90,9 @@ const LandingPage: React.FC = (): JSX.Element => {
                     </LandingButton>
                     <LandingButton
                         title="Dar aulas"
+                        onPress={() => {
+                            navigation.push('GiveClassesPage')
+                        }}
                         style={{
                             flex: 1,
                             backgroundColor: '#04D361',

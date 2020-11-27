@@ -5,7 +5,7 @@ import { StackNavigationProp } from '@react-navigation/stack'
 
 import useStateAndCheck from '../../hooks/useStateAndCheck'
 
-import { AppStackParamsList } from '../../routes/AppStack'
+import { AppStackParamsList } from '../../routes/appStack'
 
 import {
     ContainerSafeAreaView,
@@ -21,13 +21,13 @@ import {
 
 import Button from '../../components/atoms/Button'
 import Header from '../../components/atoms/Header'
-import ProfileImage from '../../components/atoms/ProfileImage'
 import AvailableTimeElement, {
     TimeProps
 } from '../../components/molecules/AvailableTimeElement'
 import AvailableTimesList from '../../components/organisms/AvailableTimesList'
 
 import backgroundImage from '../../assets/images/login/login-page-background.png'
+import ProfileImage from './ProfileImage'
 import uuid from 'uuid-random'
 
 /**
