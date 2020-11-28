@@ -8,8 +8,6 @@ import { StackNavigationProp } from '@react-navigation/stack'
 
 import { StatusBar } from 'expo-status-bar'
 
-import { AppStackParamsList } from '../../routes/appStack'
-
 import {
     ContainerSafeAreaView,
     LogoView,
@@ -32,6 +30,7 @@ import landingImage from '../../assets/images/landing.png'
 import giveClassesIcon from '../../assets/images/onboarding/give-classes.png'
 import studyIcon from '../../assets/images/onboarding/study.png'
 import profileImage from '../../assets/images/profile.jpg'
+import { AppStackParamsList } from '../../navigations/appStack'
 import LandingButton from './LandingButton'
 
 /**

@@ -5,8 +5,6 @@ import { AntDesign } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
-import { AppStackParamsList } from '../../routes/appStack'
-
 import {
     ContainerSafeAreaView,
     DetailsView,
@@ -29,6 +27,7 @@ import Header from '../../components/atoms/Header'
 import AvailableTimeElement from '../../components/molecules/AvailableTimeElement'
 
 import { TimeProps } from '../../api/time'
+import { AppStackParamsList } from '../../navigations/appStack'
 import { isStringEmpty, validateTimePropsList } from '../../utils/validation'
 import uuid from 'uuid-random'
 

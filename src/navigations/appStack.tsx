@@ -43,7 +43,7 @@ const config: TransitionSpec = {
 /**
  * The app stack component that stores the main app navigation logic
  */
-export default function AppStack(): JSX.Element {
+const AppStack: React.FC = (): JSX.Element => {
     return (
         //#region JSX
 
@@ -79,3 +79,5 @@ export default function AppStack(): JSX.Element {
         //#endregion
     )
 }
+
+export default AppStack
