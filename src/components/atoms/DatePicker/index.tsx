@@ -14,29 +14,33 @@ export interface TimePickerProps {
     readonly initialDate?: Date
     readonly style?: StyleProp<ViewStyle>
     readonly containerStyle?: StyleProp<ViewStyle>
+    onChangeDateTime?(selectedDate: Date | undefined): void
 }
 
 const TimePicker: React.FC<TimePickerProps> = ({
     title,
     initialDate = new Date(),
     style,
-    containerStyle
+    containerStyle,
+    onChangeDateTime
 }: TimePickerProps): JSX.Element => {
     const [dateText, setDateText] = useState('')
     const [date, setDate] = useState(initialDate)
     const [active, toggleValue] = useToggle(false)
 
-    function onChangeDateTime(
+    //#region Functions
+
+    function handleOnChange(
         _event: Event,
         selectedDate: Date | undefined
     ): void {
         toggleValue()
-        if (selectedDate) {
-            setDateText(formatDate(selectedDate))
-        }
-
+        if (selectedDate) setDateText(formatDate(selectedDate))
+        if (onChangeDateTime) onChangeDateTime(selectedDate)
         setDate(selectedDate || date)
     }
+
+    //#endregion
 
     return (
         //#region JSX
@@ -53,7 +57,7 @@ const TimePicker: React.FC<TimePickerProps> = ({
                     is24Hour
                     mode="time"
                     value={date}
-                    onChange={onChangeDateTime}
+                    onChange={handleOnChange}
                 />
             )}
         </ContainerView>
