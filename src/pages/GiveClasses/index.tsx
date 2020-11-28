@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ScrollView } from 'react-native'
+import { ScrollView, TouchableWithoutFeedback } from 'react-native'
 
 import { AntDesign } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
@@ -18,16 +18,17 @@ import {
     FooterView,
     FooterTextsView,
     FooterTitleText,
-    FooterDescriptionText
+    FooterDescriptionText,
+    HeaderView,
+    NewText,
+    TitleText
 } from './styles'
 
 import Button from '../../components/atoms/Button'
 import Header from '../../components/atoms/Header'
-import AvailableTimeElement, {
-    TimeProps
-} from '../../components/molecules/AvailableTimeElement'
-import AvailableTimesList from '../../components/organisms/AvailableTimesList'
+import AvailableTimeElement from '../../components/molecules/AvailableTimeElement'
 
+import { TimeProps } from '../../api/time'
 import { isStringEmpty, validateTimePropsList } from '../../utils/validation'
 import uuid from 'uuid-random'
 
@@ -104,11 +105,20 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
                             setCost(Number(text))
                         }}
                     />
-                    <AvailableTimesList
-                        onClickedNewButton={() => {
-                            setTimePropsList([...timePropsList, { id: uuid() }])
-                        }}
-                    >
+                    <>
+                        <HeaderView>
+                            <TitleText>Horários disponíveis</TitleText>
+                            <TouchableWithoutFeedback
+                                onPress={() => {
+                                    setTimePropsList([
+                                        ...timePropsList,
+                                        { id: uuid() }
+                                    ])
+                                }}
+                            >
+                                <NewText>+ Novo</NewText>
+                            </TouchableWithoutFeedback>
+                        </HeaderView>
                         {timePropsList.map((element: TimeProps) => {
                             const { id, ...rest } = element
                             return (
@@ -118,7 +128,7 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
                                         setTimePropsList(
                                             timePropsList.filter(
                                                 (timeProps: TimeProps) =>
-                                                    timeProps.id != id
+                                                    timeProps.id !== id
                                             )
                                         )
                                     }}
@@ -130,7 +140,8 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
                                 />
                             )
                         })}
-                    </AvailableTimesList>
+                    </>
+
                     <Button
                         enabled={enabled}
                         enabledColor="#04D361"
