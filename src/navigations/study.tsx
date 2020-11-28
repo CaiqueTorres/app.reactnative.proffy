@@ -5,6 +5,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import FavoritesPage from '../pages/Favorites'
 import ProffysPage from '../pages/Proffys'
 
+/**
+ * The study tab navigation params
+ */
 export type StudyTabNavigationParamsList = {
     readonly ProffysPage: undefined
     readonly FavoritesPage: undefined
@@ -12,6 +15,9 @@ export type StudyTabNavigationParamsList = {
 
 const Tab = createBottomTabNavigator<StudyTabNavigationParamsList>()
 
+/**
+ * The navigation component of the study flow (proffy and favorites page)
+ */
 const StudyTabNavigation: React.FC = (): JSX.Element => {
     return (
         //#region JSX
