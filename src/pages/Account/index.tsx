@@ -1,4 +1,5 @@
 import React from 'react'
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
@@ -16,16 +17,17 @@ import {
     DetailsSubtitleText,
     UserDataView,
     UserDataTitleText,
-    UserDataTextInput
+    UserDataTextInput,
+    HeaderView,
+    TitleText,
+    NewText
 } from './styles'
 
 import Button from '../../components/atoms/Button'
 import Header from '../../components/atoms/Header'
-import AvailableTimeElement, {
-    TimeProps
-} from '../../components/molecules/AvailableTimeElement'
-import AvailableTimesList from '../../components/organisms/AvailableTimesList'
+import AvailableTimeElement from '../../components/molecules/AvailableTimeElement'
 
+import { TimeProps } from '../../api/time'
 import backgroundImage from '../../assets/images/login/login-page-background.png'
 import ProfileImage from './ProfileImage'
 import uuid from 'uuid-random'
@@ -45,14 +47,16 @@ const AccountPage: React.FC = (): JSX.Element => {
     const [, setWhatsapp, hasChangedWhatsapp] = useStateAndCheck('')
     const [, setAbout, hasChangedAbout] = useStateAndCheck('')
     const [, setSubject, hasChangedSubject] = useStateAndCheck('')
-    const [, setCost, hasChangedCost] = useStateAndCheck(0)
+    const [, setCost, hasChangedCost] = useStateAndCheck<number | undefined>(
+        undefined
+    )
     const [
         timePropsList,
         setTimePropsList,
         hasChangedTimePropsList
     ] = useStateAndCheck<TimeProps[]>([])
 
-    const enableButton =
+    const validUserData =
         hasChangedImage ||
         hasChangedName ||
         hasChangedLastName ||
@@ -126,11 +130,20 @@ const AccountPage: React.FC = (): JSX.Element => {
                             setCost(Number(newText))
                         }
                     />
-                    <AvailableTimesList
-                        onClickedNewButton={() => {
-                            setTimePropsList([...timePropsList, { id: uuid() }])
-                        }}
-                    >
+                    <>
+                        <HeaderView>
+                            <TitleText>Horários disponíveis</TitleText>
+                            <TouchableWithoutFeedback
+                                onPress={() => {
+                                    setTimePropsList([
+                                        ...timePropsList,
+                                        { id: uuid() }
+                                    ])
+                                }}
+                            >
+                                <NewText>+ Novo</NewText>
+                            </TouchableWithoutFeedback>
+                        </HeaderView>
                         {timePropsList.map((element: TimeProps) => {
                             const { id, ...rest } = element
                             return (
@@ -140,7 +153,7 @@ const AccountPage: React.FC = (): JSX.Element => {
                                         setTimePropsList(
                                             timePropsList.filter(
                                                 (timeProps: TimeProps) =>
-                                                    timeProps.id != id
+                                                    timeProps.id !== id
                                             )
                                         )
                                     }}
@@ -152,9 +165,10 @@ const AccountPage: React.FC = (): JSX.Element => {
                                 />
                             )
                         })}
-                    </AvailableTimesList>
+                    </>
+
                     <Button
-                        enabled={enableButton}
+                        enabled={validUserData}
                         enabledColor="#04D361"
                         text="Salvar alterações"
                         style={{

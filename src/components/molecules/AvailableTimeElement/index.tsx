@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StyleProp, TouchableWithoutFeedback, ViewStyle } from 'react-native'
 
 import { Picker } from '@react-native-community/picker'
@@ -22,6 +22,7 @@ export interface AvailableTimeElementProps extends TimeProps {
     readonly style?: StyleProp<ViewStyle>
     readonly displayDeleteButton?: boolean
     onClickDeleteButton?(): void
+    onChangedValue?(time: TimeProps): void
 }
 
 /**
@@ -31,13 +32,23 @@ const AvailableTimeElement: React.FC<AvailableTimeElementProps> = ({
     style,
     weekDay = WeekDay.MONDAY,
     displayDeleteButton = true,
-    onClickDeleteButton
+    onClickDeleteButton,
+    onChangedValue
 }: AvailableTimeElementProps): JSX.Element => {
+    const [time, setTime] = useState<TimeProps>({ weekDay })
+
     return (
         //#region JSX
 
         <ContainerView style={style}>
-            <Dropdown title="Dia da semana" defaultValue={weekDay}>
+            <Dropdown
+                title="Dia da semana"
+                defaultValue={weekDay}
+                onValueChange={(itemValue: WeekDay) => {
+                    setTime({ ...time, weekDay: itemValue })
+                    if (onChangedValue) onChangedValue(time)
+                }}
+            >
                 <Picker.Item label={WeekDay.MONDAY} value={WeekDay.MONDAY} />
                 <Picker.Item label={WeekDay.TUESDAY} value={WeekDay.TUESDAY} />
                 <Picker.Item
@@ -55,11 +66,19 @@ const AvailableTimeElement: React.FC<AvailableTimeElementProps> = ({
                     title="Das"
                     style={{ marginRight: 10, height: 85 }}
                     containerStyle={{ borderRadius: 8 }}
+                    onChangeDateTime={(selectedDate: Date | undefined) => {
+                        setTime({ ...time, from: selectedDate })
+                        if (onChangedValue) onChangedValue(time)
+                    }}
                 />
                 <TimePicker
                     title="Até"
                     style={{ marginLeft: 10, height: 85 }}
                     containerStyle={{ borderRadius: 8 }}
+                    onChangeDateTime={(selectedDate: Date | undefined) => {
+                        setTime({ ...time, to: selectedDate })
+                        if (onChangedValue) onChangedValue(time)
+                    }}
                 />
             </TimeView>
             {displayDeleteButton && (
