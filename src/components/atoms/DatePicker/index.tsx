@@ -9,6 +9,9 @@ import { ContainerView, TitleText, TimeView, TimeText } from './styles'
 
 import { formatDate } from '../../../utils/date'
 
+/**
+ * The main app's date picker properties
+ */
 export interface TimePickerProps {
     readonly title: string
     readonly initialDate?: Date
@@ -17,6 +20,9 @@ export interface TimePickerProps {
     onChangeDateTime?(selectedDate: Date | undefined): void
 }
 
+/**
+ * The main app's date picker
+ */
 const TimePicker: React.FC<TimePickerProps> = ({
     title,
     initialDate = new Date(),
@@ -30,6 +36,11 @@ const TimePicker: React.FC<TimePickerProps> = ({
 
     //#region Functions
 
+    /**
+     * Function that can set the component's date and call the property onChangeDateTime
+     * @param _event stores the date-time-picker event
+     * @param selectedDate stores the current selected date
+     */
     function handleOnChange(
         _event: Event,
         selectedDate: Date | undefined
