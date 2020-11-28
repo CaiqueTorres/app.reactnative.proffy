@@ -21,10 +21,7 @@ import {
 import AuthenticationTextInput from '../../../components/atoms/AuthenticationTextInput'
 import Button from '../../../components/atoms/Button'
 
-import {
-    validateEmail,
-    validatePassword
-} from '../../../utils/validationFunctions'
+import { validateEmail, validatePassword } from '../../../utils/validation'
 import SignUpHeader from '../Header'
 
 /**

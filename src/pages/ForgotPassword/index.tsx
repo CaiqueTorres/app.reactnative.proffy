@@ -29,7 +29,7 @@ import Button from '../../components/atoms/Button'
 
 import loginPageBackgroundImage from '../../assets/images/login/login-page-background.png'
 import logoImage from '../../assets/images/logo.png'
-import { validateEmail } from '../../utils/validationFunctions'
+import { validateEmail } from '../../utils/validation'
 
 /**
  * The app's forgot password page

@@ -1,4 +1,4 @@
-import { TimeProps } from '../components/molecules/AvailableTimeElement'
+import { TimeProps } from '../api/time'
 
 /**
  * Function that can validate if a text is null or empty

@@ -21,7 +21,7 @@ import {
 import AuthenticationTextInput from '../../../components/atoms/AuthenticationTextInput'
 import Button from '../../../components/atoms/Button'
 
-import { isStringEmpty } from '../../../utils/validationFunctions'
+import { isStringEmpty } from '../../../utils/validation'
 import SignUpHeader from '../Header'
 
 /**

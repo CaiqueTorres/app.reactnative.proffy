@@ -28,10 +28,7 @@ import AvailableTimeElement, {
 } from '../../components/molecules/AvailableTimeElement'
 import AvailableTimesList from '../../components/organisms/AvailableTimesList'
 
-import {
-    isStringEmpty,
-    validateTimePropsList
-} from '../../utils/validationFunctions'
+import { isStringEmpty, validateTimePropsList } from '../../utils/validation'
 import uuid from 'uuid-random'
 
 /**

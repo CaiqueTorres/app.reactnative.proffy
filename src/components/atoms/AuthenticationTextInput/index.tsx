@@ -19,7 +19,7 @@ import {
     PlaceholderText
 } from './styles'
 
-import { isStringEmpty } from '../../../utils/validationFunctions'
+import { isStringEmpty } from '../../../utils/validation'
 
 /**
  * The authentication text input props

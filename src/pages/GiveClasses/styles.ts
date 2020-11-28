@@ -1,7 +1,5 @@
 import { SafeAreaView } from 'react-native-safe-area-context'
 
-import { Poppins_400Regular } from '@expo-google-fonts/poppins'
-
 import TextInput from '../../components/atoms/TextInput'
 import styled from 'styled-components/native'
 

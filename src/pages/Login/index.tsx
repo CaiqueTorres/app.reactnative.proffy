@@ -33,10 +33,7 @@ import Checkbox from '../../components/atoms/Checkbox'
 
 import loginPageBackgroundImage from '../../assets/images/login/login-page-background.png'
 import logoImage from '../../assets/images/logo.png'
-import {
-    validateEmail,
-    validatePassword
-} from '../../utils/validationFunctions'
+import { validateEmail, validatePassword } from '../../utils/validation'
 
 /**
  * The app login page

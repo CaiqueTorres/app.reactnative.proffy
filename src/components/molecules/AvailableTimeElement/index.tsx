@@ -11,16 +11,9 @@ import {
     DeleteLine
 } from './styles'
 
-import { WeekDay } from '../../../utils/date'
+import { TimeProps, WeekDay } from '../../../api/time'
 import TimePicker from '../../atoms/DatePicker'
 import Dropdown from '../../atoms/Dropdown'
-
-export interface TimeProps {
-    readonly id?: string | number
-    readonly weekDay?: WeekDay
-    readonly from?: Date
-    readonly to?: Date
-}
 
 /**
  * Tha app's main available time element properties

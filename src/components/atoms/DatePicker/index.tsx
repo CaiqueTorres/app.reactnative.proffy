@@ -3,9 +3,10 @@ import { StyleProp, TouchableWithoutFeedback, ViewStyle } from 'react-native'
 
 import DateTimePicker, { Event } from '@react-native-community/datetimepicker'
 
+import useToggle from '../../../hooks/useToggle'
+
 import { ContainerView, TitleText, TimeView, TimeText } from './styles'
 
-import useToggle from '../../../hooks/useToggle'
 import { formatDate } from '../../../utils/date'
 
 export interface TimePickerProps {
