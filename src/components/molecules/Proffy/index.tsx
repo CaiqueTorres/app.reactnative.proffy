@@ -22,7 +22,7 @@ import {
 } from './styles'
 
 import profileImage from '../../../assets/images/profile.jpg'
-import LikeButton from '../../atoms/HeartButton'
+import LikeButton from '../../atoms/LikeButton'
 
 const Proffy: React.FC = (): JSX.Element => {
     return (
