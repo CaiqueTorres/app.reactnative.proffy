@@ -1,12 +1,16 @@
 import React from 'react'
 
-import { ContainerView } from './styles'
+import { ContainerSafeAreaView } from './styles'
+
+import Proffy from '../../components/molecules/Proffy'
 
 const ProffysPage: React.FC = (): JSX.Element => {
     return (
         //#region JSX
 
-        <ContainerView></ContainerView>
+        <ContainerSafeAreaView>
+            <Proffy />
+        </ContainerSafeAreaView>
 
         //#endregion
     )
