@@ -76,8 +76,8 @@ export const ButtonsView = styled.View`
 
 export const WhiteCircleView = styled.View`
     position: absolute;
-    left: 4;
-    top: 4;
+    left: 4px;
+    top: 4px;
     background: #fff;
     border-radius: 12px;
     width: 21px;
