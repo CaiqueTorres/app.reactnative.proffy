@@ -16,13 +16,13 @@ import {
     PriceTitleText,
     PriceValueText,
     ButtonsView,
-    LikeRectButton,
     WhiteCircleView,
     ContactRectButton,
     ContactRectButtonText
 } from './styles'
 
 import profileImage from '../../../assets/images/profile.jpg'
+import HeartButton from '../../atoms/HeartButton'
 
 const Proffy: React.FC = (): JSX.Element => {
     return (
@@ -54,7 +54,7 @@ const Proffy: React.FC = (): JSX.Element => {
                     <PriceValueText>R$ 20,00 reais</PriceValueText>
                 </PriceView>
                 <ButtonsView>
-                    <LikeRectButton></LikeRectButton>
+                    <HeartButton />
                     <ContactRectButton>
                         <View>
                             <WhiteCircleView />
