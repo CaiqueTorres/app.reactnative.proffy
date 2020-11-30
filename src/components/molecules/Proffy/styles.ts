@@ -74,14 +74,6 @@ export const ButtonsView = styled.View`
     margin-top: 20px;
 `
 
-export const LikeRectButton = styled(RectButton)`
-    width: 75px;
-    height: 75px;
-    background: #8257e5;
-    border-radius: 8px;
-    margin-right: 10px;
-`
-
 export const WhiteCircleView = styled.View`
     position: absolute;
     left: 4;
