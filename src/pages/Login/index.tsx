@@ -58,6 +58,7 @@ const LoginPage: React.FC = () => {
 
     return (
         //#region JSX
+
         <KeyboardAvoidingView behavior="position" style={{ flex: 1 }}>
             <StatusBar translucent style="light" />
             <ContainerSafeAreaView>
@@ -117,7 +118,6 @@ const LoginPage: React.FC = () => {
                                     color="#fff"
                                 />
                             }
-                            onPress={(value: boolean) => {}}
                         >
                             <PasswordStoreText>Lembrar-me</PasswordStoreText>
                         </Checkbox>

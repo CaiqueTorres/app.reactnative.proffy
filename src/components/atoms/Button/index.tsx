@@ -9,7 +9,7 @@ import { ContainerRectButton, ContainerText } from './styles'
  * It stores the RectButton properties and the Button properties
  */
 export interface ButtonProps extends RectButtonProperties {
-    readonly enabled: boolean
+    readonly enabled?: boolean
     readonly text?: string
     readonly enabledColor?: string
     readonly disabledColor?: string
@@ -24,7 +24,7 @@ export interface ButtonProps extends RectButtonProperties {
  * project when a button is needed
  */
 const Button: React.FC<ButtonProps> = ({
-    enabled,
+    enabled = true,
     text,
     enabledColor = '#04d361',
     disabledColor = '#DCDCE5',
@@ -37,6 +37,7 @@ const Button: React.FC<ButtonProps> = ({
 
     /**
      * Function that run the onPress event just when the button is activated
+     * @param pointerInside stores the click event data
      */
     function handleOnPress(pointerInside: boolean): void {
         if (enabled && onPress) onPress(pointerInside)

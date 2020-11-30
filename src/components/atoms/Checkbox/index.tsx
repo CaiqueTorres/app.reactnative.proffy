@@ -32,9 +32,13 @@ const Checkbox: React.FC<CheckboxProps> = ({
 }: CheckboxProps): JSX.Element => {
     const [active, toggleValue] = useToggle(false)
 
+    //#region Effects
+
     useEffect(() => {
         if (onPress) onPress(active)
     }, [active])
+
+    //#endregion
 
     return (
         //#region JSX
