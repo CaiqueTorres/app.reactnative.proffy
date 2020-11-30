@@ -1,7 +1,6 @@
 /* eslint-disable react/display-name */
 import React from 'react'
 
-import { Archivo_400Regular } from '@expo-google-fonts/archivo'
 import { Feather } from '@expo/vector-icons'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
