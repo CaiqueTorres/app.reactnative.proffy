@@ -1,5 +1,5 @@
 import React from 'react'
-import { View } from 'react-native'
+import { ImageSourcePropType, View } from 'react-native'
 
 import { Ionicons } from '@expo/vector-icons'
 
@@ -21,10 +21,25 @@ import {
     ContactRectButtonText
 } from './styles'
 
-import profileImage from '../../../assets/images/profile.jpg'
+import { TimeProps } from '../../../api/time'
 import LikeButton from '../../atoms/LikeButton'
 
-const Proffy: React.FC = (): JSX.Element => {
+export interface ProffyProps {
+    readonly profileImage: ImageSourcePropType
+    readonly name: string
+    readonly subject: string
+    readonly description: string
+    readonly workDays: TimeProps[]
+    readonly price: number
+}
+
+const Proffy: React.FC<ProffyProps> = ({
+    profileImage,
+    name,
+    subject,
+    description,
+    price
+}: ProffyProps): JSX.Element => {
     return (
         //#region JSX
 
@@ -33,25 +48,16 @@ const Proffy: React.FC = (): JSX.Element => {
                 <ProfileView>
                     <ProfileImage source={profileImage} />
                     <View>
-                        <ProfileNameText>Fulano</ProfileNameText>
-                        <ProfileSubjectText>Matéria</ProfileSubjectText>
+                        <ProfileNameText>{name}</ProfileNameText>
+                        <ProfileSubjectText>{subject}</ProfileSubjectText>
                     </View>
                 </ProfileView>
-                <ProfileDescriptionText>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
-                </ProfileDescriptionText>
+                <ProfileDescriptionText>{description}</ProfileDescriptionText>
             </HeaderView>
             <FooterView>
                 <PriceView>
                     <PriceTitleText>Preço da minha hora:</PriceTitleText>
-                    <PriceValueText>R$ 20,00 reais</PriceValueText>
+                    <PriceValueText>{price}</PriceValueText>
                 </PriceView>
                 <ButtonsView>
                     <LikeButton></LikeButton>
