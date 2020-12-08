@@ -21,8 +21,9 @@ import {
     ContactRectButtonText
 } from './styles'
 
-import { TimeProps } from '../../../api/time'
+import { TimeProps, WeekDay } from '../../../api/time'
 import LikeButton from '../../atoms/LikeButton'
+import Time from './Time'
 
 export interface ProffyProps {
     readonly profileImage: ImageSourcePropType
@@ -38,8 +39,17 @@ const Proffy: React.FC<ProffyProps> = ({
     name,
     subject,
     description,
+    workDays,
     price
 }: ProffyProps): JSX.Element => {
+    const days = [
+        WeekDay.MONDAY,
+        WeekDay.TUESDAY,
+        WeekDay.WEDNESDAY,
+        WeekDay.THURSDAY,
+        WeekDay.FRIDAY
+    ]
+
     return (
         //#region JSX
 
@@ -53,6 +63,15 @@ const Proffy: React.FC<ProffyProps> = ({
                     </View>
                 </ProfileView>
                 <ProfileDescriptionText>{description}</ProfileDescriptionText>
+                {/* {days.map((day: WeekDay) => {
+                    return workDays
+                        .map((workDay) => workDay.weekDay)
+                        .includes(day) ? (
+                        <Time {...day} />
+                    ) : (
+                        <Time />
+                    )
+                })} */}
             </HeaderView>
             <FooterView>
                 <PriceView>
@@ -60,7 +79,7 @@ const Proffy: React.FC<ProffyProps> = ({
                     <PriceValueText>{price}</PriceValueText>
                 </PriceView>
                 <ButtonsView>
-                    <LikeButton></LikeButton>
+                    <LikeButton />
                     <ContactRectButton>
                         <View>
                             <WhiteCircleView />
