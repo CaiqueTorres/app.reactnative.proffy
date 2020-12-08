@@ -14,7 +14,7 @@ export const BackButtonView = styled.View`
     width: 50px;
 `
 
-export const TitleText = styled.Text`
+export const PageTitleText = styled.Text`
     color: #d4c2ff;
     font-family: Archivo_400Regular;
     font-size: 14px;
@@ -24,4 +24,31 @@ export const TitleText = styled.Text`
 export const LogoImage = styled.Image`
     width: 52px;
     height: 15px;
+`
+
+export const ChildrenView = styled.View`
+    flex-direction: row;
+    justify-content: space-between;
+    background: #8257e5;
+    padding: 40px 35px 120px 35px;
+`
+
+export const TitleText = styled.Text`
+    color: #fff;
+    font-size: 24px;
+    width: 200px;
+    font-family: Archivo_400Regular;
+`
+
+export const ProffysAmountView = styled.View`
+    flex-direction: row;
+    align-items: center;
+    height: 33px;
+`
+
+export const ProffysAmountText = styled.Text`
+    color: #d4c2ff;
+    font-size: 12px;
+    font-family: Poppins_400Regular;
+    margin-left: 10px;
 `

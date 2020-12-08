@@ -71,7 +71,7 @@ const AccountPage: React.FC = (): JSX.Element => {
 
         <ContainerSafeAreaView>
             <Header
-                title="Meu perfil"
+                pageTitle="Meu perfil"
                 onPress={() => {
                     navigation.pop()
                 }}

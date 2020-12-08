@@ -19,7 +19,7 @@ const ProffysPage: React.FC = (): JSX.Element => {
 
         <ContainerSafeAreaView>
             <Header
-                title="Estudar"
+                pageTitle="Estudar"
                 onPress={() => {
                     navigation.pop()
                 }}

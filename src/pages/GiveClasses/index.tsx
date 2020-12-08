@@ -57,7 +57,7 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
 
         <ContainerSafeAreaView>
             <Header
-                title="Dar aulas"
+                pageTitle="Dar aulas"
                 onPress={() => {
                     navigation.pop()
                 }}
