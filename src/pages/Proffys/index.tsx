@@ -26,26 +26,31 @@ const ProffysPage: React.FC = (): JSX.Element => {
                 price={20}
                 workDays={[
                     {
+                        id: 0,
                         weekDay: WeekDay.MONDAY,
                         from: '15:00',
                         to: '17:00'
                     },
                     {
+                        id: 1,
                         weekDay: WeekDay.TUESDAY,
                         from: '15:00',
                         to: '17:00'
                     },
                     {
+                        id: 2,
                         weekDay: WeekDay.WEDNESDAY,
                         from: '15:00',
                         to: '17:00'
                     },
                     {
+                        id: 3,
                         weekDay: WeekDay.THURSDAY,
                         from: '15:00',
                         to: '17:00'
                     },
                     {
+                        id: 4,
                         weekDay: WeekDay.FRIDAY,
                         from: '15:00',
                         to: '17:00'
