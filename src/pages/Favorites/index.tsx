@@ -20,6 +20,7 @@ const FavoritesPage: React.FC = (): JSX.Element => {
         <ContainerSafeAreaView>
             <Header
                 pageTitle="Estudar"
+                title="Meus proffys Favoritos"
                 onPress={() => {
                     navigation.pop()
                 }}
