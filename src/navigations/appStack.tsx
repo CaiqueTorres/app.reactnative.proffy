@@ -13,6 +13,7 @@ import OnboardingPage from '../pages/Onboarding'
 import FirstSignUpPage from '../pages/SignUp/First'
 import SecondSignUpPage from '../pages/SignUp/Second'
 import SuccessPage, { SuccessPageProps } from '../pages/Success'
+import StudyTabNavigation from './study'
 
 export type AppStackParamsList = {
     readonly OnboardingPage: undefined
@@ -24,6 +25,7 @@ export type AppStackParamsList = {
     readonly LandingPage: undefined
     readonly AccountPage: undefined
     readonly GiveClassesPage: undefined
+    readonly StudyNavigation: undefined
 }
 
 const { Navigator, Screen } = createStackNavigator<AppStackParamsList>()
@@ -43,7 +45,7 @@ const config: TransitionSpec = {
 /**
  * The app stack component that stores the main app navigation logic
  */
-export default function AppStack(): JSX.Element {
+const AppStack: React.FC = (): JSX.Element => {
     return (
         //#region JSX
 
@@ -73,9 +75,12 @@ export default function AppStack(): JSX.Element {
                 <Screen name="LandingPage" component={LandingPage} />
                 <Screen name="AccountPage" component={AccountPage} />
                 <Screen name="GiveClassesPage" component={GiveClassesPage} />
+                <Screen name="StudyNavigation" component={StudyTabNavigation} />
             </Navigator>
         </NavigationContainer>
 
         //#endregion
     )
 }
+
+export default AppStack

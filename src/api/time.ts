@@ -11,6 +11,6 @@ export enum WeekDay {
 export interface TimeProps {
     readonly id?: string | number
     readonly weekDay?: WeekDay
-    readonly from?: Date
-    readonly to?: Date
+    readonly from?: Date | string
+    readonly to?: Date | string
 }

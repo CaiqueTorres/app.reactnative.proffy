@@ -6,8 +6,6 @@ import { StackNavigationProp } from '@react-navigation/stack'
 
 import useStateAndCheck from '../../hooks/useStateAndCheck'
 
-import { AppStackParamsList } from '../../routes/appStack'
-
 import {
     ContainerSafeAreaView,
     ContainerScrollView,
@@ -29,6 +27,7 @@ import AvailableTimeElement from '../../components/molecules/AvailableTimeElemen
 
 import { TimeProps } from '../../api/time'
 import backgroundImage from '../../assets/images/login/login-page-background.png'
+import { AppStackParamsList } from '../../navigations/appStack'
 import ProfileImage from './ProfileImage'
 import uuid from 'uuid-random'
 
@@ -72,7 +71,7 @@ const AccountPage: React.FC = (): JSX.Element => {
 
         <ContainerSafeAreaView>
             <Header
-                title="Meu perfil"
+                pageTitle="Meu perfil"
                 onPress={() => {
                     navigation.pop()
                 }}

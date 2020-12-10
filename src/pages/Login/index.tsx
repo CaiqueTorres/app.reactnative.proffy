@@ -11,8 +11,6 @@ import { StackNavigationProp } from '@react-navigation/stack'
 
 import { StatusBar } from 'expo-status-bar'
 
-import { AppStackParamsList } from '../../routes/appStack'
-
 import {
     ContainerSafeAreaView,
     IconView,
@@ -33,6 +31,7 @@ import Checkbox from '../../components/atoms/Checkbox'
 
 import loginPageBackgroundImage from '../../assets/images/login/login-page-background.png'
 import logoImage from '../../assets/images/logo.png'
+import { AppStackParamsList } from '../../navigations/appStack'
 import { validateEmail, validatePassword } from '../../utils/validation'
 
 /**
@@ -59,6 +58,7 @@ const LoginPage: React.FC = () => {
 
     return (
         //#region JSX
+
         <KeyboardAvoidingView behavior="position" style={{ flex: 1 }}>
             <StatusBar translucent style="light" />
             <ContainerSafeAreaView>
@@ -118,7 +118,6 @@ const LoginPage: React.FC = () => {
                                     color="#fff"
                                 />
                             }
-                            onPress={(value: boolean) => {}}
                         >
                             <PasswordStoreText>Lembrar-me</PasswordStoreText>
                         </Checkbox>

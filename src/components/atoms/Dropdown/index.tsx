@@ -3,12 +3,18 @@ import { PickerProps } from 'react-native'
 
 import { ContainerView, TitleText, PickerView, ContainerPicker } from './styles'
 
+/**
+ * The main app's dropdown component properties
+ */
 export interface DropdownProps extends PickerProps {
     defaultValue?: string
     title?: string
     children?: JSX.Element[]
 }
 
+/**
+ * The main app's dropdown component
+ */
 const Dropdown: React.FC<DropdownProps> = ({
     defaultValue,
     title,
