@@ -22,9 +22,11 @@ import {
 } from './styles'
 
 import { TimeProps, WeekDay } from '../../../api/time'
-import LikeButton from '../../atoms/LikeButton'
-import Time from './Time'
+import LikeButton from './LikeButton'
 
+/**
+ * The main app's proffy component properties
+ */
 export interface ProffyProps {
     readonly profileImage: ImageSourcePropType
     readonly name: string
@@ -34,6 +36,10 @@ export interface ProffyProps {
     readonly price: number
 }
 
+/**
+ * The main app's proffy component
+ * It is used in the Proffys page and in the Favorites page
+ */
 const Proffy: React.FC<ProffyProps> = ({
     profileImage,
     name,
