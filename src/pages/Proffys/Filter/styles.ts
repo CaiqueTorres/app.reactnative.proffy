@@ -17,3 +17,12 @@ export const FilterText = styled.Text`
     font-family: Archivo_400Regular;
     font-size: 16px;
 `
+
+export const DropdownsView = styled.View`
+    margin-top: 20px;
+`
+
+export const TimeView = styled.View`
+    margin-top: 10px;
+    flex-direction: row;
+`
