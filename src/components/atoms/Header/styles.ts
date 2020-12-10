@@ -27,10 +27,14 @@ export const LogoImage = styled.Image`
 `
 
 export const ChildrenView = styled.View`
+    background: #8257e5;
+    padding: 40px 35px 40px 35px;
+    justify-content: space-between;
+`
+
+export const HeaderView = styled.View`
     flex-direction: row;
     justify-content: space-between;
-    background: #8257e5;
-    padding: 40px 35px 120px 35px;
 `
 
 export const TitleText = styled.Text`

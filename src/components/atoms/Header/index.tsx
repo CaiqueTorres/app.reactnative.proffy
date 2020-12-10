@@ -17,12 +17,14 @@ import {
     PageTitleText,
     LogoImage,
     ChildrenView,
+    HeaderView,
     TitleText,
     ProffysAmountView,
     ProffysAmountText
 } from './styles'
 
 import logoImage from '../../../assets/images/logo.png'
+import Dropdown from '../Dropdown'
 
 /**
  * The app's main header properties
@@ -46,7 +48,8 @@ const Header: React.FC<HeaderProps> = ({
     emojiName = 'nerd_face',
     style,
     title = 'Title',
-    proffysAmount = 0
+    proffysAmount = 0,
+    children
 }: HeaderProps): JSX.Element => {
     return (
         //#region JSX
@@ -67,13 +70,18 @@ const Header: React.FC<HeaderProps> = ({
                 <LogoImage source={logoImage} />
             </ContainerView>
             <ChildrenView>
-                <TitleText>{title}</TitleText>
-                <ProffysAmountView>
-                    <Emoji name={emojiName} style={{ fontSize: 20 }} />
-                    <ProffysAmountText>
-                        {proffysAmount} proffys
-                    </ProffysAmountText>
-                </ProffysAmountView>
+                <HeaderView>
+                    <TitleText>{title}</TitleText>
+                    <ProffysAmountView>
+                        <Emoji name={emojiName} style={{ fontSize: 20 }} />
+                        <ProffysAmountText>
+                            {proffysAmount} proffys
+                        </ProffysAmountText>
+                    </ProffysAmountView>
+                </HeaderView>
+                <View>
+                    <Dropdown title="Matéria" />
+                </View>
             </ChildrenView>
         </>
 
