@@ -39,9 +39,9 @@ export interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({
     onPress,
     pageTitle,
-    emojiName = 'nerd_face',
+    emojiName,
     style,
-    title = 'Title',
+    title,
     proffysAmount = 0,
     children
 }: HeaderProps): JSX.Element => {
@@ -63,18 +63,25 @@ const Header: React.FC<HeaderProps> = ({
                 <PageTitleText>{pageTitle}</PageTitleText>
                 <LogoImage source={logoImage} />
             </ContainerView>
-            <ChildrenView>
-                <HeaderView>
-                    <TitleText>{title}</TitleText>
-                    <ProffysAmountView>
-                        <Emoji name={emojiName} style={{ fontSize: 20 }} />
-                        <ProffysAmountText>
-                            {proffysAmount} proffys
-                        </ProffysAmountText>
-                    </ProffysAmountView>
-                </HeaderView>
-                {children}
-            </ChildrenView>
+            {title && (
+                <ChildrenView>
+                    <HeaderView>
+                        <TitleText>{title}</TitleText>
+                        <ProffysAmountView>
+                            {emojiName && (
+                                <Emoji
+                                    name={emojiName}
+                                    style={{ fontSize: 20 }}
+                                />
+                            )}
+                            <ProffysAmountText>
+                                {proffysAmount} proffys
+                            </ProffysAmountText>
+                        </ProffysAmountView>
+                    </HeaderView>
+                    {children}
+                </ChildrenView>
+            )}
         </>
 
         //#endregion
