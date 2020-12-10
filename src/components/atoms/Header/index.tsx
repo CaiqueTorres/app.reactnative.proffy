@@ -5,7 +5,12 @@ import { AntDesign } from '@expo/vector-icons'
 
 import { StatusBar } from 'expo-status-bar'
 
-import { ContainerView, BackButtonView, TitleText, LogoImage } from './styles'
+import {
+    ContainerView,
+    BackButtonView,
+    PageTitleText,
+    LogoImage
+} from './styles'
 
 import logoImage from '../../../assets/images/logo.png'
 
@@ -14,7 +19,7 @@ import logoImage from '../../../assets/images/logo.png'
  */
 export interface HeaderProps {
     onPress?(): void
-    readonly title?: string
+    readonly pageTitle?: string
     readonly style?: StyleProp<ViewStyle>
 }
 
@@ -23,22 +28,28 @@ export interface HeaderProps {
  */
 const Header: React.FC<HeaderProps> = ({
     onPress,
-    title,
+    pageTitle,
     style
 }: HeaderProps): JSX.Element => {
     return (
         //#region JSX
 
-        <ContainerView style={style}>
-            <StatusBar translucent style="light" backgroundColor="#774dd6" />
-            <TouchableWithoutFeedback onPress={onPress}>
-                <BackButtonView>
-                    <AntDesign name="arrowleft" size={24} color="#D4C2FF" />
-                </BackButtonView>
-            </TouchableWithoutFeedback>
-            <TitleText>{title}</TitleText>
-            <LogoImage source={logoImage} />
-        </ContainerView>
+        <>
+            <ContainerView style={style}>
+                <StatusBar
+                    translucent
+                    style="light"
+                    backgroundColor="#774dd6"
+                />
+                <TouchableWithoutFeedback onPress={onPress}>
+                    <BackButtonView>
+                        <AntDesign name="arrowleft" size={24} color="#D4C2FF" />
+                    </BackButtonView>
+                </TouchableWithoutFeedback>
+                <PageTitleText>{pageTitle}</PageTitleText>
+                <LogoImage source={logoImage} />
+            </ContainerView>
+        </>
 
         //#endregion
     )

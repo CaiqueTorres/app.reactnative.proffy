@@ -8,8 +8,6 @@ import { StackNavigationProp } from '@react-navigation/stack'
 
 import { StatusBar } from 'expo-status-bar'
 
-import { AppStackParamsList } from '../../routes/AppStack'
-
 import {
     ContainerView,
     SwiperPageContainerView,
@@ -25,6 +23,7 @@ import giveClassesIcon from '../../assets/images/onboarding/give-classes.png'
 import onboardingPageBackground01 from '../../assets/images/onboarding/onboarding-page-background-01.png'
 import onboardingPageBackground02 from '../../assets/images/onboarding/onboarding-page-background-02.png'
 import studyIcon from '../../assets/images/onboarding/study.png'
+import { AppStackParamsList } from '../../navigations/appStack'
 
 /**
  * The app onboarding page

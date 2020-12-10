@@ -1,0 +1,6 @@
+/node_modules
+.eslintrc.js
+tsconfig.json
+react-native.config.js
+app.json
+babel.config.js

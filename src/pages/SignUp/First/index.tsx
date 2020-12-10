@@ -6,8 +6,6 @@ import { StackNavigationProp } from '@react-navigation/stack'
 
 import { StatusBar } from 'expo-status-bar'
 
-import { AppStackParamsList } from '../../../routes/AppStack'
-
 import {
     ContainerSafeAreaView,
     TitleView,
@@ -21,7 +19,8 @@ import {
 import AuthenticationTextInput from '../../../components/atoms/AuthenticationTextInput'
 import Button from '../../../components/atoms/Button'
 
-import { isTextEmpty } from '../../../utils/validationFunctions'
+import { AppStackParamsList } from '../../../navigations/appStack'
+import { isStringEmpty } from '../../../utils/validation'
 import SignUpHeader from '../Header'
 
 /**
@@ -41,7 +40,7 @@ const FirstSignUpPage: React.FC = (): JSX.Element => {
     //#region Effects
 
     useEffect(() => {
-        setValid(!isTextEmpty(name) && !isTextEmpty(lastName))
+        setValid(!isStringEmpty(name) && !isStringEmpty(lastName))
     }, [name, lastName])
 
     //#endregion

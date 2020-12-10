@@ -11,8 +11,6 @@ import { StackNavigationProp } from '@react-navigation/stack'
 
 import { StatusBar } from 'expo-status-bar'
 
-import { AppStackParamsList } from '../../routes/AppStack'
-
 import {
     ContainerSafeAreaView,
     IconView,
@@ -29,10 +27,11 @@ import Button from '../../components/atoms/Button'
 
 import loginPageBackgroundImage from '../../assets/images/login/login-page-background.png'
 import logoImage from '../../assets/images/logo.png'
-import { validateEmail } from '../../utils/validationFunctions'
+import { AppStackParamsList } from '../../navigations/appStack'
+import { validateEmail } from '../../utils/validation'
 
 /**
- * The app's forgot page
+ * The app's forgot password page
  */
 const ForgotPasswordPage: React.FC = (): JSX.Element => {
     const navigation = useNavigation<

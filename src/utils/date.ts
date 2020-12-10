@@ -9,13 +9,3 @@ export function formatDate(date: Date): string {
 
     return `${hours}:${minutes}`
 }
-
-export enum WeekDay {
-    SUNDAY = 'Domingo',
-    MONDAY = 'Segunda-feira',
-    TUESDAY = 'Terça-feira',
-    WEDNESDAY = 'Quarta-feira',
-    THURSDAY = 'Quinta-feira',
-    FRIDAY = 'Sexta-feira',
-    SATURDAY = 'Sábado'
-}
