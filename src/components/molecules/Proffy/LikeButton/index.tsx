@@ -2,10 +2,13 @@ import React from 'react'
 
 import { Ionicons } from '@expo/vector-icons'
 
-import useToggle from '../../../hooks/useToggle'
+import useToggle from '../../../../hooks/useToggle'
 
 import { ContainerRectButton } from './styles'
 
+/**
+ * The main app'a like button properties
+ */
 export interface LikeButtonProps {
     liked?: boolean
     activeBackgroundColor?: string
@@ -14,6 +17,11 @@ export interface LikeButtonProps {
     onToggle?(value: boolean): void
 }
 
+/**
+ * The main app's like button
+ * This component is used in the Proffy component, the user can
+ * click on it and favoritate a proffy
+ */
 const LikeButton: React.FC<LikeButtonProps> = ({
     liked = false,
     activeBackgroundColor = '#8257E5',
