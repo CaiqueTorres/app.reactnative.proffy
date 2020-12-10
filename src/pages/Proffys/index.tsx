@@ -1,9 +1,17 @@
 import React from 'react'
+import Emoji from 'react-native-emoji'
 
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
-import { ContainerSafeAreaView } from './styles'
+import {
+    ContainerSafeAreaView,
+    ChildrenView,
+    HeaderView,
+    TitleText,
+    ProffysAmountView,
+    ProffysAmountText
+} from './styles'
 
 import Header from '../../components/atoms/Header'
 
@@ -21,13 +29,20 @@ const ProffysPage: React.FC = (): JSX.Element => {
         <ContainerSafeAreaView>
             <Header
                 pageTitle="Estudar"
-                title="Proffys Disponíveis"
                 onPress={() => {
                     navigation.pop()
                 }}
-            >
+            />
+            <ChildrenView>
+                <HeaderView>
+                    <TitleText>Proffys Disponíveis</TitleText>
+                    <ProffysAmountView>
+                        <Emoji name="nerd_face" style={{ fontSize: 20 }} />
+                        <ProffysAmountText>{15} proffys</ProffysAmountText>
+                    </ProffysAmountView>
+                </HeaderView>
                 <Filter />
-            </Header>
+            </ChildrenView>
         </ContainerSafeAreaView>
 
         //#endregion

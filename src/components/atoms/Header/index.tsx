@@ -1,6 +1,5 @@
 import React from 'react'
 import { StyleProp, TouchableWithoutFeedback, ViewStyle } from 'react-native'
-import Emoji from 'react-native-emoji'
 
 import { AntDesign } from '@expo/vector-icons'
 
@@ -10,12 +9,7 @@ import {
     ContainerView,
     BackButtonView,
     PageTitleText,
-    LogoImage,
-    ChildrenView,
-    HeaderView,
-    TitleText,
-    ProffysAmountView,
-    ProffysAmountText
+    LogoImage
 } from './styles'
 
 import logoImage from '../../../assets/images/logo.png'
@@ -26,11 +20,7 @@ import logoImage from '../../../assets/images/logo.png'
 export interface HeaderProps {
     onPress?(): void
     readonly pageTitle?: string
-    readonly title?: string
-    readonly proffysAmount?: number
-    readonly emojiName?: string
     readonly style?: StyleProp<ViewStyle>
-    readonly children?: JSX.Element
 }
 
 /**
@@ -39,11 +29,7 @@ export interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({
     onPress,
     pageTitle,
-    emojiName,
-    style,
-    title,
-    proffysAmount = 0,
-    children
+    style
 }: HeaderProps): JSX.Element => {
     return (
         //#region JSX
@@ -63,25 +49,6 @@ const Header: React.FC<HeaderProps> = ({
                 <PageTitleText>{pageTitle}</PageTitleText>
                 <LogoImage source={logoImage} />
             </ContainerView>
-            {title && (
-                <ChildrenView>
-                    <HeaderView>
-                        <TitleText>{title}</TitleText>
-                        <ProffysAmountView>
-                            {emojiName && (
-                                <Emoji
-                                    name={emojiName}
-                                    style={{ fontSize: 20 }}
-                                />
-                            )}
-                            <ProffysAmountText>
-                                {proffysAmount} proffys
-                            </ProffysAmountText>
-                        </ProffysAmountView>
-                    </HeaderView>
-                    {children}
-                </ChildrenView>
-            )}
         </>
 
         //#endregion

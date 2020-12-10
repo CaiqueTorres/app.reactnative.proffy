@@ -1,9 +1,17 @@
 import React from 'react'
+import Emoji from 'react-native-emoji'
 
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
-import { ContainerSafeAreaView } from './styles'
+import {
+    ContainerSafeAreaView,
+    ChildrenView,
+    HeaderView,
+    TitleText,
+    ProffysAmountView,
+    ProffysAmountText
+} from './styles'
 
 import Header from '../../components/atoms/Header'
 
@@ -20,11 +28,19 @@ const FavoritesPage: React.FC = (): JSX.Element => {
         <ContainerSafeAreaView>
             <Header
                 pageTitle="Estudar"
-                title="Meus proffys Favoritos"
                 onPress={() => {
                     navigation.pop()
                 }}
             />
+            <ChildrenView>
+                <HeaderView>
+                    <TitleText>Meus Proffys Favoritos</TitleText>
+                    <ProffysAmountView>
+                        <Emoji name="smile" style={{ fontSize: 20 }} />
+                        <ProffysAmountText>{15} proffys</ProffysAmountText>
+                    </ProffysAmountView>
+                </HeaderView>
+            </ChildrenView>
         </ContainerSafeAreaView>
 
         //#endregion

@@ -1,5 +1,3 @@
-import { Archivo_400Regular } from '@expo-google-fonts/archivo'
-
 import styled from 'styled-components/native'
 
 export const ContainerView = styled.View`
