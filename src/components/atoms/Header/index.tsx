@@ -1,10 +1,5 @@
 import React from 'react'
-import {
-    StyleProp,
-    TouchableWithoutFeedback,
-    View,
-    ViewStyle
-} from 'react-native'
+import { StyleProp, TouchableWithoutFeedback, ViewStyle } from 'react-native'
 import Emoji from 'react-native-emoji'
 
 import { AntDesign } from '@expo/vector-icons'
@@ -24,7 +19,6 @@ import {
 } from './styles'
 
 import logoImage from '../../../assets/images/logo.png'
-import Dropdown from '../Dropdown'
 
 /**
  * The app's main header properties
@@ -79,9 +73,7 @@ const Header: React.FC<HeaderProps> = ({
                         </ProffysAmountText>
                     </ProffysAmountView>
                 </HeaderView>
-                <View>
-                    <Dropdown title="Matéria" />
-                </View>
+                {children}
             </ChildrenView>
         </>
 

@@ -8,6 +8,7 @@ import { ContainerSafeAreaView } from './styles'
 import Header from '../../components/atoms/Header'
 
 import { AppStackParamsList } from '../../navigations/appStack'
+import Filter from './Filter'
 
 const ProffysPage: React.FC = (): JSX.Element => {
     const navigation = useNavigation<
@@ -23,7 +24,9 @@ const ProffysPage: React.FC = (): JSX.Element => {
                 onPress={() => {
                     navigation.pop()
                 }}
-            />
+            >
+                <Filter />
+            </Header>
         </ContainerSafeAreaView>
 
         //#endregion
