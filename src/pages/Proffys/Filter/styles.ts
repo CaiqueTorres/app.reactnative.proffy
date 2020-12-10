@@ -18,6 +18,7 @@ export const FilterText = styled.Text`
 
 export const DropdownsView = styled.View`
     margin-top: 20px;
+    width: 100%;
 `
 
 export const TimeView = styled.View`
