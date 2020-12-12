@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 
-import { RootState } from '../store'
+import { RootState } from '../store/rootReducer'
 
 import { UserProxy } from '../api/models/user/userProxy'
 
