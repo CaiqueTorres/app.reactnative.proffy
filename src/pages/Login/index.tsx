@@ -1,15 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { Dispatch, useEffect, useState } from 'react'
 import {
     KeyboardAvoidingView,
     TouchableWithoutFeedback,
     View
 } from 'react-native'
+import { useDispatch } from 'react-redux'
 
 import { FontAwesome } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
+import * as SecureStore from 'expo-secure-store'
 import { StatusBar } from 'expo-status-bar'
+
+import { setMe } from '../../store/user/actions'
+import { UserActions } from '../../store/user/types'
 
 import {
     ContainerSafeAreaView,
@@ -29,6 +34,9 @@ import AuthenticationTextInput from '../../components/atoms/AuthenticationTextIn
 import Button from '../../components/atoms/Button'
 import Checkbox from '../../components/atoms/Checkbox'
 
+import api from '../../api'
+import { TokenProxy } from '../../api/models/auth/tokenProxy'
+import { UserProxy } from '../../api/models/user/userProxy'
 import loginPageBackgroundImage from '../../assets/images/login/login-page-background.png'
 import logoImage from '../../assets/images/logo.png'
 import { AppStackParamsList } from '../../navigations/appStack'
@@ -44,6 +52,8 @@ const LoginPage: React.FC = () => {
         StackNavigationProp<AppStackParamsList, 'LoginPage'>
     >()
 
+    const dispatch = useDispatch<Dispatch<UserActions>>()
+
     const [inputValid, setInputValid] = useState(false)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -53,6 +63,30 @@ const LoginPage: React.FC = () => {
     useEffect(() => {
         setInputValid(validateEmail(email) && validatePassword(password))
     }, [email, password])
+
+    //#endregion
+
+    //#region Functions
+
+    async function signIn(): Promise<void> {
+        const loginResponse = await api.post<TokenProxy>('/auth/local', {
+            email,
+            password
+        })
+
+        const token = loginResponse.data.token
+        await SecureStore.setItemAsync('token', token)
+
+        const getMeResponse = await api.get<UserProxy>('/users/me', {
+            headers: {
+                // Authorization: token
+            }
+        })
+
+        dispatch(setMe(getMeResponse.data))
+
+        navigation.replace('LandingPage')
+    }
 
     //#endregion
 
@@ -137,9 +171,7 @@ const LoginPage: React.FC = () => {
                         style={{ height: 65 }}
                         enabledColor="#04D361"
                         textEnabledColor="#fff"
-                        onPress={() => {
-                            navigation.replace('LandingPage')
-                        }}
+                        onPress={signIn}
                     />
                 </LoginView>
             </ContainerSafeAreaView>
