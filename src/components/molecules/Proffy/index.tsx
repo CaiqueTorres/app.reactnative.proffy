@@ -21,7 +21,7 @@ import {
     ContactRectButtonText
 } from './styles'
 
-import { TimeProps } from '../../../api/time'
+import { TimeProps } from '../../../api/models/time/time'
 import LikeButton from './LikeButton'
 
 /**

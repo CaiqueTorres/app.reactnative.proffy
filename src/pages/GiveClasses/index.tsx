@@ -26,7 +26,7 @@ import Button from '../../components/atoms/Button'
 import Header from '../../components/atoms/Header'
 import AvailableTimeElement from '../../components/molecules/AvailableTimeElement'
 
-import { TimeProps } from '../../api/time'
+import { TimeProps } from '../../api/models/time/time'
 import { AppStackParamsList } from '../../navigations/appStack'
 import { isStringEmpty, validateTimePropsList } from '../../utils/validation'
 import uuid from 'uuid-random'
