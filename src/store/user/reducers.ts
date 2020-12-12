@@ -1,7 +1,7 @@
 import { UserState, UserActions, UserActionTypes, SetMeAction } from './types'
 
 const initialState: UserState = {
-    user: null
+    me: null
 }
 
 export function userReducer(
@@ -12,7 +12,7 @@ export function userReducer(
         case UserActionTypes.SET_ME:
             return {
                 ...initialState,
-                user: (action as SetMeAction).payload
+                me: (action as SetMeAction).payload
             }
         default:
             return state
