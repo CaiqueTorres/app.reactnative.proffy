@@ -25,7 +25,7 @@ import Button from '../../components/atoms/Button'
 import Header from '../../components/atoms/Header'
 import AvailableTimeElement from '../../components/molecules/AvailableTimeElement'
 
-import { TimeProps } from '../../api/time'
+import { TimeProps } from '../../api/models/time/time'
 import backgroundImage from '../../assets/images/login/login-page-background.png'
 import { AppStackParamsList } from '../../navigations/appStack'
 import ProfileImage from './ProfileImage'

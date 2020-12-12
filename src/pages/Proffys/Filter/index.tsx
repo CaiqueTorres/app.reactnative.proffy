@@ -13,7 +13,7 @@ import TimePicker from '../../../components/atoms/DatePicker'
 import Dropdown from '../../../components/atoms/Dropdown'
 import TextInput from '../../../components/atoms/TextInput'
 
-import { WeekDay } from '../../../api/time'
+import { WeekDay } from '../../../api/models/time/time'
 
 const Filter: React.FC = (): JSX.Element => {
     const [active, toggle] = useToggle(false)
