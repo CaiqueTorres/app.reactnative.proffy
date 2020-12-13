@@ -25,12 +25,6 @@ export const ProfileView = styled.View`
     align-items: center;
 `
 
-export const ProfilePhotoImage = styled.Image`
-    width: 60px;
-    height: 60px;
-    border-radius: 30px;
-`
-
 export const ProfileUsernameText = styled.Text`
     margin-left: 15px;
     color: #d4c2ff;

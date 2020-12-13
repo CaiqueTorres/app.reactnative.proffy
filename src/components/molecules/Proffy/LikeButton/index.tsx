@@ -19,6 +19,7 @@ export interface LikeButtonProps {
 
 /**
  * The main app's like button
+ *
  * This component is used in the Proffy component, the user can
  * click on it and favoritate a proffy
  */

@@ -91,7 +91,10 @@ const FirstSignUpPage: React.FC = (): JSX.Element => {
                         enabled={valid}
                         style={{ height: 65 }}
                         onPress={() => {
-                            navigation.push('SecondSignUpPage')
+                            navigation.push('SecondSignUpPage', {
+                                name,
+                                lastName
+                            })
                         }}
                     />
                 </FooterView>

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { KeyboardAvoidingView } from 'react-native'
 
-import { useNavigation } from '@react-navigation/native'
+import { RouteProp } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
 import { StatusBar } from 'expo-status-bar'
@@ -19,6 +20,8 @@ import {
 import AuthenticationTextInput from '../../../components/atoms/AuthenticationTextInput'
 import Button from '../../../components/atoms/Button'
 
+import api from '../../../api'
+import { UserProxy } from '../../../api/models/user/userProxy'
 import { AppStackParamsList } from '../../../navigations/appStack'
 import { validateEmail, validatePassword } from '../../../utils/validation'
 import SignUpHeader from '../Header'
@@ -29,6 +32,7 @@ import SignUpHeader from '../Header'
  * This page is responsible to get the user e-mail and password
  */
 const SecondSignUpPage: React.FC = (): JSX.Element => {
+    const route = useRoute<RouteProp<AppStackParamsList, 'SecondSignUpPage'>>()
     const navigation = useNavigation<
         StackNavigationProp<AppStackParamsList, 'SecondSignUpPage'>
     >()
@@ -42,6 +46,32 @@ const SecondSignUpPage: React.FC = (): JSX.Element => {
     useEffect(() => {
         setValid(validateEmail(email) && validatePassword(password))
     }, [email, password])
+
+    //#endregion
+
+    //#region Functions
+
+    /**
+     * Function that can send a request to save the user in the database
+     */
+    async function signUp(): Promise<void> {
+        try {
+            await api.post<UserProxy>('/users', {
+                name: route.params.name,
+                lastName: route.params.lastName,
+                email,
+                password
+            })
+
+            navigation.push('SuccessPage', {
+                title: 'Cadastro concluído!',
+                subtitle: 'Agora você faz parte da plataforma da Proffy',
+                buttonTitle: 'Fazer login'
+            })
+        } catch (exception) {
+            console.log(exception)
+        }
+    }
 
     //#endregion
 
@@ -92,14 +122,7 @@ const SecondSignUpPage: React.FC = (): JSX.Element => {
                         text="Concluir cadastro"
                         enabled={valid}
                         style={{ height: 65 }}
-                        onPress={() => {
-                            navigation.push('SuccessPage', {
-                                title: 'Cadastro concluído!',
-                                subtitle:
-                                    'Agora você faz parte da plataforma da Proffy',
-                                buttonTitle: 'Fazer login'
-                            })
-                        }}
+                        onPress={signUp}
                     />
                 </FooterView>
             </ContainerSafeAreaView>

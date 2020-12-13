@@ -8,12 +8,13 @@ import { StackNavigationProp } from '@react-navigation/stack'
 
 import { StatusBar } from 'expo-status-bar'
 
+import useMe from '../../hooks/useMe'
+
 import {
     ContainerSafeAreaView,
     LogoView,
     HeaderView,
     ProfileView,
-    ProfilePhotoImage,
     ProfileUsernameText,
     LogoutRectButton,
     LandingImage,
@@ -26,10 +27,11 @@ import {
     FooterText
 } from './styles'
 
+import UserImage from '../../components/atoms/UserImage'
+
 import landingImage from '../../assets/images/landing.png'
 import giveClassesIcon from '../../assets/images/onboarding/give-classes.png'
 import studyIcon from '../../assets/images/onboarding/study.png'
-import profileImage from '../../assets/images/profile.jpg'
 import { AppStackParamsList } from '../../navigations/appStack'
 import LandingButton from './LandingButton'
 
@@ -40,6 +42,8 @@ const LandingPage: React.FC = (): JSX.Element => {
     const navigation = useNavigation<
         StackNavigationProp<AppStackParamsList, 'LandingPage'>
     >()
+
+    const user = useMe()
 
     return (
         //#region JSX
@@ -54,9 +58,9 @@ const LandingPage: React.FC = (): JSX.Element => {
                         }}
                     >
                         <ProfileView>
-                            <ProfilePhotoImage source={profileImage} />
+                            <UserImage size={40} imageUri={user?.photo} />
                             <ProfileUsernameText>
-                                Caique Torres
+                                {`${user?.name} ${user?.lastName}`}
                             </ProfileUsernameText>
                         </ProfileView>
                     </TouchableWithoutFeedback>

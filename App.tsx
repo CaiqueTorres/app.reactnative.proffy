@@ -1,4 +1,5 @@
 import React from 'react'
+import { Provider } from 'react-redux'
 
 import {
     Archivo_400Regular,
@@ -13,6 +14,8 @@ import {
 
 import { AppLoading } from 'expo'
 import { useFonts } from 'expo-font'
+
+import store from './src/store'
 
 import AppStack from './src/navigations/appStack'
 
@@ -31,7 +34,9 @@ export default function App(): JSX.Element {
     return (
         //#region JSX
 
-        <AppStack />
+        <Provider store={store}>
+            <AppStack />
+        </Provider>
 
         //#endregion
     )

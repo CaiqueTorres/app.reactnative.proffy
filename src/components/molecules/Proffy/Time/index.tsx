@@ -2,7 +2,7 @@ import React from 'react'
 
 import { ContainerView } from './styles'
 
-import { WeekDay } from '../../../../api/time'
+import { WeekDay } from '../../../../api/models/time/time'
 
 /**
  * The proffy time component properties
@@ -15,13 +15,10 @@ export interface TimeProps {
 
 /**
  * The proffy time component
+ *
  * It is used to display which day the proffy works
  */
-const Time: React.FC<TimeProps> = ({
-    weekDay,
-    from,
-    to
-}: TimeProps): JSX.Element => {
+const Time: React.FC = (): JSX.Element => {
     return (
         //#region JSX
 
