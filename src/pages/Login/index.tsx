@@ -77,12 +77,12 @@ const LoginPage: React.FC = () => {
     /**
      * Function that will be called when the component starts
      */
-    async function initialize(): Promise<void> {
-        const token = await SecureStore.getItemAsync('token')
-        if (token === null) return
-        await setMeInApplicationState(token)
-        navigateToLanding()
-    }
+    // async function initialize(): Promise<void> {
+    //     const token = await SecureStore.getItemAsync('token')
+    //     if (token === null) return
+    //     await setMeInApplicationState(token)
+    //     navigateToLanding()
+    // }
 
     /**
      * Function that can check the user email and password
