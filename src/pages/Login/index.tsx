@@ -54,7 +54,9 @@ const LoginPage: React.FC = () => {
 
     const dispatch = useDispatch<Dispatch<UserActions>>()
 
+    const [validated, setValidated] = useState(true)
     const [inputValid, setInputValid] = useState(false)
+
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -69,23 +71,28 @@ const LoginPage: React.FC = () => {
     //#region Functions
 
     async function signIn(): Promise<void> {
-        const loginResponse = await api.post<TokenProxy>('/auth/local', {
-            email,
-            password
-        })
+        try {
+            const loginResponse = await api.post<TokenProxy>('/auth/local', {
+                email,
+                password
+            })
 
-        const token = loginResponse.data.token
-        await SecureStore.setItemAsync('token', token)
+            const token = loginResponse.data.token
+            await SecureStore.setItemAsync('token', token)
 
-        const getMeResponse = await api.get<UserProxy>('/users/me', {
-            headers: {
-                // Authorization: token
-            }
-        })
+            const getMeResponse = await api.get<UserProxy>('/users/me', {
+                headers: {
+                    Authorization: token
+                }
+            })
 
-        dispatch(setMe(getMeResponse.data))
+            dispatch(setMe(getMeResponse.data))
 
-        navigation.replace('LandingPage')
+            navigation.replace('LandingPage')
+        } catch (exception) {
+            setValidated(false)
+            console.log(exception)
+        }
     }
 
     //#endregion
@@ -120,6 +127,7 @@ const LoginPage: React.FC = () => {
                     </LoginHeaderView>
                     <View>
                         <AuthenticationTextInput
+                            validated={validated}
                             keyboardType="email-address"
                             placeholder="E-mail"
                             colorTheme="#8257e5"
@@ -128,9 +136,13 @@ const LoginPage: React.FC = () => {
                                 borderTopLeftRadius: 10,
                                 borderTopRightRadius: 10
                             }}
-                            onChangeText={setEmail}
+                            onChangeText={(text: string) => {
+                                setEmail(text)
+                                setValidated(true)
+                            }}
                         />
                         <AuthenticationTextInput
+                            validated={validated}
                             secureTextEntry
                             placeholder="Senha"
                             colorTheme="#8257e5"
@@ -138,7 +150,10 @@ const LoginPage: React.FC = () => {
                                 borderBottomLeftRadius: 10,
                                 borderBottomRightRadius: 10
                             }}
-                            onChangeText={setPassword}
+                            onChangeText={(text: string) => {
+                                setPassword(text)
+                                setValidated(true)
+                            }}
                         />
                     </View>
                     <PasswordStoreView>
