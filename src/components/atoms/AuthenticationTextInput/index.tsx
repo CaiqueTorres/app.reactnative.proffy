@@ -25,6 +25,7 @@ import { isStringEmpty } from '../../../utils/validation'
  * The authentication text input props
  */
 export interface AuthenticationTextInputProps extends TextInputProps {
+    readonly validated?: boolean
     readonly duration?: number
     readonly colorTheme?: string
     readonly style?: StyleProp<ViewStyle>
@@ -36,6 +37,7 @@ export interface AuthenticationTextInputProps extends TextInputProps {
  * It component will be used in login, signup and forgot password screens
  */
 const AuthenticationTextInput: React.FC<AuthenticationTextInputProps> = ({
+    validated = true,
     secureTextEntry,
     duration = 200,
     onFocus,
@@ -164,11 +166,12 @@ const AuthenticationTextInput: React.FC<AuthenticationTextInputProps> = ({
             <NonInteractableView pointerEvents="none">
                 <PlaceholderText
                     style={{
+                        color: validated ? '#9c98a6' : '#E83F5B',
                         top: animatedPlaceholderPosition,
                         fontSize: animatedPlaceholderTextSize
                     }}
                 >
-                    {placeholder}
+                    {validated ? placeholder : 'Erro de confirmação'}
                 </PlaceholderText>
                 <LineView
                     style={{
