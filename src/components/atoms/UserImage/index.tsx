@@ -18,7 +18,7 @@ const UserImage: React.FC<UserImageProps> = ({
 
         <ImageView size={size}>
             {!imageUri ? (
-                <Ionicons name="md-person" size={100} color="#6A6180" />
+                <Ionicons name="md-person" size={size - 10} color="#6A6180" />
             ) : (
                 <ProfileImage source={{ uri: imageUri }} size={size} />
             )}
