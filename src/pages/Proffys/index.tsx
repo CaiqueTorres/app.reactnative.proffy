@@ -18,6 +18,9 @@ import Header from '../../components/atoms/Header'
 import { AppStackParamsList } from '../../navigations/appStack'
 import Filter from './Filter'
 
+/**
+ * The main app's proffys page
+ */
 const ProffysPage: React.FC = (): JSX.Element => {
     const navigation = useNavigation<
         StackNavigationProp<AppStackParamsList, 'GiveClassesPage'>

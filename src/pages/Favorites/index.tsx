@@ -17,6 +17,9 @@ import Header from '../../components/atoms/Header'
 
 import { AppStackParamsList } from '../../navigations/appStack'
 
+/**
+ * The app's main favorited proffys page
+ */
 const FavoritesPage: React.FC = (): JSX.Element => {
     const navigation = useNavigation<
         StackNavigationProp<AppStackParamsList, 'GiveClassesPage'>

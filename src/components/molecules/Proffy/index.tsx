@@ -38,6 +38,7 @@ export interface ProffyProps {
 
 /**
  * The main app's proffy component
+ *
  * It is used in the Proffys page and in the Favorites page
  */
 const Proffy: React.FC<ProffyProps> = ({

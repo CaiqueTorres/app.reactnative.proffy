@@ -23,6 +23,7 @@ export interface ProfileImageProps {
 
 /**
  * The app's main profile image
+ *
  * It can pick some image from gallery as set it as the profile image
  */
 const ProfileImage: React.FC<ProfileImageProps> = ({
