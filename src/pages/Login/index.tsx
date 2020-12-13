@@ -63,7 +63,7 @@ const LoginPage: React.FC = () => {
     //#region Effects
 
     useEffect(() => {
-        initialize()
+        // initialize()
     }, [])
 
     useEffect(() => {
@@ -93,12 +93,9 @@ const LoginPage: React.FC = () => {
                 email,
                 password
             })
-
             const token = loginResponse.data.token
             await SecureStore.setItemAsync('token', token)
-
             await setMeInApplicationState(token)
-
             navigateToLanding()
         } catch (exception) {
             setValidated(false)
@@ -113,7 +110,7 @@ const LoginPage: React.FC = () => {
     async function setMeInApplicationState(token: string) {
         const getMeResponse = await api.get<UserProxy>('/users/me', {
             headers: {
-                Authorization: token
+                Authorization: 'Bearer ' + token
             }
         })
         dispatch(setMe(getMeResponse.data))
