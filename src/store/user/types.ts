@@ -9,6 +9,7 @@ export interface UserState {
 
 /**
  * The user action types
+ *
  * It is used to call some functionalities in the project related with the user
  */
 export enum UserActionTypes {

@@ -15,6 +15,7 @@ export interface TimeProps {
 
 /**
  * The proffy time component
+ *
  * It is used to display which day the proffy works
  */
 const Time: React.FC = (): JSX.Element => {

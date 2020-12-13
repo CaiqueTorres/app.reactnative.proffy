@@ -19,7 +19,10 @@ export type AppStackParamsList = {
     readonly OnboardingPage: undefined
     readonly LoginPage: undefined
     readonly FirstSignUpPage: undefined
-    readonly SecondSignUpPage: undefined
+    readonly SecondSignUpPage: {
+        readonly name: string
+        readonly lastName: string
+    }
     readonly SuccessPage: SuccessPageProps
     readonly ForgotPasswordPage: undefined
     readonly LandingPage: undefined

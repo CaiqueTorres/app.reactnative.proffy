@@ -15,6 +15,9 @@ import TextInput from '../../../components/atoms/TextInput'
 
 import { WeekDay } from '../../../api/models/time/time'
 
+/**
+ * The proffy filter component
+ */
 const Filter: React.FC = (): JSX.Element => {
     const [active, toggle] = useToggle(false)
 
