@@ -63,6 +63,10 @@ const LoginPage: React.FC = () => {
     //#region Effects
 
     useEffect(() => {
+        initialize()
+    }, [])
+
+    useEffect(() => {
         setInputValid(validateEmail(email) && validatePassword(password))
     }, [email, password])
 
@@ -70,6 +74,19 @@ const LoginPage: React.FC = () => {
 
     //#region Functions
 
+    /**
+     * Function that will be called when the component starts
+     */
+    async function initialize(): Promise<void> {
+        const token = await SecureStore.getItemAsync('token')
+        if (token === null) return
+        await setMeInApplicationState(token)
+        navigateToLanding()
+    }
+
+    /**
+     * Function that can check the user email and password
+     */
     async function signIn(): Promise<void> {
         try {
             const loginResponse = await api.post<TokenProxy>('/auth/local', {
@@ -80,19 +97,33 @@ const LoginPage: React.FC = () => {
             const token = loginResponse.data.token
             await SecureStore.setItemAsync('token', token)
 
-            const getMeResponse = await api.get<UserProxy>('/users/me', {
-                headers: {
-                    Authorization: token
-                }
-            })
+            await setMeInApplicationState(token)
 
-            dispatch(setMe(getMeResponse.data))
-
-            navigation.replace('LandingPage')
+            navigateToLanding()
         } catch (exception) {
             setValidated(false)
             console.log(exception)
         }
+    }
+
+    /**
+     * Function that can save the logged user data in the application state
+     * @param token stores the user token
+     */
+    async function setMeInApplicationState(token: string) {
+        const getMeResponse = await api.get<UserProxy>('/users/me', {
+            headers: {
+                Authorization: token
+            }
+        })
+        dispatch(setMe(getMeResponse.data))
+    }
+
+    /**
+     * Function that can make the app navigate to the landing page
+     */
+    function navigateToLanding(): void {
+        navigation.replace('LandingPage')
     }
 
     //#endregion
