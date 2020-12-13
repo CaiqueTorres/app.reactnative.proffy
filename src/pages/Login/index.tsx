@@ -1,15 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { Dispatch, useEffect, useState } from 'react'
 import {
     KeyboardAvoidingView,
     TouchableWithoutFeedback,
     View
 } from 'react-native'
+import { useDispatch } from 'react-redux'
 
 import { FontAwesome } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
+import * as SecureStore from 'expo-secure-store'
 import { StatusBar } from 'expo-status-bar'
+
+import { setMe } from '../../store/user/actions'
+import { UserActions } from '../../store/user/types'
 
 import {
     ContainerSafeAreaView,
@@ -29,6 +34,9 @@ import AuthenticationTextInput from '../../components/atoms/AuthenticationTextIn
 import Button from '../../components/atoms/Button'
 import Checkbox from '../../components/atoms/Checkbox'
 
+import api from '../../api'
+import { TokenProxy } from '../../api/models/auth/tokenProxy'
+import { UserProxy } from '../../api/models/user/userProxy'
 import loginPageBackgroundImage from '../../assets/images/login/login-page-background.png'
 import logoImage from '../../assets/images/logo.png'
 import { AppStackParamsList } from '../../navigations/appStack'
@@ -44,15 +52,76 @@ const LoginPage: React.FC = () => {
         StackNavigationProp<AppStackParamsList, 'LoginPage'>
     >()
 
+    const dispatch = useDispatch<Dispatch<UserActions>>()
+
+    const [validated, setValidated] = useState(true)
     const [inputValid, setInputValid] = useState(false)
+
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
     //#region Effects
 
     useEffect(() => {
+        // initialize()
+    }, [])
+
+    useEffect(() => {
         setInputValid(validateEmail(email) && validatePassword(password))
     }, [email, password])
+
+    //#endregion
+
+    //#region Functions
+
+    /**
+     * Function that will be called when the component starts
+     */
+    async function initialize(): Promise<void> {
+        const token = await SecureStore.getItemAsync('token')
+        if (token === null) return
+        await setMeInApplicationState(token)
+        navigateToLanding()
+    }
+
+    /**
+     * Function that can check the user email and password
+     */
+    async function signIn(): Promise<void> {
+        try {
+            const loginResponse = await api.post<TokenProxy>('/auth/local', {
+                email,
+                password
+            })
+            const token = loginResponse.data.token
+            await SecureStore.setItemAsync('token', token)
+            await setMeInApplicationState(token)
+            navigateToLanding()
+        } catch (exception) {
+            setValidated(false)
+            console.log(exception)
+        }
+    }
+
+    /**
+     * Function that can save the logged user data in the application state
+     * @param token stores the user token
+     */
+    async function setMeInApplicationState(token: string) {
+        const getMeResponse = await api.get<UserProxy>('/users/me', {
+            headers: {
+                Authorization: 'Bearer ' + token
+            }
+        })
+        dispatch(setMe(getMeResponse.data))
+    }
+
+    /**
+     * Function that can make the app navigate to the landing page
+     */
+    function navigateToLanding(): void {
+        navigation.replace('LandingPage')
+    }
 
     //#endregion
 
@@ -86,6 +155,7 @@ const LoginPage: React.FC = () => {
                     </LoginHeaderView>
                     <View>
                         <AuthenticationTextInput
+                            validated={validated}
                             keyboardType="email-address"
                             placeholder="E-mail"
                             colorTheme="#8257e5"
@@ -94,9 +164,13 @@ const LoginPage: React.FC = () => {
                                 borderTopLeftRadius: 10,
                                 borderTopRightRadius: 10
                             }}
-                            onChangeText={setEmail}
+                            onChangeText={(text: string) => {
+                                setEmail(text)
+                                setValidated(true)
+                            }}
                         />
                         <AuthenticationTextInput
+                            validated={validated}
                             secureTextEntry
                             placeholder="Senha"
                             colorTheme="#8257e5"
@@ -104,7 +178,10 @@ const LoginPage: React.FC = () => {
                                 borderBottomLeftRadius: 10,
                                 borderBottomRightRadius: 10
                             }}
-                            onChangeText={setPassword}
+                            onChangeText={(text: string) => {
+                                setPassword(text)
+                                setValidated(true)
+                            }}
                         />
                     </View>
                     <PasswordStoreView>
@@ -137,9 +214,7 @@ const LoginPage: React.FC = () => {
                         style={{ height: 65 }}
                         enabledColor="#04D361"
                         textEnabledColor="#fff"
-                        onPress={() => {
-                            navigation.replace('LandingPage')
-                        }}
+                        onPress={signIn}
                     />
                 </LoginView>
             </ContainerSafeAreaView>

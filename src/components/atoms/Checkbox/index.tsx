@@ -10,6 +10,7 @@ import { ContainerView, ToggleView } from './styles'
  */
 export interface CheckboxProps {
     onPress?(value: boolean): void
+    readonly initialValue?: boolean
     readonly boxSize?: number
     readonly boxActiveColor?: string
     readonly boxDeactiveColor?: string
@@ -22,6 +23,7 @@ export interface CheckboxProps {
  * The main app's checkbox component
  */
 const Checkbox: React.FC<CheckboxProps> = ({
+    initialValue,
     onPress,
     activeIcon,
     deactiveIcon,
@@ -30,7 +32,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
     boxSize = 30,
     children
 }: CheckboxProps): JSX.Element => {
-    const [active, toggleValue] = useToggle(false)
+    const [active, toggleValue] = useToggle(initialValue)
 
     //#region Effects
 

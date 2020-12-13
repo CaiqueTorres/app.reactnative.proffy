@@ -30,7 +30,6 @@ export const NonInteractableView = styled.View`
 export const PlaceholderText = styled(Animated.Text)`
     position: absolute;
     left: 25px;
-    color: #9c98a6;
     line-height: 24px;
     font-family: Poppins_400Regular;
 `
