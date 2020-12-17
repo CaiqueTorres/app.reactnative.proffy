@@ -17,7 +17,7 @@ import {
  */
 export interface ProfileImageProps {
     readonly size?: number
-    readonly initialImageUri?: string
+    readonly defaultValue?: string
     onChangedImage?(imageUri: string): void
 }
 
@@ -28,10 +28,10 @@ export interface ProfileImageProps {
  */
 const ProfileImage: React.FC<ProfileImageProps> = ({
     size = 200,
-    initialImageUri,
+    defaultValue,
     onChangedImage
 }: ProfileImageProps): JSX.Element => {
-    const [imageUri, setImageUri] = useState(initialImageUri)
+    const [imageUri, setImageUri] = useState(defaultValue)
 
     //#region Functions
 
