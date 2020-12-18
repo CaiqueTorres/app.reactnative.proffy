@@ -58,7 +58,7 @@ const LandingPage: React.FC = (): JSX.Element => {
                         }}
                     >
                         <ProfileView>
-                            <UserImage size={40} imageUri={user?.photo} />
+                            <UserImage size={40} imageUri={user?.image} />
                             <ProfileUsernameText>
                                 {`${user?.name} ${user?.lastName}`}
                             </ProfileUsernameText>

@@ -13,6 +13,7 @@ import { TitleText, ContainerTextInput } from './styles'
  */
 export interface TextInputProps extends TextInputPropsRN {
     readonly title: string
+    readonly defaultValue?: string
     readonly viewStyle?: StyleProp<ViewStyle>
 }
 
@@ -21,6 +22,7 @@ export interface TextInputProps extends TextInputPropsRN {
  */
 const TextInput: React.FC<TextInputProps> = ({
     title,
+    defaultValue,
     viewStyle,
     ...rest
 }: TextInputProps): JSX.Element => {
@@ -29,7 +31,10 @@ const TextInput: React.FC<TextInputProps> = ({
 
         <View style={viewStyle}>
             <TitleText>{title}</TitleText>
-            <ContainerTextInput {...rest} />
+            <ContainerTextInput
+                defaultValue={defaultValue}
+                {...rest}
+            />
         </View>
 
         //#endregion

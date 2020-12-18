@@ -6,12 +6,14 @@ import { useState } from 'react'
  */
 export default function useStateAndCheck<TValue>(
     initialValue: TValue
-): [TValue, (value: TValue) => void, boolean] {
+): [TValue, (value: TValue) => void, boolean, (value: boolean) => void] {
     const [hasChanged, setHasChanged] = useState(false)
     const [value, setValue] = useState<TValue>(initialValue)
+
     const handleSetValue = (newValue: TValue): void => {
         if (!hasChanged) setHasChanged(true)
         setValue(newValue)
     }
-    return [value, handleSetValue, hasChanged]
+
+    return [value, handleSetValue, hasChanged, setHasChanged]
 }
