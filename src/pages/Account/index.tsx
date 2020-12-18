@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { Dispatch } from 'react'
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
+import { useDispatch } from 'react-redux'
 
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
+
+import { getItemAsync } from 'expo-secure-store'
+
+import { setMe } from '../../store/user/actions'
+import { UserActions } from '../../store/user/types'
 
 import useMe from '../../hooks/useMe'
 import useStateAndCheck from '../../hooks/useStateAndCheck'
@@ -12,8 +18,8 @@ import {
     ContainerScrollView,
     DetailsView,
     DetailsImageBackground,
-    DetailsTitleText,
-    DetailsSubtitleText,
+    DetailsNameText,
+    DetailsSubjectText,
     UserDataView,
     UserDataTitleText,
     UserDataTextInput,
@@ -26,7 +32,10 @@ import Button from '../../components/atoms/Button'
 import Header from '../../components/atoms/Header'
 import AvailableTimeElement from '../../components/molecules/AvailableTimeElement'
 
+import api from '../../api'
 import { TimeProps } from '../../api/models/time/time'
+import { UpdateUserPayload } from '../../api/models/user/updateUserPayload'
+import { UserProxy } from '../../api/models/user/userProxy'
 import backgroundImage from '../../assets/images/login/login-page-background.png'
 import { AppStackParamsList } from '../../navigations/appStack'
 import ProfileImage from './ProfileImage'
@@ -40,34 +49,68 @@ const AccountPage: React.FC = (): JSX.Element => {
         StackNavigationProp<AppStackParamsList, 'AccountPage'>
     >()
 
+    const dispatch = useDispatch<Dispatch<UserActions>>()
+
     const user = useMe()
 
-    const [, setImage, hasChangedImage] = useStateAndCheck('')
-    const [, setName, hasChangedName] = useStateAndCheck('')
-    const [, setLastName, hasChangedLastName] = useStateAndCheck('')
-    const [, setEmail, hasChangedEmail] = useStateAndCheck('')
-    const [, setWhatsapp, hasChangedWhatsapp] = useStateAndCheck('')
-    const [, setAbout, hasChangedAbout] = useStateAndCheck('')
-    const [, setSubject, hasChangedSubject] = useStateAndCheck('')
-    const [, setCost, hasChangedCost] = useStateAndCheck<number | undefined>(
-        undefined
-    )
+    const [
+        payload,
+        setPayload,
+        hasChangedPayload,
+        setHasChangedPayload
+    ] = useStateAndCheck<UpdateUserPayload | undefined>(undefined)
+
     const [
         timePropsList,
         setTimePropsList,
-        hasChangedTimePropsList
+        hasChangedTimePropsList,
+        setHasChangedTimePropsList
     ] = useStateAndCheck<TimeProps[]>([])
 
-    const validUserData =
-        hasChangedImage ||
-        hasChangedName ||
-        hasChangedLastName ||
-        hasChangedEmail ||
-        hasChangedWhatsapp ||
-        hasChangedAbout ||
-        hasChangedSubject ||
-        hasChangedCost ||
-        hasChangedTimePropsList
+    const validUserData = hasChangedPayload || hasChangedTimePropsList
+
+    //#region Functions
+
+    /**
+     * Function that can update the user data in the database
+     */
+    async function updateUser(): Promise<void> {
+        if (!user || !user.id) return
+
+        try {
+            const token = await getItemAsync('token')
+
+            if (!token) throw new Error('The token is null!')
+
+            await api.patch(`/users/${user.id}`, payload, {
+                headers: {
+                    Authorization: 'Bearer ' + token
+                }
+            })
+
+            setHasChangedPayload(false)
+            setHasChangedTimePropsList(false)
+
+            setMeInApplicationState(token)
+        } catch (exception) {
+            console.log(exception)
+        }
+    }
+
+    /**
+     * Function that can save the logged user data in the application state
+     * @param token stores the user token
+     */
+    async function setMeInApplicationState(token: string) {
+        const getMeResponse = await api.get<UserProxy>('/users/me', {
+            headers: {
+                Authorization: 'Bearer ' + token
+            }
+        })
+        dispatch(setMe(getMeResponse.data))
+    }
+
+    //#endregion
 
     return (
         //#region JSX
@@ -84,64 +127,114 @@ const AccountPage: React.FC = (): JSX.Element => {
                 <DetailsView>
                     <DetailsImageBackground source={backgroundImage}>
                         <ProfileImage
-                            onChangedImage={setImage}
-                            defaultValue={user?.photo}
+                            onChangedImage={(image: string) => {
+                                setPayload({
+                                    ...payload,
+                                    image
+                                })
+                            }}
+                            defaultValue={user?.image}
                         />
-                        <DetailsTitleText>Caique Torres</DetailsTitleText>
-                        <DetailsSubtitleText>Física</DetailsSubtitleText>
+
+                        <DetailsNameText>{user?.name}</DetailsNameText>
+
+                        <DetailsSubjectText>
+                            {user?.subject?.name}
+                        </DetailsSubjectText>
                     </DetailsImageBackground>
                 </DetailsView>
                 <UserDataView>
                     <UserDataTitleText>Seus dados</UserDataTitleText>
+
                     <UserDataTextInput
                         title="Nome"
                         viewStyle={{ marginVertical: 20 }}
-                        onChangeText={setName}
+                        onChangeText={(name: string) => {
+                            setPayload({
+                                ...payload,
+                                name
+                            })
+                        }}
                         defaultValue={user?.name}
                     />
+
                     <UserDataTextInput
                         title="Sobrenome"
                         viewStyle={{ marginVertical: 20 }}
-                        onChangeText={setLastName}
+                        onChangeText={(lastName: string) => {
+                            setPayload({
+                                ...payload,
+                                lastName
+                            })
+                        }}
                         defaultValue={user?.lastName}
                     />
+
                     <UserDataTextInput
                         title="E-mail"
                         keyboardType="email-address"
                         viewStyle={{ marginVertical: 20 }}
-                        onChangeText={setEmail}
+                        onChangeText={(email: string) => {
+                            setPayload({
+                                ...payload,
+                                email
+                            })
+                        }}
                         defaultValue={user?.email}
                     />
+
                     <UserDataTextInput
                         title="Whatsapp"
                         keyboardType="phone-pad"
                         viewStyle={{ marginVertical: 20 }}
-                        onChangeText={setWhatsapp}
+                        onChangeText={(whatsapp: string) => {
+                            setPayload({
+                                ...payload,
+                                whatsapp
+                            })
+                        }}
                         defaultValue={user?.whatsapp}
                     />
+
                     <UserDataTextInput
                         multiline
                         title="Sobre"
                         viewStyle={{ marginVertical: 20 }}
-                        onChangeText={setAbout}
-                        defaultValue={user?.description}
+                        onChangeText={(about: string) => {
+                            setPayload({
+                                ...payload,
+                                about
+                            })
+                        }}
+                        defaultValue={user?.about}
                     />
+
                     <UserDataTitleText>Sobre a aula</UserDataTitleText>
                     <UserDataTextInput
                         title="Matéria"
                         viewStyle={{ marginVertical: 20 }}
-                        onChangeText={setSubject}
+                        onChangeText={(subject: string) => {
+                            setPayload({
+                                ...payload,
+                                subject
+                            })
+                        }}
                         defaultValue={user?.subject?.name}
                     />
+
                     <UserDataTextInput
                         title="Custo da sua hora por aula"
                         keyboardType="decimal-pad"
                         viewStyle={{ marginVertical: 20 }}
-                        onChangeText={(newText: string) =>
-                            setCost(Number(newText))
+                        onChangeText={(cost: string) =>
+                            setPayload({
+                                ...payload,
+                                cost: Number(cost)
+                            })
                         }
-                        defaultValue={user?.price?.toString()}
+                        defaultValue={user?.cost?.toString()}
                     />
+
                     <HeaderView>
                         <TitleText>Horários disponíveis</TitleText>
                         <TouchableWithoutFeedback
@@ -184,6 +277,7 @@ const AccountPage: React.FC = (): JSX.Element => {
                             height: 65,
                             marginVertical: 10
                         }}
+                        onPress={updateUser}
                     />
                 </UserDataView>
             </ContainerScrollView>
