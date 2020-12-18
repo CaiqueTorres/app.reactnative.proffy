@@ -2,7 +2,7 @@ import React from 'react'
 
 import { ContainerView } from './styles'
 
-import { WeekDay } from '../../../../api/models/time/time'
+import { WeekDay } from '../../../../services/models/time/time'
 
 /**
  * The proffy time component properties

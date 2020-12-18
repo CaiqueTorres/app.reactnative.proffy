@@ -1,4 +1,4 @@
-import { UserProxy } from '../../api/models/user/userProxy'
+import { UserProxy } from '../../services/models/user/userProxy'
 
 /**
  * The user reducer state

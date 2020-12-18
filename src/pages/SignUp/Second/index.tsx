@@ -20,9 +20,9 @@ import {
 import AuthenticationTextInput from '../../../components/atoms/AuthenticationTextInput'
 import Button from '../../../components/atoms/Button'
 
-import api from '../../../api'
-import { UserProxy } from '../../../api/models/user/userProxy'
 import { AppStackParamsList } from '../../../navigations/appStack'
+import api from '../../../services'
+import { UserProxy } from '../../../services/models/user/userProxy'
 import { validateEmail, validatePassword } from '../../../utils/validation'
 import SignUpHeader from '../Header'
 

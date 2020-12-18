@@ -13,7 +13,7 @@ import TimePicker from '../../../components/atoms/DatePicker'
 import Dropdown from '../../../components/atoms/Dropdown'
 import TextInput from '../../../components/atoms/TextInput'
 
-import { WeekDay } from '../../../api/models/time/time'
+import { WeekDay } from '../../../services/models/time/time'
 
 /**
  * The proffy filter component
