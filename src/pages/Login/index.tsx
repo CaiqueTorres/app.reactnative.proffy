@@ -34,11 +34,10 @@ import AuthenticationTextInput from '../../components/atoms/AuthenticationTextIn
 import Button from '../../components/atoms/Button'
 import Checkbox from '../../components/atoms/Checkbox'
 
-import api from '../../api'
+import { AuthService } from '../../api/authService'
+import { UserService } from '../../api/userService'
 import loginPageBackgroundImage from '../../assets/images/login/login-page-background.png'
 import logoImage from '../../assets/images/logo.png'
-import { TokenProxy } from '../../models/auth/tokenProxy'
-import { UserProxy } from '../../models/user/userProxy'
 import { AppStackParamsList } from '../../navigations/appStack'
 import { validateEmail, validatePassword } from '../../utils/validation'
 
@@ -75,27 +74,15 @@ const LoginPage: React.FC = () => {
     //#region Functions
 
     /**
-     * Function that will be called when the component starts
-     */
-    // async function initialize(): Promise<void> {
-    //     const token = await SecureStore.getItemAsync('token')
-    //     if (token === null) return
-    //     await setMeInApplicationState(token)
-    //     navigateToLanding()
-    // }
-
-    /**
      * Function that can check the user email and password
      */
     async function signIn(): Promise<void> {
         try {
-            const loginResponse = await api.post<TokenProxy>('/auth/local', {
-                email,
-                password
-            })
-            const token = loginResponse.data.token
+            const { token } = await AuthService.login({ email, password })
+
             await SecureStore.setItemAsync('token', token)
             await setMeInApplicationState(token)
+
             navigateToLanding()
         } catch (exception) {
             setValidated(false)
@@ -108,12 +95,8 @@ const LoginPage: React.FC = () => {
      * @param token stores the user token
      */
     async function setMeInApplicationState(token: string) {
-        const getMeResponse = await api.get<UserProxy>('/users/me', {
-            headers: {
-                Authorization: 'Bearer ' + token
-            }
-        })
-        dispatch(setMe(getMeResponse.data))
+        const user = await UserService.getMe(token)
+        dispatch(setMe(user))
     }
 
     /**

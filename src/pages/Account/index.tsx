@@ -33,6 +33,7 @@ import Header from '../../components/atoms/Header'
 import AvailableTimeElement from '../../components/molecules/AvailableTimeElement'
 
 import api from '../../api'
+import { UserService } from '../../api/userService'
 import backgroundImage from '../../assets/images/login/login-page-background.png'
 import { TimeProps } from '../../models/time/time'
 import { UpdateUserPayload } from '../../models/user/updateUserPayload'
@@ -82,11 +83,7 @@ const AccountPage: React.FC = (): JSX.Element => {
 
             if (!token) throw new Error('The token is null!')
 
-            await api.patch(`/users/${user.id}`, payload, {
-                headers: {
-                    Authorization: 'Bearer ' + token
-                }
-            })
+            UserService.updateUser(user.id, payload, token)
 
             setHasChangedPayload(false)
             setHasChangedTimePropsList(false)
