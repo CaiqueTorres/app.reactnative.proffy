@@ -34,12 +34,12 @@ import AuthenticationTextInput from '../../components/atoms/AuthenticationTextIn
 import Button from '../../components/atoms/Button'
 import Checkbox from '../../components/atoms/Checkbox'
 
+import api from '../../api'
 import loginPageBackgroundImage from '../../assets/images/login/login-page-background.png'
 import logoImage from '../../assets/images/logo.png'
+import { TokenProxy } from '../../models/auth/tokenProxy'
+import { UserProxy } from '../../models/user/userProxy'
 import { AppStackParamsList } from '../../navigations/appStack'
-import api from '../../services'
-import { TokenProxy } from '../../services/models/auth/tokenProxy'
-import { UserProxy } from '../../services/models/user/userProxy'
 import { validateEmail, validatePassword } from '../../utils/validation'
 
 /**
