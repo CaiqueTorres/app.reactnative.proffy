@@ -62,10 +62,6 @@ const LoginPage: React.FC = () => {
     //#region Effects
 
     useEffect(() => {
-        // initialize()
-    }, [])
-
-    useEffect(() => {
         setInputValid(validateEmail(email) && validatePassword(password))
     }, [email, password])
 
