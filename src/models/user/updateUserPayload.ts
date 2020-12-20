@@ -5,6 +5,6 @@ export interface UpdateUserPayload {
     about?: string
     lastName?: string
     whatsapp?: string
-    subject?: string
+    subjectId?: number
     cost?: number
 }
