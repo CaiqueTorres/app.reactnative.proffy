@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { PickerProps } from 'react-native'
+import { PickerProps, StyleProp, ViewStyle } from 'react-native'
 
 import { ContainerView, TitleText, PickerView, ContainerPicker } from './styles'
 
@@ -7,8 +7,9 @@ import { ContainerView, TitleText, PickerView, ContainerPicker } from './styles'
  * The main app's dropdown component properties
  */
 export interface DropdownProps extends PickerProps {
-    defaultValue?: string | number | undefined
     title?: string
+    defaultValue?: string | number | undefined
+    style?: StyleProp<ViewStyle>
     children?: JSX.Element[]
 }
 
@@ -18,6 +19,7 @@ export interface DropdownProps extends PickerProps {
 const Dropdown: React.FC<DropdownProps> = ({
     defaultValue,
     title,
+    style,
     children,
     onValueChange,
     ...rest
@@ -46,7 +48,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     return (
         //#region JSX
 
-        <ContainerView>
+        <ContainerView style={style}>
             <TitleText>{title}</TitleText>
             <PickerView>
                 <ContainerPicker
