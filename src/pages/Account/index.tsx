@@ -104,6 +104,7 @@ const AccountPage: React.FC = (): JSX.Element => {
                 Authorization: 'Bearer ' + token
             }
         })
+
         dispatch(setMe(getMeResponse.data))
     }
 
