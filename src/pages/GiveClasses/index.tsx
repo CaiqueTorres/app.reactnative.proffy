@@ -115,7 +115,7 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
             setHasChangedPayload(false)
             setHasChangedTimePropsList(false)
 
-            setMeInApplicationState(token)
+            setMeInRootState(token)
 
             navigateToSuccessPage()
         } catch (exception) {
@@ -127,7 +127,7 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
      * Function that can save the logged user data in the application state
      * @param token stores the user token
      */
-    async function setMeInApplicationState(token: string) {
+    async function setMeInRootState(token: string) {
         const getMeResponse = await api.get<UserProxy>('/users/me', {
             headers: {
                 Authorization: 'Bearer ' + token
@@ -137,6 +137,9 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
         dispatch(setMe(getMeResponse.data))
     }
 
+    /**
+     * Function that can make the app push the success page
+     */
     function navigateToSuccessPage(): void {
         navigation.push('SuccessPage', {
             title: 'Cadastro Salvo!',

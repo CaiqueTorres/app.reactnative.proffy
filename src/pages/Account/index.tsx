@@ -100,7 +100,7 @@ const AccountPage: React.FC = (): JSX.Element => {
             setHasChangedPayload(false)
             setHasChangedTimePropsList(false)
 
-            setMeInApplicationState(token)
+            setMeInRootState(token)
         } catch (exception) {
             console.log(exception)
         }
@@ -110,7 +110,7 @@ const AccountPage: React.FC = (): JSX.Element => {
      * Function that can save the logged user data in the application state
      * @param token stores the user token
      */
-    async function setMeInApplicationState(token: string) {
+    async function setMeInRootState(token: string) {
         const getMeResponse = await api.get<UserProxy>('/users/me', {
             headers: {
                 Authorization: 'Bearer ' + token
