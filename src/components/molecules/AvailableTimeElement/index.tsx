@@ -11,7 +11,7 @@ import {
     DeleteLine
 } from './styles'
 
-import { TimeProps, WeekDay } from '../../../api/models/time/time'
+import { TimeProps, WeekDay } from '../../../models/time/time'
 import TimePicker from '../../atoms/DatePicker'
 import Dropdown from '../../atoms/Dropdown'
 

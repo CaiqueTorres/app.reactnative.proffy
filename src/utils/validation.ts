@@ -1,11 +1,11 @@
-import { TimeProps } from '../api/models/time/time'
+import { TimeProps } from '../models/time/time'
 
 /**
  * Function that can validate if a text is null or empty
  * @param text stores the text string
  */
-export function isStringEmpty(text: string): boolean {
-    return text.length === 0
+export function isStringEmpty(text: string | undefined | null): boolean {
+    return !text || text.length === 0
 }
 
 /**

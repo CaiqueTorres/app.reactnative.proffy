@@ -26,7 +26,7 @@ export const DetailsImageBackground = styled.ImageBackground`
     width: 100%;
 `
 
-export const DetailsTitleText = styled.Text`
+export const DetailsNameText = styled.Text`
     color: #fff;
     font-family: Archivo_400Regular;
     font-size: 24px;
@@ -34,7 +34,7 @@ export const DetailsTitleText = styled.Text`
     line-height: 32px;
 `
 
-export const DetailsSubtitleText = styled.Text`
+export const DetailsSubjectText = styled.Text`
     color: #d4c2ff;
     font-family: Poppins_400Regular;
     font-size: 16px;
