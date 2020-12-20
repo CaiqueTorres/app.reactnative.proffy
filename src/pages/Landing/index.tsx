@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { Dispatch, useEffect } from 'react'
 import { TouchableWithoutFeedback, View } from 'react-native'
+import { useDispatch } from 'react-redux'
 
 import { Feather } from '@expo/vector-icons'
 import { AntDesign } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
+import { getItemAsync } from 'expo-secure-store'
 import { StatusBar } from 'expo-status-bar'
+
+import { setSubjects } from '../../store/subjects/actions'
+import { SubjectActions } from '../../store/subjects/types'
 
 import useMe from '../../hooks/useMe'
 
@@ -29,6 +34,7 @@ import {
 
 import UserImage from '../../components/atoms/UserImage'
 
+import { SubjectService } from '../../api/subjectService'
 import landingImage from '../../assets/images/landing.png'
 import giveClassesIcon from '../../assets/images/onboarding/give-classes.png'
 import studyIcon from '../../assets/images/onboarding/study.png'
@@ -43,7 +49,34 @@ const LandingPage: React.FC = (): JSX.Element => {
         StackNavigationProp<AppStackParamsList, 'LandingPage'>
     >()
 
+    const dispatch = useDispatch<Dispatch<SubjectActions>>()
+
     const user = useMe()
+
+    //#region Effects
+
+    useEffect(() => {
+        setSubjectsInRootState()
+    }, [])
+
+    //#endregion
+
+    //#region Functions
+
+    /**
+     * Function that can set all the subjects that will be return of the api
+     * in the redux state
+     */
+    async function setSubjectsInRootState(): Promise<void> {
+        const token = await getItemAsync('token')
+
+        if (!token) throw new Error('The token is null!')
+
+        const subjects = await SubjectService.getAllSubjectsAsArray(token)
+        dispatch(setSubjects(subjects))
+    }
+
+    //#endregion
 
     return (
         //#region JSX
