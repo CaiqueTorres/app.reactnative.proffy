@@ -1,4 +1,4 @@
-import { TimeProps } from '../api/models/time/time'
+import { TimeProps } from '../models/time/time'
 
 /**
  * Function that can validate if a text is null or empty

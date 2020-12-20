@@ -2,6 +2,7 @@ import React, { Dispatch } from 'react'
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import { useDispatch } from 'react-redux'
 
+import { Picker } from '@react-native-community/picker'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
@@ -12,6 +13,7 @@ import { UserActions } from '../../store/user/types'
 
 import useMe from '../../hooks/useMe'
 import useStateAndCheck from '../../hooks/useStateAndCheck'
+import useSubjects from '../../hooks/useSubjects'
 
 import {
     ContainerSafeAreaView,
@@ -29,14 +31,17 @@ import {
 } from './styles'
 
 import Button from '../../components/atoms/Button'
+import Dropdown from '../../components/atoms/Dropdown'
 import Header from '../../components/atoms/Header'
 import AvailableTimeElement from '../../components/molecules/AvailableTimeElement'
 
 import api from '../../api'
-import { TimeProps } from '../../api/models/time/time'
-import { UpdateUserPayload } from '../../api/models/user/updateUserPayload'
-import { UserProxy } from '../../api/models/user/userProxy'
+import { UserService } from '../../api/userService'
 import backgroundImage from '../../assets/images/login/login-page-background.png'
+import { SubjectProxy } from '../../models/subject/subjectProxy'
+import { TimeProps } from '../../models/time/time'
+import { UpdateUserPayload } from '../../models/user/updateUserPayload'
+import { UserProxy } from '../../models/user/userProxy'
 import { AppStackParamsList } from '../../navigations/appStack'
 import ProfileImage from './ProfileImage'
 import uuid from 'uuid-random'
@@ -52,6 +57,14 @@ const AccountPage: React.FC = (): JSX.Element => {
     const dispatch = useDispatch<Dispatch<UserActions>>()
 
     const user = useMe()
+
+    const subjectsList: SubjectProxy[] = [
+        {
+            id: 0,
+            name: 'Selecione'
+        },
+        ...(useSubjects() ?? [])
+    ]
 
     const [
         payload,
@@ -82,11 +95,7 @@ const AccountPage: React.FC = (): JSX.Element => {
 
             if (!token) throw new Error('The token is null!')
 
-            await api.patch(`/users/${user.id}`, payload, {
-                headers: {
-                    Authorization: 'Bearer ' + token
-                }
-            })
+            await UserService.updateUser(user.id, payload, token)
 
             setHasChangedPayload(false)
             setHasChangedTimePropsList(false)
@@ -107,6 +116,7 @@ const AccountPage: React.FC = (): JSX.Element => {
                 Authorization: 'Bearer ' + token
             }
         })
+
         dispatch(setMe(getMeResponse.data))
     }
 
@@ -210,17 +220,27 @@ const AccountPage: React.FC = (): JSX.Element => {
                     />
 
                     <UserDataTitleText>Sobre a aula</UserDataTitleText>
-                    <UserDataTextInput
+
+                    <Dropdown
                         title="Matéria"
-                        viewStyle={{ marginVertical: 20 }}
-                        onChangeText={(subject: string) => {
+                        defaultValue={user?.subject?.id}
+                        onValueChange={(itemValue: unknown) => {
+                            const numberValue = Number(itemValue)
                             setPayload({
                                 ...payload,
-                                subject
+                                subjectId:
+                                    numberValue === 0 ? undefined : numberValue
                             })
                         }}
-                        defaultValue={user?.subject?.name}
-                    />
+                    >
+                        {subjectsList?.map((subject) => (
+                            <Picker.Item
+                                key={subject.id}
+                                label={subject.name}
+                                value={subject.id}
+                            />
+                        ))}
+                    </Dropdown>
 
                     <UserDataTextInput
                         title="Custo da sua hora por aula"
