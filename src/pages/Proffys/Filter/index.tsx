@@ -5,14 +5,15 @@ import { Feather } from '@expo/vector-icons'
 import { MaterialIcons } from '@expo/vector-icons'
 import { Picker } from '@react-native-community/picker'
 
+import useSubjects from '../../../hooks/useSubjects'
 import useToggle from '../../../hooks/useToggle'
 
 import { ContainerView, FilterText, DropdownsView, TimeView } from './styles'
 
 import TimePicker from '../../../components/atoms/DatePicker'
 import Dropdown from '../../../components/atoms/Dropdown'
-import TextInput from '../../../components/atoms/TextInput'
 
+import { SubjectProxy } from '../../../models/subject/subjectProxy'
 import { WeekDay } from '../../../models/time/time'
 
 /**
@@ -20,6 +21,14 @@ import { WeekDay } from '../../../models/time/time'
  */
 const Filter: React.FC = (): JSX.Element => {
     const [active, toggle] = useToggle(false)
+
+    const subjectsList: SubjectProxy[] = [
+        {
+            id: 0,
+            name: 'Selecione'
+        },
+        ...(useSubjects() ?? [])
+    ]
 
     return (
         //#region JSX
@@ -41,19 +50,21 @@ const Filter: React.FC = (): JSX.Element => {
 
             {active && (
                 <DropdownsView>
-                    <TextInput
-                        title="Matéria"
-                        style={{
-                            height: 70,
-                            paddingLeft: 30,
-                            borderRadius: 8
-                        }}
-                    />
+                    <Dropdown title="Matéria" defaultValue={0}>
+                        {subjectsList?.map((subject) => (
+                            <Picker.Item
+                                key={subject.id}
+                                label={subject.name}
+                                value={subject.id}
+                            />
+                        ))}
+                    </Dropdown>
+
                     <TimeView>
                         <Dropdown
                             title="Dia da semana"
                             defaultValue={WeekDay.MONDAY}
-                            style={{ width: '60%' }}
+                            style={{ width: '70%' }}
                         >
                             <Picker.Item
                                 label={WeekDay.MONDAY}
