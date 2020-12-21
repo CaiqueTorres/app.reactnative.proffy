@@ -21,7 +21,7 @@ import AuthenticationTextInput from '../../../components/atoms/AuthenticationTex
 import Button from '../../../components/atoms/Button'
 
 import api from '../../../api'
-import { UserProxy } from '../../../api/models/user/userProxy'
+import { UserProxy } from '../../../models/user/userProxy'
 import { AppStackParamsList } from '../../../navigations/appStack'
 import { validateEmail, validatePassword } from '../../../utils/validation'
 import SignUpHeader from '../Header'

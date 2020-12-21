@@ -8,9 +8,9 @@ const initialState: UserState = {
 }
 
 /**
- * The reducer that will controll the data in the user state
- * @param state the new user state
- * @param action the action that is being called
+ * The reducer that will control the data in the user state
+ * @param state stores the new user state
+ * @param action stores the action that is being called
  */
 export function userReducer(
     state = initialState,

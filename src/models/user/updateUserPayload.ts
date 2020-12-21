@@ -1,11 +1,10 @@
 export interface UpdateUserPayload {
-    photo?: string
+    image?: string
     name?: string
-    lastName?: string
     email?: string
-    roles?: string
+    about?: string
+    lastName?: string
     whatsapp?: string
-    description?: string
     subjectId?: number
-    price?: number
+    cost?: number
 }
