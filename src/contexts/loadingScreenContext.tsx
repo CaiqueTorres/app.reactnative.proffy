@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { createContext } from 'react'
 
+import LoadingScreen from '../components/molecules/LoadingScreen'
+
 export interface LoadingScreenData {
-    enabled: boolean
-    setEnabled: (value: boolean) => void
+    enabledLoading: boolean
+    setEnabledLoading: (value: boolean) => void
 }
 
 export interface LoadingScreenProviderProps {
@@ -17,13 +19,23 @@ export const LoadingScreenContext = createContext<LoadingScreenData>(
 export const LoadingScreenProvider: React.FC<LoadingScreenProviderProps> = ({
     children
 }: LoadingScreenProviderProps): JSX.Element => {
-    const [enabled, setEnabled] = useState(false)
+    const [enabledLoading, setEnabledLoading] = useState(false)
 
     return (
         //#region JSX
 
-        <LoadingScreenContext.Provider value={{ enabled, setEnabled }}>
+        <LoadingScreenContext.Provider
+            value={{
+                enabledLoading,
+                setEnabledLoading
+            }}
+        >
             {children}
+            <LoadingScreen
+                animationType="fade"
+                transparent={true}
+                visible={enabledLoading}
+            />
         </LoadingScreenContext.Provider>
 
         //#endregion
