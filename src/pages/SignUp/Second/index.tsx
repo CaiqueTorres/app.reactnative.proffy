@@ -9,6 +9,10 @@ import { StatusBar } from 'expo-status-bar'
 
 import * as UserService from '../../../services/userService'
 
+import { LoadingScreenContext } from '../../../contexts/loadingScreenContext'
+
+import { AppStackParamsList } from '../../../navigations/appStack'
+
 import {
     ContainerSafeAreaView,
     TitleView,
@@ -22,9 +26,8 @@ import {
 import AuthenticationTextInput from '../../../components/atoms/AuthenticationTextInput'
 import Button from '../../../components/atoms/Button'
 
-import { LoadingScreenContext } from '../../../contexts/loadingScreenContext'
-import { AppStackParamsList } from '../../../navigations/appStack'
 import { validateEmail, validatePassword } from '../../../utils/validation'
+
 import SignUpHeader from '../Header'
 
 /**

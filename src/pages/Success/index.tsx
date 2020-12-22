@@ -5,6 +5,8 @@ import { StackNavigationProp } from '@react-navigation/stack'
 
 import { StatusBar } from 'expo-status-bar'
 
+import { AppStackParamsList } from '../../navigations/appStack'
+
 import {
     ContainerView,
     SuccessImage,
@@ -16,9 +18,8 @@ import {
 
 import Button from '../../components/atoms/Button'
 
-import backgroundImage from '../../assets/images/success/background.png'
-import successIcon from '../../assets/images/success/success.png'
-import { AppStackParamsList } from '../../navigations/appStack'
+import backgroundImage from '../../assets/success/background.png'
+import successIcon from '../../assets/success/success.png'
 
 /**
  * The app's generic succes page properties

@@ -4,6 +4,8 @@ import Emoji from 'react-native-emoji'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
+import { AppStackParamsList } from '../../navigations/appStack'
+
 import {
     ContainerSafeAreaView,
     ChildrenView,
@@ -15,7 +17,6 @@ import {
 
 import Header from '../../components/atoms/Header'
 
-import { AppStackParamsList } from '../../navigations/appStack'
 import Filter from './Filter'
 
 /**

@@ -21,6 +21,10 @@ import useMe from '../../hooks/useMe'
 import useStateAndCheck from '../../hooks/useStateAndCheck'
 import useSubjects from '../../hooks/useSubjects'
 
+import { LoadingScreenContext } from '../../contexts/loadingScreenContext'
+
+import { AppStackParamsList } from '../../navigations/appStack'
+
 import {
     ContainerSafeAreaView,
     DetailsView,
@@ -43,8 +47,6 @@ import Dropdown from '../../components/atoms/Dropdown'
 import Header from '../../components/atoms/Header'
 import AvailableTimeElement from '../../components/molecules/AvailableTimeElement'
 
-import { LoadingScreenContext } from '../../contexts/loadingScreenContext'
-import { AppStackParamsList } from '../../navigations/appStack'
 import uuid from 'uuid-random'
 
 interface PartialUpdateUserPayload {
