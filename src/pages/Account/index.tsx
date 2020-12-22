@@ -35,7 +35,7 @@ import Dropdown from '../../components/atoms/Dropdown'
 import Header from '../../components/atoms/Header'
 import AvailableTimeElement from '../../components/molecules/AvailableTimeElement'
 
-import { UserService } from '../../api/userService'
+import * as UserService from '../../api/userService'
 import backgroundImage from '../../assets/images/login/login-page-background.png'
 import { SubjectProxy } from '../../models/subject/subjectProxy'
 import { TimeProps } from '../../models/time/time'

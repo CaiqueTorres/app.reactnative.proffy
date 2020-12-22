@@ -34,7 +34,7 @@ import {
 
 import UserImage from '../../components/atoms/UserImage'
 
-import { SubjectService } from '../../api/subjectService'
+import * as SubjectService from '../../api/subjectService'
 import landingImage from '../../assets/images/landing.png'
 import giveClassesIcon from '../../assets/images/onboarding/give-classes.png'
 import studyIcon from '../../assets/images/onboarding/study.png'

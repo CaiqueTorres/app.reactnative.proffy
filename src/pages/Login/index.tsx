@@ -34,8 +34,8 @@ import AuthenticationTextInput from '../../components/atoms/AuthenticationTextIn
 import Button from '../../components/atoms/Button'
 import Checkbox from '../../components/atoms/Checkbox'
 
-import { AuthService } from '../../api/authService'
-import { UserService } from '../../api/userService'
+import * as AuthService from '../../api/authService'
+import * as UserService from '../../api/userService'
 import loginPageBackgroundImage from '../../assets/images/login/login-page-background.png'
 import logoImage from '../../assets/images/logo.png'
 import { AppStackParamsList } from '../../navigations/appStack'
