@@ -1,4 +1,4 @@
-import React, { Dispatch, useEffect, useState } from 'react'
+import React, { Dispatch, useContext, useEffect, useState } from 'react'
 import {
     KeyboardAvoidingView,
     TouchableWithoutFeedback,
@@ -12,6 +12,9 @@ import { StackNavigationProp } from '@react-navigation/stack'
 
 import * as SecureStore from 'expo-secure-store'
 import { StatusBar } from 'expo-status-bar'
+
+import * as AuthService from '../../services/authService'
+import * as UserService from '../../services/userService'
 
 import { setMe } from '../../store/user/actions'
 import { UserActions } from '../../store/user/types'
@@ -34,10 +37,9 @@ import AuthenticationTextInput from '../../components/atoms/AuthenticationTextIn
 import Button from '../../components/atoms/Button'
 import Checkbox from '../../components/atoms/Checkbox'
 
-import { AuthService } from '../../api/authService'
-import { UserService } from '../../api/userService'
 import loginPageBackgroundImage from '../../assets/images/login/login-page-background.png'
 import logoImage from '../../assets/images/logo.png'
+import { LoadingScreenContext } from '../../contexts/loadingScreenContext'
 import { AppStackParamsList } from '../../navigations/appStack'
 import { validateEmail, validatePassword } from '../../utils/validation'
 
@@ -52,6 +54,8 @@ const LoginPage: React.FC = () => {
     >()
 
     const dispatch = useDispatch<Dispatch<UserActions>>()
+
+    const { setEnabledLoading } = useContext(LoadingScreenContext)
 
     const [validated, setValidated] = useState(true)
     const [inputValid, setInputValid] = useState(false)
@@ -73,6 +77,8 @@ const LoginPage: React.FC = () => {
      * Function that can check the user email and password
      */
     async function signIn(): Promise<void> {
+        setEnabledLoading(true)
+
         try {
             const { token } = await AuthService.login({ email, password })
 
@@ -83,6 +89,8 @@ const LoginPage: React.FC = () => {
         } catch (exception) {
             setValidated(false)
             console.log(exception)
+        } finally {
+            setEnabledLoading(false)
         }
     }
 

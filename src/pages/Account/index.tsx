@@ -1,4 +1,4 @@
-import React, { Dispatch } from 'react'
+import React, { Dispatch, useContext } from 'react'
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import { useDispatch } from 'react-redux'
 
@@ -7,6 +7,12 @@ import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
 import { getItemAsync } from 'expo-secure-store'
+
+import { SubjectProxy } from '../../models/subject/subjectProxy'
+import { TimeProps } from '../../models/time/time'
+import { UpdateUserPayload } from '../../models/user/updateUserPayload'
+
+import * as UserService from '../../services/userService'
 
 import { setMe } from '../../store/user/actions'
 import { UserActions } from '../../store/user/types'
@@ -35,13 +41,8 @@ import Dropdown from '../../components/atoms/Dropdown'
 import Header from '../../components/atoms/Header'
 import AvailableTimeElement from '../../components/molecules/AvailableTimeElement'
 
-import api from '../../api'
-import { UserService } from '../../api/userService'
 import backgroundImage from '../../assets/images/login/login-page-background.png'
-import { SubjectProxy } from '../../models/subject/subjectProxy'
-import { TimeProps } from '../../models/time/time'
-import { UpdateUserPayload } from '../../models/user/updateUserPayload'
-import { UserProxy } from '../../models/user/userProxy'
+import { LoadingScreenContext } from '../../contexts/loadingScreenContext'
 import { AppStackParamsList } from '../../navigations/appStack'
 import ProfileImage from './ProfileImage'
 import uuid from 'uuid-random'
@@ -55,6 +56,8 @@ const AccountPage: React.FC = (): JSX.Element => {
     >()
 
     const dispatch = useDispatch<Dispatch<UserActions>>()
+
+    const { setEnabledLoading } = useContext(LoadingScreenContext)
 
     const user = useMe()
 
@@ -90,6 +93,7 @@ const AccountPage: React.FC = (): JSX.Element => {
     async function updateUser(): Promise<void> {
         if (!user || !user.id) return
 
+        setEnabledLoading(true)
         try {
             const token = await getItemAsync('token')
 
@@ -103,6 +107,8 @@ const AccountPage: React.FC = (): JSX.Element => {
             setMeInRootState(token)
         } catch (exception) {
             console.log(exception)
+        } finally {
+            setEnabledLoading(false)
         }
     }
 
@@ -111,13 +117,8 @@ const AccountPage: React.FC = (): JSX.Element => {
      * @param token stores the user token
      */
     async function setMeInRootState(token: string) {
-        const getMeResponse = await api.get<UserProxy>('/users/me', {
-            headers: {
-                Authorization: 'Bearer ' + token
-            }
-        })
-
-        dispatch(setMe(getMeResponse.data))
+        const me = await UserService.getMe(token)
+        dispatch(setMe(me))
     }
 
     //#endregion
