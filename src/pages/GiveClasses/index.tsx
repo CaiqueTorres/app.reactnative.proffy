@@ -58,6 +58,8 @@ interface PartialUpdateUserPayload {
  * Tha main app's give classes page
  */
 const GiveClassesPage: React.FC = (): JSX.Element => {
+    //#region States
+
     const navigation = useNavigation<
         StackNavigationProp<AppStackParamsList, 'GiveClassesPage'>
     >()
@@ -99,6 +101,8 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
         (hasChangedPayload || hasChangedTimePropsList) &&
         payload &&
         Object.values(payload).every((value) => !!value)
+
+    //#endregion
 
     //#region Functions
 

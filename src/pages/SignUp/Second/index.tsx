@@ -33,6 +33,8 @@ import SignUpHeader from '../Header'
  * This page is responsible to get the user e-mail and password
  */
 const SecondSignUpPage: React.FC = (): JSX.Element => {
+    //#region States
+
     const route = useRoute<RouteProp<AppStackParamsList, 'SecondSignUpPage'>>()
     const navigation = useNavigation<
         StackNavigationProp<AppStackParamsList, 'SecondSignUpPage'>
@@ -43,6 +45,8 @@ const SecondSignUpPage: React.FC = (): JSX.Element => {
     const [valid, setValid] = useState(false)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+
+    //#endregion
 
     //#region Effects
 

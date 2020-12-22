@@ -3,6 +3,8 @@ import { ImageSourcePropType, View } from 'react-native'
 
 import { Ionicons } from '@expo/vector-icons'
 
+import { TimeProps } from '../../../models/time/time'
+
 import {
     ContainerView,
     HeaderView,
@@ -21,7 +23,6 @@ import {
     ContactRectButtonText
 } from './styles'
 
-import { TimeProps } from '../../../models/time/time'
 import LikeButton from './LikeButton'
 
 /**

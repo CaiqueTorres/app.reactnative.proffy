@@ -29,6 +29,8 @@ import SignUpHeader from '../Header'
  * This page is responsible to get the user name and last name
  */
 const FirstSignUpPage: React.FC = (): JSX.Element => {
+    //#region States
+
     const navigation = useNavigation<
         StackNavigationProp<AppStackParamsList, 'FirstSignUpPage'>
     >()
@@ -36,6 +38,8 @@ const FirstSignUpPage: React.FC = (): JSX.Element => {
     const [valid, setValid] = useState(false)
     const [name, setName] = useState('')
     const [lastName, setMiddleName] = useState('')
+
+    //#endregion
 
     //#region Effects
 

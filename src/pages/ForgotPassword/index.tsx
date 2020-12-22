@@ -34,12 +34,16 @@ import { validateEmail } from '../../utils/validation'
  * The app's forgot password page
  */
 const ForgotPasswordPage: React.FC = (): JSX.Element => {
+    //#region States
+
     const navigation = useNavigation<
         StackNavigationProp<AppStackParamsList, 'ForgotPasswordPage'>
     >()
 
     const [valid, setValid] = useState(false)
     const [email, setEmail] = useState('')
+
+    //#endregion
 
     //#region Effects
 

@@ -22,9 +22,13 @@ import Filter from './Filter'
  * The main app's proffys page
  */
 const ProffysPage: React.FC = (): JSX.Element => {
+    //#region States
+
     const navigation = useNavigation<
         StackNavigationProp<AppStackParamsList, 'GiveClassesPage'>
     >()
+
+    //#endregion
 
     return (
         //#region JSX

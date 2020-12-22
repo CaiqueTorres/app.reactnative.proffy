@@ -5,6 +5,9 @@ import { Feather } from '@expo/vector-icons'
 import { MaterialIcons } from '@expo/vector-icons'
 import { Picker } from '@react-native-community/picker'
 
+import { SubjectProxy } from '../../../models/subject/subjectProxy'
+import { WeekDay } from '../../../models/time/time'
+
 import useSubjects from '../../../hooks/useSubjects'
 import useToggle from '../../../hooks/useToggle'
 
@@ -13,13 +16,12 @@ import { ContainerView, FilterText, DropdownsView, TimeView } from './styles'
 import TimePicker from '../../../components/atoms/DatePicker'
 import Dropdown from '../../../components/atoms/Dropdown'
 
-import { SubjectProxy } from '../../../models/subject/subjectProxy'
-import { WeekDay } from '../../../models/time/time'
-
 /**
  * The proffy filter component
  */
 const Filter: React.FC = (): JSX.Element => {
+    //#region States
+
     const [active, toggle] = useToggle(false)
 
     const subjectsList: SubjectProxy[] = [
@@ -29,6 +31,8 @@ const Filter: React.FC = (): JSX.Element => {
         },
         ...(useSubjects() ?? [])
     ]
+
+    //#endregion
 
     return (
         //#region JSX

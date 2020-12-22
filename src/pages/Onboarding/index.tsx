@@ -29,6 +29,8 @@ import { AppStackParamsList } from '../../navigations/appStack'
  * The app onboarding page
  */
 const OnboadingPage: React.FC = (): JSX.Element => {
+    //#region States
+
     const navigation = useNavigation<
         StackNavigationProp<AppStackParamsList, 'OnboardingPage'>
     >()
@@ -36,6 +38,8 @@ const OnboadingPage: React.FC = (): JSX.Element => {
     const swiper = useRef<Swiper>(null)
 
     const [index, setIndex] = useState(0)
+
+    //#endregion
 
     //#region Functions
 

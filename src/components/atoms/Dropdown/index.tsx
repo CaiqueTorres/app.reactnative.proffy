@@ -24,9 +24,13 @@ const Dropdown: React.FC<DropdownProps> = ({
     onValueChange,
     ...rest
 }: DropdownProps): JSX.Element => {
+    //#region States
+
     const [value, setValue] = useState<string | number | undefined>(
         defaultValue
     )
+
+    //#endregion
 
     //#region Functions
 

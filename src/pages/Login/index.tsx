@@ -49,6 +49,8 @@ import { validateEmail, validatePassword } from '../../utils/validation'
  * This component stores all the login page style and logic
  */
 const LoginPage: React.FC = () => {
+    //#region States
+
     const navigation = useNavigation<
         StackNavigationProp<AppStackParamsList, 'LoginPage'>
     >()
@@ -62,6 +64,8 @@ const LoginPage: React.FC = () => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+
+    //#endregion
 
     //#region Effects
 

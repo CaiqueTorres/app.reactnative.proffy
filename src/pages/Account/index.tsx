@@ -51,6 +51,8 @@ import uuid from 'uuid-random'
  * The app's account page
  */
 const AccountPage: React.FC = (): JSX.Element => {
+    //#region States
+
     const navigation = useNavigation<
         StackNavigationProp<AppStackParamsList, 'AccountPage'>
     >()
@@ -84,6 +86,8 @@ const AccountPage: React.FC = (): JSX.Element => {
     ] = useStateAndCheck<TimeProps[]>([])
 
     const validUserData = hasChangedPayload || hasChangedTimePropsList
+
+    //#endregion
 
     //#region Functions
 

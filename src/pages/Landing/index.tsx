@@ -47,6 +47,8 @@ import LandingButton from './LandingButton'
  * Tha app's landing page
  */
 const LandingPage: React.FC = (): JSX.Element => {
+    //#region States
+
     const navigation = useNavigation<
         StackNavigationProp<AppStackParamsList, 'LandingPage'>
     >()
@@ -56,6 +58,8 @@ const LandingPage: React.FC = (): JSX.Element => {
     const { setEnabledLoading } = useContext(LoadingScreenContext)
 
     const user = useMe()
+
+    //#endregion
 
     //#region Effects
 

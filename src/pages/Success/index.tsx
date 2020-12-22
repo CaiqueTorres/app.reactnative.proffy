@@ -33,10 +33,14 @@ export interface SuccessPageProps {
  * The app's generic succes page
  */
 const SuccessPage: React.FC = (): JSX.Element => {
+    //#region States
+
     const route = useRoute<RouteProp<AppStackParamsList, 'SuccessPage'>>()
     const navigation = useNavigation<
         StackNavigationProp<AppStackParamsList, 'SuccessPage'>
     >()
+
+    //#endregion
 
     return (
         //#region JSX

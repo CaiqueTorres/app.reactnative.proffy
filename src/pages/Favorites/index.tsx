@@ -21,9 +21,13 @@ import { AppStackParamsList } from '../../navigations/appStack'
  * The app's main favorited proffys page
  */
 const FavoritesPage: React.FC = (): JSX.Element => {
+    //#region States
+
     const navigation = useNavigation<
         StackNavigationProp<AppStackParamsList, 'GiveClassesPage'>
     >()
+
+    //#endregion
 
     return (
         //#region JSX
