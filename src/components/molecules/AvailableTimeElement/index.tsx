@@ -3,6 +3,8 @@ import { StyleProp, TouchableWithoutFeedback, ViewStyle } from 'react-native'
 
 import { Picker } from '@react-native-community/picker'
 
+import { TimeProps, WeekDay } from '../../../models/time/time'
+
 import {
     ContainerView,
     TimeView,
@@ -11,7 +13,6 @@ import {
     DeleteLine
 } from './styles'
 
-import { TimeProps, WeekDay } from '../../../models/time/time'
 import TimePicker from '../../atoms/DatePicker'
 import Dropdown from '../../atoms/Dropdown'
 
@@ -35,7 +36,11 @@ const AvailableTimeElement: React.FC<AvailableTimeElementProps> = ({
     onClickDeleteButton,
     onChangedValue
 }: AvailableTimeElementProps): JSX.Element => {
+    //#region States
+
     const [time, setTime] = useState<TimeProps>({ weekDay })
+
+    //#endregion
 
     return (
         //#region JSX

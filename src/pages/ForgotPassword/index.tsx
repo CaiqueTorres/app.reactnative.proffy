@@ -11,6 +11,8 @@ import { StackNavigationProp } from '@react-navigation/stack'
 
 import { StatusBar } from 'expo-status-bar'
 
+import { AppStackParamsList } from '../../navigations/appStack'
+
 import {
     ContainerSafeAreaView,
     IconView,
@@ -25,15 +27,17 @@ import {
 import AuthenticationTextInput from '../../components/atoms/AuthenticationTextInput'
 import Button from '../../components/atoms/Button'
 
-import loginPageBackgroundImage from '../../assets/images/login/login-page-background.png'
-import logoImage from '../../assets/images/logo.png'
-import { AppStackParamsList } from '../../navigations/appStack'
 import { validateEmail } from '../../utils/validation'
+
+import logoImage from '../../assets/icons/logo.png'
+import loginPageBackgroundImage from '../../assets/login/login-page-background.png'
 
 /**
  * The app's forgot password page
  */
 const ForgotPasswordPage: React.FC = (): JSX.Element => {
+    //#region States
+
     const navigation = useNavigation<
         StackNavigationProp<AppStackParamsList, 'ForgotPasswordPage'>
     >()
@@ -41,11 +45,29 @@ const ForgotPasswordPage: React.FC = (): JSX.Element => {
     const [valid, setValid] = useState(false)
     const [email, setEmail] = useState('')
 
+    //#endregion
+
     //#region Effects
 
     useEffect(() => {
         setValid(validateEmail(email))
     }, [email])
+
+    //#endregion
+
+    //#region Functions
+
+    /**
+     * Function that can make the app push the success page
+     */
+    function handleNavigateToSuccessPage(): void {
+        navigation.push('SuccessPage', {
+            title: 'Redefinição enviada!',
+            subtitle:
+                'Boa, agora é só checar o e-mail que foi enviado para você redefinir sua senha e aproveitar os estudos.',
+            buttonTitle: 'Voltar ao login'
+        })
+    }
 
     //#endregion
 
@@ -91,16 +113,9 @@ const ForgotPasswordPage: React.FC = (): JSX.Element => {
                         <Button
                             enabled={valid}
                             enabledColor="#04D361"
-                            text="Concluir cadastro"
+                            text="Enviar e-mail"
                             style={{ height: 65, marginTop: 20 }}
-                            onPress={() => {
-                                navigation.push('SuccessPage', {
-                                    title: 'Redefinição enviada!',
-                                    subtitle:
-                                        'Boa, agora é só checar o e-mail que foi enviado para você redefinir sua senha e aproveitar os estudos.',
-                                    buttonTitle: 'Voltar ao login'
-                                })
-                            }}
+                            onPress={handleNavigateToSuccessPage}
                         />
                     </View>
                 </ForgotPasswordView>

@@ -30,9 +30,13 @@ const TimePicker: React.FC<TimePickerProps> = ({
     containerStyle,
     onChangeDateTime
 }: TimePickerProps): JSX.Element => {
+    //#region States
+
     const [dateText, setDateText] = useState('')
     const [date, setDate] = useState(initialDate)
     const [active, toggleValue] = useToggle(false)
+
+    //#endregion
 
     //#region Functions
 

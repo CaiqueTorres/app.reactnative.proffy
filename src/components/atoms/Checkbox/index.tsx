@@ -30,7 +30,11 @@ const Checkbox: React.FC<CheckboxProps> = ({
     boxSize = 30,
     children
 }: CheckboxProps): JSX.Element => {
+    //#region States
+
     const [active, toggleValue] = useToggle(false)
+
+    //#endregion
 
     //#region Effects
 

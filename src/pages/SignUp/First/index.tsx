@@ -6,6 +6,8 @@ import { StackNavigationProp } from '@react-navigation/stack'
 
 import { StatusBar } from 'expo-status-bar'
 
+import { AppStackParamsList } from '../../../navigations/appStack'
+
 import {
     ContainerSafeAreaView,
     TitleView,
@@ -19,8 +21,8 @@ import {
 import AuthenticationTextInput from '../../../components/atoms/AuthenticationTextInput'
 import Button from '../../../components/atoms/Button'
 
-import { AppStackParamsList } from '../../../navigations/appStack'
 import { isStringEmpty } from '../../../utils/validation'
+
 import SignUpHeader from '../Header'
 
 /**
@@ -29,6 +31,8 @@ import SignUpHeader from '../Header'
  * This page is responsible to get the user name and last name
  */
 const FirstSignUpPage: React.FC = (): JSX.Element => {
+    //#region States
+
     const navigation = useNavigation<
         StackNavigationProp<AppStackParamsList, 'FirstSignUpPage'>
     >()
@@ -36,6 +40,8 @@ const FirstSignUpPage: React.FC = (): JSX.Element => {
     const [valid, setValid] = useState(false)
     const [name, setName] = useState('')
     const [lastName, setMiddleName] = useState('')
+
+    //#endregion
 
     //#region Effects
 

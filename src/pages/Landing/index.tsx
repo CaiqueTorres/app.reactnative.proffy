@@ -17,6 +17,10 @@ import { SubjectActions } from '../../store/subjects/types'
 
 import useMe from '../../hooks/useMe'
 
+import { LoadingScreenContext } from '../../contexts/loadingScreenContext'
+
+import { AppStackParamsList } from '../../navigations/appStack'
+
 import {
     ContainerSafeAreaView,
     LogoView,
@@ -36,17 +40,18 @@ import {
 
 import UserImage from '../../components/atoms/UserImage'
 
-import landingImage from '../../assets/images/landing.png'
-import giveClassesIcon from '../../assets/images/onboarding/give-classes.png'
-import studyIcon from '../../assets/images/onboarding/study.png'
-import { LoadingScreenContext } from '../../contexts/loadingScreenContext'
-import { AppStackParamsList } from '../../navigations/appStack'
+import landingImage from '../../assets/landing/landing.png'
+import giveClassesIcon from '../../assets/onboarding/give-classes.png'
+import studyIcon from '../../assets/onboarding/study.png'
+
 import LandingButton from './LandingButton'
 
 /**
  * Tha app's landing page
  */
 const LandingPage: React.FC = (): JSX.Element => {
+    //#region States
+
     const navigation = useNavigation<
         StackNavigationProp<AppStackParamsList, 'LandingPage'>
     >()
@@ -56,6 +61,8 @@ const LandingPage: React.FC = (): JSX.Element => {
     const { setEnabledLoading } = useContext(LoadingScreenContext)
 
     const user = useMe()
+
+    //#endregion
 
     //#region Effects
 

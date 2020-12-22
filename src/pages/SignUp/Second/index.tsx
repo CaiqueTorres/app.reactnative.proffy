@@ -9,6 +9,10 @@ import { StatusBar } from 'expo-status-bar'
 
 import * as UserService from '../../../services/userService'
 
+import { LoadingScreenContext } from '../../../contexts/loadingScreenContext'
+
+import { AppStackParamsList } from '../../../navigations/appStack'
+
 import {
     ContainerSafeAreaView,
     TitleView,
@@ -22,9 +26,8 @@ import {
 import AuthenticationTextInput from '../../../components/atoms/AuthenticationTextInput'
 import Button from '../../../components/atoms/Button'
 
-import { LoadingScreenContext } from '../../../contexts/loadingScreenContext'
-import { AppStackParamsList } from '../../../navigations/appStack'
 import { validateEmail, validatePassword } from '../../../utils/validation'
+
 import SignUpHeader from '../Header'
 
 /**
@@ -33,6 +36,8 @@ import SignUpHeader from '../Header'
  * This page is responsible to get the user e-mail and password
  */
 const SecondSignUpPage: React.FC = (): JSX.Element => {
+    //#region States
+
     const route = useRoute<RouteProp<AppStackParamsList, 'SecondSignUpPage'>>()
     const navigation = useNavigation<
         StackNavigationProp<AppStackParamsList, 'SecondSignUpPage'>
@@ -43,6 +48,8 @@ const SecondSignUpPage: React.FC = (): JSX.Element => {
     const [valid, setValid] = useState(false)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+
+    //#endregion
 
     //#region Effects
 

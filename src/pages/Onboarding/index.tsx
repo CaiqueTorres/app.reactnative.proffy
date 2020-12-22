@@ -8,6 +8,8 @@ import { StackNavigationProp } from '@react-navigation/stack'
 
 import { StatusBar } from 'expo-status-bar'
 
+import { AppStackParamsList } from '../../navigations/appStack'
+
 import {
     ContainerView,
     SwiperPageContainerView,
@@ -19,16 +21,17 @@ import {
     SubtitleText
 } from './styles'
 
-import giveClassesIcon from '../../assets/images/onboarding/give-classes.png'
-import onboardingPageBackground01 from '../../assets/images/onboarding/onboarding-page-background-01.png'
-import onboardingPageBackground02 from '../../assets/images/onboarding/onboarding-page-background-02.png'
-import studyIcon from '../../assets/images/onboarding/study.png'
-import { AppStackParamsList } from '../../navigations/appStack'
+import giveClassesIcon from '../../assets/onboarding/give-classes.png'
+import onboardingPageBackground01 from '../../assets/onboarding/onboarding-page-background-01.png'
+import onboardingPageBackground02 from '../../assets/onboarding/onboarding-page-background-02.png'
+import studyIcon from '../../assets/onboarding/study.png'
 
 /**
  * The app onboarding page
  */
 const OnboadingPage: React.FC = (): JSX.Element => {
+    //#region States
+
     const navigation = useNavigation<
         StackNavigationProp<AppStackParamsList, 'OnboardingPage'>
     >()
@@ -36,6 +39,8 @@ const OnboadingPage: React.FC = (): JSX.Element => {
     const swiper = useRef<Swiper>(null)
 
     const [index, setIndex] = useState(0)
+
+    //#endregion
 
     //#region Functions
 

@@ -4,6 +4,8 @@ import Emoji from 'react-native-emoji'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
+import { AppStackParamsList } from '../../navigations/appStack'
+
 import {
     ContainerSafeAreaView,
     ChildrenView,
@@ -15,15 +17,17 @@ import {
 
 import Header from '../../components/atoms/Header'
 
-import { AppStackParamsList } from '../../navigations/appStack'
-
 /**
  * The app's main favorited proffys page
  */
 const FavoritesPage: React.FC = (): JSX.Element => {
+    //#region States
+
     const navigation = useNavigation<
         StackNavigationProp<AppStackParamsList, 'GiveClassesPage'>
     >()
+
+    //#endregion
 
     return (
         //#region JSX
