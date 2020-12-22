@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { TransitionSpec } from '@react-navigation/stack/lib/typescript/src/types'
 
+import LoadingScreenProvider from '../contexts/loadingScreenContext'
 import AccountPage from '../pages/Account'
 import ForgotPasswordPage from '../pages/ForgotPassword'
 import GiveClassesPage from '../pages/GiveClasses'
@@ -52,35 +53,49 @@ const AppStack: React.FC = (): JSX.Element => {
     return (
         //#region JSX
 
-        <NavigationContainer>
-            <Navigator
-                screenOptions={{ headerShown: false }}
-                initialRouteName="OnboardingPage"
-            >
-                <Screen
-                    name="OnboardingPage"
-                    component={OnboardingPage}
-                    options={{
-                        transitionSpec: {
-                            open: config,
-                            close: config
-                        }
-                    }}
-                />
-                <Screen name="LoginPage" component={LoginPage} />
-                <Screen name="FirstSignUpPage" component={FirstSignUpPage} />
-                <Screen name="SecondSignUpPage" component={SecondSignUpPage} />
-                <Screen name="SuccessPage" component={SuccessPage} />
-                <Screen
-                    name="ForgotPasswordPage"
-                    component={ForgotPasswordPage}
-                />
-                <Screen name="LandingPage" component={LandingPage} />
-                <Screen name="AccountPage" component={AccountPage} />
-                <Screen name="GiveClassesPage" component={GiveClassesPage} />
-                <Screen name="StudyNavigation" component={StudyTabNavigation} />
-            </Navigator>
-        </NavigationContainer>
+        <LoadingScreenProvider>
+            <NavigationContainer>
+                <Navigator
+                    screenOptions={{ headerShown: false }}
+                    initialRouteName="OnboardingPage"
+                >
+                    <Screen
+                        name="OnboardingPage"
+                        component={OnboardingPage}
+                        options={{
+                            transitionSpec: {
+                                open: config,
+                                close: config
+                            }
+                        }}
+                    />
+                    <Screen name="LoginPage" component={LoginPage} />
+                    <Screen
+                        name="FirstSignUpPage"
+                        component={FirstSignUpPage}
+                    />
+                    <Screen
+                        name="SecondSignUpPage"
+                        component={SecondSignUpPage}
+                    />
+                    <Screen name="SuccessPage" component={SuccessPage} />
+                    <Screen
+                        name="ForgotPasswordPage"
+                        component={ForgotPasswordPage}
+                    />
+                    <Screen name="LandingPage" component={LandingPage} />
+                    <Screen name="AccountPage" component={AccountPage} />
+                    <Screen
+                        name="GiveClassesPage"
+                        component={GiveClassesPage}
+                    />
+                    <Screen
+                        name="StudyNavigation"
+                        component={StudyTabNavigation}
+                    />
+                </Navigator>
+            </NavigationContainer>
+        </LoadingScreenProvider>
 
         //#endregion
     )
