@@ -1,7 +1,15 @@
 import api from '.'
 
+import { CreateUserPayload } from '../models/user/createUserPayload'
 import { UpdateUserPayload } from '../models/user/updateUserPayload'
 import { UserProxy } from '../models/user/userProxy'
+
+export async function createUser(
+    createUserPayload: CreateUserPayload
+): Promise<UserProxy> {
+    const response = await api.post<UserProxy>('/users', createUserPayload)
+    return response.data
+}
 
 /**
  * Method that can return the logged user data
