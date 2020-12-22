@@ -1,4 +1,4 @@
-import React, { Dispatch, useEffect } from 'react'
+import React, { Dispatch, useContext, useEffect } from 'react'
 import { TouchableWithoutFeedback, View } from 'react-native'
 import { useDispatch } from 'react-redux'
 
@@ -39,6 +39,7 @@ import UserImage from '../../components/atoms/UserImage'
 import landingImage from '../../assets/images/landing.png'
 import giveClassesIcon from '../../assets/images/onboarding/give-classes.png'
 import studyIcon from '../../assets/images/onboarding/study.png'
+import { LoadingScreenContext } from '../../contexts/loadingScreenContext'
 import { AppStackParamsList } from '../../navigations/appStack'
 import LandingButton from './LandingButton'
 
@@ -51,6 +52,8 @@ const LandingPage: React.FC = (): JSX.Element => {
     >()
 
     const dispatch = useDispatch<Dispatch<SubjectActions>>()
+
+    const { setEnabledLoading } = useContext(LoadingScreenContext)
 
     const user = useMe()
 
@@ -69,12 +72,19 @@ const LandingPage: React.FC = (): JSX.Element => {
      * in the redux state
      */
     async function setSubjectsInRootState(): Promise<void> {
-        const token = await getItemAsync('token')
+        setEnabledLoading(true)
+        try {
+            const token = await getItemAsync('token')
 
-        if (!token) throw new Error('The token is null!')
+            if (!token) throw new Error('The token is null!')
 
-        const subjects = await SubjectService.getAllSubjectsAsArray(token)
-        dispatch(setSubjects(subjects))
+            const subjects = await SubjectService.getAllSubjectsAsArray(token)
+            dispatch(setSubjects(subjects))
+        } catch (exception) {
+            console.log(exception)
+        } finally {
+            setEnabledLoading(false)
+        }
     }
 
     //#endregion
