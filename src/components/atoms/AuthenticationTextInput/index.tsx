@@ -48,6 +48,8 @@ const AuthenticationTextInput: React.FC<AuthenticationTextInputProps> = ({
     style,
     ...rest
 }: AuthenticationTextInputProps): JSX.Element => {
+    //#region States
+
     const [text, setText] = useState('')
     const [selected, setSelected] = useState(false)
     const [passwordVisible, setPasswordVisible] = useState(false)
@@ -55,6 +57,8 @@ const AuthenticationTextInput: React.FC<AuthenticationTextInputProps> = ({
     const animatedLineOpacity = useRef(new Animated.Value(0)).current
     const animatedPlaceholderPosition = useRef(new Animated.Value(20)).current
     const animatedPlaceholderTextSize = useRef(new Animated.Value(14)).current
+
+    //#endregion
 
     //#region Functions
 

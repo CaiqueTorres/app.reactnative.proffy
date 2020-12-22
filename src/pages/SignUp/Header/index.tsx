@@ -24,7 +24,11 @@ const SignUpHeader: React.FC<SignUpHeaderProps> = ({
     selectedDot,
     onPress
 }: SignUpHeaderProps): JSX.Element => {
+    //#region States
+
     const [dots, setDots] = useState<number[]>([])
+
+    //#endregion
 
     //#region Effects
 

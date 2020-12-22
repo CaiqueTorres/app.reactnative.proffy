@@ -12,7 +12,7 @@ import {
     LogoImage
 } from './styles'
 
-import logoImage from '../../../assets/images/logo.png'
+import logoImage from '../../../assets/icons/logo.png'
 
 /**
  * The app's main header properties

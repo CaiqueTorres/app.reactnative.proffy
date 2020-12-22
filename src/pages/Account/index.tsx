@@ -21,6 +21,10 @@ import useMe from '../../hooks/useMe'
 import useStateAndCheck from '../../hooks/useStateAndCheck'
 import useSubjects from '../../hooks/useSubjects'
 
+import { LoadingScreenContext } from '../../contexts/loadingScreenContext'
+
+import { AppStackParamsList } from '../../navigations/appStack'
+
 import {
     ContainerSafeAreaView,
     ContainerScrollView,
@@ -41,9 +45,8 @@ import Dropdown from '../../components/atoms/Dropdown'
 import Header from '../../components/atoms/Header'
 import AvailableTimeElement from '../../components/molecules/AvailableTimeElement'
 
-import backgroundImage from '../../assets/images/login/login-page-background.png'
-import { LoadingScreenContext } from '../../contexts/loadingScreenContext'
-import { AppStackParamsList } from '../../navigations/appStack'
+import backgroundImage from '../../assets/login/login-page-background.png'
+
 import ProfileImage from './ProfileImage'
 import uuid from 'uuid-random'
 
@@ -51,6 +54,8 @@ import uuid from 'uuid-random'
  * The app's account page
  */
 const AccountPage: React.FC = (): JSX.Element => {
+    //#region States
+
     const navigation = useNavigation<
         StackNavigationProp<AppStackParamsList, 'AccountPage'>
     >()
@@ -84,6 +89,8 @@ const AccountPage: React.FC = (): JSX.Element => {
     ] = useStateAndCheck<TimeProps[]>([])
 
     const validUserData = hasChangedPayload || hasChangedTimePropsList
+
+    //#endregion
 
     //#region Functions
 

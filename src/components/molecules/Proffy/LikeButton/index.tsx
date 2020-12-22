@@ -30,7 +30,11 @@ const LikeButton: React.FC<LikeButtonProps> = ({
     heartSize = 28,
     onToggle
 }: LikeButtonProps): JSX.Element => {
+    //#region States
+
     const [active, toggle] = useToggle(liked)
+
+    //#endregion
 
     //#region Functions
 

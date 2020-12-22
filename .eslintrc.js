@@ -30,9 +30,12 @@ module.exports = {
                     '/(services)|(api)/',
                     '/store/',
                     '/hooks/',
-                    '/routes/',
+                    '/contexts/',
+                    '/navigations/',
                     '/.styles/',
                     '/components/',
+                    '/utils/',
+                    '/assets/',
                     [('parent', 'sibling', 'index')]
                 ],
                 alphabetize: { order: 'asc', ignoreCase: true }

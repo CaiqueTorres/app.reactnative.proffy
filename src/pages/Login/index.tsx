@@ -19,6 +19,10 @@ import * as UserService from '../../services/userService'
 import { setMe } from '../../store/user/actions'
 import { UserActions } from '../../store/user/types'
 
+import { LoadingScreenContext } from '../../contexts/loadingScreenContext'
+
+import { AppStackParamsList } from '../../navigations/appStack'
+
 import {
     ContainerSafeAreaView,
     IconView,
@@ -37,11 +41,10 @@ import AuthenticationTextInput from '../../components/atoms/AuthenticationTextIn
 import Button from '../../components/atoms/Button'
 import Checkbox from '../../components/atoms/Checkbox'
 
-import loginPageBackgroundImage from '../../assets/images/login/login-page-background.png'
-import logoImage from '../../assets/images/logo.png'
-import { LoadingScreenContext } from '../../contexts/loadingScreenContext'
-import { AppStackParamsList } from '../../navigations/appStack'
 import { validateEmail, validatePassword } from '../../utils/validation'
+
+import logoImage from '../../assets/icons/logo.png'
+import loginPageBackgroundImage from '../../assets/login/login-page-background.png'
 
 /**
  * The app login page
@@ -49,6 +52,8 @@ import { validateEmail, validatePassword } from '../../utils/validation'
  * This component stores all the login page style and logic
  */
 const LoginPage: React.FC = () => {
+    //#region States
+
     const navigation = useNavigation<
         StackNavigationProp<AppStackParamsList, 'LoginPage'>
     >()
@@ -62,6 +67,8 @@ const LoginPage: React.FC = () => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+
+    //#endregion
 
     //#region Effects
 
