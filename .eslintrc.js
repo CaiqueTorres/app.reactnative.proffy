@@ -26,6 +26,8 @@ module.exports = {
                     '/^react/',
                     '/@/',
                     '/(expo)|(modules)/',
+                    '/models/',
+                    '/(services)|(api)/',
                     '/store/',
                     '/hooks/',
                     '/routes/',

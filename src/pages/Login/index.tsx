@@ -13,6 +13,9 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import * as SecureStore from 'expo-secure-store'
 import { StatusBar } from 'expo-status-bar'
 
+import * as AuthService from '../../services/authService'
+import * as UserService from '../../services/userService'
+
 import { setMe } from '../../store/user/actions'
 import { UserActions } from '../../store/user/types'
 
@@ -37,8 +40,6 @@ import Checkbox from '../../components/atoms/Checkbox'
 import loginPageBackgroundImage from '../../assets/images/login/login-page-background.png'
 import logoImage from '../../assets/images/logo.png'
 import { AppStackParamsList } from '../../navigations/appStack'
-import * as AuthService from '../../services/authService'
-import * as UserService from '../../services/userService'
 import { validateEmail, validatePassword } from '../../utils/validation'
 
 /**

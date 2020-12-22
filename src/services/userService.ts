@@ -1,8 +1,13 @@
-import api from '../api'
 import { CreateUserPayload } from '../models/user/createUserPayload'
 import { UpdateUserPayload } from '../models/user/updateUserPayload'
 import { UserProxy } from '../models/user/userProxy'
 
+import api from '../api'
+
+/**
+ * Function that can create a new user
+ * @param createUserPayload stores the basic user data
+ */
 export async function createUser(
     createUserPayload: CreateUserPayload
 ): Promise<UserProxy> {
@@ -11,7 +16,7 @@ export async function createUser(
 }
 
 /**
- * Method that can return the logged user data
+ * Function that can return the logged user data
  * @param token stores the logged user token
  */
 export async function getMe(token: string): Promise<UserProxy> {
@@ -25,7 +30,7 @@ export async function getMe(token: string): Promise<UserProxy> {
 }
 
 /**
- * Method that can change some user data
+ * Function that can change some user data
  * @param id stores the user id
  * @param payload stores the user new data
  * @param token stores the logged user token

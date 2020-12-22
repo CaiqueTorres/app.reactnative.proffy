@@ -1,9 +1,10 @@
-import api from '../api'
 import { GetManyDefaultResponse } from '../models/getManyDefaultResponse'
 import { SubjectProxy } from '../models/subject/subjectProxy'
 
+import api from '../api'
+
 /**
- * Method that can get the subjects in the database with pagination
+ * Function that can get the subjects in the database with pagination
  * @param offset stores the initial value position
  * @param limit stores the page size
  * @param page stores the current page
@@ -27,7 +28,7 @@ export async function getSubjectsAsGetManyDefaultResponse(
 }
 
 /**
- * Method that can get all the subjects saved in the database
+ * Function that can get all the subjects saved in the database
  * @param token stores the logged user token
  */
 export async function getAllSubjectsAsArray(

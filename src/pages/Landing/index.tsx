@@ -10,6 +10,8 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { getItemAsync } from 'expo-secure-store'
 import { StatusBar } from 'expo-status-bar'
 
+import * as SubjectService from '../../services/subjectService'
+
 import { setSubjects } from '../../store/subjects/actions'
 import { SubjectActions } from '../../store/subjects/types'
 
@@ -38,7 +40,6 @@ import landingImage from '../../assets/images/landing.png'
 import giveClassesIcon from '../../assets/images/onboarding/give-classes.png'
 import studyIcon from '../../assets/images/onboarding/study.png'
 import { AppStackParamsList } from '../../navigations/appStack'
-import * as SubjectService from '../../services/subjectService'
 import LandingButton from './LandingButton'
 
 /**

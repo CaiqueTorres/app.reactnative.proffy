@@ -7,6 +7,8 @@ import { StackNavigationProp } from '@react-navigation/stack'
 
 import { StatusBar } from 'expo-status-bar'
 
+import * as UserService from '../../../services/userService'
+
 import {
     ContainerSafeAreaView,
     TitleView,
@@ -21,7 +23,6 @@ import AuthenticationTextInput from '../../../components/atoms/AuthenticationTex
 import Button from '../../../components/atoms/Button'
 
 import { AppStackParamsList } from '../../../navigations/appStack'
-import * as UserService from '../../../services/userService'
 import { validateEmail, validatePassword } from '../../../utils/validation'
 import SignUpHeader from '../Header'
 
