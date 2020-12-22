@@ -1,5 +1,4 @@
-import api from '.'
-
+import api from '../api'
 import { CreateUserPayload } from '../models/user/createUserPayload'
 import { UpdateUserPayload } from '../models/user/updateUserPayload'
 import { UserProxy } from '../models/user/userProxy'

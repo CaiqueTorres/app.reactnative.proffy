@@ -20,8 +20,8 @@ import {
 import AuthenticationTextInput from '../../../components/atoms/AuthenticationTextInput'
 import Button from '../../../components/atoms/Button'
 
-import * as UserService from '../../../api/userService'
 import { AppStackParamsList } from '../../../navigations/appStack'
+import * as UserService from '../../../services/userService'
 import { validateEmail, validatePassword } from '../../../utils/validation'
 import SignUpHeader from '../Header'
 

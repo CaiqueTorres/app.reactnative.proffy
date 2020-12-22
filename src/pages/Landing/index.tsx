@@ -34,11 +34,11 @@ import {
 
 import UserImage from '../../components/atoms/UserImage'
 
-import * as SubjectService from '../../api/subjectService'
 import landingImage from '../../assets/images/landing.png'
 import giveClassesIcon from '../../assets/images/onboarding/give-classes.png'
 import studyIcon from '../../assets/images/onboarding/study.png'
 import { AppStackParamsList } from '../../navigations/appStack'
+import * as SubjectService from '../../services/subjectService'
 import LandingButton from './LandingButton'
 
 /**

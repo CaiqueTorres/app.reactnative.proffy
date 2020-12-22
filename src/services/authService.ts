@@ -1,5 +1,4 @@
-import api from '.'
-
+import api from '../api'
 import { LoginPayload } from '../models/auth/loginPayload'
 import { TokenProxy } from '../models/auth/tokenProxy'
 

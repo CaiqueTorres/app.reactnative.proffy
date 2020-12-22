@@ -1,5 +1,4 @@
-import api from '.'
-
+import api from '../api'
 import { GetManyDefaultResponse } from '../models/getManyDefaultResponse'
 import { SubjectProxy } from '../models/subject/subjectProxy'
 

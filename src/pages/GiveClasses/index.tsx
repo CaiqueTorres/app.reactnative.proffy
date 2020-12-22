@@ -38,10 +38,10 @@ import Dropdown from '../../components/atoms/Dropdown'
 import Header from '../../components/atoms/Header'
 import AvailableTimeElement from '../../components/molecules/AvailableTimeElement'
 
-import * as UserService from '../../api/userService'
 import { SubjectProxy } from '../../models/subject/subjectProxy'
 import { TimeProps } from '../../models/time/time'
 import { AppStackParamsList } from '../../navigations/appStack'
+import * as UserService from '../../services/userService'
 import uuid from 'uuid-random'
 
 interface PartialUpdateUserPayload {
