@@ -8,6 +8,12 @@ import { StackNavigationProp } from '@react-navigation/stack'
 
 import { getItemAsync } from 'expo-secure-store'
 
+import { SubjectProxy } from '../../models/subject/subjectProxy'
+import { TimeProps } from '../../models/time/time'
+import { UpdateUserPayload } from '../../models/user/updateUserPayload'
+
+import * as UserService from '../../services/userService'
+
 import { setMe } from '../../store/user/actions'
 import { UserActions } from '../../store/user/types'
 
@@ -35,11 +41,7 @@ import Dropdown from '../../components/atoms/Dropdown'
 import Header from '../../components/atoms/Header'
 import AvailableTimeElement from '../../components/molecules/AvailableTimeElement'
 
-import { UserService } from '../../api/userService'
 import backgroundImage from '../../assets/images/login/login-page-background.png'
-import { SubjectProxy } from '../../models/subject/subjectProxy'
-import { TimeProps } from '../../models/time/time'
-import { UpdateUserPayload } from '../../models/user/updateUserPayload'
 import { AppStackParamsList } from '../../navigations/appStack'
 import ProfileImage from './ProfileImage'
 import uuid from 'uuid-random'

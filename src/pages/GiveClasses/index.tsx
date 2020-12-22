@@ -9,6 +9,11 @@ import { StackNavigationProp } from '@react-navigation/stack'
 
 import { getItemAsync } from 'expo-secure-store'
 
+import { SubjectProxy } from '../../models/subject/subjectProxy'
+import { TimeProps } from '../../models/time/time'
+
+import * as UserService from '../../services/userService'
+
 import { setMe } from '../../store/user/actions'
 import { UserActions } from '../../store/user/types'
 
@@ -38,9 +43,6 @@ import Dropdown from '../../components/atoms/Dropdown'
 import Header from '../../components/atoms/Header'
 import AvailableTimeElement from '../../components/molecules/AvailableTimeElement'
 
-import { UserService } from '../../api/userService'
-import { SubjectProxy } from '../../models/subject/subjectProxy'
-import { TimeProps } from '../../models/time/time'
 import { AppStackParamsList } from '../../navigations/appStack'
 import uuid from 'uuid-random'
 

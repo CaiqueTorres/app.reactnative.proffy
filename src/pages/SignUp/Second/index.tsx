@@ -7,6 +7,8 @@ import { StackNavigationProp } from '@react-navigation/stack'
 
 import { StatusBar } from 'expo-status-bar'
 
+import * as UserService from '../../../services/userService'
+
 import {
     ContainerSafeAreaView,
     TitleView,
@@ -20,8 +22,6 @@ import {
 import AuthenticationTextInput from '../../../components/atoms/AuthenticationTextInput'
 import Button from '../../../components/atoms/Button'
 
-import api from '../../../api'
-import { UserProxy } from '../../../models/user/userProxy'
 import { AppStackParamsList } from '../../../navigations/appStack'
 import { validateEmail, validatePassword } from '../../../utils/validation'
 import SignUpHeader from '../Header'
@@ -56,21 +56,28 @@ const SecondSignUpPage: React.FC = (): JSX.Element => {
      */
     async function signUp(): Promise<void> {
         try {
-            await api.post<UserProxy>('/users', {
+            await UserService.createUser({
                 name: route.params.name,
                 lastName: route.params.lastName,
                 email,
                 password
             })
 
-            navigation.push('SuccessPage', {
-                title: 'Cadastro concluído!',
-                subtitle: 'Agora você faz parte da plataforma da Proffy',
-                buttonTitle: 'Fazer login'
-            })
+            handleNavigateToSuccessPage()
         } catch (exception) {
             console.log(exception)
         }
+    }
+
+    /**
+     * Function that can make the app push the success page
+     */
+    function handleNavigateToSuccessPage(): void {
+        navigation.push('SuccessPage', {
+            title: 'Cadastro concluído!',
+            subtitle: 'Agora você faz parte da plataforma da Proffy',
+            buttonTitle: 'Fazer login'
+        })
     }
 
     //#endregion
