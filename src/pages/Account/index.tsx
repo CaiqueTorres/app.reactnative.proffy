@@ -1,4 +1,4 @@
-import React, { Dispatch } from 'react'
+import React, { Dispatch, useContext } from 'react'
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import { useDispatch } from 'react-redux'
 
@@ -42,6 +42,7 @@ import Header from '../../components/atoms/Header'
 import AvailableTimeElement from '../../components/molecules/AvailableTimeElement'
 
 import backgroundImage from '../../assets/images/login/login-page-background.png'
+import { LoadingScreenContext } from '../../contexts/loadingScreenContext'
 import { AppStackParamsList } from '../../navigations/appStack'
 import ProfileImage from './ProfileImage'
 import uuid from 'uuid-random'
@@ -55,6 +56,8 @@ const AccountPage: React.FC = (): JSX.Element => {
     >()
 
     const dispatch = useDispatch<Dispatch<UserActions>>()
+
+    const { setEnabledLoading } = useContext(LoadingScreenContext)
 
     const user = useMe()
 
@@ -90,6 +93,7 @@ const AccountPage: React.FC = (): JSX.Element => {
     async function updateUser(): Promise<void> {
         if (!user || !user.id) return
 
+        setEnabledLoading(true)
         try {
             const token = await getItemAsync('token')
 
@@ -103,6 +107,8 @@ const AccountPage: React.FC = (): JSX.Element => {
             setMeInRootState(token)
         } catch (exception) {
             console.log(exception)
+        } finally {
+            setEnabledLoading(false)
         }
     }
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { KeyboardAvoidingView } from 'react-native'
 
 import { RouteProp } from '@react-navigation/native'
@@ -22,6 +22,7 @@ import {
 import AuthenticationTextInput from '../../../components/atoms/AuthenticationTextInput'
 import Button from '../../../components/atoms/Button'
 
+import { LoadingScreenContext } from '../../../contexts/loadingScreenContext'
 import { AppStackParamsList } from '../../../navigations/appStack'
 import { validateEmail, validatePassword } from '../../../utils/validation'
 import SignUpHeader from '../Header'
@@ -36,6 +37,8 @@ const SecondSignUpPage: React.FC = (): JSX.Element => {
     const navigation = useNavigation<
         StackNavigationProp<AppStackParamsList, 'SecondSignUpPage'>
     >()
+
+    const { setEnabledLoading } = useContext(LoadingScreenContext)
 
     const [valid, setValid] = useState(false)
     const [email, setEmail] = useState('')
@@ -55,6 +58,8 @@ const SecondSignUpPage: React.FC = (): JSX.Element => {
      * Function that can send a request to save the user in the database
      */
     async function signUp(): Promise<void> {
+        setEnabledLoading(true)
+
         try {
             await UserService.createUser({
                 name: route.params.name,
@@ -66,6 +71,8 @@ const SecondSignUpPage: React.FC = (): JSX.Element => {
             handleNavigateToSuccessPage()
         } catch (exception) {
             console.log(exception)
+        } finally {
+            setEnabledLoading(false)
         }
     }
 
