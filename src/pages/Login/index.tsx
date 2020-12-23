@@ -2,8 +2,10 @@ import React, { Dispatch, useContext, useEffect, useState } from 'react'
 import {
     KeyboardAvoidingView,
     TouchableWithoutFeedback,
+    useWindowDimensions,
     View
 } from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler'
 import { useDispatch } from 'react-redux'
 
 import { FontAwesome } from '@expo/vector-icons'
@@ -57,6 +59,13 @@ const LoginPage: React.FC = () => {
     const navigation = useNavigation<
         StackNavigationProp<AppStackParamsList, 'LoginPage'>
     >()
+
+    const { height, scale } = useWindowDimensions()
+
+    useEffect(() => {
+        console.log(scale)
+        console.log(height)
+    }, [scale, height])
 
     const dispatch = useDispatch<Dispatch<UserActions>>()
 
@@ -122,21 +131,31 @@ const LoginPage: React.FC = () => {
     return (
         //#region JSX
 
-        <KeyboardAvoidingView behavior="position" style={{ flex: 1 }}>
-            <StatusBar translucent style="light" />
+        <KeyboardAvoidingView
+            style={{
+                flex: 1,
+                width: '100%'
+            }}
+        >
             <ContainerSafeAreaView>
+                <StatusBar translucent style="light" />
+
                 <IconView>
                     <IconBackgroundImage source={loginPageBackgroundImage} />
+
                     <View>
                         <LogoImage source={logoImage} />
+
                         <LogoSubtitleText>
                             Sua plaforma de estudos online.
                         </LogoSubtitleText>
                     </View>
                 </IconView>
+
                 <LoginView>
                     <LoginHeaderView>
                         <LoginHeaderTitleText>Fazer login</LoginHeaderTitleText>
+
                         <TouchableWithoutFeedback
                             onPress={() => {
                                 navigation.push('FirstSignUpPage')
@@ -147,6 +166,7 @@ const LoginPage: React.FC = () => {
                             </LoginHeaderCreateAccountText>
                         </TouchableWithoutFeedback>
                     </LoginHeaderView>
+
                     <View>
                         <AuthenticationTextInput
                             validated={validated}
@@ -163,6 +183,7 @@ const LoginPage: React.FC = () => {
                                 setValidated(true)
                             }}
                         />
+
                         <AuthenticationTextInput
                             validated={validated}
                             secureTextEntry
@@ -178,6 +199,7 @@ const LoginPage: React.FC = () => {
                             }}
                         />
                     </View>
+
                     <PasswordStoreView>
                         <Checkbox
                             boxActiveColor="#04D361"
@@ -192,6 +214,7 @@ const LoginPage: React.FC = () => {
                         >
                             <PasswordStoreText>Lembrar-me</PasswordStoreText>
                         </Checkbox>
+
                         <TouchableWithoutFeedback
                             onPress={() => {
                                 navigation.push('ForgotPasswordPage')
@@ -202,6 +225,7 @@ const LoginPage: React.FC = () => {
                             </PasswordStoreText>
                         </TouchableWithoutFeedback>
                     </PasswordStoreView>
+
                     <Button
                         enabled={inputValid}
                         text="Entrar"
