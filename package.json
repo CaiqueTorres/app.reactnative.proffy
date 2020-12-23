@@ -31,6 +31,7 @@
         "react-native-gesture-handler": "~1.6.0",
         "react-native-onboarding-swiper": "^1.1.4",
         "react-native-reanimated": "~1.9.0",
+        "react-native-responsive-screen": "^1.4.1",
         "react-native-safe-area-context": "~3.0.7",
         "react-native-screens": "~2.9.0",
         "react-native-swiper": "^1.6.0",
