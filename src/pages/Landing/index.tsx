@@ -10,14 +10,13 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { getItemAsync } from 'expo-secure-store'
 import { StatusBar } from 'expo-status-bar'
 
-import * as SubjectService from '../../services/subjectService'
-
 import { setSubjects } from '../../store/subjects/actions'
 import { SubjectActions } from '../../store/subjects/types'
 
 import useMe from '../../hooks/useMe'
 
 import { LoadingScreenContext } from '../../contexts/loadingScreenContext'
+import { useService } from '../../contexts/serviceContext'
 
 import { AppStackParamsList } from '../../navigations/appStack'
 
@@ -58,6 +57,7 @@ const LandingPage: React.FC = (): JSX.Element => {
 
     const dispatch = useDispatch<Dispatch<SubjectActions>>()
 
+    const { subjectService } = useService()
     const { setEnabledLoading } = useContext(LoadingScreenContext)
 
     const user = useMe()
@@ -85,7 +85,7 @@ const LandingPage: React.FC = (): JSX.Element => {
 
             if (!token) throw new Error('The token is null!')
 
-            const subjects = await SubjectService.getAllSubjectsAsArray(token)
+            const subjects = await subjectService.getAllSubjectsAsArray(token)
             dispatch(setSubjects(subjects))
         } catch (exception) {
             console.log(exception)

@@ -7,9 +7,8 @@ import { StackNavigationProp } from '@react-navigation/stack'
 
 import { StatusBar } from 'expo-status-bar'
 
-import * as UserService from '../../../services/userService'
-
 import { LoadingScreenContext } from '../../../contexts/loadingScreenContext'
+import { useService } from '../../../contexts/serviceContext'
 
 import { AppStackParamsList } from '../../../navigations/appStack'
 
@@ -43,6 +42,7 @@ const SecondSignUpPage: React.FC = (): JSX.Element => {
         StackNavigationProp<AppStackParamsList, 'SecondSignUpPage'>
     >()
 
+    const { userService } = useService()
     const { setEnabledLoading } = useContext(LoadingScreenContext)
 
     const [valid, setValid] = useState(false)
@@ -68,7 +68,7 @@ const SecondSignUpPage: React.FC = (): JSX.Element => {
         setEnabledLoading(true)
 
         try {
-            await UserService.createUser({
+            await userService.createUser({
                 name: route.params.name,
                 lastName: route.params.lastName,
                 email,
