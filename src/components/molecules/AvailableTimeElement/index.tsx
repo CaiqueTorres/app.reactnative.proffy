@@ -3,7 +3,7 @@ import { StyleProp, TouchableWithoutFeedback, ViewStyle } from 'react-native'
 
 import { Picker } from '@react-native-community/picker'
 
-import { TimeProps, WeekDay } from '../../../models/time/time'
+import { TimeProxy, WeekDay } from '../../../models/time/timeProxy'
 
 import {
     ContainerView,
@@ -19,11 +19,11 @@ import Dropdown from '../../atoms/Dropdown'
 /**
  * Tha app's main available time element properties
  */
-export interface AvailableTimeElementProps extends TimeProps {
+export interface AvailableTimeElementProps extends TimeProxy {
     readonly style?: StyleProp<ViewStyle>
     readonly displayDeleteButton?: boolean
     onClickDeleteButton?(): void
-    onChangedValue?(time: TimeProps): void
+    onChangedValue?(time: TimeProxy): void
 }
 
 /**
@@ -38,7 +38,7 @@ const AvailableTimeElement: React.FC<AvailableTimeElementProps> = ({
 }: AvailableTimeElementProps): JSX.Element => {
     //#region States
 
-    const [time, setTime] = useState<TimeProps>({ weekDay })
+    const [time, setTime] = useState<TimeProxy>({ weekDay })
 
     //#endregion
 

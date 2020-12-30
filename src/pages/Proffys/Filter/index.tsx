@@ -6,7 +6,7 @@ import { MaterialIcons } from '@expo/vector-icons'
 import { Picker } from '@react-native-community/picker'
 
 import { SubjectProxy } from '../../../models/subject/subjectProxy'
-import { WeekDay } from '../../../models/time/time'
+import { WeekDay } from '../../../models/time/timeProxy'
 
 import useSubjects from '../../../hooks/useSubjects'
 import useToggle from '../../../hooks/useToggle'

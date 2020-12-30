@@ -1,14 +1,14 @@
 import { SubjectProxy } from '../subject/subjectProxy'
 
 export interface UserProxy {
-    id: number
-    image?: string
-    name: string
-    lastName: string
-    email: string
-    roles: string
-    whatsapp?: string
-    about?: string
-    subject?: SubjectProxy
-    cost?: number
+    readonly id: number
+    readonly image?: string
+    readonly name: string
+    readonly lastName: string
+    readonly email: string
+    readonly roles: string
+    readonly whatsapp?: string
+    readonly about?: string
+    readonly subject?: SubjectProxy
+    readonly cost?: number
 }

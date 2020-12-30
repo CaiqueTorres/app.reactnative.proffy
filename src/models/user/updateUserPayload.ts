@@ -1,10 +1,10 @@
 export interface UpdateUserPayload {
-    image?: string
-    name?: string
-    email?: string
-    about?: string
-    lastName?: string
-    whatsapp?: string
-    subjectId?: number
-    cost?: number
+    readonly image?: string
+    readonly name?: string
+    readonly email?: string
+    readonly about?: string
+    readonly lastName?: string
+    readonly whatsapp?: string
+    readonly subjectId?: number
+    readonly cost?: number
 }

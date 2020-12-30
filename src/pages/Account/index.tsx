@@ -9,7 +9,7 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { getItemAsync } from 'expo-secure-store'
 
 import { SubjectProxy } from '../../models/subject/subjectProxy'
-import { TimeProps } from '../../models/time/time'
+import { TimeProxy } from '../../models/time/timeProxy'
 import { UpdateUserPayload } from '../../models/user/updateUserPayload'
 
 import * as UserService from '../../services/userService'
@@ -86,7 +86,7 @@ const AccountPage: React.FC = (): JSX.Element => {
         setTimePropsList,
         hasChangedTimePropsList,
         setHasChangedTimePropsList
-    ] = useStateAndCheck<TimeProps[]>([])
+    ] = useStateAndCheck<TimeProxy[]>([])
 
     const validUserData = hasChangedPayload || hasChangedTimePropsList
 
@@ -276,7 +276,7 @@ const AccountPage: React.FC = (): JSX.Element => {
                             <NewText>+ Novo</NewText>
                         </TouchableWithoutFeedback>
                     </HeaderView>
-                    {timePropsList.map((element: TimeProps) => {
+                    {timePropsList.map((element: TimeProxy) => {
                         const { id, ...rest } = element
                         return (
                             <AvailableTimeElement
@@ -284,7 +284,7 @@ const AccountPage: React.FC = (): JSX.Element => {
                                 onClickDeleteButton={() => {
                                     setTimePropsList(
                                         timePropsList.filter(
-                                            (timeProps: TimeProps) =>
+                                            (timeProps: TimeProxy) =>
                                                 timeProps.id !== id
                                         )
                                     )

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { WeekDay } from '../../../../models/time/time'
+import { WeekDay } from '../../../../models/time/timeProxy'
 
 import { ContainerView } from './styles'
 

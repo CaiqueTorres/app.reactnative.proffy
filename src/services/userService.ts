@@ -31,16 +31,16 @@ export async function getMe(token: string): Promise<UserProxy> {
 
 /**
  * Function that can change some user data
- * @param id stores the user id
+ * @param userId stores the user id
  * @param payload stores the user new data
  * @param token stores the logged user token
  */
 export async function updateUser(
-    id: number,
+    userId: number,
     payload: UpdateUserPayload | undefined,
     token: string
 ): Promise<void> {
-    await api.patch(`/users/${id}`, payload, {
+    await api.patch(`/users/${userId}`, payload, {
         headers: {
             Authorization: 'Bearer ' + token
         }
