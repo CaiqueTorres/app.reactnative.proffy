@@ -14,12 +14,12 @@ import * as SecureStore from 'expo-secure-store'
 import { StatusBar } from 'expo-status-bar'
 
 import * as AuthService from '../../services/authService'
+import * as UserService from '../../services/userService'
 
 import { setMe } from '../../store/user/actions'
 import { UserActions } from '../../store/user/types'
 
 import { LoadingScreenContext } from '../../contexts/loadingScreenContext'
-import { useService } from '../../contexts/serviceContext'
 
 import { AppStackParamsList } from '../../navigations/appStack'
 
@@ -60,7 +60,6 @@ const LoginPage: React.FC = () => {
 
     const dispatch = useDispatch<Dispatch<UserActions>>()
 
-    const { userService, authService } = useService()
     const { setEnabledLoading } = useContext(LoadingScreenContext)
 
     const [validated, setValidated] = useState(true)
@@ -88,7 +87,7 @@ const LoginPage: React.FC = () => {
         setEnabledLoading(true)
 
         try {
-            const { token } = await authService.login({ email, password })
+            const { token } = await AuthService.login({ email, password })
 
             await SecureStore.setItemAsync('token', token)
             await setMeInApplicationState(token)
@@ -107,7 +106,7 @@ const LoginPage: React.FC = () => {
      * @param token stores the user token
      */
     async function setMeInApplicationState(token: string) {
-        const user = await userService.getMe(token)
+        const user = await UserService.getMe(token)
         dispatch(setMe(user))
     }
 

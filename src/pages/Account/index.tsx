@@ -12,6 +12,8 @@ import { SubjectProxy } from '../../models/subject/subjectProxy'
 import { TimeProxy } from '../../models/time/timeProxy'
 import { UpdateUserPayload } from '../../models/user/updateUserPayload'
 
+import * as UserService from '../../services/userService'
+
 import { setMe } from '../../store/user/actions'
 import { UserActions } from '../../store/user/types'
 
@@ -20,7 +22,6 @@ import useStateAndCheck from '../../hooks/useStateAndCheck'
 import useSubjects from '../../hooks/useSubjects'
 
 import { LoadingScreenContext } from '../../contexts/loadingScreenContext'
-import { useService } from '../../contexts/serviceContext'
 
 import { AppStackParamsList } from '../../navigations/appStack'
 
@@ -61,7 +62,6 @@ const AccountPage: React.FC = (): JSX.Element => {
 
     const dispatch = useDispatch<Dispatch<UserActions>>()
 
-    const { userService } = useService()
     const { setEnabledLoading } = useContext(LoadingScreenContext)
 
     const user = useMe()
@@ -106,7 +106,7 @@ const AccountPage: React.FC = (): JSX.Element => {
 
             if (!token) throw new Error('The token is null!')
 
-            await userService.updateUser(user.id, payload, token)
+            await UserService.updateUser(user.id, payload, token)
 
             setHasChangedPayload(false)
             setHasChangedTimePropsList(false)
@@ -124,7 +124,7 @@ const AccountPage: React.FC = (): JSX.Element => {
      * @param token stores the user token
      */
     async function setMeInRootState(token: string) {
-        const me = await userService.getMe(token)
+        const me = await UserService.getMe(token)
         dispatch(setMe(me))
     }
 
