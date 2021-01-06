@@ -17,8 +17,6 @@ import { useFonts } from 'expo-font'
 
 import store from './src/store'
 
-import { ServiceProvider } from './src/contexts/serviceContext'
-
 import AppStack from './src/navigations/appStack'
 
 export default function App(): JSX.Element {
@@ -36,11 +34,9 @@ export default function App(): JSX.Element {
     return (
         //#region JSX
 
-        <ServiceProvider>
-            <Provider store={store}>
-                <AppStack />
-            </Provider>
-        </ServiceProvider>
+        <Provider store={store}>
+            <AppStack />
+        </Provider>
 
         //#endregion
     )
