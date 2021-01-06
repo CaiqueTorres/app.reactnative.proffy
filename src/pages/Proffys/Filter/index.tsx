@@ -6,7 +6,7 @@ import { MaterialIcons } from '@expo/vector-icons'
 import { Picker } from '@react-native-community/picker'
 
 import { SubjectProxy } from '../../../models/subject/subjectProxy'
-import { WeekDay } from '../../../models/time/timeProxy'
+import { WeekDay } from '../../../models/time/weekDay'
 
 import useSubjects from '../../../hooks/useSubjects'
 import useToggle from '../../../hooks/useToggle'
@@ -15,6 +15,8 @@ import { ContainerView, FilterText, DropdownsView, TimeView } from './styles'
 
 import TimePicker from '../../../components/atoms/DatePicker'
 import Dropdown from '../../../components/atoms/Dropdown'
+
+import { fromWeekDay } from '../../../utils/date'
 
 /**
  * The proffy filter component
@@ -41,7 +43,9 @@ const Filter: React.FC = (): JSX.Element => {
             <TouchableWithoutFeedback onPress={toggle}>
                 <ContainerView>
                     <Feather name="filter" size={24} color="#04D361" />
+
                     <FilterText>Filtrar por dia, hora e matéria</FilterText>
+
                     <MaterialIcons
                         name={
                             active ? 'keyboard-arrow-up' : 'keyboard-arrow-down'
@@ -67,28 +71,32 @@ const Filter: React.FC = (): JSX.Element => {
                     <TimeView>
                         <Dropdown
                             title="Dia da semana"
-                            defaultValue={WeekDay.MONDAY}
+                            defaultValue={fromWeekDay(WeekDay.MONDAY)}
                             style={{ width: '70%' }}
                         >
                             <Picker.Item
-                                label={WeekDay.MONDAY}
-                                value={WeekDay.MONDAY}
+                                label={fromWeekDay(WeekDay.MONDAY)}
+                                value={fromWeekDay(WeekDay.MONDAY)}
                             />
+
                             <Picker.Item
-                                label={WeekDay.TUESDAY}
-                                value={WeekDay.TUESDAY}
+                                label={fromWeekDay(WeekDay.TUESDAY)}
+                                value={fromWeekDay(WeekDay.TUESDAY)}
                             />
+
                             <Picker.Item
-                                label={WeekDay.WEDNESDAY}
-                                value={WeekDay.WEDNESDAY}
+                                label={fromWeekDay(WeekDay.WEDNESDAY)}
+                                value={fromWeekDay(WeekDay.WEDNESDAY)}
                             />
+
                             <Picker.Item
-                                label={WeekDay.THURSDAY}
-                                value={WeekDay.THURSDAY}
+                                label={fromWeekDay(WeekDay.THURSDAY)}
+                                value={fromWeekDay(WeekDay.THURSDAY)}
                             />
+
                             <Picker.Item
-                                label={WeekDay.FRIDAY}
-                                value={WeekDay.FRIDAY}
+                                label={fromWeekDay(WeekDay.FRIDAY)}
+                                value={fromWeekDay(WeekDay.FRIDAY)}
                             />
                         </Dropdown>
                         <TimePicker

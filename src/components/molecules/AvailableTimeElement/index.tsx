@@ -3,7 +3,8 @@ import { StyleProp, TouchableWithoutFeedback, ViewStyle } from 'react-native'
 
 import { Picker } from '@react-native-community/picker'
 
-import { TimeProxy, WeekDay } from '../../../models/time/timeProxy'
+import { TimeProxy } from '../../../models/time/timeProxy'
+import { WeekDay } from '../../../models/time/weekDay'
 
 import {
     ContainerView,
@@ -12,6 +13,8 @@ import {
     DeleteText,
     DeleteLine
 } from './styles'
+
+import { fromWeekDay } from '../../../utils/date'
 
 import TimePicker from '../../atoms/DatePicker'
 import Dropdown from '../../atoms/Dropdown'
@@ -54,17 +57,30 @@ const AvailableTimeElement: React.FC<AvailableTimeElementProps> = ({
                     if (onChangedValue) onChangedValue(time)
                 }}
             >
-                <Picker.Item label={WeekDay.MONDAY} value={WeekDay.MONDAY} />
-                <Picker.Item label={WeekDay.TUESDAY} value={WeekDay.TUESDAY} />
                 <Picker.Item
-                    label={WeekDay.WEDNESDAY}
-                    value={WeekDay.WEDNESDAY}
+                    label={fromWeekDay(WeekDay.MONDAY)}
+                    value={fromWeekDay(WeekDay.MONDAY)}
                 />
+
                 <Picker.Item
-                    label={WeekDay.THURSDAY}
-                    value={WeekDay.THURSDAY}
+                    label={fromWeekDay(WeekDay.TUESDAY)}
+                    value={fromWeekDay(WeekDay.TUESDAY)}
                 />
-                <Picker.Item label={WeekDay.FRIDAY} value={WeekDay.FRIDAY} />
+
+                <Picker.Item
+                    label={fromWeekDay(WeekDay.WEDNESDAY)}
+                    value={fromWeekDay(WeekDay.WEDNESDAY)}
+                />
+
+                <Picker.Item
+                    label={fromWeekDay(WeekDay.THURSDAY)}
+                    value={fromWeekDay(WeekDay.THURSDAY)}
+                />
+
+                <Picker.Item
+                    label={fromWeekDay(WeekDay.FRIDAY)}
+                    value={fromWeekDay(WeekDay.FRIDAY)}
+                />
             </Dropdown>
             <TimeView>
                 <TimePicker
@@ -76,6 +92,7 @@ const AvailableTimeElement: React.FC<AvailableTimeElementProps> = ({
                         if (onChangedValue) onChangedValue(time)
                     }}
                 />
+
                 <TimePicker
                     title="Até"
                     style={{ marginLeft: 10, height: 85 }}
@@ -90,7 +107,9 @@ const AvailableTimeElement: React.FC<AvailableTimeElementProps> = ({
                 <TouchableWithoutFeedback onPress={onClickDeleteButton}>
                     <DeleteView>
                         <DeleteLine />
+
                         <DeleteText>Excluir horário</DeleteText>
+
                         <DeleteLine />
                     </DeleteView>
                 </TouchableWithoutFeedback>

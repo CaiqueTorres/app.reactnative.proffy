@@ -10,6 +10,7 @@ import { getItemAsync } from 'expo-secure-store'
 
 import { SubjectProxy } from '../../models/subject/subjectProxy'
 import { TimeProxy } from '../../models/time/timeProxy'
+import { WeekDay } from '../../models/time/weekDay'
 import { UpdateUserPayload } from '../../models/user/updateUserPayload'
 
 import * as UserService from '../../services/userService'
@@ -269,7 +270,12 @@ const AccountPage: React.FC = (): JSX.Element => {
                             onPress={() => {
                                 setTimePropsList([
                                     ...timePropsList,
-                                    { id: uuid() }
+                                    {
+                                        id: uuid(),
+                                        from: new Date(),
+                                        to: new Date(),
+                                        weekDay: WeekDay.MONDAY
+                                    }
                                 ])
                             }}
                         >
