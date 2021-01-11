@@ -52,7 +52,7 @@ import loginPageBackgroundImage from '../../assets/login/login-page-background.p
  * This component stores all the login page style and logic
  */
 const LoginPage: React.FC = () => {
-    //#region States
+    //#region Hooks
 
     const navigation = useNavigation<
         StackNavigationProp<AppStackParamsList, 'LoginPage'>
@@ -68,15 +68,32 @@ const LoginPage: React.FC = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    //#endregion
-
-    //#region Effects
+    useEffect(() => {
+        onInit()
+    }, [])
 
     useEffect(() => {
         setInputValid(validateEmail(email) && validatePassword(password))
     }, [email, password])
 
     //#endregion
+
+    /**
+     * Function that is called when the component is mounted
+     */
+    async function onInit(): Promise<void> {
+        try {
+            const token = await SecureStore.getItemAsync('token')
+            if (token) {
+                setEnabledLoading(true)
+                await logIn(token)
+            }
+        } catch (exception) {
+            setValidated(false)
+            console.log(exception)
+            setEnabledLoading(false)
+        }
+    }
 
     //#region Functions
 
@@ -85,18 +102,13 @@ const LoginPage: React.FC = () => {
      */
     async function signIn(): Promise<void> {
         setEnabledLoading(true)
-
         try {
             const { token } = await AuthService.login({ email, password })
-
             await SecureStore.setItemAsync('token', token)
-            await setMeInApplicationState(token)
-
-            navigateToLanding()
+            logIn(token)
         } catch (exception) {
             setValidated(false)
             console.log(exception)
-        } finally {
             setEnabledLoading(false)
         }
     }
@@ -111,9 +123,11 @@ const LoginPage: React.FC = () => {
     }
 
     /**
-     * Function that can make the app navigate to the landing page
+     * Function that makes the user log in the app
+     * @param token stores the user token
      */
-    function navigateToLanding(): void {
+    async function logIn(token: string): Promise<void> {
+        await setMeInApplicationState(token)
         navigation.replace('LandingPage')
     }
 

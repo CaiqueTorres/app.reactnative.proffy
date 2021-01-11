@@ -50,17 +50,17 @@ import AvailableTimeElement from '../../components/molecules/AvailableTimeElemen
 import uuid from 'uuid-random'
 
 interface PartialUpdateUserPayload {
-    about?: string
-    whatsapp?: string
-    subjectId?: number
-    cost?: number
+    readonly about?: string
+    readonly whatsapp?: string
+    readonly subjectId?: number
+    readonly cost?: number
 }
 
 /**
  * Tha main app's give classes page
  */
 const GiveClassesPage: React.FC = (): JSX.Element => {
-    //#region States
+    //#region Hooks
 
     const navigation = useNavigation<
         StackNavigationProp<AppStackParamsList, 'GiveClassesPage'>
@@ -168,6 +168,7 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
                     navigation.pop()
                 }}
             />
+
             <ScrollView
                 style={{
                     width: '100%'
@@ -177,6 +178,7 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
                     <DetailsTitleText>
                         Que incrível que você quer dar aulas.
                     </DetailsTitleText>
+
                     <DetailsDescriptionText>
                         O primeiro passo, é preencher esse formulário de
                         inscrição.
@@ -184,6 +186,7 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
                 </DetailsView>
                 <UserDataView>
                     <UserDataTitleText>Seus dados</UserDataTitleText>
+
                     <UserDataTextInput
                         title="Whatsapp"
                         keyboardType="phone-pad"
@@ -249,6 +252,7 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
                     <>
                         <HeaderView>
                             <TitleText>Horários disponíveis</TitleText>
+
                             <TouchableWithoutFeedback
                                 onPress={() => {
                                     setTimePropsList([
@@ -295,8 +299,10 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
                     />
                     <FooterView>
                         <AntDesign name="warning" size={33} color="#8257E5" />
+
                         <FooterTextsView>
                             <FooterTitleText>Importante!</FooterTitleText>
+
                             <FooterDescriptionText>
                                 Preencha todos os dados
                             </FooterDescriptionText>

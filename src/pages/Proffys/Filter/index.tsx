@@ -22,7 +22,7 @@ import { fromWeekDay } from '../../../utils/date'
  * The proffy filter component
  */
 const Filter: React.FC = (): JSX.Element => {
-    //#region States
+    //#region Hooks
 
     const [active, toggle] = useToggle(false)
 
