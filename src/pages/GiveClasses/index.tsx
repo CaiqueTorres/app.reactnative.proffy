@@ -10,7 +10,6 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { getItemAsync } from 'expo-secure-store'
 
 import { SubjectProxy } from '../../models/subject/subjectProxy'
-import { CreateTimePayload } from '../../models/time/createTimePayload'
 import { TimeProxy } from '../../models/time/timeProxy'
 import { WeekDay } from '../../models/time/weekDay'
 
@@ -24,6 +23,7 @@ import useStateAndCheck from '../../hooks/useStateAndCheck'
 import useSubjects from '../../hooks/useSubjects'
 
 import { LoadingScreenContext } from '../../contexts/loadingScreenContext'
+import { Times, useTimes } from '../../contexts/timeContext'
 
 import { AppStackParamsList } from '../../navigations/appStack'
 
@@ -49,6 +49,8 @@ import Dropdown from '../../components/atoms/Dropdown'
 import Header from '../../components/atoms/Header'
 import AvailableTimeElement from '../../components/molecules/AvailableTimeElement'
 
+import { isGetMany } from '../../utils/crud'
+
 import uuid from 'uuid-random'
 
 interface PartialUpdateUserPayload {
@@ -73,13 +75,15 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
     const { setEnabledLoading } = useContext(LoadingScreenContext)
 
     const user = useMe()
+    const subjects = useSubjects()
+    const { times } = useTimes()
 
     const subjectsList: SubjectProxy[] = [
         {
             id: 0,
             name: 'Selecione'
         },
-        ...(useSubjects() ?? [])
+        ...(subjects ?? [])
     ]
 
     const [
@@ -99,10 +103,10 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
         setTimePropsList,
         hasChangedTimePropsList,
         setHasChangedTimePropsList
-    ] = useStateAndCheck<TimeProxy[]>([])
+    ] = useStateAndCheck<Times>(times)
 
     const validUserData =
-        hasChangedPayload &&
+        (hasChangedPayload || hasChangedTimePropsList) &&
         payload &&
         Object.values(payload).every((value) => !!value)
 
@@ -155,6 +159,55 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
             subtitle:
                 'Tudo certo, seu cadastro está na nossa lista de professores. Agora é só ficar de olho no seu WhatsApp.',
             buttonTitle: 'Ir para o ínicio'
+        })
+    }
+
+    function createNewTimeElement(): void {
+        const time: TimeProxy = {
+            id: uuid(),
+            weekDay: WeekDay.MONDAY,
+            from: '00:00',
+            to: '00:00'
+        }
+
+        if (isGetMany(timePropsList)) {
+            setTimePropsList({
+                ...timePropsList,
+                data: [...timePropsList.data, time]
+            })
+            return
+        }
+
+        setTimePropsList([...timePropsList, time])
+    }
+
+    function forEachTimeProp(): JSX.Element[] {
+        const array = isGetMany(timePropsList)
+            ? timePropsList.data
+            : timePropsList
+
+        return array.map((element: TimeProxy) => {
+            const { id, ...rest } = element
+            return (
+                <AvailableTimeElement
+                    key={id}
+                    onClickDeleteButton={() => {
+                        setTimePropsList(
+                            array.filter(
+                                (timeProps: TimeProxy) => timeProps.id !== id
+                            )
+                        )
+                    }}
+                    onChangedValue={() => {
+                        setHasChangedTimePropsList(true)
+                    }}
+                    style={{
+                        height: 240,
+                        marginVertical: 10
+                    }}
+                    {...rest}
+                />
+            )
         })
     }
 
@@ -256,45 +309,13 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
                             <TitleText>Horários disponíveis</TitleText>
 
                             <TouchableWithoutFeedback
-                                onPress={() => {
-                                    setTimePropsList([
-                                        ...timePropsList,
-                                        {
-                                            id: uuid(),
-                                            from: '00:00',
-                                            to: '00:00',
-                                            weekDay: WeekDay.MONDAY
-                                        }
-                                    ])
-                                }}
+                                onPress={createNewTimeElement}
                             >
                                 <NewText>+ Novo</NewText>
                             </TouchableWithoutFeedback>
                         </HeaderView>
-                        {timePropsList.map((element: TimeProxy) => {
-                            const { id, ...rest } = element
-                            return (
-                                <AvailableTimeElement
-                                    key={id}
-                                    onClickDeleteButton={() => {
-                                        setTimePropsList(
-                                            timePropsList.filter(
-                                                (timeProps: TimeProxy) =>
-                                                    timeProps.id !== id
-                                            )
-                                        )
-                                    }}
-                                    onChangedValue={() => {
-                                        setHasChangedTimePropsList(true)
-                                    }}
-                                    style={{
-                                        height: 240,
-                                        marginVertical: 10
-                                    }}
-                                    {...rest}
-                                />
-                            )
-                        })}
+
+                        {forEachTimeProp()}
                     </>
 
                     <Button
