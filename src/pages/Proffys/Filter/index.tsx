@@ -13,8 +13,8 @@ import useToggle from '../../../hooks/useToggle'
 
 import { ContainerView, FilterText, DropdownsView, TimeView } from './styles'
 
-import TimePicker from '../../../components/atoms/DatePicker'
 import Dropdown from '../../../components/atoms/Dropdown'
+import TimePicker from '../../../components/atoms/TimePicker'
 
 import { fromWeekDay } from '../../../utils/date'
 
