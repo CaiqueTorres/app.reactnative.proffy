@@ -1,5 +1,8 @@
+/**
+ * Class with the time data
+ */
 export interface CreateTimePayload {
     readonly weekDay: number
-    readonly from: Date
-    readonly to: Date
+    readonly from: string
+    readonly to: string
 }
