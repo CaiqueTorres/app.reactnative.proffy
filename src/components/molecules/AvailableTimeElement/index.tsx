@@ -16,8 +16,8 @@ import {
 
 import { fromWeekDay } from '../../../utils/date'
 
-import TimePicker from '../../atoms/DatePicker'
 import Dropdown from '../../atoms/Dropdown'
+import TimePicker from '../../atoms/TimePicker'
 
 /**
  * Tha app's main available time element properties
@@ -34,14 +34,16 @@ export interface AvailableTimeElementProps extends TimeProxy {
  */
 const AvailableTimeElement: React.FC<AvailableTimeElementProps> = ({
     style,
+    to = '00:00',
+    from = '00:00',
     weekDay = WeekDay.MONDAY,
     displayDeleteButton = true,
     onClickDeleteButton,
     onChangedValue
 }: AvailableTimeElementProps): JSX.Element => {
-    //#region States
+    //#region Hooks
 
-    const [time, setTime] = useState<TimeProxy>({ weekDay })
+    const [time, setTime] = useState<TimeProxy>({ weekDay, to, from })
 
     //#endregion
 
@@ -87,7 +89,8 @@ const AvailableTimeElement: React.FC<AvailableTimeElementProps> = ({
                     title="Das"
                     style={{ marginRight: 10, height: 85 }}
                     containerStyle={{ borderRadius: 8 }}
-                    onChangeDateTime={(selectedDate: Date | undefined) => {
+                    initialDate={from}
+                    onChangeTime={(selectedDate: string) => {
                         setTime({ ...time, from: selectedDate })
                         if (onChangedValue) onChangedValue(time)
                     }}
@@ -97,7 +100,8 @@ const AvailableTimeElement: React.FC<AvailableTimeElementProps> = ({
                     title="Até"
                     style={{ marginLeft: 10, height: 85 }}
                     containerStyle={{ borderRadius: 8 }}
-                    onChangeDateTime={(selectedDate: Date | undefined) => {
+                    initialDate={to}
+                    onChangeTime={(selectedDate: string) => {
                         setTime({ ...time, to: selectedDate })
                         if (onChangedValue) onChangedValue(time)
                     }}

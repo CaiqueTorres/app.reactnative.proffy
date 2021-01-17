@@ -114,7 +114,7 @@ const AccountPage: React.FC = (): JSX.Element => {
 
             setMeInRootState(token)
         } catch (exception) {
-            console.log(exception)
+            // console.log(exception)
         } finally {
             setEnabledLoading(false)
         }
@@ -272,8 +272,8 @@ const AccountPage: React.FC = (): JSX.Element => {
                                     ...timePropsList,
                                     {
                                         id: uuid(),
-                                        from: new Date(),
-                                        to: new Date(),
+                                        from: '00:00',
+                                        to: '00:00',
                                         weekDay: WeekDay.MONDAY
                                     }
                                 ])

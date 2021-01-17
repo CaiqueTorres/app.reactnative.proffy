@@ -14,10 +14,10 @@ import { formatDate } from '../../../utils/date'
  */
 export interface TimePickerProps {
     readonly title: string
-    readonly initialDate?: Date
+    readonly initialDate?: string
     readonly style?: StyleProp<ViewStyle>
     readonly containerStyle?: StyleProp<ViewStyle>
-    onChangeDateTime?(selectedDate: Date | undefined): void
+    onChangeTime?(selectedDate: string | undefined): void
 }
 
 /**
@@ -25,20 +25,32 @@ export interface TimePickerProps {
  */
 const TimePicker: React.FC<TimePickerProps> = ({
     title,
-    initialDate = new Date(),
+    initialDate,
     style,
     containerStyle,
-    onChangeDateTime
+    onChangeTime
 }: TimePickerProps): JSX.Element => {
-    //#region States
+    //#region Hooks
 
-    const [dateText, setDateText] = useState('')
-    const [date, setDate] = useState(initialDate)
+    const [dateText, setDateText] = useState(initialDate)
     const [active, toggleValue] = useToggle(false)
 
     //#endregion
 
     //#region Functions
+
+    function setHours(dateText = initialDate): Date {
+        const newDate = new Date()
+
+        if (dateText) {
+            const splittedArray = dateText
+                .split(':')
+                .map((value) => Number(value))
+            newDate.setHours(splittedArray[0], splittedArray[1])
+        }
+
+        return newDate
+    }
 
     /**
      * Function that can set the component's date and call the property onChangeDateTime
@@ -50,9 +62,12 @@ const TimePicker: React.FC<TimePickerProps> = ({
         selectedDate: Date | undefined
     ): void {
         toggleValue()
-        if (selectedDate) setDateText(formatDate(selectedDate))
-        if (onChangeDateTime) onChangeDateTime(selectedDate)
-        setDate(selectedDate || date)
+        if (!selectedDate) return
+
+        const newDateText = formatDate(selectedDate)
+
+        setDateText(newDateText)
+        if (onChangeTime) onChangeTime(newDateText)
     }
 
     //#endregion
@@ -71,7 +86,7 @@ const TimePicker: React.FC<TimePickerProps> = ({
                 <DateTimePicker
                     is24Hour
                     mode="time"
-                    value={date}
+                    value={setHours()}
                     onChange={handleOnChange}
                 />
             )}

@@ -10,7 +10,9 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { getItemAsync } from 'expo-secure-store'
 
 import { SubjectProxy } from '../../models/subject/subjectProxy'
+import { CreateTimePayload } from '../../models/time/createTimePayload'
 import { TimeProxy } from '../../models/time/timeProxy'
+import { WeekDay } from '../../models/time/weekDay'
 
 import * as UserService from '../../services/userService'
 
@@ -100,7 +102,7 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
     ] = useStateAndCheck<TimeProxy[]>([])
 
     const validUserData =
-        (hasChangedPayload || hasChangedTimePropsList) &&
+        hasChangedPayload &&
         payload &&
         Object.values(payload).every((value) => !!value)
 
@@ -257,7 +259,12 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
                                 onPress={() => {
                                     setTimePropsList([
                                         ...timePropsList,
-                                        { id: uuid() }
+                                        {
+                                            id: uuid(),
+                                            from: '00:00',
+                                            to: '00:00',
+                                            weekDay: WeekDay.MONDAY
+                                        }
                                     ])
                                 }}
                             >
@@ -276,6 +283,9 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
                                                     timeProps.id !== id
                                             )
                                         )
+                                    }}
+                                    onChangedValue={() => {
+                                        setHasChangedTimePropsList(true)
                                     }}
                                     style={{
                                         height: 240,
