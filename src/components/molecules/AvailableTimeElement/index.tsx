@@ -34,16 +34,17 @@ export interface AvailableTimeElementProps extends TimeProxy {
  */
 const AvailableTimeElement: React.FC<AvailableTimeElementProps> = ({
     style,
-    to = '00:00',
-    from = '00:00',
-    weekDay = WeekDay.MONDAY,
+    id,
+    to,
+    from,
+    weekDay,
     displayDeleteButton = true,
     onClickDeleteButton,
     onChangedValue
 }: AvailableTimeElementProps): JSX.Element => {
     //#region Hooks
 
-    const [time, setTime] = useState<TimeProxy>({ weekDay, to, from })
+    const [time, setTime] = useState<TimeProxy>({ id, weekDay, to, from })
 
     //#endregion
 

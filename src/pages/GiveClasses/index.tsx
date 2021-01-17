@@ -13,6 +13,7 @@ import { SubjectProxy } from '../../models/subject/subjectProxy'
 import { TimeProxy } from '../../models/time/timeProxy'
 import { WeekDay } from '../../models/time/weekDay'
 
+import * as TimeService from '../../services/timeService'
 import * as UserService from '../../services/userService'
 
 import { setMe } from '../../store/user/actions'
@@ -76,7 +77,7 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
 
     const user = useMe()
     const subjects = useSubjects()
-    const { times } = useTimes()
+    const { times, setTimes } = useTimes()
 
     const subjectsList: SubjectProxy[] = [
         {
@@ -113,54 +114,6 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
     //#endregion
 
     //#region Functions
-
-    /**
-     * Function that can update the user data in the database
-     */
-    async function updateUser(): Promise<void> {
-        if (!user || !user.id) return
-
-        setEnabledLoading(true)
-        try {
-            const token = await getItemAsync('token')
-
-            if (!token) throw new Error('The token is null!')
-
-            await UserService.updateUser(user.id, payload, token)
-
-            setHasChangedPayload(false)
-            setHasChangedTimePropsList(false)
-
-            setMeInRootState(token)
-
-            navigateToSuccessPage()
-        } catch (exception) {
-            console.log(exception)
-        } finally {
-            setEnabledLoading(false)
-        }
-    }
-
-    /**
-     * Function that can save the logged user data in the application state
-     * @param token stores the user token
-     */
-    async function setMeInRootState(token: string) {
-        const me = await UserService.getMe(token)
-        dispatch(setMe(me))
-    }
-
-    /**
-     * Function that can make the app push the success page
-     */
-    function navigateToSuccessPage(): void {
-        navigation.push('SuccessPage', {
-            title: 'Cadastro Salvo!',
-            subtitle:
-                'Tudo certo, seu cadastro está na nossa lista de professores. Agora é só ficar de olho no seu WhatsApp.',
-            buttonTitle: 'Ir para o ínicio'
-        })
-    }
 
     function createNewTimeElement(): void {
         const time: TimeProxy = {
@@ -205,9 +158,86 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
                         height: 240,
                         marginVertical: 10
                     }}
+                    id={id}
                     {...rest}
                 />
             )
+        })
+    }
+
+    /**
+     * Function that can update the user data in the database
+     */
+    async function updateUser(token: string): Promise<void> {
+        if (!user || !user.id) return
+
+        await UserService.updateUser(user.id, payload, token)
+
+        setHasChangedPayload(false)
+
+        setMeInRootState(token)
+    }
+
+    async function updateTimesList(token: string): Promise<void> {
+        if (!user || !user.id) return
+
+        await TimeService.clear(user.id, token)
+
+        const times = isGetMany(timePropsList)
+            ? timePropsList.data
+            : timePropsList
+
+        await TimeService.createTimes(
+            user.id,
+            times.map((time) => ({
+                weekDay: time.weekDay,
+                from: time.from,
+                to: time.to
+            })),
+            token
+        )
+
+        setHasChangedTimePropsList(false)
+
+        setTimes(timePropsList)
+    }
+
+    async function updateData(): Promise<void> {
+        const token = await getItemAsync('token')
+
+        if (!token) throw new Error('The token is null!')
+
+        setEnabledLoading(true)
+        try {
+            await updateUser(token)
+            await updateTimesList(token)
+
+            navigateToSuccessPage()
+        } catch (exception) {
+            console.log(exception)
+        } finally {
+            setEnabledLoading(false)
+        }
+    }
+
+    /**
+     * Function that can save the logged user data in the application state
+     * @param token stores the user token
+     */
+    async function setMeInRootState(token: string) {
+        const me = await UserService.getMe(token)
+        dispatch(setMe(me))
+    }
+
+    /**
+     * Function that can make the app push the success page
+     */
+    function navigateToSuccessPage(): void {
+        navigation.push('SuccessPage', {
+            title: 'Cadastro Salvo!',
+            subtitle:
+                'Tudo certo, seu cadastro está na nossa lista de professores. Agora é só ficar de olho no seu WhatsApp.',
+            buttonTitle: 'Ir para o ínicio'
         })
     }
 
@@ -326,7 +356,7 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
                             height: 65,
                             marginVertical: 10
                         }}
-                        onPress={updateUser}
+                        onPress={updateData}
                     />
                     <FooterView>
                         <AntDesign name="warning" size={33} color="#8257E5" />
