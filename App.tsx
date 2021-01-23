@@ -18,6 +18,7 @@ import { useFonts } from 'expo-font'
 import store from './src/store'
 
 import LoadingScreenProvider from './src/contexts/loadingScreenContext'
+import SubjectProvider from './src/contexts/subjectContext'
 import TimeProvider from './src/contexts/timeContext'
 
 import AppStack from './src/navigations/appStack'
@@ -40,7 +41,9 @@ export default function App(): JSX.Element {
         <Provider store={store}>
             <LoadingScreenProvider>
                 <TimeProvider>
-                    <AppStack />
+                    <SubjectProvider>
+                        <AppStack />
+                    </SubjectProvider>
                 </TimeProvider>
             </LoadingScreenProvider>
         </Provider>
