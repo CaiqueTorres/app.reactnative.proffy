@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleProp, TouchableWithoutFeedback, ViewStyle } from 'react-native'
 
 import { Picker } from '@react-native-community/picker'
@@ -46,6 +46,10 @@ const AvailableTimeElement: React.FC<AvailableTimeElementProps> = ({
 
     const [time, setTime] = useState<TimeProxy>({ id, weekDay, to, from })
 
+    useEffect(() => {
+        if (onChangedValue) onChangedValue(time)
+    }, [time])
+
     //#endregion
 
     return (
@@ -57,7 +61,6 @@ const AvailableTimeElement: React.FC<AvailableTimeElementProps> = ({
                 defaultValue={weekDay}
                 onValueChange={(itemValue: WeekDay) => {
                     setTime({ ...time, weekDay: itemValue })
-                    if (onChangedValue) onChangedValue(time)
                 }}
             >
                 <Picker.Item
@@ -93,7 +96,6 @@ const AvailableTimeElement: React.FC<AvailableTimeElementProps> = ({
                     initialDate={from}
                     onChangeTime={(selectedDate: string) => {
                         setTime({ ...time, from: selectedDate })
-                        if (onChangedValue) onChangedValue(time)
                     }}
                 />
 
@@ -104,7 +106,6 @@ const AvailableTimeElement: React.FC<AvailableTimeElementProps> = ({
                     initialDate={to}
                     onChangeTime={(selectedDate: string) => {
                         setTime({ ...time, to: selectedDate })
-                        if (onChangedValue) onChangedValue(time)
                     }}
                 />
             </TimeView>

@@ -4,22 +4,15 @@
 
 import { GetManyDefaultResponse } from '../models/getManyDefaultResponse'
 
-// /**
-//  * Method that maps all the elements of "data" property and return a new
-//  * "GetManyDefaultResponse" with the new mapped elements
-//  * @param callbackfn
-//  */
-// export function map<T>(
-//     callbackfn: (value: TValue, index: number, array: TValue[]) => T
-// ): GetManyDefaultResponse<T> {
-//     return new GetManyDefaultResponse<T>({
-//         total: this.total,
-//         count: this.count,
-//         page: this.page,
-//         pageCount: this.pageCount,
-//         data: this.data.map(callbackfn)
-//     })
-// }
+export function map<TGetMany extends GetManyDefaultResponse<TValue>, TValue>(
+    value: TGetMany,
+    callbackfn: (value: TValue, index: number, array: TValue[]) => TValue
+): GetManyDefaultResponse<TValue> {
+    return {
+        ...value,
+        data: value.data.map<TValue>(callbackfn)
+    }
+}
 
 /**
  * Static method that validates if the "value" parameter is an

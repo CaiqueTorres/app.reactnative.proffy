@@ -9,6 +9,7 @@ import { StackNavigationProp } from '@react-navigation/stack'
 
 import { getItemAsync } from 'expo-secure-store'
 
+import { GetManyDefaultResponse } from '../../models/getManyDefaultResponse'
 import { SubjectProxy } from '../../models/subject/subjectProxy'
 import { TimeProxy } from '../../models/time/timeProxy'
 import { WeekDay } from '../../models/time/weekDay'
@@ -50,7 +51,7 @@ import Dropdown from '../../components/atoms/Dropdown'
 import Header from '../../components/atoms/Header'
 import AvailableTimeElement from '../../components/molecules/AvailableTimeElement'
 
-import { isGetMany } from '../../utils/crud'
+import { isGetMany, map } from '../../utils/crud'
 
 import uuid from 'uuid-random'
 
@@ -144,6 +145,7 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
             return (
                 <AvailableTimeElement
                     key={id}
+                    id={id}
                     onClickDeleteButton={() => {
                         setTimePropsList(
                             array.filter(
@@ -151,14 +153,28 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
                             )
                         )
                     }}
-                    onChangedValue={() => {
+                    onChangedValue={(time: TimeProxy) => {
+                        console.log(time)
+
+                        if (Array.isArray(timePropsList))
+                            setTimePropsList(
+                                timePropsList.map((element) =>
+                                    element.id == id ? time : element
+                                )
+                            )
+                        else
+                            setTimePropsList(
+                                map(timePropsList, (element) =>
+                                    element.id == id ? time : element
+                                )
+                            )
+
                         setHasChangedTimePropsList(true)
                     }}
                     style={{
                         height: 240,
                         marginVertical: 10
                     }}
-                    id={id}
                     {...rest}
                 />
             )
@@ -186,6 +202,8 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
         const times = isGetMany(timePropsList)
             ? timePropsList.data
             : timePropsList
+
+        console.log(times)
 
         await TimeService.createTimes(
             user.id,
