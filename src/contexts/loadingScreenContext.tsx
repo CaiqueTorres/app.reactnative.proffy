@@ -60,4 +60,6 @@ export const LoadingScreenProvider: React.FC<LoadingScreenProviderProps> = ({
     )
 }
 
+LoadingScreenProvider.displayName = 'LoadingScreenProvider'
+
 export default LoadingScreenProvider
