@@ -9,7 +9,6 @@ import { StackNavigationProp } from '@react-navigation/stack'
 
 import { getItemAsync } from 'expo-secure-store'
 
-import { GetManyDefaultResponse } from '../../models/getManyDefaultResponse'
 import { SubjectProxy } from '../../models/subject/subjectProxy'
 import { TimeProxy } from '../../models/time/timeProxy'
 import { WeekDay } from '../../models/time/weekDay'
