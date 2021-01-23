@@ -1,4 +1,4 @@
-import { TimeProps } from '../models/time/time'
+import { TimeProxy } from '../models/time/timeProxy'
 
 /**
  * Function that can validate if a text is null or empty
@@ -31,7 +31,7 @@ export function validatePassword(password: string): boolean {
  * It checks if the list is empty of some field is undefined or null
  * @param timePropsList stores the TimeProps array
  */
-export function validateTimePropsList(timePropsList: TimeProps[]): boolean {
+export function validateTimePropsList(timePropsList: TimeProxy[]): boolean {
     return (
         timePropsList.length != 0 &&
         timePropsList.every((timeProps) => {

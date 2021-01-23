@@ -1,3 +1,3 @@
 export interface TokenProxy {
-    token: string
+    readonly token: string
 }

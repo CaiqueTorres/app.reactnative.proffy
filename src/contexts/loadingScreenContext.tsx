@@ -33,7 +33,7 @@ export interface LoadingScreenProviderProps {
 export const LoadingScreenProvider: React.FC<LoadingScreenProviderProps> = ({
     children
 }: LoadingScreenProviderProps): JSX.Element => {
-    //#region States
+    //#region Hooks
 
     const [enabledLoading, setEnabledLoading] = useState(false)
 
@@ -59,5 +59,7 @@ export const LoadingScreenProvider: React.FC<LoadingScreenProviderProps> = ({
         //#endregion
     )
 }
+
+LoadingScreenProvider.displayName = 'LoadingScreenProvider'
 
 export default LoadingScreenProvider

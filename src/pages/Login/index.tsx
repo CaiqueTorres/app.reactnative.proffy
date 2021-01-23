@@ -14,12 +14,14 @@ import * as SecureStore from 'expo-secure-store'
 import { StatusBar } from 'expo-status-bar'
 
 import * as AuthService from '../../services/authService'
+import * as TimesService from '../../services/timeService'
 import * as UserService from '../../services/userService'
 
 import { setMe } from '../../store/user/actions'
 import { UserActions } from '../../store/user/types'
 
 import { LoadingScreenContext } from '../../contexts/loadingScreenContext'
+import { useTimes } from '../../contexts/timeContext'
 
 import { AppStackParamsList } from '../../navigations/appStack'
 
@@ -52,7 +54,7 @@ import loginPageBackgroundImage from '../../assets/login/login-page-background.p
  * This component stores all the login page style and logic
  */
 const LoginPage: React.FC = () => {
-    //#region States
+    //#region Hooks
 
     const navigation = useNavigation<
         StackNavigationProp<AppStackParamsList, 'LoginPage'>
@@ -60,6 +62,7 @@ const LoginPage: React.FC = () => {
 
     const dispatch = useDispatch<Dispatch<UserActions>>()
 
+    const { setTimes } = useTimes()
     const { setEnabledLoading } = useContext(LoadingScreenContext)
 
     const [validated, setValidated] = useState(true)
@@ -68,9 +71,9 @@ const LoginPage: React.FC = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    //#endregion
-
-    //#region Effects
+    useEffect(() => {
+        onInit()
+    }, [])
 
     useEffect(() => {
         setInputValid(validateEmail(email) && validatePassword(password))
@@ -81,22 +84,34 @@ const LoginPage: React.FC = () => {
     //#region Functions
 
     /**
+     * Function that is called when the component is mounted
+     */
+    async function onInit(): Promise<void> {
+        try {
+            const token = await SecureStore.getItemAsync('token')
+            if (token) {
+                setEnabledLoading(true)
+                await logIn(token)
+            }
+        } catch (exception) {
+            setValidated(false)
+            console.log(exception)
+            setEnabledLoading(false)
+        }
+    }
+
+    /**
      * Function that can check the user email and password
      */
     async function signIn(): Promise<void> {
         setEnabledLoading(true)
-
         try {
             const { token } = await AuthService.login({ email, password })
-
             await SecureStore.setItemAsync('token', token)
-            await setMeInApplicationState(token)
-
-            navigateToLanding()
+            logIn(token)
         } catch (exception) {
             setValidated(false)
             console.log(exception)
-        } finally {
             setEnabledLoading(false)
         }
     }
@@ -107,13 +122,18 @@ const LoginPage: React.FC = () => {
      */
     async function setMeInApplicationState(token: string) {
         const user = await UserService.getMe(token)
+        const times = await TimesService.getTimes(user.id, token)
+
+        setTimes(times)
         dispatch(setMe(user))
     }
 
     /**
-     * Function that can make the app navigate to the landing page
+     * Function that makes the user log in the app
+     * @param token stores the user token
      */
-    function navigateToLanding(): void {
+    async function logIn(token: string): Promise<void> {
+        await setMeInApplicationState(token)
         navigation.replace('LandingPage')
     }
 

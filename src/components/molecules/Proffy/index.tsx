@@ -3,7 +3,7 @@ import { ImageSourcePropType, View } from 'react-native'
 
 import { Ionicons } from '@expo/vector-icons'
 
-import { TimeProps } from '../../../models/time/time'
+import { TimeProxy } from '../../../models/time/timeProxy'
 
 import {
     ContainerView,
@@ -33,7 +33,7 @@ export interface ProffyProps {
     readonly name: string
     readonly subject: string
     readonly description: string
-    readonly workDays: TimeProps[]
+    readonly workDays: TimeProxy[]
     readonly price: number
 }
 

@@ -1,4 +1,5 @@
 import { UserProxy } from '../../models/user/userProxy'
+
 import { UserActions, UserActionTypes } from './types'
 
 /**

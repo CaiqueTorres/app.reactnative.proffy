@@ -1,6 +1,5 @@
-import React, { Dispatch, useContext, useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { TouchableWithoutFeedback, View } from 'react-native'
-import { useDispatch } from 'react-redux'
 
 import { Feather } from '@expo/vector-icons'
 import { AntDesign } from '@expo/vector-icons'
@@ -8,16 +7,15 @@ import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
 import { getItemAsync } from 'expo-secure-store'
+import * as SecureStore from 'expo-secure-store'
 import { StatusBar } from 'expo-status-bar'
 
 import * as SubjectService from '../../services/subjectService'
 
-import { setSubjects } from '../../store/subjects/actions'
-import { SubjectActions } from '../../store/subjects/types'
-
 import useMe from '../../hooks/useMe'
 
 import { LoadingScreenContext } from '../../contexts/loadingScreenContext'
+import { useSubjects } from '../../contexts/subjectContext'
 
 import { AppStackParamsList } from '../../navigations/appStack'
 
@@ -50,21 +48,16 @@ import LandingButton from './LandingButton'
  * Tha app's landing page
  */
 const LandingPage: React.FC = (): JSX.Element => {
-    //#region States
+    //#region Hooks
 
     const navigation = useNavigation<
         StackNavigationProp<AppStackParamsList, 'LandingPage'>
     >()
 
-    const dispatch = useDispatch<Dispatch<SubjectActions>>()
-
     const { setEnabledLoading } = useContext(LoadingScreenContext)
 
     const user = useMe()
-
-    //#endregion
-
-    //#region Effects
+    const { setSubjects } = useSubjects()
 
     useEffect(() => {
         setSubjectsInRootState()
@@ -86,12 +79,21 @@ const LandingPage: React.FC = (): JSX.Element => {
             if (!token) throw new Error('The token is null!')
 
             const subjects = await SubjectService.getAllSubjectsAsArray(token)
-            dispatch(setSubjects(subjects))
+            setSubjects(subjects)
         } catch (exception) {
             console.log(exception)
         } finally {
             setEnabledLoading(false)
         }
+    }
+
+    /**
+     * Function that makes the navigation to the login page and clears the saved
+     * token
+     */
+    async function navigateToLogin(): Promise<void> {
+        await SecureStore.setItemAsync('token', '')
+        navigation.replace('LoginPage')
     }
 
     //#endregion
@@ -115,11 +117,7 @@ const LandingPage: React.FC = (): JSX.Element => {
                             </ProfileUsernameText>
                         </ProfileView>
                     </TouchableWithoutFeedback>
-                    <LogoutRectButton
-                        onPress={() => {
-                            navigation.replace('LoginPage')
-                        }}
-                    >
+                    <LogoutRectButton onPress={navigateToLogin}>
                         <Feather name="power" size={22} color="#d4c2ff" />
                     </LogoutRectButton>
                 </HeaderView>
