@@ -10,10 +10,10 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { getItemAsync } from 'expo-secure-store'
 
 import { SubjectProxy } from '../../models/subject/subjectProxy'
-import { CreateTimePayload } from '../../models/time/createTimePayload'
 import { TimeProxy } from '../../models/time/timeProxy'
 import { WeekDay } from '../../models/time/weekDay'
 
+import * as TimeService from '../../services/timeService'
 import * as UserService from '../../services/userService'
 
 import { setMe } from '../../store/user/actions'
@@ -24,6 +24,7 @@ import useStateAndCheck from '../../hooks/useStateAndCheck'
 import useSubjects from '../../hooks/useSubjects'
 
 import { LoadingScreenContext } from '../../contexts/loadingScreenContext'
+import { Times, useTimes } from '../../contexts/timeContext'
 
 import { AppStackParamsList } from '../../navigations/appStack'
 
@@ -49,6 +50,8 @@ import Dropdown from '../../components/atoms/Dropdown'
 import Header from '../../components/atoms/Header'
 import AvailableTimeElement from '../../components/molecules/AvailableTimeElement'
 
+import { isGetMany, map } from '../../utils/crud'
+
 import uuid from 'uuid-random'
 
 interface PartialUpdateUserPayload {
@@ -73,13 +76,15 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
     const { setEnabledLoading } = useContext(LoadingScreenContext)
 
     const user = useMe()
+    const subjects = useSubjects()
+    const { times, setTimes } = useTimes()
 
     const subjectsList: SubjectProxy[] = [
         {
             id: 0,
             name: 'Selecione'
         },
-        ...(useSubjects() ?? [])
+        ...(subjects ?? [])
     ]
 
     const [
@@ -99,10 +104,10 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
         setTimePropsList,
         hasChangedTimePropsList,
         setHasChangedTimePropsList
-    ] = useStateAndCheck<TimeProxy[]>([])
+    ] = useStateAndCheck<Times>(times)
 
     const validUserData =
-        hasChangedPayload &&
+        (hasChangedPayload || hasChangedTimePropsList) &&
         payload &&
         Object.values(payload).every((value) => !!value)
 
@@ -111,23 +116,131 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
     //#region Functions
 
     /**
+     * Function that allow creating the new time element
+     */
+    function createNewTimeElement(): void {
+        const time: TimeProxy = {
+            id: uuid(),
+            weekDay: WeekDay.MONDAY,
+            from: '00:00',
+            to: '00:00'
+        }
+
+        if (isGetMany(timePropsList)) {
+            setTimePropsList({
+                ...timePropsList,
+                data: [...timePropsList.data, time]
+            })
+            return
+        }
+
+        setTimePropsList([...timePropsList, time])
+    }
+
+    /**
+     * Function that allow redenring all te time elements
+     */
+    function forEachTimeProp(): JSX.Element[] {
+        const array = isGetMany(timePropsList)
+            ? timePropsList.data
+            : timePropsList
+
+        return array.map((element: TimeProxy) => {
+            const { id, ...rest } = element
+            return (
+                <AvailableTimeElement
+                    key={id}
+                    id={id}
+                    onClickDeleteButton={() => {
+                        setTimePropsList(
+                            array.filter(
+                                (timeProps: TimeProxy) => timeProps.id !== id
+                            )
+                        )
+                    }}
+                    onChangedValue={(time: TimeProxy) => {
+                        console.log(time)
+
+                        if (Array.isArray(timePropsList))
+                            setTimePropsList(
+                                timePropsList.map((element) =>
+                                    element.id == id ? time : element
+                                )
+                            )
+                        else
+                            setTimePropsList(
+                                map(timePropsList, (element) =>
+                                    element.id == id ? time : element
+                                )
+                            )
+
+                        setHasChangedTimePropsList(true)
+                    }}
+                    style={{
+                        height: 240,
+                        marginVertical: 10
+                    }}
+                    {...rest}
+                />
+            )
+        })
+    }
+
+    /**
      * Function that can update the user data in the database
      */
-    async function updateUser(): Promise<void> {
+    async function updateUser(token: string): Promise<void> {
         if (!user || !user.id) return
+
+        await UserService.updateUser(user.id, payload, token)
+
+        setHasChangedPayload(false)
+
+        setMeInRootState(token)
+    }
+
+    /**
+     * Function that can update the times list data in the database
+     * @param token stores the logged user token
+     */
+    async function updateTimesList(token: string): Promise<void> {
+        if (!user || !user.id) return
+
+        await TimeService.clear(user.id, token)
+
+        const times = isGetMany(timePropsList)
+            ? timePropsList.data
+            : timePropsList
+
+        console.log(times)
+
+        await TimeService.createTimes(
+            user.id,
+            times.map((time) => ({
+                weekDay: time.weekDay,
+                from: time.from,
+                to: time.to
+            })),
+            token
+        )
+
+        setHasChangedTimePropsList(false)
+
+        setTimes(timePropsList)
+    }
+
+    /**
+     * Function that update the user data and the times list data
+     */
+    async function updateData(): Promise<void> {
+        const token = await getItemAsync('token')
+
+        if (!token) throw new Error('The token is null!')
 
         setEnabledLoading(true)
         try {
-            const token = await getItemAsync('token')
-
-            if (!token) throw new Error('The token is null!')
-
-            await UserService.updateUser(user.id, payload, token)
-
-            setHasChangedPayload(false)
-            setHasChangedTimePropsList(false)
-
-            setMeInRootState(token)
+            await updateUser(token)
+            await updateTimesList(token)
 
             navigateToSuccessPage()
         } catch (exception) {
@@ -256,45 +369,13 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
                             <TitleText>Horários disponíveis</TitleText>
 
                             <TouchableWithoutFeedback
-                                onPress={() => {
-                                    setTimePropsList([
-                                        ...timePropsList,
-                                        {
-                                            id: uuid(),
-                                            from: '00:00',
-                                            to: '00:00',
-                                            weekDay: WeekDay.MONDAY
-                                        }
-                                    ])
-                                }}
+                                onPress={createNewTimeElement}
                             >
                                 <NewText>+ Novo</NewText>
                             </TouchableWithoutFeedback>
                         </HeaderView>
-                        {timePropsList.map((element: TimeProxy) => {
-                            const { id, ...rest } = element
-                            return (
-                                <AvailableTimeElement
-                                    key={id}
-                                    onClickDeleteButton={() => {
-                                        setTimePropsList(
-                                            timePropsList.filter(
-                                                (timeProps: TimeProxy) =>
-                                                    timeProps.id !== id
-                                            )
-                                        )
-                                    }}
-                                    onChangedValue={() => {
-                                        setHasChangedTimePropsList(true)
-                                    }}
-                                    style={{
-                                        height: 240,
-                                        marginVertical: 10
-                                    }}
-                                    {...rest}
-                                />
-                            )
-                        })}
+
+                        {forEachTimeProp()}
                     </>
 
                     <Button
@@ -305,7 +386,7 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
                             height: 65,
                             marginVertical: 10
                         }}
-                        onPress={updateUser}
+                        onPress={updateData}
                     />
                     <FooterView>
                         <AntDesign name="warning" size={33} color="#8257E5" />

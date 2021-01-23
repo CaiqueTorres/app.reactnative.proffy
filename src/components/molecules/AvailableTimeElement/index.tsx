@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleProp, TouchableWithoutFeedback, ViewStyle } from 'react-native'
 
 import { Picker } from '@react-native-community/picker'
@@ -34,16 +34,21 @@ export interface AvailableTimeElementProps extends TimeProxy {
  */
 const AvailableTimeElement: React.FC<AvailableTimeElementProps> = ({
     style,
-    to = '00:00',
-    from = '00:00',
-    weekDay = WeekDay.MONDAY,
+    id,
+    to,
+    from,
+    weekDay,
     displayDeleteButton = true,
     onClickDeleteButton,
     onChangedValue
 }: AvailableTimeElementProps): JSX.Element => {
     //#region Hooks
 
-    const [time, setTime] = useState<TimeProxy>({ weekDay, to, from })
+    const [time, setTime] = useState<TimeProxy>({ id, weekDay, to, from })
+
+    useEffect(() => {
+        if (onChangedValue) onChangedValue(time)
+    }, [time])
 
     //#endregion
 
@@ -56,7 +61,6 @@ const AvailableTimeElement: React.FC<AvailableTimeElementProps> = ({
                 defaultValue={weekDay}
                 onValueChange={(itemValue: WeekDay) => {
                     setTime({ ...time, weekDay: itemValue })
-                    if (onChangedValue) onChangedValue(time)
                 }}
             >
                 <Picker.Item
@@ -92,7 +96,6 @@ const AvailableTimeElement: React.FC<AvailableTimeElementProps> = ({
                     initialDate={from}
                     onChangeTime={(selectedDate: string) => {
                         setTime({ ...time, from: selectedDate })
-                        if (onChangedValue) onChangedValue(time)
                     }}
                 />
 
@@ -103,7 +106,6 @@ const AvailableTimeElement: React.FC<AvailableTimeElementProps> = ({
                     initialDate={to}
                     onChangeTime={(selectedDate: string) => {
                         setTime({ ...time, to: selectedDate })
-                        if (onChangedValue) onChangedValue(time)
                     }}
                 />
             </TimeView>

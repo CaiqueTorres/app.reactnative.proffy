@@ -8,13 +8,33 @@ import api from '../api'
  * @param userId stores the user id
  * @param createTimePayload stores the new time data
  */
-export async function createTime(
+export async function createTimes(
     userId: number,
-    createTimePayload: CreateTimePayload
-): Promise<TimeProxy> {
-    const response = await api.post<TimeProxy>(
+    createTimePayload: CreateTimePayload | CreateTimePayload[],
+    token: string
+): Promise<TimeProxy | TimeProxy[]> {
+    console.log(createTimePayload)
+
+    const response = await api.post<TimeProxy | TimeProxy[]>(
         `/users/${userId}/times`,
-        createTimePayload
+        createTimePayload,
+        {
+            headers: {
+                Authorization: 'Bearer ' + token
+            }
+        }
     )
     return response.data
+}
+
+/**
+ * Function that can clear all the times entities from the database
+ * @param userId stores the user id
+ */
+export async function clear(userId: number, token: string): Promise<void> {
+    await api.delete(`/users/${userId}/times`, {
+        headers: {
+            Authorization: 'Bearer ' + token
+        }
+    })
 }
