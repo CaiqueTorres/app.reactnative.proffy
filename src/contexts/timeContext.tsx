@@ -12,7 +12,7 @@ export type Times = TimeProxy[] | GetManyDefaultResponse<TimeProxy>
  * The interface that has all the needed properties that will be used to
  * control the times list
  */
-export interface TimeProps {
+export interface TimeContextProps {
     times: Times
     setTimes: (value: Times) => void
 }
@@ -20,7 +20,9 @@ export interface TimeProps {
 /**
  * The context that allows the app components change the times list
  */
-export const TimeContext = createContext<TimeProps>({} as TimeProps)
+export const TimeContext = createContext<TimeContextProps>(
+    {} as TimeContextProps
+)
 
 /**
  * The app's main time provider properties
@@ -30,7 +32,7 @@ export interface TimeProviderProps {
 }
 
 /**
- * The app's main time provider
+ * The app's main time provider component
  */
 const TimeProvider: React.FC<TimeProviderProps> = ({
     children
@@ -64,6 +66,6 @@ export default TimeProvider
 /**
  * The hooks that allows calling the times list
  */
-export function useTimes(): TimeProps {
+export function useTimes(): TimeContextProps {
     return useContext(TimeContext)
 }

@@ -13,8 +13,6 @@ export async function createTimes(
     createTimePayload: CreateTimePayload | CreateTimePayload[],
     token: string
 ): Promise<TimeProxy | TimeProxy[]> {
-    console.log(createTimePayload)
-
     const response = await api.post<TimeProxy | TimeProxy[]>(
         `/users/${userId}/times`,
         createTimePayload,
@@ -24,6 +22,19 @@ export async function createTimes(
             }
         }
     )
+    return response.data
+}
+
+export async function getTimes(
+    userId: number,
+    token: string
+): Promise<TimeProxy[]> {
+    const response = await api.get<TimeProxy[]>(`/users/${userId}/times`, {
+        headers: {
+            Authorization: 'Bearer ' + token
+        }
+    })
+
     return response.data
 }
 
