@@ -9,7 +9,6 @@ import { StackNavigationProp } from '@react-navigation/stack'
 
 import { getItemAsync } from 'expo-secure-store'
 
-import { SubjectProxy } from '../../models/subject/subjectProxy'
 import { TimeProxy } from '../../models/time/timeProxy'
 import { WeekDay } from '../../models/time/weekDay'
 
@@ -21,9 +20,9 @@ import { UserActions } from '../../store/user/types'
 
 import useMe from '../../hooks/useMe'
 import useStateAndCheck from '../../hooks/useStateAndCheck'
-import useSubjects from '../../hooks/useSubjects'
 
 import { LoadingScreenContext } from '../../contexts/loadingScreenContext'
+import { useSubjects } from '../../contexts/subjectContext'
 import { Times, useTimes } from '../../contexts/timeContext'
 
 import { AppStackParamsList } from '../../navigations/appStack'
@@ -76,16 +75,8 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
     const { setEnabledLoading } = useContext(LoadingScreenContext)
 
     const user = useMe()
-    const subjects = useSubjects()
+    const { subjects } = useSubjects()
     const { times, setTimes } = useTimes()
-
-    const subjectsList: SubjectProxy[] = [
-        {
-            id: 0,
-            name: 'Selecione'
-        },
-        ...(subjects ?? [])
-    ]
 
     const [
         payload,
@@ -159,8 +150,6 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
                         )
                     }}
                     onChangedValue={(time: TimeProxy) => {
-                        console.log(time)
-
                         if (Array.isArray(timePropsList))
                             setTimePropsList(
                                 timePropsList.map((element) =>
@@ -211,8 +200,6 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
         const times = isGetMany(timePropsList)
             ? timePropsList.data
             : timePropsList
-
-        console.log(times)
 
         await TimeService.createTimes(
             user.id,
@@ -342,7 +329,7 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
                             })
                         }}
                     >
-                        {subjectsList?.map((subject) => (
+                        {subjects.map((subject) => (
                             <Picker.Item
                                 key={subject.id}
                                 label={subject.name}

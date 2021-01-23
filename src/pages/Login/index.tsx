@@ -14,12 +14,14 @@ import * as SecureStore from 'expo-secure-store'
 import { StatusBar } from 'expo-status-bar'
 
 import * as AuthService from '../../services/authService'
+import * as TimesService from '../../services/timeService'
 import * as UserService from '../../services/userService'
 
 import { setMe } from '../../store/user/actions'
 import { UserActions } from '../../store/user/types'
 
 import { LoadingScreenContext } from '../../contexts/loadingScreenContext'
+import { useTimes } from '../../contexts/timeContext'
 
 import { AppStackParamsList } from '../../navigations/appStack'
 
@@ -60,6 +62,7 @@ const LoginPage: React.FC = () => {
 
     const dispatch = useDispatch<Dispatch<UserActions>>()
 
+    const { setTimes } = useTimes()
     const { setEnabledLoading } = useContext(LoadingScreenContext)
 
     const [validated, setValidated] = useState(true)
@@ -78,6 +81,8 @@ const LoginPage: React.FC = () => {
 
     //#endregion
 
+    //#region Functions
+
     /**
      * Function that is called when the component is mounted
      */
@@ -94,8 +99,6 @@ const LoginPage: React.FC = () => {
             setEnabledLoading(false)
         }
     }
-
-    //#region Functions
 
     /**
      * Function that can check the user email and password
@@ -119,6 +122,9 @@ const LoginPage: React.FC = () => {
      */
     async function setMeInApplicationState(token: string) {
         const user = await UserService.getMe(token)
+        const times = await TimesService.getTimes(user.id, token)
+
+        setTimes(times)
         dispatch(setMe(user))
     }
 

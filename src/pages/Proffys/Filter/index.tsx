@@ -5,11 +5,11 @@ import { Feather } from '@expo/vector-icons'
 import { MaterialIcons } from '@expo/vector-icons'
 import { Picker } from '@react-native-community/picker'
 
-import { SubjectProxy } from '../../../models/subject/subjectProxy'
 import { WeekDay } from '../../../models/time/weekDay'
 
-import useSubjects from '../../../hooks/useSubjects'
 import useToggle from '../../../hooks/useToggle'
+
+import { useSubjects } from '../../../contexts/subjectContext'
 
 import { ContainerView, FilterText, DropdownsView, TimeView } from './styles'
 
@@ -26,13 +26,7 @@ const Filter: React.FC = (): JSX.Element => {
 
     const [active, toggle] = useToggle(false)
 
-    const subjectsList: SubjectProxy[] = [
-        {
-            id: 0,
-            name: 'Selecione'
-        },
-        ...(useSubjects() ?? [])
-    ]
+    const { subjects } = useSubjects()
 
     //#endregion
 
@@ -59,7 +53,7 @@ const Filter: React.FC = (): JSX.Element => {
             {active && (
                 <DropdownsView>
                     <Dropdown title="Matéria" defaultValue={0}>
-                        {subjectsList?.map((subject) => (
+                        {subjects.map((subject) => (
                             <Picker.Item
                                 key={subject.id}
                                 label={subject.name}
