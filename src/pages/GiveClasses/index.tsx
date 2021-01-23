@@ -116,6 +116,9 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
 
     //#region Functions
 
+    /**
+     * Function that allow creating the new time element
+     */
     function createNewTimeElement(): void {
         const time: TimeProxy = {
             id: uuid(),
@@ -135,6 +138,9 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
         setTimePropsList([...timePropsList, time])
     }
 
+    /**
+     * Function that allow redenring all te time elements
+     */
     function forEachTimeProp(): JSX.Element[] {
         const array = isGetMany(timePropsList)
             ? timePropsList.data
@@ -194,6 +200,10 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
         setMeInRootState(token)
     }
 
+    /**
+     * Function that can update the times list data in the database
+     * @param token stores the logged user token
+     */
     async function updateTimesList(token: string): Promise<void> {
         if (!user || !user.id) return
 
@@ -220,6 +230,9 @@ const GiveClassesPage: React.FC = (): JSX.Element => {
         setTimes(timePropsList)
     }
 
+    /**
+     * Function that update the user data and the times list data
+     */
     async function updateData(): Promise<void> {
         const token = await getItemAsync('token')
 
